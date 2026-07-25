@@ -1,0 +1,56 @@
+/*
+ * Self-hosted Arabic reader fonts, all SIL Open Font License via Google
+ * Fonts. "King Fahad" and "Uthmani" are commonly associated with the
+ * proprietary KFGQPC Mushaf fonts, which aren't freely redistributable —
+ * these are open-license stand-ins with a similar character until the real
+ * KFGQPC files can be dropped in here and swapped in below.
+ */
+
+@font-face {
+  font-family: 'Reader Uthmani';
+  src: url('./scheherazade-new-uthmani.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*
+ * Noto Nastaliq Urdu (the original file here) is built for Urdu prose, not
+ * Quranic annotation — it's missing glyphs for several Unicode marks the
+ * Uthmani text actually uses (e.g. U+06DB ARABIC SMALL HIGH THREE DOTS,
+ * a waqf/pause sign), which rendered as visible tofu boxes. Pointing this
+ * at the same file as 'Reader Uthmani' trades true Indo-Pak letterforms for
+ * guaranteed-correct rendering until a real Indo-Pak Quran font (e.g. PDMS
+ * Saleem, Al Qalam Quran Majeed) is sourced and dropped in here.
+ */
+@font-face {
+  font-family: 'Reader IndoPak';
+  src: url('./scheherazade-new-uthmani.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Reader King Fahad';
+  src: url('./amiri-kingfahad.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Reader Naskh';
+  src: url('./noto-naskh-arabic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Reader Kufi';
+  src: url('./noto-kufi-arabic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

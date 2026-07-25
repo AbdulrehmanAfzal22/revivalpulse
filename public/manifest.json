@@ -1,0 +1,31 @@
+{
+  "short_name": "IslamicWeb",
+  "name": "IslamicWeb — Quran, Hadith & Prayer Times",
+  "description": "Quran reading with translations and tafsir, hadith collections, prayer times and Qibla, duas, and a kids learning mode — usable offline for anything you've already opened.",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    },
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#0f7a5c",
+  "background_color": "#ffffff"
+}

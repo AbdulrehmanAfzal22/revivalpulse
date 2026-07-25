@@ -1,0 +1,109 @@
+.page {
+  max-width: 40rem;
+  margin-inline: auto;
+  padding: 1.5rem 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.verseCard {
+  padding: 1rem 1.25rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.arabic {
+  margin: 0;
+  font-family: var(--reader-arabic-font, 'Reader Uthmani', serif);
+  font-size: 1.5rem;
+  line-height: 2;
+  text-align: end;
+  color: var(--color-text);
+}
+
+.content {
+  min-height: 8rem;
+}
+
+/*
+ * Readable measure is controlled in character units (ch), independent of
+ * .page's own max-width — the two happen to agree at this font size, but
+ * `ch` keeps the line length correct if either is changed later.
+ */
+.tafsirText {
+  max-width: 68ch;
+  margin-inline: auto;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-text);
+}
+
+/* Tafsir sources are either full Arabic prose (Ibn Kathir, Jalalayn, Sa'di,
+ * Tabari) or English commentary (Maududi) — see constants/tafsirs.ts
+ * `languageCode`. Arabic prose reads better larger, more open, and RTL;
+ * this class is applied by TafsirPage based on the active source. */
+.tafsirTextArabic {
+  max-width: 42ch;
+  font-size: 1.25rem;
+  line-height: 2;
+  text-align: start;
+}
+
+.tafsirText :global(p) {
+  margin: 0 0 1.1em;
+}
+
+.tafsirText :global(p:last-child) {
+  margin-bottom: 0;
+}
+
+.tafsirText :global(strong),
+.tafsirText :global(b) {
+  font-weight: 600;
+}
+
+.tafsirText :global(em),
+.tafsirText :global(i) {
+  font-style: italic;
+}
+
+.tafsirText :global(blockquote) {
+  margin: 0 0 1.1em;
+  padding-inline-start: 1rem;
+  border-inline-start: 3px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.tafsirText :global(ul),
+.tafsirText :global(ol) {
+  margin: 0 0 1.1em;
+  padding-inline-start: 1.5rem;
+}
+
+.tafsirText :global(li) {
+  margin-bottom: 0.4em;
+}
+
+.tafsirText :global(a) {
+  color: var(--color-primary);
+}
+
+/* Quranic quotations embedded within tafsir prose — always Arabic
+ * regardless of the surrounding commentary's language. */
+.tafsirText :global(span.arabic) {
+  font-size: 1.15em;
+  line-height: 1.9;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.pagerLink {
+  text-decoration: none;
+}

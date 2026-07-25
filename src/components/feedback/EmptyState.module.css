@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  padding: 3rem 1.5rem;
+  color: var(--color-text-muted);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  margin-block-end: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+}
+
+.description {
+  max-width: 26rem;
+}
+
+.action {
+  margin-block-start: 0.75rem;
+}

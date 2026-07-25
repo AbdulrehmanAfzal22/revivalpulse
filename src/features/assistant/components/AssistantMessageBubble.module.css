@@ -1,0 +1,17 @@
+.userRow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.userBubble {
+  max-width: 85%;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+}
+
+.assistantRow {
+  display: flex;
+  justify-content: flex-start;
+}

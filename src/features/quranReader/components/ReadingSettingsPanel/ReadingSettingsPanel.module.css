@@ -1,0 +1,82 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+  max-width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 1rem 1.25rem;
+  border-block-end: 1px solid var(--color-border);
+}
+
+.section {
+  padding: 1rem 1.25rem;
+  border-block-end: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.section:last-child {
+  border-block-end: none;
+}
+
+.sectionLabel {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.modeGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.modeCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  text-align: start;
+  cursor: pointer;
+}
+
+.modeCard:hover {
+  background-color: var(--color-surface-raised);
+}
+
+.modeCardActive {
+  border-color: var(--color-primary);
+  background-color: var(--color-surface-raised);
+}
+
+.modeTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.modeDescription {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.toggleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text);
+  cursor: pointer;
+}

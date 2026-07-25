@@ -1,0 +1,25 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.title {
+  margin: 0;
+}
+
+.arabic {
+  direction: rtl;
+  text-align: end;
+  font-family: var(--reader-arabic-font, 'Reader Uthmani', serif);
+  /* Unitless/em-relative and more generous than Latin body text — full
+   * tashkeel diacritics need more vertical room than Typography's default. */
+  line-height: 2;
+}

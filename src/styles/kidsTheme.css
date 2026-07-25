@@ -1,0 +1,80 @@
+/**
+ * Scoped kid-friendly palette — applied via a wrapper class (layouts/KidsLayout.tsx),
+ * not touched via ThemeContext/:root[data-theme]. Every components/ui/* primitive
+ * already reads these same custom properties (var(--color-primary) etc.), so
+ * wrapping Kids Mode in this class reskins Button/Card/Typography/... for free
+ * without a parallel component library — "own visual language" via CSS, not a
+ * rebuild. Still respects the light/dark toggle (two variants below) rather than
+ * fighting it.
+ */
+.kidsTheme {
+  --font-sans: ui-rounded, 'SF Pro Rounded', 'Segoe UI Rounded', -apple-system, BlinkMacSystemFont,
+    'Noto Naskh Arabic', 'Noto Nastaliq Urdu', Roboto, sans-serif;
+
+  --color-bg: #fff8ee;
+  --color-surface: #ffffff;
+  --color-surface-raised: #fff2d9;
+  --color-border: #ffdca8;
+  --color-text: #3a2a1a;
+  --color-text-muted: #8a6f4f;
+  --color-primary: #ff7a3d;
+  --color-primary-hover: #ff6620;
+  --color-primary-contrast: #ffffff;
+  --color-danger: #e5484d;
+  --color-focus-ring: #ff7a3d;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+}
+
+:root[data-theme='dark'] .kidsTheme {
+  --color-bg: #241a2e;
+  --color-surface: #2f2240;
+  --color-surface-raised: #3a2b4d;
+  --color-border: #4d3a66;
+  --color-text: #fdf3ff;
+  --color-text-muted: #c7b3da;
+  --color-primary: #ffb454;
+  --color-primary-hover: #ffc372;
+  --color-primary-contrast: #241a2e;
+  --color-danger: #f38ba0;
+  --color-focus-ring: #ffb454;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']):not([data-theme='dark']) .kidsTheme {
+    --color-bg: #241a2e;
+    --color-surface: #2f2240;
+    --color-surface-raised: #3a2b4d;
+    --color-border: #4d3a66;
+    --color-text: #fdf3ff;
+    --color-text-muted: #c7b3da;
+    --color-primary: #ffb454;
+    --color-primary-hover: #ffc372;
+    --color-primary-contrast: #241a2e;
+    --color-danger: #f38ba0;
+    --color-focus-ring: #ffb454;
+  }
+}
+
+.kidsTheme {
+  background-color: var(--color-bg);
+  min-height: 100vh;
+}
+
+/* High contrast (Settings > Appearance) applies globally, including inside Kids Mode. */
+[data-contrast='high'] .kidsTheme {
+  --color-text: #2a1c0e;
+  --color-text-muted: #4a3620;
+  --color-border: #2a1c0e;
+  --color-primary: #b3480f;
+}
+
+:root[data-theme='dark'][data-contrast='high'] .kidsTheme {
+  --color-bg: #120a18;
+  --color-text: #ffffff;
+  --color-text-muted: #ead9ff;
+  --color-border: #ffffff;
+  --color-primary: #ffcb80;
+}

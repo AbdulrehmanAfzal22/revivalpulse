@@ -1,0 +1,83 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+  white-space: nowrap;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.iconSlot {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* variants */
+.primary {
+  background-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+}
+
+.primary:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+}
+
+.secondary {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.secondary:hover:not(:disabled) {
+  background-color: var(--color-surface-raised);
+}
+
+.ghost {
+  background-color: transparent;
+  color: var(--color-text);
+}
+
+.ghost:hover:not(:disabled) {
+  background-color: var(--color-surface);
+}
+
+/* icon variant: icon-only button (e.g. theme toggle, hamburger) */
+.icon {
+  background-color: transparent;
+  color: var(--color-text);
+  border-radius: var(--radius-md);
+  padding: 0.5rem;
+}
+
+.icon:hover:not(:disabled) {
+  background-color: var(--color-surface);
+}
+
+/* sizes */
+.sm {
+  padding-inline: 0.75rem;
+  padding-block: 0.375rem;
+  font-size: 0.8125rem;
+}
+
+.md {
+  padding-inline: 1rem;
+  padding-block: 0.5rem;
+  font-size: 0.9375rem;
+}
+
+.lg {
+  padding-inline: 1.25rem;
+  padding-block: 0.75rem;
+  font-size: 1rem;
+}

@@ -1,0 +1,99 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-navbar);
+  background-color: var(--color-surface-raised);
+  border-block-end: 1px solid var(--color-border);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 90rem;
+  margin-inline: auto;
+  padding: 0.625rem 1rem;
+}
+
+.menuButton {
+  display: none;
+  flex-shrink: 0;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  font-weight: 700;
+  font-size: 1.0625rem;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.logo:hover {
+  color: var(--color-primary);
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex: 1;
+  /* Flex items default to min-width: auto, which blocks their own content
+   * from shrinking below its intrinsic width — without this, overflow-x:
+   * auto above never actually triggers; the row just grows past the
+   * viewport instead, silently pushing Calendar/Bookmarks/Downloads off
+   * with no way to reach them between ~769px and ~1200px. */
+  min-width: 0;
+}
+
+.links::-webkit-scrollbar {
+  display: none;
+}
+
+.link {
+  flex-shrink: 0;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.link:hover {
+  color: var(--color-text);
+  background-color: var(--color-surface);
+}
+
+.linkActive {
+  color: var(--color-primary);
+  background-color: var(--color-surface);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .menuButton {
+    display: inline-flex;
+  }
+
+  .links,
+  .actions {
+    display: none;
+  }
+
+  .logo {
+    flex: 1;
+  }
+}

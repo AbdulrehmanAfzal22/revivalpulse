@@ -1,0 +1,22 @@
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-block-end: 1rem;
+}
+
+.swatch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+}
+
+.check {
+  color: #fff;
+  filter: drop-shadow(0 0 1px rgb(0 0 0 / 70%));
+}

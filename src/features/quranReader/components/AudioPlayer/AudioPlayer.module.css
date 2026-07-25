@@ -1,0 +1,113 @@
+.bar {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: var(--z-navbar);
+  background-color: var(--color-surface-raised);
+  border-block-start: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+  padding: 0.5rem 1rem 0.625rem;
+}
+
+.progressRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 60rem;
+  margin-inline: auto;
+}
+
+.time {
+  font-size: 0.6875rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  width: 2.25rem;
+}
+
+.time:last-child {
+  text-align: end;
+}
+
+.progress {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-border);
+}
+
+.progress::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  cursor: pointer;
+}
+
+.controlsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  max-width: 60rem;
+  margin-inline: auto;
+  margin-block-start: 0.375rem;
+}
+
+.nowPlaying {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.surahName {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ayahLabel {
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+}
+
+.reciterName {
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.transport {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.spin {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

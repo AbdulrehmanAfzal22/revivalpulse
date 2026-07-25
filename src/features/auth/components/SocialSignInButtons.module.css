@@ -1,0 +1,10 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.wrapper > button {
+  justify-content: flex-start;
+  width: 100%;
+}

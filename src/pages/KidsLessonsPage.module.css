@@ -1,0 +1,60 @@
+.page {
+  max-width: 36rem;
+  margin-inline: auto;
+  padding: 1.5rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: 0.75rem;
+}
+
+.lessonCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.lessonHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.completeIcon {
+  color: var(--color-primary);
+}
+
+.verses {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.verseCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.verseHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.verseArabic {
+  direction: rtl;
+  text-align: end;
+  font-family: var(--reader-arabic-font, 'Reader Uthmani', serif);
+  /* Unitless/em-relative — real, multi-line Quran verse text needs more
+   * vertical room for full tashkeel diacritics than Typography's default. */
+  line-height: 2;
+}

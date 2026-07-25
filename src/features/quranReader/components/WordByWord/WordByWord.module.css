@@ -1,0 +1,124 @@
+.line {
+  margin: 0 0 0.75rem;
+  text-align: end;
+  /* Also set font-size here (matching .word's own) so this unitless
+   * line-height — inherited by .word as a raw multiplier per CSS's
+   * inheritance rules for unitless line-height — has a sane value to fall
+   * back to even before .word resolves its own. */
+  font-size: var(--reader-arabic-size, 1.75rem);
+  line-height: var(--reader-line-height, 2.4);
+}
+
+.word {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  background: transparent;
+  padding: 0.125rem 0.3em;
+  margin-inline-start: 0.15em;
+  border-radius: var(--radius-sm);
+  font: inherit;
+  font-family: var(--reader-arabic-font, inherit);
+  font-size: var(--reader-arabic-size, 1.75rem);
+  word-spacing: var(--reader-word-spacing, normal);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.word:disabled {
+  cursor: default;
+}
+
+.word:hover {
+  background-color: var(--color-surface);
+}
+
+.wordActive {
+  background-color: color-mix(in srgb, var(--reader-highlight, var(--color-primary)) 45%, transparent);
+}
+
+.arabic {
+  /* This is the actual glyph-bearing element (a flex child of .word), so
+   * its own line-height — not .line's or .word's — is what governs the
+   * vertical room available to Uthmani diacritics. It previously hardcoded
+   * 1.6, a Latin-book-text ratio that clips full tashkeel; it now follows
+   * the same user-adjustable, em-relative value as the rest of the reader. */
+  line-height: var(--reader-line-height, 2.4);
+}
+
+.playIcon {
+  position: absolute;
+  top: -0.15rem;
+  inset-inline-end: -0.15rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+}
+
+@media (hover: hover) {
+  .word:hover .playIcon {
+    display: inline-flex;
+  }
+}
+
+.tooltip {
+  position: absolute;
+  top: 100%;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  margin-block-start: 0.375rem;
+  padding: 0.5rem 0.625rem;
+  min-width: 8rem;
+  max-width: 14rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.1s ease;
+  text-align: center;
+  white-space: normal;
+}
+
+.tooltipVisible {
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  .word:hover .tooltip {
+    opacity: 1;
+  }
+}
+
+.tooltipTranslation {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  direction: ltr;
+}
+
+.tooltipTransliteration {
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--color-text-muted);
+  direction: ltr;
+}
+
+.tooltipMeta {
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+  direction: ltr;
+}

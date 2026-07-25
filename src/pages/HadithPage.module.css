@@ -1,0 +1,92 @@
+.page {
+  max-width: 48rem;
+  margin-inline: auto;
+  padding: 1.5rem 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.searchField {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.searchIcon {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  outline: none;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem 0.25rem 1rem;
+  border-block-end: 1px solid var(--color-border);
+}
+
+.row:last-child {
+  border-block-end: none;
+}
+
+.rowLink {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  flex: 1;
+  min-width: 0;
+  padding: 0.625rem 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.rowText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.rowTitle {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.rowSubtitle {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.arabicName {
+  font-size: 1.125rem;
+  color: var(--color-text);
+  flex-shrink: 0;
+  font-family: var(--reader-arabic-font, 'Reader Uthmani', serif);
+  line-height: 1.8;
+}

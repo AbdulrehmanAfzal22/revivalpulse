@@ -1,0 +1,29 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.375rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.arabic {
+  direction: rtl;
+  font-family: var(--reader-arabic-font, 'Reader Uthmani', serif);
+  /* Unitless/em-relative and more generous than Typography's h3 default —
+   * needed for full tashkeel diacritics, even on single-word name text. */
+  line-height: 1.8;
+}

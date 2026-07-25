@@ -1,0 +1,50 @@
+.hint {
+  display: block;
+  margin-block-end: 1rem;
+}
+
+.group {
+  margin-block-end: 1.25rem;
+}
+
+.group:last-child {
+  margin-block-end: 0;
+}
+
+.groupLabel {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-block-end: 0.5rem;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 0;
+  cursor: pointer;
+}
+
+.rowLabel {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.rowAuthor {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.radio {
+  accent-color: var(--color-primary);
+}
+
+.check {
+  margin-inline-start: auto;
+  color: var(--color-primary);
+  flex-shrink: 0;
+}

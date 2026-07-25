@@ -1,0 +1,20 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.arabic {
+  direction: rtl;
+  text-align: end;
+  font-family: var(--reader-arabic-font, 'Reader Uthmani', serif);
+  /* Unitless (em-relative) and deliberately more generous than Latin body
+   * text — full tashkeel diacritics need more vertical room than the
+   * Typography variant's default line-height provides, or ascenders from
+   * one line collide with diacritics from the line above. */
+  line-height: 2;
+}
+
+.note {
+  color: var(--color-text-muted);
+}

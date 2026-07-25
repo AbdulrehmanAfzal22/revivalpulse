@@ -1,0 +1,205 @@
+[
+  {
+    "id": "alif",
+    "order": 1,
+    "arabic": "ا",
+    "transliteration": "Alif",
+    "audioUrl": "/audio/kids-alphabet/alif.mp3"
+  },
+  {
+    "id": "ba",
+    "order": 2,
+    "arabic": "ب",
+    "transliteration": "Ba",
+    "audioUrl": "/audio/kids-alphabet/ba.mp3"
+  },
+  {
+    "id": "ta",
+    "order": 3,
+    "arabic": "ت",
+    "transliteration": "Ta",
+    "audioUrl": "/audio/kids-alphabet/ta.mp3"
+  },
+  {
+    "id": "tha",
+    "order": 4,
+    "arabic": "ث",
+    "transliteration": "Tha",
+    "audioUrl": "/audio/kids-alphabet/tha.mp3"
+  },
+  {
+    "id": "jim",
+    "order": 5,
+    "arabic": "ج",
+    "transliteration": "Jim",
+    "audioUrl": "/audio/kids-alphabet/jim.mp3"
+  },
+  {
+    "id": "ha",
+    "order": 6,
+    "arabic": "ح",
+    "transliteration": "Ha",
+    "audioUrl": "/audio/kids-alphabet/ha.mp3"
+  },
+  {
+    "id": "kha",
+    "order": 7,
+    "arabic": "خ",
+    "transliteration": "Kha",
+    "audioUrl": "/audio/kids-alphabet/kha.mp3"
+  },
+  {
+    "id": "dal",
+    "order": 8,
+    "arabic": "د",
+    "transliteration": "Dal",
+    "audioUrl": "/audio/kids-alphabet/dal.mp3"
+  },
+  {
+    "id": "dhal",
+    "order": 9,
+    "arabic": "ذ",
+    "transliteration": "Dhal",
+    "audioUrl": "/audio/kids-alphabet/dhal.mp3"
+  },
+  {
+    "id": "ra",
+    "order": 10,
+    "arabic": "ر",
+    "transliteration": "Ra",
+    "audioUrl": "/audio/kids-alphabet/ra.mp3"
+  },
+  {
+    "id": "zay",
+    "order": 11,
+    "arabic": "ز",
+    "transliteration": "Zay",
+    "audioUrl": "/audio/kids-alphabet/zay.mp3"
+  },
+  {
+    "id": "sin",
+    "order": 12,
+    "arabic": "س",
+    "transliteration": "Seen",
+    "audioUrl": "/audio/kids-alphabet/sin.mp3"
+  },
+  {
+    "id": "shin",
+    "order": 13,
+    "arabic": "ش",
+    "transliteration": "Sheen",
+    "audioUrl": "/audio/kids-alphabet/shin.mp3"
+  },
+  {
+    "id": "sad",
+    "order": 14,
+    "arabic": "ص",
+    "transliteration": "Sad",
+    "audioUrl": "/audio/kids-alphabet/sad.mp3"
+  },
+  {
+    "id": "dad",
+    "order": 15,
+    "arabic": "ض",
+    "transliteration": "Dad",
+    "audioUrl": "/audio/kids-alphabet/dad.mp3"
+  },
+  {
+    "id": "ta2",
+    "order": 16,
+    "arabic": "ط",
+    "transliteration": "Taa",
+    "audioUrl": "/audio/kids-alphabet/ta2.mp3"
+  },
+  {
+    "id": "za",
+    "order": 17,
+    "arabic": "ظ",
+    "transliteration": "Zaa",
+    "audioUrl": "/audio/kids-alphabet/za.mp3"
+  },
+  {
+    "id": "ain",
+    "order": 18,
+    "arabic": "ع",
+    "transliteration": "'Ayn",
+    "audioUrl": "/audio/kids-alphabet/ain.mp3"
+  },
+  {
+    "id": "ghayn",
+    "order": 19,
+    "arabic": "غ",
+    "transliteration": "Ghayn",
+    "audioUrl": "/audio/kids-alphabet/ghayn.mp3"
+  },
+  {
+    "id": "fa",
+    "order": 20,
+    "arabic": "ف",
+    "transliteration": "Fa",
+    "audioUrl": "/audio/kids-alphabet/fa.mp3"
+  },
+  {
+    "id": "qaf",
+    "order": 21,
+    "arabic": "ق",
+    "transliteration": "Qaf",
+    "audioUrl": "/audio/kids-alphabet/qaf.mp3"
+  },
+  {
+    "id": "kaf",
+    "order": 22,
+    "arabic": "ك",
+    "transliteration": "Kaf",
+    "audioUrl": "/audio/kids-alphabet/kaf.mp3"
+  },
+  {
+    "id": "lam",
+    "order": 23,
+    "arabic": "ل",
+    "transliteration": "Lam",
+    "audioUrl": "/audio/kids-alphabet/lam.mp3"
+  },
+  {
+    "id": "mim",
+    "order": 24,
+    "arabic": "م",
+    "transliteration": "Meem",
+    "audioUrl": "/audio/kids-alphabet/mim.mp3"
+  },
+  {
+    "id": "nun",
+    "order": 25,
+    "arabic": "ن",
+    "transliteration": "Noon",
+    "audioUrl": "/audio/kids-alphabet/nun.mp3"
+  },
+  {
+    "id": "ha2",
+    "order": 26,
+    "arabic": "ه",
+    "transliteration": "Ha (soft)",
+    "audioUrl": "/audio/kids-alphabet/ha2.mp3"
+  },
+  {
+    "id": "waw",
+    "order": 27,
+    "arabic": "و",
+    "transliteration": "Waw",
+    "audioUrl": "/audio/kids-alphabet/waw.mp3"
+  },
+  {
+    "id": "ya",
+    "order": 28,
+    "arabic": "ي",
+    "transliteration": "Ya",
+    "audioUrl": "/audio/kids-alphabet/ya.mp3"
+  },
+  {
+    "id": "hamza",
+    "order": 29,
+    "arabic": "ء",
+    "transliteration": "Hamza",
+    "audioUrl": "/audio/kids-alphabet/hamza.mp3"
+  }
+]

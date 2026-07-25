@@ -1,0 +1,14 @@
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.skeletonRow {
+  padding: 1.25rem 0;
+  border-block-end: 1px solid var(--color-border);
+}
+
+.count {
+  padding-block-start: 1rem;
+  text-align: center;
+}
