@@ -119,7 +119,7 @@ export default function SurahPage() {
         )}
       </nav>
 
-      <ReadingSettingsPanel isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
+      <ReadingSettingsPanel isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} surahId={surah.id} />
       <TranslationSwitcher isOpen={isTranslationsOpen} onClose={() => setIsTranslationsOpen(false)} />
     </div>
   );

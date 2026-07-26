@@ -41,7 +41,6 @@ export const tr: LocaleDictionary = {
   'nav.hadith': 'Hadis',
   'nav.tafsir': 'Tefsir',
   'nav.prayerTimes': 'Namaz Vakitleri',
-  'nav.qibla': 'Kıble',
   'nav.tasbeeh': 'Tesbih',
   'nav.duas': 'Dualar',
   'nav.namesOfAllah': '99 İsim',
@@ -322,7 +321,11 @@ export const tr: LocaleDictionary = {
   'tafsir.chooseTafsir': 'Tefsir seç',
   'tafsir.dialogTitle': 'Tefsir kaynağı',
   'tafsir.dialogHint': 'Bu ayet için okunacak bir tefsir seçin.',
-
+  'tafsir.selectSurahTitle': 'Tefsir',
+  'tafsir.selectSurahDescription': 'Tefsirini okumak için bir sure seçin',
+  'tafsir.backToSurahs': 'Tüm Sureler',
+  'tafsir.videoTafsirNote': "Bu kaynak için dijitalleştirilmiş bir tefsir metni yok — bunun yerine YouTube'da bir video ders arayın.",
+  'tafsir.watchOnYouTube': "YouTube'da ara: {{name}}",
   // ---- emptyState: tafsir ----
   'emptyState.tafsir.verseNotFoundTitle': 'Ayet bulunamadı',
   'emptyState.tafsir.verseNotFoundDescription': 'Kur\'an okuyucusundan bir ayet seçin.',
@@ -368,7 +371,6 @@ export const tr: LocaleDictionary = {
   'quran.pause': 'Duraklat',
   'quran.play': 'Oynat',
   'quran.nextAyah': 'Sonraki ayet',
-  'quran.playbackOptions': 'Oynatma seçenekleri',
   'quran.closePlayer': 'Oynatıcıyı kapat',
   'quran.wordSyncNote': 'Bu kâri için kelime vurgusu mevcut değil — yalnızca ayet düzeyinde senkronizasyon.',
   'quran.speed': 'Hız',
@@ -378,6 +380,12 @@ export const tr: LocaleDictionary = {
   'quran.loopRange': 'Özel aralık',
   'quran.loopSurah': 'Sureyi tekrarla',
   'quran.autoplayNextAyah': 'Sonraki ayeti otomatik oynat',
+  'quran.translationAudioSectionLabel': 'Meal sesi',
+  'quran.urduAudioTranslationToggle': 'Urduca Sesli Meal: {{state}}',
+  'quran.englishAudioTranslationToggle': 'İngilizce Sesli Meal: {{state}}',
+  'quran.toggleOn': 'Açık',
+  'quran.toggleOff': 'Kapalı',
+  'quran.translationAudioGroupNote': 'Her 3 ayet okunduktan sonra çalar, ardından otomatik olarak devam eder.',
   'quran.downloaded': 'İndirildi',
   'quran.downloading': 'İndiriliyor {{completed}}/{{total}}',
   'quran.downloadForOffline': 'Çevrimdışı için indir',
@@ -484,22 +492,6 @@ export const tr: LocaleDictionary = {
   'location.unsupportedNote': 'Bu cihazda konum desteklenmiyor — bunun yerine bir şehir seçin.',
   'location.searchCityPlaceholder': 'Bir şehir ara...',
   'location.cityCountry': '{{city}}, {{country}}',
-
-  // ---- qibla ----
-  'qibla.title': 'Kıble',
-  'qibla.cardinalNorth': 'K',
-  'qibla.cardinalEast': 'D',
-  'qibla.cardinalSouth': 'G',
-  'qibla.cardinalWest': 'B',
-  'qibla.bearingFromNorth': 'Kuzeyden {{bearing}}°',
-  'qibla.distanceToKaaba': 'Kâbe\'ye {{distance}} km',
-  'qibla.enableCompass': 'Pusulayı etkinleştir',
-  'qibla.fallbackNote':
-    'Bu cihazda canlı pusula mevcut değil. Gerçek kuzeye dönün (gerekirse başka bir pusula kullanın), ardından Kâbe\'ye dönmek için saat yönünde {{bearing}}° dönün.',
-  'qibla.checkingSupport': 'Pusula desteği kontrol ediliyor…',
-
-  // ---- emptyState: qibla ----
-  'emptyState.qibla.setLocation': 'Kıble yönünü bulmak için bir konum ayarlayın',
 
   // ---- islamic calendar ----
   'islamicCalendar.title': 'İslami Takvim',

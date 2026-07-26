@@ -10,9 +10,9 @@ const SurahPage = lazy(() => import('pages/SurahPage'));
 const HadithPage = lazy(() => import('pages/HadithPage'));
 const HadithBookPage = lazy(() => import('pages/HadithBookPage'));
 const HadithChapterPage = lazy(() => import('pages/HadithChapterPage'));
+const TafsirSurahListPage = lazy(() => import('pages/TafsirSurahListPage'));
 const TafsirPage = lazy(() => import('pages/TafsirPage'));
 const PrayerTimesPage = lazy(() => import('pages/PrayerTimesPage'));
-const QiblaPage = lazy(() => import('pages/QiblaPage'));
 const TasbeehPage = lazy(() => import('pages/TasbeehPage'));
 const DuasPage = lazy(() => import('pages/DuasPage'));
 const NamesOfAllahPage = lazy(() => import('pages/NamesOfAllahPage'));
@@ -41,9 +41,9 @@ export default function AppRoutes() {
         <Route path={ROUTES.HADITH} element={<HadithPage />} />
         <Route path={ROUTES.HADITH_BOOK} element={<HadithBookPage />} />
         <Route path={ROUTES.HADITH_CHAPTER} element={<HadithChapterPage />} />
+        <Route path={ROUTES.TAFSIR_SURAHS} element={<TafsirSurahListPage />} />
         <Route path={ROUTES.TAFSIR} element={<TafsirPage />} />
         <Route path={ROUTES.PRAYER_TIMES} element={<PrayerTimesPage />} />
-        <Route path={ROUTES.QIBLA} element={<QiblaPage />} />
         <Route path={ROUTES.TASBEEH} element={<TasbeehPage />} />
         <Route path={ROUTES.DUAS} element={<DuasPage />} />
         <Route path={ROUTES.NAMES_OF_ALLAH} element={<NamesOfAllahPage />} />

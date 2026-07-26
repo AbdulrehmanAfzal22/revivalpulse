@@ -41,7 +41,6 @@ export const fa: LocaleDictionary = {
   'nav.hadith': 'حدیث',
   'nav.tafsir': 'تفسیر',
   'nav.prayerTimes': 'اوقات نماز',
-  'nav.qibla': 'قبله',
   'nav.tasbeeh': 'تسبیح',
   'nav.duas': 'دعاها',
   'nav.namesOfAllah': '۹۹ نام',
@@ -322,7 +321,11 @@ export const fa: LocaleDictionary = {
   'tafsir.chooseTafsir': 'انتخاب تفسیر',
   'tafsir.dialogTitle': 'منبع تفسیر',
   'tafsir.dialogHint': 'یک تفسیر برای خواندن این آیه انتخاب کنید.',
-
+  'tafsir.selectSurahTitle': 'تفسیر',
+  'tafsir.selectSurahDescription': 'سوره‌ای را برای خواندن تفسیر آن انتخاب کنید',
+  'tafsir.backToSurahs': 'همه سوره‌ها',
+  'tafsir.videoTafsirNote': 'هیچ متن تفسیر دیجیتالی برای این منبع وجود ندارد — به‌جای آن در یوتیوب یک سخنرانی ویدیویی جستجو کنید.',
+  'tafsir.watchOnYouTube': 'جستجو در یوتیوب: {{name}}',
   // ---- emptyState: tafsir ----
   'emptyState.tafsir.verseNotFoundTitle': 'آیه یافت نشد',
   'emptyState.tafsir.verseNotFoundDescription': 'آیه‌ای از قرآن‌خوان انتخاب کنید.',
@@ -368,7 +371,6 @@ export const fa: LocaleDictionary = {
   'quran.pause': 'توقف',
   'quran.play': 'پخش',
   'quran.nextAyah': 'آیه بعدی',
-  'quran.playbackOptions': 'گزینه‌های پخش',
   'quran.closePlayer': 'بستن پخش‌کننده',
   'quran.wordSyncNote': 'برجسته‌سازی کلمه برای این قاری در دسترس نیست — فقط همگام‌سازی در سطح آیه.',
   'quran.speed': 'سرعت',
@@ -378,6 +380,12 @@ export const fa: LocaleDictionary = {
   'quran.loopRange': 'محدوده سفارشی',
   'quran.loopSurah': 'تکرار سوره',
   'quran.autoplayNextAyah': 'پخش خودکار آیه بعدی',
+  'quran.translationAudioSectionLabel': 'صوت ترجمه',
+  'quran.urduAudioTranslationToggle': 'ترجمه صوتی اردو: {{state}}',
+  'quran.englishAudioTranslationToggle': 'ترجمه صوتی انگلیسی: {{state}}',
+  'quran.toggleOn': 'روشن',
+  'quran.toggleOff': 'خاموش',
+  'quran.translationAudioGroupNote': 'پس از هر ۳ آیه تلاوت پخش می‌شود و سپس به‌طور خودکار ادامه می‌یابد.',
   'quran.downloaded': 'دانلود شد',
   'quran.downloading': 'در حال دانلود {{completed}}/{{total}}',
   'quran.downloadForOffline': 'دانلود برای استفاده آفلاین',
@@ -484,22 +492,6 @@ export const fa: LocaleDictionary = {
   'location.unsupportedNote': 'موقعیت‌یابی در این دستگاه پشتیبانی نمی‌شود — به جای آن شهری را انتخاب کنید.',
   'location.searchCityPlaceholder': 'جستجوی یک شهر...',
   'location.cityCountry': '{{city}}، {{country}}',
-
-  // ---- qibla ----
-  'qibla.title': 'قبله',
-  'qibla.cardinalNorth': 'ش',
-  'qibla.cardinalEast': 'خ',
-  'qibla.cardinalSouth': 'ج',
-  'qibla.cardinalWest': 'غ',
-  'qibla.bearingFromNorth': '{{bearing}}° از شمال',
-  'qibla.distanceToKaaba': '{{distance}} کیلومتر تا کعبه',
-  'qibla.enableCompass': 'فعال‌سازی قطب‌نما',
-  'qibla.fallbackNote':
-    'قطب‌نمای زنده روی این دستگاه در دسترس نیست. رو به شمال واقعی بایستید (در صورت نیاز از قطب‌نمای دیگری استفاده کنید)، سپس {{bearing}}° در جهت عقربه‌های ساعت بچرخید تا رو به کعبه باشید.',
-  'qibla.checkingSupport': 'در حال بررسی پشتیبانی قطب‌نما…',
-
-  // ---- emptyState: qibla ----
-  'emptyState.qibla.setLocation': 'برای یافتن جهت قبله موقعیتی تنظیم کنید',
 
   // ---- islamic calendar ----
   'islamicCalendar.title': 'تقویم اسلامی',

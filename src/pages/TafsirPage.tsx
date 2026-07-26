@@ -1,12 +1,13 @@
-import { BookOpen, ChevronLeft, ChevronRight, RotateCw } from 'lucide-react';
+import { BookOpen, ChevronLeft, ChevronRight, RotateCw, ArrowLeft } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { SURAHS } from 'data/quran/surahs';
 import { TAFSIRS, DEFAULT_TAFSIR_ID } from 'constants/tafsirs';
-import { buildTafsirPath } from 'constants/routes';
+import { ROUTES, buildTafsirPath } from 'constants/routes';
 import useVerseArabicText from 'features/quranReader/hooks/useVerseArabicText';
 import useAyahTafsir from 'features/quranReader/hooks/useAyahTafsir';
 import TafsirSwitcher from 'features/quranReader/components/TafsirSwitcher';
+import YouTubeSearchLink from 'components/media/YouTubeSearchLink';
 import Typography from 'components/ui/Typography';
 import Skeleton from 'components/ui/Skeleton';
 import Button from 'components/ui/Button';
@@ -22,6 +23,7 @@ export default function TafsirPage() {
 
   const activeTafsir = TAFSIRS.find((item) => item.id === tafsirId) ?? TAFSIRS[0];
   const isArabicTafsir = activeTafsir?.languageCode === 'ar';
+  const isVideoTafsir = activeTafsir?.source === 'youtube';
 
   const surahNumber = Number(surahId);
   const verseNumber = Number(ayahNumber);
@@ -29,11 +31,15 @@ export default function TafsirPage() {
   const verseKey = `${surahNumber}:${verseNumber}`;
 
   const arabicText = useVerseArabicText(verseKey);
-  const tafsir = useAyahTafsir(tafsirId, verseKey);
+  const tafsir = useAyahTafsir(isVideoTafsir ? '' : tafsirId, verseKey);
 
   if (!surah || !Number.isInteger(verseNumber) || verseNumber < 1 || verseNumber > surah.versesCount) {
     return (
       <div className={styles.page}>
+        <Link to={ROUTES.TAFSIR_SURAHS} className={styles.backLink}>
+          <ArrowLeft size={14} />
+          {t('tafsir.backToSurahs')}
+        </Link>
         <EmptyState
           title={t('emptyState.tafsir.verseNotFoundTitle')}
           description={t('emptyState.tafsir.verseNotFoundDescription')}
@@ -47,6 +53,11 @@ export default function TafsirPage() {
 
   return (
     <div className={styles.page}>
+      <Link to={ROUTES.TAFSIR_SURAHS} className={styles.backLink}>
+        <ArrowLeft size={14} />
+        {t('tafsir.backToSurahs')}
+      </Link>
+
       <Typography variant="caption" muted>
         {t('tafsir.verseCaption', { surah: surah.nameSimple, verse: verseNumber })}
       </Typography>
@@ -81,40 +92,54 @@ export default function TafsirPage() {
       />
 
       <div className={styles.content}>
-        {tafsir.isPending && (
-          <div aria-busy="true" aria-label={t('tafsir.loadingTafsir')}>
-            <Skeleton variant="text" count={5} />
-          </div>
-        )}
-
-        {tafsir.isError && (
-          <EmptyState
-            title={t('emptyState.tafsir.loadFailed')}
-            description={tafsir.error.message}
-            action={
-              <Button
-                variant="secondary"
-                onClick={() => tafsir.refetch()}
-                leadingIcon={<RotateCw size={16} />}
-              >
-                {t('common.retry')}
-              </Button>
-            }
-          />
-        )}
-
-        {tafsir.data && (
+        {isVideoTafsir ? (
           <>
-            {tafsir.data.trim().length === 0 ? (
-              <EmptyState title={t('tafsir.noText')} />
-            ) : (
-              // Sanitized with DOMPurify in useAyahTafsir before it reaches here.
-              <div
-                className={isArabicTafsir ? `${styles.tafsirText} ${styles.tafsirTextArabic}` : styles.tafsirText}
-                dir={isArabicTafsir ? 'rtl' : 'auto'}
-                lang={activeTafsir?.languageCode}
-                dangerouslySetInnerHTML={{ __html: tafsir.data }}
+            <Typography variant="caption" muted className={styles.videoNote}>
+              {t('tafsir.videoTafsirNote')}
+            </Typography>
+            <YouTubeSearchLink
+              query={`${activeTafsir.sourceId} ${surah.nameSimple}`}
+              label={t('tafsir.watchOnYouTube', { name: activeTafsir.label })}
+            />
+          </>
+        ) : (
+          <>
+            {tafsir.isPending && (
+              <div aria-busy="true" aria-label={t('tafsir.loadingTafsir')}>
+                <Skeleton variant="text" count={5} />
+              </div>
+            )}
+
+            {tafsir.isError && (
+              <EmptyState
+                title={t('emptyState.tafsir.loadFailed')}
+                description={tafsir.error.message}
+                action={
+                  <Button
+                    variant="secondary"
+                    onClick={() => tafsir.refetch()}
+                    leadingIcon={<RotateCw size={16} />}
+                  >
+                    {t('common.retry')}
+                  </Button>
+                }
               />
+            )}
+
+            {tafsir.data && (
+              <>
+                {tafsir.data.trim().length === 0 ? (
+                  <EmptyState title={t('tafsir.noText')} />
+                ) : (
+                  // Sanitized with DOMPurify in useAyahTafsir before it reaches here.
+                  <div
+                    className={isArabicTafsir ? `${styles.tafsirText} ${styles.tafsirTextArabic}` : styles.tafsirText}
+                    dir={isArabicTafsir ? 'rtl' : 'auto'}
+                    lang={activeTafsir?.languageCode}
+                    dangerouslySetInnerHTML={{ __html: tafsir.data }}
+                  />
+                )}
+              </>
             )}
           </>
         )}

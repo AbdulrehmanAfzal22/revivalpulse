@@ -41,7 +41,6 @@ export const id: LocaleDictionary = {
   'nav.hadith': 'Hadis',
   'nav.tafsir': 'Tafsir',
   'nav.prayerTimes': 'Waktu Salat',
-  'nav.qibla': 'Kiblat',
   'nav.tasbeeh': 'Tasbih',
   'nav.duas': 'Doa',
   'nav.namesOfAllah': '99 Nama',
@@ -322,7 +321,11 @@ export const id: LocaleDictionary = {
   'tafsir.chooseTafsir': 'Pilih tafsir',
   'tafsir.dialogTitle': 'Sumber tafsir',
   'tafsir.dialogHint': 'Pilih tafsir untuk dibaca pada ayat ini.',
-
+  'tafsir.selectSurahTitle': 'Tafsir',
+  'tafsir.selectSurahDescription': 'Pilih surah untuk membaca tafsirnya',
+  'tafsir.backToSurahs': 'Semua Surah',
+  'tafsir.videoTafsirNote': 'Tidak ada teks tafsir digital untuk sumber ini — cari ceramah video di YouTube sebagai gantinya.',
+  'tafsir.watchOnYouTube': 'Cari di YouTube: {{name}}',
   // ---- emptyState: tafsir ----
   'emptyState.tafsir.verseNotFoundTitle': 'Ayat tidak ditemukan',
   'emptyState.tafsir.verseNotFoundDescription': 'Pilih ayat dari pembaca Al-Qur\'an.',
@@ -368,7 +371,6 @@ export const id: LocaleDictionary = {
   'quran.pause': 'Jeda',
   'quran.play': 'Putar',
   'quran.nextAyah': 'Ayat berikutnya',
-  'quran.playbackOptions': 'Opsi pemutaran',
   'quran.closePlayer': 'Tutup pemutar',
   'quran.wordSyncNote': 'Penyorotan kata tidak tersedia untuk qari ini — hanya sinkronisasi tingkat ayat.',
   'quran.speed': 'Kecepatan',
@@ -378,6 +380,12 @@ export const id: LocaleDictionary = {
   'quran.loopRange': 'Rentang kustom',
   'quran.loopSurah': 'Ulangi surah',
   'quran.autoplayNextAyah': 'Putar otomatis ayat berikutnya',
+  'quran.translationAudioSectionLabel': 'Audio terjemahan',
+  'quran.urduAudioTranslationToggle': 'Terjemahan Audio Urdu: {{state}}',
+  'quran.englishAudioTranslationToggle': 'Terjemahan Audio Inggris: {{state}}',
+  'quran.toggleOn': 'Aktif',
+  'quran.toggleOff': 'Nonaktif',
+  'quran.translationAudioGroupNote': 'Diputar setelah setiap 3 ayat dibacakan, lalu berlanjut otomatis.',
   'quran.downloaded': 'Terunduh',
   'quran.downloading': 'Mengunduh {{completed}}/{{total}}',
   'quran.downloadForOffline': 'Unduh untuk luring',
@@ -484,22 +492,6 @@ export const id: LocaleDictionary = {
   'location.unsupportedNote': 'Lokasi tidak didukung di perangkat ini — pilih kota sebagai gantinya.',
   'location.searchCityPlaceholder': 'Cari kota...',
   'location.cityCountry': '{{city}}, {{country}}',
-
-  // ---- qibla ----
-  'qibla.title': 'Kiblat',
-  'qibla.cardinalNorth': 'U',
-  'qibla.cardinalEast': 'T',
-  'qibla.cardinalSouth': 'S',
-  'qibla.cardinalWest': 'B',
-  'qibla.bearingFromNorth': '{{bearing}}° dari utara',
-  'qibla.distanceToKaaba': '{{distance}} km menuju Kakbah',
-  'qibla.enableCompass': 'Aktifkan kompas',
-  'qibla.fallbackNote':
-    'Kompas langsung tidak tersedia di perangkat ini. Hadapkan diri ke utara sejati (gunakan kompas lain jika perlu), lalu putar {{bearing}}° searah jarum jam untuk menghadap Kakbah.',
-  'qibla.checkingSupport': 'Memeriksa dukungan kompas…',
-
-  // ---- emptyState: qibla ----
-  'emptyState.qibla.setLocation': 'Atur lokasi untuk menemukan arah kiblat',
 
   // ---- islamic calendar ----
   'islamicCalendar.title': 'Kalender Islam',

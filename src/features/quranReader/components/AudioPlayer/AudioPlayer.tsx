@@ -1,11 +1,9 @@
-import { useState } from 'react';
-import { Loader2, Pause, Play, Settings2, SkipBack, SkipForward, X } from 'lucide-react';
+import { Loader2, Pause, Play, SkipBack, SkipForward, X } from 'lucide-react';
 import { usePlaybackStore } from 'stores/playbackStore';
 import * as engine from 'features/quranReader/services/playbackEngine';
 import { getReciterById } from 'constants/reciters';
 import { SURAHS } from 'data/quran/surahs';
 import Button from 'components/ui/Button';
-import AudioPlayerOptions from './AudioPlayerOptions';
 import useTranslation from 'hooks/useTranslation';
 import styles from './AudioPlayer.module.css';
 
@@ -25,7 +23,6 @@ export default function AudioPlayer() {
   const currentTime = usePlaybackStore((state) => state.currentTime);
   const duration = usePlaybackStore((state) => state.duration);
   const reciterId = usePlaybackStore((state) => state.reciterId);
-  const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const { t } = useTranslation();
 
   const surah = SURAHS.find((item) => item.id === surahId);
@@ -88,17 +85,9 @@ export default function AudioPlayer() {
         </div>
 
         <div className={styles.actions}>
-          <Button
-            variant="icon"
-            onClick={() => setIsOptionsOpen(true)}
-            aria-label={t('quran.playbackOptions')}
-            leadingIcon={<Settings2 size={16} />}
-          />
           <Button variant="icon" onClick={() => engine.stop()} aria-label={t('quran.closePlayer')} leadingIcon={<X size={16} />} />
         </div>
       </div>
-
-      <AudioPlayerOptions isOpen={isOptionsOpen} onClose={() => setIsOptionsOpen(false)} surahId={surah.id} />
     </div>
   );
 }

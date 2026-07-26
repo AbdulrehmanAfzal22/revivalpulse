@@ -11,12 +11,24 @@
   padding-block-start: 2rem;
 }
 
+/* No navbar to clear in fullscreen — the page itself is the fullscreen root. */
+.page:fullscreen .toolbar {
+  top: 0;
+}
+
 .toolbar {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 0.25rem;
   margin-block-end: 0.5rem;
+  /* Stays reachable while scrolling through long surahs — sits just below
+     the global sticky navbar rather than scrolling away with the header. */
+  position: sticky;
+  top: 3.5rem;
+  z-index: var(--z-navbar);
+  padding-block: 0.5rem;
+  background-color: var(--reader-bg, var(--color-bg));
 }
 
 .header {

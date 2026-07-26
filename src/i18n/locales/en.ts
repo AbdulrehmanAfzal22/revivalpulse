@@ -45,7 +45,6 @@ export const en = {
   'nav.hadith': 'Hadith',
   'nav.tafsir': 'Tafsir',
   'nav.prayerTimes': 'Prayer Times',
-  'nav.qibla': 'Qibla',
   'nav.tasbeeh': 'Tasbeeh',
   'nav.duas': 'Duas',
   'nav.namesOfAllah': '99 Names',
@@ -328,6 +327,11 @@ export const en = {
   'tafsir.chooseTafsir': 'Choose tafsir',
   'tafsir.dialogTitle': 'Tafsir source',
   'tafsir.dialogHint': 'Select a tafsir to read for this verse.',
+  'tafsir.selectSurahTitle': 'Tafsir',
+  'tafsir.selectSurahDescription': 'Choose a surah to read its tafsir',
+  'tafsir.backToSurahs': 'All Surahs',
+  'tafsir.videoTafsirNote': 'No digitized tafsir text exists for this source — search YouTube for a video lecture instead.',
+  'tafsir.watchOnYouTube': 'Search YouTube: {{name}}',
 
   // ---- emptyState: tafsir ----
   'emptyState.tafsir.verseNotFoundTitle': 'Verse not found',
@@ -374,7 +378,6 @@ export const en = {
   'quran.pause': 'Pause',
   'quran.play': 'Play',
   'quran.nextAyah': 'Next ayah',
-  'quran.playbackOptions': 'Playback options',
   'quran.closePlayer': 'Close player',
   'quran.wordSyncNote': "Word-level highlighting isn't available for this reciter — verse-level sync only.",
   'quran.speed': 'Speed',
@@ -384,6 +387,12 @@ export const en = {
   'quran.loopRange': 'Custom range',
   'quran.loopSurah': 'Repeat surah',
   'quran.autoplayNextAyah': 'Autoplay next ayah',
+  'quran.translationAudioSectionLabel': 'Translation audio',
+  'quran.urduAudioTranslationToggle': 'Urdu Audio Translation: {{state}}',
+  'quran.englishAudioTranslationToggle': 'English Audio Translation: {{state}}',
+  'quran.toggleOn': 'On',
+  'quran.toggleOff': 'Off',
+  'quran.translationAudioGroupNote': 'Plays after every 3 ayahs of recitation, then continues automatically.',
   'quran.downloaded': 'Downloaded',
   'quran.downloading': 'Downloading {{completed}}/{{total}}',
   'quran.downloadForOffline': 'Download for offline',
@@ -499,7 +508,7 @@ export const en = {
   'emptyState.prayerTimes.setLocation': 'Set a location to see prayer times',
   'emptyState.prayerTimes.loadFailed': "Couldn't load prayer times",
 
-  // ---- location picker (shared by Prayer Times + Qibla) ----
+  // ---- location picker (used by Prayer Times) ----
   'location.useMyLocation': 'Use my location',
   'location.deniedNote': "Location access is blocked — enable it in your browser's site settings, or pick a city instead.",
   'location.errorNote': "Couldn't get your location — pick a city instead.",
@@ -507,23 +516,6 @@ export const en = {
   'location.searchCityPlaceholder': 'Search for a city...',
   'location.cityCountry': '{{city}}, {{country}}',
 
-  // ---- qibla ----
-  'qibla.title': 'Qibla',
-  'qibla.cardinalNorth': 'N',
-  'qibla.cardinalEast': 'E',
-  'qibla.cardinalSouth': 'S',
-  'qibla.cardinalWest': 'W',
-  'qibla.bearingFromNorth': '{{bearing}}° from North',
-  'qibla.distanceToKaaba': '{{distance}} km to the Kaaba',
-  'qibla.enableCompass': 'Enable compass',
-  'qibla.fallbackNote':
-    "Live compass isn't available on this device. Face true north (using another compass if needed), then turn {{bearing}}° clockwise to face the Kaaba.",
-  'qibla.checkingSupport': 'Checking compass support…',
-
-  // ---- emptyState: qibla ----
-  'emptyState.qibla.setLocation': 'Set a location to find the Qibla direction',
-
-  // ---- islamic calendar ----
   'islamicCalendar.title': 'Islamic Calendar',
   'islamicCalendar.islamicDate': 'Islamic Date',
   'islamicCalendar.today': 'Today',

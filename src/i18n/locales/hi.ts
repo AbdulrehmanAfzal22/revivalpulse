@@ -41,7 +41,6 @@ export const hi: LocaleDictionary = {
   'nav.hadith': 'हदीस',
   'nav.tafsir': 'तफ़सीर',
   'nav.prayerTimes': 'नमाज़ के समय',
-  'nav.qibla': 'क़िबला',
   'nav.tasbeeh': 'तस्बीह',
   'nav.duas': 'दुआएं',
   'nav.namesOfAllah': '99 नाम',
@@ -322,7 +321,11 @@ export const hi: LocaleDictionary = {
   'tafsir.chooseTafsir': 'तफ़सीर चुनें',
   'tafsir.dialogTitle': 'तफ़सीर स्रोत',
   'tafsir.dialogHint': 'इस आयत के लिए पढ़ने हेतु एक तफ़सीर चुनें।',
-
+  'tafsir.selectSurahTitle': 'तफ़सीर',
+  'tafsir.selectSurahDescription': 'तफ़सीर पढ़ने के लिए एक सूरह चुनें',
+  'tafsir.backToSurahs': 'सभी सूरह',
+  'tafsir.videoTafsirNote': 'इस स्रोत के लिए कोई डिजिटाइज़्ड तफ़सीर टेक्स्ट मौजूद नहीं है — इसके बजाय यूट्यूब पर एक वीडियो व्याख्यान खोजें।',
+  'tafsir.watchOnYouTube': 'यूट्यूब पर खोजें: {{name}}',
   // ---- emptyState: tafsir ----
   'emptyState.tafsir.verseNotFoundTitle': 'आयत नहीं मिली',
   'emptyState.tafsir.verseNotFoundDescription': 'क़ुरान रीडर से एक आयत चुनें।',
@@ -368,7 +371,6 @@ export const hi: LocaleDictionary = {
   'quran.pause': 'रोकें',
   'quran.play': 'चलाएं',
   'quran.nextAyah': 'अगली आयत',
-  'quran.playbackOptions': 'प्लेबैक विकल्प',
   'quran.closePlayer': 'प्लेयर बंद करें',
   'quran.wordSyncNote': 'इस क़ारी के लिए शब्द हाइलाइटिंग उपलब्ध नहीं है — केवल आयत-स्तरीय सिंक।',
   'quran.speed': 'गति',
@@ -378,6 +380,12 @@ export const hi: LocaleDictionary = {
   'quran.loopRange': 'कस्टम सीमा',
   'quran.loopSurah': 'सूरा दोहराएं',
   'quran.autoplayNextAyah': 'अगली आयत स्वतः चलाएं',
+  'quran.translationAudioSectionLabel': 'अनुवाद ऑडियो',
+  'quran.urduAudioTranslationToggle': 'उर्दू ऑडियो अनुवाद: {{state}}',
+  'quran.englishAudioTranslationToggle': 'अंग्रेज़ी ऑडियो अनुवाद: {{state}}',
+  'quran.toggleOn': 'चालू',
+  'quran.toggleOff': 'बंद',
+  'quran.translationAudioGroupNote': 'हर 3 आयतों की तिलावत के बाद बजता है, फिर स्वतः जारी रहता है।',
   'quran.downloaded': 'डाउनलोड हो गया',
   'quran.downloading': 'डाउनलोड हो रहा है {{completed}}/{{total}}',
   'quran.downloadForOffline': 'ऑफ़लाइन के लिए डाउनलोड करें',
@@ -484,22 +492,6 @@ export const hi: LocaleDictionary = {
   'location.unsupportedNote': 'इस डिवाइस पर स्थान समर्थित नहीं है — इसके बजाय एक शहर चुनें।',
   'location.searchCityPlaceholder': 'एक शहर खोजें...',
   'location.cityCountry': '{{city}}, {{country}}',
-
-  // ---- qibla ----
-  'qibla.title': 'क़िबला',
-  'qibla.cardinalNorth': 'उ',
-  'qibla.cardinalEast': 'पू',
-  'qibla.cardinalSouth': 'द',
-  'qibla.cardinalWest': 'प',
-  'qibla.bearingFromNorth': 'उत्तर से {{bearing}}°',
-  'qibla.distanceToKaaba': 'काबा तक {{distance}} किमी',
-  'qibla.enableCompass': 'कम्पास सक्षम करें',
-  'qibla.fallbackNote':
-    'इस डिवाइस पर लाइव कम्पास उपलब्ध नहीं है। सच्चे उत्तर की ओर मुख करें (यदि आवश्यक हो तो कोई अन्य कम्पास उपयोग करें), फिर काबा की ओर मुख करने के लिए {{bearing}}° दक्षिणावर्त घुमाएं।',
-  'qibla.checkingSupport': 'कम्पास समर्थन की जांच की जा रही है…',
-
-  // ---- emptyState: qibla ----
-  'emptyState.qibla.setLocation': 'क़िबला दिशा खोजने के लिए एक स्थान सेट करें',
 
   // ---- islamic calendar ----
   'islamicCalendar.title': 'इस्लामी कैलेंडर',

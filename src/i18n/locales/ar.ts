@@ -42,7 +42,6 @@ export const ar: LocaleDictionary = {
   'nav.hadith': 'الحديث',
   'nav.tafsir': 'التفسير',
   'nav.prayerTimes': 'مواقيت الصلاة',
-  'nav.qibla': 'القبلة',
   'nav.tasbeeh': 'التسبيح',
   'nav.duas': 'الأدعية',
   'nav.namesOfAllah': 'أسماء الله الحسنى',
@@ -326,7 +325,11 @@ export const ar: LocaleDictionary = {
   'tafsir.chooseTafsir': 'اختيار التفسير',
   'tafsir.dialogTitle': 'مصدر التفسير',
   'tafsir.dialogHint': 'اختر تفسيرًا لقراءته لهذه الآية.',
-
+  'tafsir.selectSurahTitle': 'التفسير',
+  'tafsir.selectSurahDescription': 'اختر سورة لقراءة تفسيرها',
+  'tafsir.backToSurahs': 'كل السور',
+  'tafsir.videoTafsirNote': 'لا يوجد نص تفسير رقمي لهذا المصدر — ابحث في يوتيوب عن محاضرة فيديو بدلاً من ذلك.',
+  'tafsir.watchOnYouTube': 'ابحث في يوتيوب: {{name}}',
   // ---- emptyState: tafsir ----
   'emptyState.tafsir.verseNotFoundTitle': 'الآية غير موجودة',
   'emptyState.tafsir.verseNotFoundDescription': 'اختر آية من قارئ القرآن.',
@@ -378,7 +381,6 @@ export const ar: LocaleDictionary = {
   'quran.pause': 'إيقاف',
   'quran.play': 'تشغيل',
   'quran.nextAyah': 'الآية التالية',
-  'quran.playbackOptions': 'خيارات التشغيل',
   'quran.closePlayer': 'إغلاق المشغّل',
   'quran.wordSyncNote': 'تمييز الكلمات غير متاح لهذا القارئ — المزامنة على مستوى الآية فقط.',
   'quran.speed': 'السرعة',
@@ -388,6 +390,12 @@ export const ar: LocaleDictionary = {
   'quran.loopRange': 'نطاق مخصص',
   'quran.loopSurah': 'تكرار السورة',
   'quran.autoplayNextAyah': 'تشغيل الآية التالية تلقائيًا',
+  'quran.translationAudioSectionLabel': 'صوت الترجمة',
+  'quran.urduAudioTranslationToggle': 'ترجمة صوتية أردية: {{state}}',
+  'quran.englishAudioTranslationToggle': 'ترجمة صوتية إنجليزية: {{state}}',
+  'quran.toggleOn': 'تشغيل',
+  'quran.toggleOff': 'إيقاف',
+  'quran.translationAudioGroupNote': 'تُشغَّل بعد كل 3 آيات من التلاوة، ثم تستمر تلقائيًا.',
   'quran.downloaded': 'تم التنزيل',
   'quran.downloading': 'جارٍ التنزيل {{completed}}/{{total}}',
   'quran.downloadForOffline': 'تنزيل للاستخدام دون اتصال',
@@ -490,29 +498,13 @@ export const ar: LocaleDictionary = {
   'emptyState.prayerTimes.setLocation': 'حدّد موقعًا لرؤية مواقيت الصلاة',
   'emptyState.prayerTimes.loadFailed': 'تعذّر تحميل مواقيت الصلاة',
 
-  // ---- location picker (shared by Prayer Times + Qibla) ----
+  // ---- location picker (used by Prayer Times) ----
   'location.useMyLocation': 'استخدام موقعي',
   'location.deniedNote': 'الوصول إلى الموقع محظور — فعّله من إعدادات الموقع في متصفحك، أو اختر مدينة بدلًا من ذلك.',
   'location.errorNote': 'تعذّر الحصول على موقعك — اختر مدينة بدلًا من ذلك.',
   'location.unsupportedNote': 'تحديد الموقع غير مدعوم على هذا الجهاز — اختر مدينة بدلًا من ذلك.',
   'location.searchCityPlaceholder': 'ابحث عن مدينة...',
   'location.cityCountry': '{{city}}، {{country}}',
-
-  // ---- qibla ----
-  'qibla.title': 'القبلة',
-  'qibla.cardinalNorth': 'ش',
-  'qibla.cardinalEast': 'ق',
-  'qibla.cardinalSouth': 'ج',
-  'qibla.cardinalWest': 'غ',
-  'qibla.bearingFromNorth': '{{bearing}}° من الشمال',
-  'qibla.distanceToKaaba': '{{distance}} كم إلى الكعبة',
-  'qibla.enableCompass': 'تفعيل البوصلة',
-  'qibla.fallbackNote':
-    'البوصلة المباشرة غير متاحة على هذا الجهاز. استقبل الشمال الحقيقي (باستخدام بوصلة أخرى إن لزم)، ثم استدر {{bearing}}° باتجاه عقارب الساعة لمواجهة الكعبة.',
-  'qibla.checkingSupport': 'جارٍ التحقق من دعم البوصلة…',
-
-  // ---- emptyState: qibla ----
-  'emptyState.qibla.setLocation': 'حدّد موقعًا لمعرفة اتجاه القبلة',
 
   // ---- islamic calendar ----
   'islamicCalendar.title': 'التقويم الإسلامي',

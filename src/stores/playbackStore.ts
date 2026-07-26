@@ -26,6 +26,9 @@ interface PlaybackStoreState {
   loopMode: LoopMode;
   range: PlaybackRange | null;
   autoplayEnabled: boolean;
+  /** Explicit on/off switches for grouped translation-audio playback — see playbackEngine.ts's TRANSLATION_GROUP_SIZE pattern. Independent of which translations are selected as text. */
+  urduTranslationAudioEnabled: boolean;
+  englishTranslationAudioEnabled: boolean;
   playbackSpeed: number;
   duration: number;
   currentTime: number;
@@ -44,6 +47,8 @@ interface PlaybackStoreState {
   setLoopMode: (mode: LoopMode) => void;
   setRange: (range: PlaybackRange | null) => void;
   setAutoplayEnabled: (enabled: boolean) => void;
+  setUrduTranslationAudioEnabled: (enabled: boolean) => void;
+  setEnglishTranslationAudioEnabled: (enabled: boolean) => void;
   setPlaybackSpeed: (speed: number) => void;
   setProgress: (currentTime: number, duration: number) => void;
 }
@@ -62,6 +67,8 @@ export const usePlaybackStore = create<PlaybackStoreState>((set, get) => ({
   loopMode: 'off',
   range: null,
   autoplayEnabled: true,
+  urduTranslationAudioEnabled: true,
+  englishTranslationAudioEnabled: false,
   playbackSpeed: useReadingPreferencesStore.getState().preferences.wordPlaybackSpeed,
   duration: 0,
   currentTime: 0,
@@ -102,6 +109,8 @@ export const usePlaybackStore = create<PlaybackStoreState>((set, get) => ({
   setLoopMode: (mode) => set({ loopMode: mode }),
   setRange: (range) => set({ range }),
   setAutoplayEnabled: (enabled) => set({ autoplayEnabled: enabled }),
+  setUrduTranslationAudioEnabled: (enabled) => set({ urduTranslationAudioEnabled: enabled }),
+  setEnglishTranslationAudioEnabled: (enabled) => set({ englishTranslationAudioEnabled: enabled }),
   setPlaybackSpeed: (speed) => {
     set({ playbackSpeed: speed });
     useReadingPreferencesStore.getState().update({ wordPlaybackSpeed: speed });

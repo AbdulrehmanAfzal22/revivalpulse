@@ -80,3 +80,65 @@
   color: var(--color-text);
   cursor: pointer;
 }
+
+.note {
+  display: block;
+}
+
+.rangeRow {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.rangeField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.rangeField input {
+  width: 5rem;
+  padding: 0.375rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.translationToggleRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+.translationToggle {
+  padding: 0.5rem 0.875rem;
+  border-radius: var(--radius-full, 999px);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease, transform 120ms ease;
+}
+
+.translationToggleActive {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-primary-contrast, #fff);
+}
+
+/* English toggle grows and gains a stronger highlight when active, so its
+   on/off state reads at a glance — distinct from the Urdu toggle's plain
+   highlight, per the explicit "larger size" requirement. */
+.englishToggleActive {
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9375rem;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 30%, transparent);
+  transform: scale(1.05);
+}

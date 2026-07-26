@@ -5,9 +5,9 @@ export const ROUTES = {
   HADITH: '/hadith',
   HADITH_BOOK: '/hadith/:bookSlug',
   HADITH_CHAPTER: '/hadith/:bookSlug/:chapterId',
+  TAFSIR_SURAHS: '/tafsir',
   TAFSIR: '/tafsir/:surahId/:ayahNumber',
   PRAYER_TIMES: '/prayer-times',
-  QIBLA: '/qibla',
   TASBEEH: '/tasbeeh',
   DUAS: '/duas',
   NAMES_OF_ALLAH: '/names-of-allah',
@@ -30,6 +30,10 @@ export type RoutePath = (typeof ROUTES)[keyof typeof ROUTES];
 
 export function buildTafsirPath(surahId: number, ayahNumber: number): string {
   return `/tafsir/${surahId}/${ayahNumber}`;
+}
+
+export function buildTafsirSurahPath(surahId: number): string {
+  return buildTafsirPath(surahId, 1);
 }
 
 export function buildHadithBookPath(bookSlug: string): string {

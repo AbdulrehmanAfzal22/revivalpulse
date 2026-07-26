@@ -41,7 +41,6 @@ export const fr: LocaleDictionary = {
   'nav.hadith': 'Hadith',
   'nav.tafsir': 'Tafsir',
   'nav.prayerTimes': 'Heures de prière',
-  'nav.qibla': 'Qibla',
   'nav.tasbeeh': 'Tasbih',
   'nav.duas': 'Invocations',
   'nav.namesOfAllah': '99 noms',
@@ -322,7 +321,11 @@ export const fr: LocaleDictionary = {
   'tafsir.chooseTafsir': 'Choisir le tafsir',
   'tafsir.dialogTitle': 'Source du tafsir',
   'tafsir.dialogHint': 'Sélectionnez un tafsir à lire pour ce verset.',
-
+  'tafsir.selectSurahTitle': 'Tafsir',
+  'tafsir.selectSurahDescription': 'Choisissez une sourate pour lire son tafsir',
+  'tafsir.backToSurahs': 'Toutes les sourates',
+  'tafsir.videoTafsirNote': "Aucun texte de tafsir numérisé n'existe pour cette source — recherchez plutôt une conférence vidéo sur YouTube.",
+  'tafsir.watchOnYouTube': 'Rechercher sur YouTube : {{name}}',
   // ---- emptyState: tafsir ----
   'emptyState.tafsir.verseNotFoundTitle': 'Verset introuvable',
   'emptyState.tafsir.verseNotFoundDescription': 'Choisissez un verset dans le lecteur du Coran.',
@@ -368,7 +371,6 @@ export const fr: LocaleDictionary = {
   'quran.pause': 'Pause',
   'quran.play': 'Lecture',
   'quran.nextAyah': 'Verset suivant',
-  'quran.playbackOptions': 'Options de lecture',
   'quran.closePlayer': 'Fermer le lecteur',
   'quran.wordSyncNote': "La mise en surbrillance des mots n'est pas disponible pour ce récitateur — synchronisation au niveau du verset uniquement.",
   'quran.speed': 'Vitesse',
@@ -378,6 +380,12 @@ export const fr: LocaleDictionary = {
   'quran.loopRange': 'Plage personnalisée',
   'quran.loopSurah': 'Répéter la sourate',
   'quran.autoplayNextAyah': 'Lecture automatique du verset suivant',
+  'quran.translationAudioSectionLabel': 'Audio de traduction',
+  'quran.urduAudioTranslationToggle': 'Traduction audio en ourdou : {{state}}',
+  'quran.englishAudioTranslationToggle': 'Traduction audio anglaise : {{state}}',
+  'quran.toggleOn': 'Activé',
+  'quran.toggleOff': 'Désactivé',
+  'quran.translationAudioGroupNote': 'Se joue après chaque bloc de 3 versets récités, puis continue automatiquement.',
   'quran.downloaded': 'Téléchargé',
   'quran.downloading': 'Téléchargement {{completed}}/{{total}}',
   'quran.downloadForOffline': 'Télécharger pour une écoute hors ligne',
@@ -484,22 +492,6 @@ export const fr: LocaleDictionary = {
   'location.unsupportedNote': "La géolocalisation n'est pas prise en charge sur cet appareil — choisissez une ville à la place.",
   'location.searchCityPlaceholder': 'Rechercher une ville...',
   'location.cityCountry': '{{city}}, {{country}}',
-
-  // ---- qibla ----
-  'qibla.title': 'Qibla',
-  'qibla.cardinalNorth': 'N',
-  'qibla.cardinalEast': 'E',
-  'qibla.cardinalSouth': 'S',
-  'qibla.cardinalWest': 'O',
-  'qibla.bearingFromNorth': '{{bearing}}° depuis le nord',
-  'qibla.distanceToKaaba': '{{distance}} km jusqu\'à la Kaaba',
-  'qibla.enableCompass': 'Activer la boussole',
-  'qibla.fallbackNote':
-    "La boussole en direct n'est pas disponible sur cet appareil. Faites face au nord réel (à l'aide d'une autre boussole si nécessaire), puis tournez de {{bearing}}° dans le sens horaire pour faire face à la Kaaba.",
-  'qibla.checkingSupport': 'Vérification de la compatibilité de la boussole…',
-
-  // ---- emptyState: qibla ----
-  'emptyState.qibla.setLocation': "Définissez une position pour trouver la direction de la Qibla",
 
   // ---- islamic calendar ----
   'islamicCalendar.title': 'Calendrier islamique',

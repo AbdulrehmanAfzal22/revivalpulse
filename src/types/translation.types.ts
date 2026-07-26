@@ -25,7 +25,13 @@ export interface TafsirResource {
   label: string;
   authorName: string;
   languageCode: TafsirLanguage;
-  source: TranslationSource;
+  /**
+   * 'youtube' covers scholars with no digitized tafsir text on either API
+   * (e.g. Engineer Muhammad Ali Mirza, who publishes only as video lectures)
+   * — sourceId is a search query, not an editing/resource id, and TafsirPage
+   * renders a live YouTube search embed instead of fetching/sanitizing text.
+   */
+  source: TranslationSource | 'youtube';
   sourceId: string | number;
   /** Quran.com hosts some commentaries (e.g. Maududi) as a translation resource, not a dedicated tafsir resource. */
   quranComEndpoint?: 'tafsir' | 'translation';

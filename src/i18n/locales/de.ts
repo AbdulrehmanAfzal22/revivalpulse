@@ -41,7 +41,6 @@ export const de: LocaleDictionary = {
   'nav.hadith': 'Hadith',
   'nav.tafsir': 'Tafsir',
   'nav.prayerTimes': 'Gebetszeiten',
-  'nav.qibla': 'Qibla',
   'nav.tasbeeh': 'Tasbih',
   'nav.duas': 'Bittgebete',
   'nav.namesOfAllah': '99 Namen',
@@ -322,7 +321,11 @@ export const de: LocaleDictionary = {
   'tafsir.chooseTafsir': 'Tafsir auswählen',
   'tafsir.dialogTitle': 'Tafsir-Quelle',
   'tafsir.dialogHint': 'Wählen Sie einen Tafsir für diesen Vers aus.',
-
+  'tafsir.selectSurahTitle': 'Tafsir',
+  'tafsir.selectSurahDescription': 'Wählen Sie eine Sure, um ihren Tafsir zu lesen',
+  'tafsir.backToSurahs': 'Alle Suren',
+  'tafsir.videoTafsirNote': 'Für diese Quelle existiert kein digitalisierter Tafsir-Text — suchen Sie stattdessen auf YouTube nach einem Vortrag.',
+  'tafsir.watchOnYouTube': 'Auf YouTube suchen: {{name}}',
   // ---- emptyState: tafsir ----
   'emptyState.tafsir.verseNotFoundTitle': 'Vers nicht gefunden',
   'emptyState.tafsir.verseNotFoundDescription': 'Wählen Sie einen Vers aus dem Koranleser.',
@@ -368,7 +371,6 @@ export const de: LocaleDictionary = {
   'quran.pause': 'Pause',
   'quran.play': 'Abspielen',
   'quran.nextAyah': 'Nächster Vers',
-  'quran.playbackOptions': 'Wiedergabeoptionen',
   'quran.closePlayer': 'Player schließen',
   'quran.wordSyncNote': 'Worthervorhebung ist für diesen Rezitator nicht verfügbar — nur Synchronisation auf Versebene.',
   'quran.speed': 'Geschwindigkeit',
@@ -378,6 +380,12 @@ export const de: LocaleDictionary = {
   'quran.loopRange': 'Benutzerdefinierter Bereich',
   'quran.loopSurah': 'Sure wiederholen',
   'quran.autoplayNextAyah': 'Nächsten Vers automatisch abspielen',
+  'quran.translationAudioSectionLabel': 'Übersetzungsaudio',
+  'quran.urduAudioTranslationToggle': 'Urdu-Audio-Übersetzung: {{state}}',
+  'quran.englishAudioTranslationToggle': 'Englische Audio-Übersetzung: {{state}}',
+  'quran.toggleOn': 'An',
+  'quran.toggleOff': 'Aus',
+  'quran.translationAudioGroupNote': 'Wird nach jeweils 3 rezitierten Versen abgespielt und läuft danach automatisch weiter.',
   'quran.downloaded': 'Heruntergeladen',
   'quran.downloading': 'Wird heruntergeladen {{completed}}/{{total}}',
   'quran.downloadForOffline': 'Für Offline-Nutzung herunterladen',
@@ -484,22 +492,6 @@ export const de: LocaleDictionary = {
   'location.unsupportedNote': 'Standortbestimmung wird auf diesem Gerät nicht unterstützt — wählen Sie stattdessen eine Stadt.',
   'location.searchCityPlaceholder': 'Eine Stadt suchen...',
   'location.cityCountry': '{{city}}, {{country}}',
-
-  // ---- qibla ----
-  'qibla.title': 'Qibla',
-  'qibla.cardinalNorth': 'N',
-  'qibla.cardinalEast': 'O',
-  'qibla.cardinalSouth': 'S',
-  'qibla.cardinalWest': 'W',
-  'qibla.bearingFromNorth': '{{bearing}}° von Norden',
-  'qibla.distanceToKaaba': '{{distance}} km bis zur Kaaba',
-  'qibla.enableCompass': 'Kompass aktivieren',
-  'qibla.fallbackNote':
-    'Der Live-Kompass ist auf diesem Gerät nicht verfügbar. Richten Sie sich nach echtem Norden aus (verwenden Sie bei Bedarf einen anderen Kompass) und drehen Sie sich dann um {{bearing}}° im Uhrzeigersinn, um zur Kaaba zu blicken.',
-  'qibla.checkingSupport': 'Kompass-Unterstützung wird überprüft…',
-
-  // ---- emptyState: qibla ----
-  'emptyState.qibla.setLocation': 'Legen Sie einen Standort fest, um die Qibla-Richtung zu finden',
 
   // ---- islamic calendar ----
   'islamicCalendar.title': 'Islamischer Kalender',

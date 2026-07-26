@@ -15,6 +15,11 @@ import type { TafsirResource } from 'types/translation.types';
  * editions publish a genuine Maududi tafsir in any language, so rather than
  * keep mis-substituting a translation for a tafsir, it's replaced below
  * with Ma'arif al-Qur'an — a real, verified tafsir resource in English.
+ *
+ * Engineer Muhammad Ali Mirza has no digitized tafsir text on either API —
+ * he publishes as video lectures, not a written commentary — so rather than
+ * fabricate or mis-substitute text, his entry uses source: 'youtube' and
+ * TafsirPage renders a live YouTube search embed for it instead of text.
  */
 export const TAFSIRS: TafsirResource[] = [
   {
@@ -64,6 +69,22 @@ export const TAFSIRS: TafsirResource[] = [
     languageCode: 'ur',
     source: 'quran.com',
     sourceId: 160,
+  },
+  {
+    id: 'bayan-ul-quran',
+    label: 'Bayan-ul-Quran',
+    authorName: 'Dr. Israr Ahmad',
+    languageCode: 'ur',
+    source: 'quran.com',
+    sourceId: 159,
+  },
+  {
+    id: 'mirza-video',
+    label: 'Engineer Muhammad Ali Mirza (Video)',
+    authorName: 'Engineer Muhammad Ali Mirza',
+    languageCode: 'ur',
+    source: 'youtube',
+    sourceId: 'Engineer Muhammad Ali Mirza tafseer',
   },
 ];
 
