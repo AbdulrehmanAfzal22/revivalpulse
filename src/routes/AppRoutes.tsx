@@ -19,6 +19,7 @@ const NamesOfAllahPage = lazy(() => import('pages/NamesOfAllahPage'));
 const IslamicCalendarPage = lazy(() => import('pages/IslamicCalendarPage'));
 const BookmarksPage = lazy(() => import('pages/BookmarksPage'));
 const DownloadsPage = lazy(() => import('pages/DownloadsPage'));
+const RecitationCoachPage = lazy(() => import('pages/RecitationCoachPage'));
 const SettingsPage = lazy(() => import('pages/SettingsPage'));
 const DevModePage = lazy(() => import('pages/DevModePage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
@@ -50,6 +51,7 @@ export default function AppRoutes() {
         <Route path={ROUTES.ISLAMIC_CALENDAR} element={<IslamicCalendarPage />} />
         <Route path={ROUTES.BOOKMARKS} element={<BookmarksPage />} />
         <Route path={ROUTES.DOWNLOADS} element={<DownloadsPage />} />
+        <Route path={ROUTES.RECITATION_COACH} element={<RecitationCoachPage />} />
         <Route path={ROUTES.SETTINGS} element={<SettingsPage />} />
         <Route path={ROUTES.DEV_MODE} element={<DevModePage />} />
         <Route path="*" element={<NotFoundPage />} />

@@ -1,0 +1,82 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  animation: coachFadeIn 350ms ease;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-block-end: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--coach-accent-soft);
+  color: var(--coach-accent);
+}
+
+.surahArabic {
+  margin: 0;
+  font-family: var(--reader-arabic-font, serif);
+  font-size: 2rem;
+  color: var(--coach-text);
+}
+
+.surahLatin {
+  margin: 0 0 0.5rem;
+  font-size: 0.9375rem;
+  color: var(--coach-text-muted);
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem 2.5rem;
+  margin-block: 1.25rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.statValue {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--coach-text);
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: var(--coach-text-muted);
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@keyframes coachFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wrapper {
+    animation: none;
+  }
+}

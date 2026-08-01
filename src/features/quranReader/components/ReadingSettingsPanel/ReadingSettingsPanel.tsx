@@ -324,7 +324,7 @@ export default function ReadingSettingsPanel({ isOpen, onClose, surahId }: Readi
               aria-pressed={urduTranslationAudioEnabled}
               onClick={() => {
                 setUrduTranslationAudioEnabled(!urduTranslationAudioEnabled);
-                engine.resetTranslationAudioGroup();
+                engine.refreshTranslationEditions();
               }}
             >
               {t('quran.urduAudioTranslationToggle', {
@@ -343,7 +343,7 @@ export default function ReadingSettingsPanel({ isOpen, onClose, surahId }: Readi
               aria-pressed={englishTranslationAudioEnabled}
               onClick={() => {
                 setEnglishTranslationAudioEnabled(!englishTranslationAudioEnabled);
-                engine.resetTranslationAudioGroup();
+                engine.refreshTranslationEditions();
               }}
             >
               {t('quran.englishAudioTranslationToggle', {

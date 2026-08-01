@@ -14,6 +14,7 @@ export const ROUTES = {
   ISLAMIC_CALENDAR: '/islamic-calendar',
   BOOKMARKS: '/bookmarks',
   DOWNLOADS: '/downloads',
+  RECITATION_COACH: '/recitation-coach',
   SETTINGS: '/settings',
   KIDS: '/kids',
   KIDS_ALPHABET: '/kids/alphabet',

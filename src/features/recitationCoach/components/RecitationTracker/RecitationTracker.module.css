@@ -1,0 +1,96 @@
+.text {
+  max-width: 44rem;
+  font-family: var(--reader-arabic-font, serif);
+  font-size: clamp(2rem, 4vw + 1rem, 3.5rem);
+  line-height: 2.3;
+  letter-spacing: 0.01em;
+  text-align: center;
+  animation: coachAyahIn 250ms ease;
+}
+
+@keyframes coachAyahIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.word {
+  position: relative;
+  display: inline-block;
+  margin: 0 0.05em;
+  padding: 0.08em 0.2em;
+  border-radius: var(--radius-sm);
+  transition: background-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
+}
+
+.pending {
+  color: var(--coach-text);
+}
+
+.current {
+  background-color: var(--coach-accent-soft);
+  color: var(--coach-text);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--coach-accent) 45%, transparent);
+}
+
+.correct {
+  background-color: transparent;
+  color: var(--coach-accent);
+}
+
+.incorrect {
+  background-color: var(--coach-mistake-soft);
+  color: var(--coach-mistake);
+  box-shadow: inset 0 -2px 0 0 var(--coach-mistake);
+}
+
+/* Small, calm, inline — deliberately not a popup or banner: a soft dot that
+   breathes just under the flagged word until the reciter says it again. */
+.incorrect::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -0.55em;
+  width: 0.3em;
+  height: 0.3em;
+  border-radius: 50%;
+  background-color: var(--coach-mistake);
+  transform: translateX(-50%);
+  animation: coachMistakePulse 1.6s ease-in-out infinite;
+}
+
+@keyframes coachMistakePulse {
+  0%, 100% {
+    opacity: 0.35;
+    transform: translateX(-50%) scale(0.85);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateX(-50%) scale(1.15);
+  }
+}
+
+/* A gentle hint, deliberately not styled like an error (no red, no solid
+   underline) — this is a best-effort duration heuristic, not a verified
+   tajweed judgment. */
+.shortMadd {
+  text-decoration: underline dotted;
+  text-decoration-color: var(--coach-text-muted);
+  text-underline-offset: 0.2em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text {
+    animation: none;
+  }
+
+  .incorrect::after {
+    animation: none;
+    opacity: 0.7;
+  }
+}

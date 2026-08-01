@@ -26,12 +26,14 @@ interface PlaybackStoreState {
   loopMode: LoopMode;
   range: PlaybackRange | null;
   autoplayEnabled: boolean;
-  /** Explicit on/off switches for grouped translation-audio playback — see playbackEngine.ts's TRANSLATION_GROUP_SIZE pattern. Independent of which translations are selected as text. */
+  /** Explicit on/off switches for translation-audio playback (each enabled ayah's Arabic is immediately followed by its translation before advancing). Independent of which translations are selected as text. */
   urduTranslationAudioEnabled: boolean;
   englishTranslationAudioEnabled: boolean;
   playbackSpeed: number;
   duration: number;
   currentTime: number;
+  /** True while a background preload (see playbackEngine.preloadSurah) is fetching/decoding audio for a surah the user has opened but not yet pressed Play on. Distinct from `isLoading`, which is the foreground state for an actual playback session — this must never drive the Play button's own spinner. */
+  isSurahPreloading: boolean;
 
   /** Stops whatever was previously playing (word or surah) before taking over. */
   begin: (source: 'word' | 'surah', verseKey: string, stopFn: () => void) => void;
@@ -51,6 +53,7 @@ interface PlaybackStoreState {
   setEnglishTranslationAudioEnabled: (enabled: boolean) => void;
   setPlaybackSpeed: (speed: number) => void;
   setProgress: (currentTime: number, duration: number) => void;
+  setSurahPreloading: (isSurahPreloading: boolean) => void;
 }
 
 export const usePlaybackStore = create<PlaybackStoreState>((set, get) => ({
@@ -72,6 +75,7 @@ export const usePlaybackStore = create<PlaybackStoreState>((set, get) => ({
   playbackSpeed: useReadingPreferencesStore.getState().preferences.wordPlaybackSpeed,
   duration: 0,
   currentTime: 0,
+  isSurahPreloading: false,
 
   begin: (source, verseKey, stopFn) => {
     get().stopFn?.();
@@ -116,6 +120,7 @@ export const usePlaybackStore = create<PlaybackStoreState>((set, get) => ({
     useReadingPreferencesStore.getState().update({ wordPlaybackSpeed: speed });
   },
   setProgress: (currentTime, duration) => set({ currentTime, duration }),
+  setSurahPreloading: (isSurahPreloading) => set({ isSurahPreloading }),
 }));
 
 /**

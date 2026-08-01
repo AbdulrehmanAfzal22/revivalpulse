@@ -11,9 +11,11 @@ export interface DrawerProps {
   onClose: () => void;
   side?: DrawerSide;
   children: ReactNode;
+  /** Id of the element (typically the panel's own heading) that names this dialog for assistive technology — sets aria-labelledby on the dialog element. Optional and additive: omitting it preserves every existing caller's behavior exactly. */
+  titleId?: string;
 }
 
-export default function Drawer({ isOpen, onClose, side = 'left', children }: DrawerProps) {
+export default function Drawer({ isOpen, onClose, side = 'left', children, titleId }: DrawerProps) {
   const prefersReducedMotion = useReducedMotion();
   const panelRef = useRef<HTMLDivElement>(null);
   useFocusTrap(panelRef, isOpen);
@@ -55,6 +57,7 @@ export default function Drawer({ isOpen, onClose, side = 'left', children }: Dra
             className={panelClasses}
             role="dialog"
             aria-modal="true"
+            aria-labelledby={titleId}
             tabIndex={-1}
             initial={{ x: prefersReducedMotion ? 0 : offscreenX, opacity: prefersReducedMotion ? 0 : 1 }}
             animate={{ x: 0, opacity: 1 }}

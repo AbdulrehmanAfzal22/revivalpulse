@@ -1,11 +1,13 @@
-import { useRef, useState } from 'react';
-import { BookText, ChevronLeft, ChevronRight, Maximize, Minimize, Settings, Star } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { BookText, ChevronLeft, ChevronRight, Loader2, Maximize, Minimize, Settings, Star } from 'lucide-react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { SURAHS } from 'data/quran/surahs';
 import SurahView from 'features/quranReader/components/SurahView';
 import ReadingSettingsPanel from 'features/quranReader/components/ReadingSettingsPanel';
 import TranslationSwitcher from 'features/quranReader/components/TranslationSwitcher';
 import { getReaderCssVars } from 'features/quranReader/services/readerStyles';
+import { preloadSurah } from 'features/quranReader/services/playbackEngine';
+import { usePlaybackStore } from 'stores/playbackStore';
 import Typography from 'components/ui/Typography';
 import EmptyState from 'components/feedback/EmptyState';
 import Button from 'components/ui/Button';
@@ -14,6 +16,9 @@ import useFullscreen from 'hooks/useFullscreen';
 import { isFavoriteSurah, useCollectionsStore } from 'stores/collectionsStore';
 import useTranslation from 'hooks/useTranslation';
 import styles from './SurahPage.module.css';
+
+/** Only surface a loading affordance if preloading is still running after this long — most preloads finish well under it, and flashing a spinner for a near-instant background fetch would be noise, not signal. */
+const SLOW_PRELOAD_HINT_DELAY_MS = 600;
 
 const BISMILLAH_ARABIC = 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ';
 
@@ -32,6 +37,30 @@ export default function SurahPage() {
   const id = Number(surahId);
   const surah = SURAHS.find((item) => item.id === id);
   const isFavorite = isFavoriteSurah(favorites, id);
+  const targetAyahParam = searchParams.get('ayah');
+  const targetAyah = targetAyahParam ? Number(targetAyahParam) : undefined;
+
+  const isSurahPreloading = usePlaybackStore((state) => state.isSurahPreloading);
+  const [showSlowPreloadHint, setShowSlowPreloadHint] = useState(false);
+
+  // Start warming audio + verse/translation caches the instant a surah is
+  // opened — well before Play is pressed — so playback can start instantly
+  // once the user actually taps it. See playbackEngine.preloadSurah.
+  useEffect(() => {
+    if (!surah) return;
+    preloadSurah(surah.id, targetAyah ?? 1);
+  }, [surah, targetAyah]);
+
+  // Only worth telling the user anything if preloading is unusually slow —
+  // the common case finishes well within this window and should stay silent.
+  useEffect(() => {
+    if (!isSurahPreloading) {
+      setShowSlowPreloadHint(false);
+      return undefined;
+    }
+    const timeout = setTimeout(() => setShowSlowPreloadHint(true), SLOW_PRELOAD_HINT_DELAY_MS);
+    return () => clearTimeout(timeout);
+  }, [isSurahPreloading]);
 
   if (!surah) {
     return (
@@ -41,8 +70,6 @@ export default function SurahPage() {
     );
   }
 
-  const targetAyahParam = searchParams.get('ayah');
-  const targetAyah = targetAyahParam ? Number(targetAyahParam) : undefined;
   const previousSurah = SURAHS.find((item) => item.id === surah.id - 1);
   const nextSurah = SURAHS.find((item) => item.id === surah.id + 1);
 
@@ -89,6 +116,12 @@ export default function SurahPage() {
         <Typography variant="body" muted>
           {t('quran.nameAndVerses', { name: surah.translatedName, count: surah.versesCount })}
         </Typography>
+
+        {showSlowPreloadHint && (
+          <Typography variant="caption" muted className={styles.preloadHint}>
+            <Loader2 size={12} className={styles.spin} /> {t('quran.preparingAudio')}
+          </Typography>
+        )}
 
         {surah.bismillahPre && surah.id !== 1 && (
           <p className={styles.bismillah} dir="rtl" lang="ar">

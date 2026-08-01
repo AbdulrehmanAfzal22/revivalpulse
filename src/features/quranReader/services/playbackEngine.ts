@@ -2,108 +2,59 @@ import { getChapterRecitation } from 'api/quran/quranClient';
 import { buildAyahAudioUrl } from 'api/quran/everyAyahClient';
 import { getAyahEditionAudio } from 'api/quran/alQuranCloudClient';
 import { getCachedSurahAudio } from 'services/surahAudioCache';
+import { queryClient } from 'services/queryClient';
 import { getReciterById } from 'constants/reciters';
 import { TRANSLATION_AUDIO_EDITIONS } from 'constants/translationAudio';
-import type { TranslationAudioEdition } from 'constants/translationAudio';
 import { SURAHS } from 'data/quran/surahs';
 import { usePlaybackStore } from 'stores/playbackStore';
-import type { ChapterRecitation, VerseTimestamp } from 'types/word.types';
+import { useReadingPreferencesStore } from 'stores/readingPreferencesStore';
+import { fetchChapterWithTranslations } from 'features/quranReader/services/translationAggregator';
+import { controller } from './PlaybackController';
+import type { QueueItem } from './PlaybackController';
 import type { LoopMode, PlaybackRange } from 'types/audioPlayer.types';
-
-let audio: HTMLAudioElement | null = null;
-let recitationCache: { key: string; data: ChapterRecitation } | null = null;
-let everyAyahQueue: number[] = [];
-let queueIndex = 0;
-let mediaSessionWired = false;
-let translationAudio: HTMLAudioElement | null = null;
-
-/** Urdu translation audio is grouped: recite this many ayahs back to back, then their translations back to back, then repeat. */
-const TRANSLATION_GROUP_SIZE = 3;
-let translationGroupKeys: string[] = [];
-/**
- * word-sync mode only. `timeupdate` fires roughly every ~250ms in most
- * browsers, so a narrow "are we within 30ms of the ayah's end" check
- * misses far more often than it hits — the tick right before the boundary
- * can land 200ms early, and the tick right after can land 200ms past it,
- * skipping the window entirely. That silently broke translation-audio
- * grouping for every word-synced reciter (Alafasy, Sudais, etc. — anyone
- * on quran.com's single-chapter-file mode), while everyayah.com-mode
- * reciters (Maher Al Muaiqly etc.) were unaffected since their boundary is
- * a real 'ended' event, not a polled window.
- *
- * Fix: once a `timeupdate` tick lands within a *wide* margin of an ayah's
- * end (generous enough that some tick is essentially guaranteed to land
- * inside it), switch to polling via requestAnimationFrame — which fires
- * ~60 times/second — until playback actually reaches that boundary, then
- * act immediately. Wide net to detect we're close; frame-accurate polling
- * to act at the right instant, so the pause always lands within ~16ms of
- * the true boundary regardless of how choppy `timeupdate` is.
- */
-const WORD_SYNC_BOUNDARY_LOOKAHEAD_MS = 600;
-let wordSyncWatchingVerseKey: string | null = null;
-let wordSyncRafHandle: number | null = null;
+import type { ChapterRecitation } from 'types/word.types';
 
 /**
- * True from the moment the main `audio` element is paused for a
- * translation-audio interlude until that interlude finishes (or is
- * cancelled). While true, `translationAudio` — not `audio` — is the
- * element the user is actually listening to, even though `isPlaying` in
- * the store stays true throughout (so the UI still shows "playing").
- *
- * `resume()`, `pause()`, `playSurah()`, and `setReciter()` are all
- * reachable from outside this module (buttons, media-session hardware
- * keys, the reciter picker) and none of them know about the interlude —
- * without this flag, any of them firing mid-interlude would resume/replace
- * the *main* Arabic audio while the translation clip kept playing
- * underneath, producing both at once. Every public control below checks
- * this flag first and defers to the interlude instead of fighting it.
+ * Deliberately retained diagnostic instrumentation — every playback
+ * transition (queue creation, ayah/surah/reciter changes, pause/resume,
+ * translation clips starting and finishing) logs here, which is what makes
+ * a future report like "translation stopped partway through" or "it jumped
+ * to the wrong ayah" reproducible from the console instead of guesswork.
+ * Not gated behind Developer Mode — this is cheap, and the alternative is
+ * re-adding it from scratch the next time something needs debugging.
  */
-let isInTranslationInterlude = false;
-
-/**
- * everyayah.com mode plays one file per ayah — without this, there's a
- * network-fetch-sized gap of silence every time playback advances to the
- * next ayah, since nothing starts loading it until the current one ends.
- * quran.com mode doesn't need this: a whole surah is one file, already
- * streaming/buffering natively via the main <audio> element.
- */
-let preloadAudio: HTMLAudioElement | null = null;
-
-function preloadNextAyah(currentIndex: number): void {
-  const reciter = currentReciter();
-  if (reciter.source !== 'everyayah.com') return;
-
-  const nextAyahNumber = everyAyahQueue[currentIndex + 1];
-  if (nextAyahNumber === undefined) return;
-
-  const surah = currentSurah();
-  const url = buildAyahAudioUrl(reciter.folderName, surah.id, nextAyahNumber);
-
-  void resolveSrc(url)
-    .then((resolvedUrl) => {
-      if (!preloadAudio) {
-        preloadAudio = new Audio();
-        preloadAudio.preload = 'auto';
-      }
-      preloadAudio.src = resolvedUrl;
-    })
-    .catch(() => {
-      // Best-effort only — a failed preload just means the normal fetch-on-advance path runs instead.
-    });
+function logTransition(event: string, details?: Record<string, unknown>): void {
+  // eslint-disable-next-line no-console
+  if (details) console.log(`[playback] ${event}`, details);
+  // eslint-disable-next-line no-console
+  else console.log(`[playback] ${event}`);
 }
 
 function getAudio(): HTMLAudioElement {
-  if (!audio) {
-    audio = new Audio();
-    audio.addEventListener('timeupdate', handleTimeUpdate);
-    audio.addEventListener('ended', handleEnded);
+  if (!controller.audio) {
+    controller.audio = new Audio();
+    controller.audio.addEventListener('timeupdate', handleTimeUpdate);
+    controller.audio.addEventListener('ended', handleEnded);
   }
-  return audio;
+  return controller.audio;
 }
 
 async function resolveSrc(url: string): Promise<string> {
   const cached = await getCachedSurahAudio(url);
   return cached ?? url;
+}
+
+/**
+ * `resolveSrc` creates a fresh `URL.createObjectURL(...)` every time it
+ * resolves a downloaded (offline-cached) surah/ayah — an unbounded leak if
+ * nothing ever revokes the previous one before assigning a new one. Reading
+ * `element.src` *before* overwriting it and revoking it here (if it's a
+ * blob: URL — a plain network URL is a no-op) is what closes that: every
+ * place `.src` gets reassigned from resolveSrc's result goes through this.
+ */
+function assignAudioSrc(element: HTMLAudioElement, newUrl: string): void {
+  if (element.src.startsWith('blob:')) URL.revokeObjectURL(element.src);
+  element.src = newUrl;
 }
 
 function currentReciter() {
@@ -119,9 +70,9 @@ function currentSurah() {
 }
 
 /** Translation-audio editions currently switched on via the explicit playback toggles (independent of which translations are selected as text). */
-function activeTranslationAudioEditions(): TranslationAudioEdition[] {
+function activeTranslationAudioEditions() {
   const { urduTranslationAudioEnabled, englishTranslationAudioEnabled } = usePlaybackStore.getState();
-  const editions: TranslationAudioEdition[] = [];
+  const editions = [];
   if (urduTranslationAudioEnabled) {
     const edition = TRANSLATION_AUDIO_EDITIONS.find((item) => item.languageCode === 'ur');
     if (edition) editions.push(edition);
@@ -133,352 +84,162 @@ function activeTranslationAudioEditions(): TranslationAudioEdition[] {
   return editions;
 }
 
-// --- quran.com mode: one whole-chapter file, word+verse segments ---
-
-async function loadRecitation(recitationId: number, surahId: number): Promise<ChapterRecitation> {
-  const key = `${recitationId}:${surahId}`;
-  if (recitationCache?.key === key) return recitationCache.data;
-  const data = await getChapterRecitation(recitationId, surahId);
-  recitationCache = { key, data };
-  return data;
-}
-
-function activeTimestampIndex(recitation: ChapterRecitation, currentMs: number): number {
-  return recitation.timestamps.findIndex(
-    (timestamp) => currentMs >= timestamp.timestampFrom && currentMs < timestamp.timestampTo
-  );
-}
-
 /**
- * Advances past one ayah boundary for word-synced (quran.com) reciters —
- * shared by the normal path and by resumeAfterTranslationInterlude below,
- * since a translation interlude just delays this decision, it doesn't
- * change it.
+ * One pure function builds the whole plan — every ordering rule (per-ayah
+ * alternation, editions in a fixed order, no special-casing the last ayah)
+ * is resolved once, here, not re-decided at playback time.
  */
-function advanceWordSyncBoundary(timestamp: VerseTimestamp, ayahNumber: number): void {
-  if (!audio || !recitationCache) return;
-  const { loopMode, range, autoplayEnabled } = usePlaybackStore.getState();
-
-  if (loopMode === 'ayah') {
-    audio.currentTime = timestamp.timestampFrom / 1000;
-  } else if (loopMode === 'range' && range && ayahNumber >= range.endAyah) {
-    const startTimestamp = recitationCache.data.timestamps.find(
-      (item) => Number(item.verseKey.split(':')[1]) === range.startAyah
-    );
-    if (startTimestamp) audio.currentTime = startTimestamp.timestampFrom / 1000;
-  } else if (loopMode === 'off' && !autoplayEnabled) {
-    pause();
-  }
-}
-
-/**
- * Resumes word-synced recitation after the Urdu translation interlude for
- * one ayah finishes. Main audio was paused (not stopped) right at the ayah
- * boundary, so resuming just means: apply whatever the loop mode would
- * have done at that boundary, then un-pause — unless the user paused
- * playback themselves during the interlude, in which case leave it paused.
- */
-function resumeAfterTranslationInterlude(
-  timestamp: VerseTimestamp,
-  ayahNumber: number
-): void {
-  isInTranslationInterlude = false;
-  if (!audio || !usePlaybackStore.getState().isPlaying) return;
-  advanceWordSyncBoundary(timestamp, ayahNumber);
-  if (usePlaybackStore.getState().isPlaying) void audio.play();
-}
-
-function cancelWordSyncBoundaryWatch(): void {
-  if (wordSyncRafHandle !== null) {
-    cancelAnimationFrame(wordSyncRafHandle);
-    wordSyncRafHandle = null;
-  }
-  wordSyncWatchingVerseKey = null;
-}
-
-/** Frame-accurate polling for the last stretch of an ayah — see WORD_SYNC_BOUNDARY_LOOKAHEAD_MS docstring. */
-function watchForWordSyncBoundary(timestamp: VerseTimestamp, ayahNumber: number): void {
-  const check = (): void => {
-    if (!audio || audio.paused) {
-      // Cleared (not just the handle) so a later resume re-arms the watch
-      // for this same ayah instead of silently skipping it forever.
-      wordSyncRafHandle = null;
-      wordSyncWatchingVerseKey = null;
-      return;
+function buildQueue(surahId: number, startAyah: number, endAyah: number, editions: ReturnType<typeof activeTranslationAudioEditions>): QueueItem[] {
+  const queue: QueueItem[] = [];
+  for (let ayah = startAyah; ayah <= endAyah; ayah += 1) {
+    queue.push({ type: 'arabic', surah: surahId, ayah });
+    for (const edition of editions) {
+      queue.push({ type: edition.languageCode === 'ur' ? 'urdu' : 'english', surah: surahId, ayah });
     }
-    if (audio.currentTime * 1000 >= timestamp.timestampTo) {
-      wordSyncRafHandle = null;
-      wordSyncWatchingVerseKey = null;
-      handleWordSyncAyahBoundary(timestamp, ayahNumber);
-      return;
-    }
-    wordSyncRafHandle = requestAnimationFrame(check);
-  };
-  wordSyncRafHandle = requestAnimationFrame(check);
-}
-
-function handleWordSyncAyahBoundary(timestamp: VerseTimestamp, ayahNumber: number): void {
-  if (!audio || !recitationCache) return;
-
-  const editions = activeTranslationAudioEditions();
-  if (editions.length === 0) {
-    advanceWordSyncBoundary(timestamp, ayahNumber);
-    return;
   }
-
-  const { loopMode, range, autoplayEnabled } = usePlaybackStore.getState();
-  const isRangeEnd = loopMode === 'range' && range !== null && ayahNumber >= range.endAyah;
-  const isLastAyahOfSurah = timestamp === recitationCache.data.timestamps[recitationCache.data.timestamps.length - 1];
-  const forceFlush = loopMode === 'ayah' || (loopMode === 'off' && !autoplayEnabled) || isRangeEnd || isLastAyahOfSurah;
-
-  const group = collectForTranslationGroup(timestamp.verseKey, forceFlush);
-  if (!group) return; // not a group boundary yet — let recitation continue straight into the next ayah
-
-  audio.currentTime = timestamp.timestampTo / 1000;
-  audio.pause();
-  isInTranslationInterlude = true;
-  void playTranslationGroup(group, editions).then(() => resumeAfterTranslationInterlude(timestamp, ayahNumber));
-}
-
-function handleQuranComTimeUpdate(): void {
-  if (!audio || !recitationCache) return;
-  // Reentrancy guard: while intentionally paused for a translation interlude,
-  // ignore any stray timeupdate ticks (some browsers fire one right around a
-  // currentTime/pause() change) rather than re-processing the same boundary.
-  if (audio.paused) return;
-
-  const currentMs = audio.currentTime * 1000;
-  const index = activeTimestampIndex(recitationCache.data, currentMs);
-  if (index === -1) return;
-
-  const timestamp = recitationCache.data.timestamps[index];
-  if (!timestamp) return;
-
-  usePlaybackStore.getState().setVerseKey(timestamp.verseKey);
-  const activeSegment = timestamp.segments.find(
-    (segment) => currentMs >= segment.startMs && currentMs < segment.endMs
-  );
-  usePlaybackStore.getState().setActiveWord(activeSegment?.wordPosition ?? null);
-
-  const ayahNumber = Number(timestamp.verseKey.split(':')[1]);
-
-  if (activeTranslationAudioEditions().length === 0) {
-    if (currentMs >= timestamp.timestampTo - 30) advanceWordSyncBoundary(timestamp, ayahNumber);
-    return;
-  }
-
-  if (currentMs < timestamp.timestampTo - WORD_SYNC_BOUNDARY_LOOKAHEAD_MS) return;
-  if (wordSyncWatchingVerseKey === timestamp.verseKey) return; // already polling this ayah's boundary via rAF
-  wordSyncWatchingVerseKey = timestamp.verseKey;
-  watchForWordSyncBoundary(timestamp, ayahNumber);
-}
-
-// --- everyayah.com mode: one file per ayah, verse-level only ---
-
-function buildQueue(surahId: number, versesCount: number, range: PlaybackRange | null): number[] {
-  const start = range?.startAyah ?? 1;
-  const end = range?.endAyah ?? versesCount;
-  const queue: number[] = [];
-  for (let ayah = start; ayah <= end; ayah += 1) queue.push(ayah);
   return queue;
 }
 
-async function playQueueIndex(index: number): Promise<void> {
-  const reciter = currentReciter();
-  const surah = currentSurah();
-  if (reciter.source !== 'everyayah.com') return;
-
-  const ayahNumber = everyAyahQueue[index];
-  if (ayahNumber === undefined) return;
-
-  queueIndex = index;
-  const url = buildAyahAudioUrl(reciter.folderName, surah.id, ayahNumber);
-  const player = getAudio();
-  player.src = await resolveSrc(url);
-  player.playbackRate = usePlaybackStore.getState().playbackSpeed;
-  usePlaybackStore.getState().setVerseKey(`${surah.id}:${ayahNumber}`);
-  updateMediaSessionMetadata(reciter.name, surah.nameSimple, ayahNumber);
-  await player.play();
-  preloadNextAyah(index);
-}
-
-function getTranslationAudioPlayer(): HTMLAudioElement {
-  if (!translationAudio) {
-    translationAudio = new Audio();
-  }
-  return translationAudio;
-}
-
 /**
- * Plays one translation-audio clip to completion.
+ * Guards the shared single-slot recitationCache against a genuinely stale
+ * request (for a *different* surah/reciter) resolving after a newer one has
+ * already taken over — without this, a slow call for surah A that resolves
+ * after a fresh call for surah B has already cached B's data would silently
+ * overwrite it with A's. The returned `data` itself is still handed back
+ * regardless (so a stale caller gets a correct value to then discard via its
+ * own epoch check against actual playback state), only the shared cache
+ * write is guarded, and it's guarded by "is this key still the latest one
+ * anyone requested" rather than by `epoch` — see `recitationLatestKey`'s
+ * docstring for why epoch specifically isn't the right signal here.
  *
- * Fixes a truncation bug where only a fragment played before cutting off:
- * the 'ended' listener was previously attached *after* `await player.play()`
- * resolved. `play()` resolves once playback *starts*, not once it's fully
- * buffered — for a clip whose data was already cached/buffered quickly,
- * playback could reach 'ended' before the listener was attached, so the
- * event was missed and the wrapping promise never resolved on its own
- * (only ever surviving by accident, e.g. a later unrelated pause() call
- * elsewhere resolving it early with whatever had played so far). Attaching
- * the listener *before* calling play() closes that race. Explicitly
- * pausing + reloading before each clip also guarantees no state (buffered
- * range, playback position) carries over from the previous clip.
+ * Also dedupes *in-flight* requests, not just already-resolved ones — this
+ * is what lets a background preload and a real Play press for the same
+ * surah (or two overlapping preloads) share one network request instead of
+ * firing a redundant second one just because the first hadn't resolved yet.
  */
-/**
- * Resolves `true` if the clip actually finished playing, `false` if it
- * failed (network/decode error, or play() rejected — e.g. an interrupted
- * load). Previously both 'ended' and 'error' were treated identically,
- * which meant a failed clip looked exactly like a successfully finished
- * one to every caller — no way to tell "this ayah has no audio" apart
- * from "it played fine", so failures were both silent AND invisible in
- * the console. Distinguishing them here is what makes the fallback in
- * playTranslationAudioForVerse (skip + log) possible.
- */
-function playTranslationClip(url: string): Promise<boolean> {
-  const player = getTranslationAudioPlayer();
-  player.pause();
-  player.currentTime = 0;
-  player.src = url;
-  player.load();
+async function loadRecitation(recitationId: number, surahId: number): Promise<ChapterRecitation> {
+  const key = `${recitationId}:${surahId}`;
+  if (controller.recitationCache?.key === key) return controller.recitationCache.data;
+  if (controller.recitationFetch?.key === key) return controller.recitationFetch.promise;
 
-  return new Promise<boolean>((resolve) => {
-    const finish = (succeeded: boolean) => (): void => {
-      player.removeEventListener('ended', onEnded);
-      player.removeEventListener('error', onError);
-      resolve(succeeded);
-    };
-    const onEnded = finish(true);
-    const onError = finish(false);
-    player.addEventListener('ended', onEnded, { once: true });
-    player.addEventListener('error', onError, { once: true });
-    void player.play().catch(onError);
-  });
-}
-
-/**
- * Plays one ayah's translation audio for a given edition and resolves once
- * it fully finishes (or fails). Best-effort: a failed fetch/playback
- * shouldn't block the main recitation queue from advancing — but unlike
- * before, it's no longer silent: a failure is logged with the exact
- * request context (edition, verse, reciter) so a real source gap or a
- * transient failure is distinguishable from a working clip, instead of
- * both looking like nothing happened.
- */
-async function playTranslationAudioForVerse(verseKey: string, edition: TranslationAudioEdition): Promise<void> {
+  controller.recitationLatestKey = key;
+  const promise = getChapterRecitation(recitationId, surahId);
+  controller.recitationFetch = { key, promise };
   try {
-    const url = await getAyahEditionAudio(verseKey, edition.identifier);
-    const succeeded = await playTranslationClip(url);
-    if (!succeeded) {
-      console.warn(
-        `[translation-audio] "${edition.label}" (${edition.identifier}) failed to play for ${verseKey} — url: ${url}, reciter: ${usePlaybackStore.getState().reciterId}. Skipping to the next ayah.`
-      );
-    }
-  } catch (error) {
-    console.warn(
-      `[translation-audio] "${edition.label}" (${edition.identifier}) failed to load for ${verseKey} — reciter: ${usePlaybackStore.getState().reciterId}.`,
-      error
-    );
+    const data = await promise;
+    if (controller.recitationLatestKey === key) controller.recitationCache = { key, data };
+    return data;
+  } finally {
+    if (controller.recitationFetch?.key === key) controller.recitationFetch = null;
   }
 }
 
 /**
- * Buffers ayahs for grouped Urdu translation playback. Returns (and clears)
- * the group once it reaches TRANSLATION_GROUP_SIZE, or immediately when
- * `force` is set — used for single-ayah playback (loop-ayah, or a manual
- * one-ayah play with autoplay off) and for a trailing partial group at the
- * end of a surah/range, where waiting for a full group of 3 would either
- * make no sense or silently drop the last 1–2 ayahs' translations.
+ * Lazily created — used purely as a decoder utility (never connected to any
+ * output node), so it never needs a user-gesture-triggered resume() the way
+ * an AudioContext used for actual playback would.
  */
-function collectForTranslationGroup(verseKey: string, force: boolean): string[] | null {
-  translationGroupKeys.push(verseKey);
-  if (translationGroupKeys.length >= TRANSLATION_GROUP_SIZE || force) {
-    const group = translationGroupKeys;
-    translationGroupKeys = [];
-    return group;
+function getAudioContext(): AudioContext {
+  if (!controller.audioContext) {
+    controller.audioContext = new AudioContext();
   }
-  return null;
+  return controller.audioContext;
 }
 
-/** Plays every ayah's translation for one edition, then the next edition — e.g. all 3 ayahs in Urdu, then all 3 in English. */
-async function playTranslationGroup(verseKeys: string[], editions: TranslationAudioEdition[]): Promise<void> {
-  for (const edition of editions) {
-    for (const verseKey of verseKeys) {
-      await playTranslationAudioForVerse(verseKey, edition);
+/**
+ * quran.com mode's shared chapter file decoded once into raw PCM and cached,
+ * so every ayah in the surah can be sliced out of it without re-fetching or
+ * re-decoding. This is what makes a sample-accurate per-ayah clip possible at
+ * all — a fetched URL only supports seeking within one continuous stream,
+ * never carving an independent, exactly-bounded clip out of it.
+ *
+ * Dedupes in-flight requests the same way loadRecitation does — this is the
+ * expensive step (fetch + decode of a whole, possibly multi-minute, chapter
+ * file), so it's the one most worth a real Play press being able to join
+ * rather than duplicate if a background preload got there first.
+ */
+async function ensureDecodedRecitation(recitationId: number, surahId: number, audioUrl: string): Promise<AudioBuffer> {
+  const key = `${recitationId}:${surahId}`;
+  if (controller.decodedRecitationCache?.key === key) return controller.decodedRecitationCache.buffer;
+  if (controller.decodedRecitationFetch?.key === key) return controller.decodedRecitationFetch.promise;
+
+  controller.decodedRecitationLatestKey = key;
+  const promise = (async () => {
+    const resolvedUrl = await resolveSrc(audioUrl);
+    const response = await fetch(resolvedUrl);
+    const arrayBuffer = await response.arrayBuffer();
+    return getAudioContext().decodeAudioData(arrayBuffer);
+  })();
+  controller.decodedRecitationFetch = { key, promise };
+  try {
+    const buffer = await promise;
+    if (controller.decodedRecitationLatestKey === key) controller.decodedRecitationCache = { key, buffer };
+    return buffer;
+  } finally {
+    if (controller.decodedRecitationFetch?.key === key) controller.decodedRecitationFetch = null;
+  }
+}
+
+/** Carves an exact [fromMs, toMs) slice out of a decoded chapter buffer — sample-accurate, no polling or margin involved. */
+function sliceAudioBuffer(source: AudioBuffer, audioContext: AudioContext, fromMs: number, toMs: number): AudioBuffer {
+  const { sampleRate, numberOfChannels } = source;
+  const startSample = Math.max(0, Math.floor((fromMs / 1000) * sampleRate));
+  const endSample = Math.min(source.length, Math.ceil((toMs / 1000) * sampleRate));
+  const frameCount = Math.max(0, endSample - startSample);
+
+  const sliced = audioContext.createBuffer(numberOfChannels, frameCount, sampleRate);
+  for (let channel = 0; channel < numberOfChannels; channel += 1) {
+    sliced.copyToChannel(source.getChannelData(channel).subarray(startSample, endSample), channel);
+  }
+  return sliced;
+}
+
+/** Encodes a (typically short, single-ayah) AudioBuffer as a 16-bit PCM WAV Blob, playable by a plain `<audio>` element. */
+function encodeWavBlob(buffer: AudioBuffer): Blob {
+  const { numberOfChannels, sampleRate, length: numFrames } = buffer;
+  const bytesPerSample = 2;
+  const blockAlign = numberOfChannels * bytesPerSample;
+  const dataSize = numFrames * blockAlign;
+
+  const arrayBuffer = new ArrayBuffer(44 + dataSize);
+  const view = new DataView(arrayBuffer);
+  const writeString = (offset: number, value: string): void => {
+    for (let i = 0; i < value.length; i += 1) view.setUint8(offset + i, value.charCodeAt(i));
+  };
+
+  writeString(0, 'RIFF');
+  view.setUint32(4, 36 + dataSize, true);
+  writeString(8, 'WAVE');
+  writeString(12, 'fmt ');
+  view.setUint32(16, 16, true);
+  view.setUint16(20, 1, true); // PCM
+  view.setUint16(22, numberOfChannels, true);
+  view.setUint32(24, sampleRate, true);
+  view.setUint32(28, sampleRate * blockAlign, true);
+  view.setUint16(32, blockAlign, true);
+  view.setUint16(34, bytesPerSample * 8, true);
+  writeString(36, 'data');
+  view.setUint32(40, dataSize, true);
+
+  const channelData = Array.from({ length: numberOfChannels }, (_, channel) => buffer.getChannelData(channel));
+  let offset = 44;
+  for (let frame = 0; frame < numFrames; frame += 1) {
+    for (let channel = 0; channel < numberOfChannels; channel += 1) {
+      const sample = Math.max(-1, Math.min(1, channelData[channel]![frame]!));
+      view.setInt16(offset, sample < 0 ? sample * 0x8000 : sample * 0x7fff, true);
+      offset += 2;
     }
   }
+
+  return new Blob([arrayBuffer], { type: 'audio/wav' });
 }
 
-function advanceEveryAyahQueue(): void {
-  const { loopMode, autoplayEnabled } = usePlaybackStore.getState();
-
-  if (loopMode === 'ayah') {
-    void playQueueIndex(queueIndex);
-    return;
-  }
-
-  if (!autoplayEnabled && loopMode === 'off') {
-    pause();
-    return;
-  }
-
-  const nextIndex = queueIndex + 1;
-  if (nextIndex < everyAyahQueue.length) {
-    void playQueueIndex(nextIndex);
-    return;
-  }
-
-  if (loopMode === 'surah' || loopMode === 'range') {
-    void playQueueIndex(0);
-    return;
-  }
-
-  stop();
-}
-
-function handleEveryAyahEnded(): void {
-  const { verseKey, loopMode, autoplayEnabled } = usePlaybackStore.getState();
-  const editions = activeTranslationAudioEditions();
-
-  if (editions.length > 0 && verseKey) {
-    const isLastInQueue = queueIndex === everyAyahQueue.length - 1;
-    const forceFlush = loopMode === 'ayah' || (loopMode === 'off' && !autoplayEnabled) || isLastInQueue;
-    const group = collectForTranslationGroup(verseKey, forceFlush);
-    if (group) {
-      isInTranslationInterlude = true;
-      void playTranslationGroup(group, editions).then(() => {
-        isInTranslationInterlude = false;
-        advanceEveryAyahQueue();
-      });
-      return;
-    }
-    advanceEveryAyahQueue();
-    return;
-  }
-
-  advanceEveryAyahQueue();
-}
-
-// --- shared handlers ---
-
-function handleTimeUpdate(): void {
-  if (!audio) return;
-  usePlaybackStore.getState().setProgress(audio.currentTime, audio.duration || 0);
-  if (currentReciter().supportsWordSync) handleQuranComTimeUpdate();
-}
-
-function handleEnded(): void {
-  const reciter = currentReciter();
-  if (reciter.supportsWordSync) {
-    const { loopMode } = usePlaybackStore.getState();
-    if (loopMode === 'surah' && audio) {
-      audio.currentTime = 0;
-      void audio.play();
-      return;
-    }
-    stop();
-    return;
-  }
-  handleEveryAyahEnded();
+/** Continuously updates activeWord for word-level highlighting while a quran.com-mode ayah plays — offsets the trimmed clip's own currentTime (which starts at 0) back into the original file's coordinate space that the segment timestamps are defined in. */
+function updateWordSyncHighlight(): void {
+  if (!controller.audio || !controller.activeTimestamp) return;
+  const currentMs = controller.activeTimestamp.timestampFrom + controller.audio.currentTime * 1000;
+  const activeSegment = controller.activeTimestamp.segments.find((segment) => currentMs >= segment.startMs && currentMs < segment.endMs);
+  usePlaybackStore.getState().setActiveWord(activeSegment?.wordPosition ?? null);
 }
 
 function updateMediaSessionMetadata(reciterName: string, surahName: string, ayahNumber: number): void {
@@ -491,113 +252,506 @@ function updateMediaSessionMetadata(reciterName: string, surahName: string, ayah
 }
 
 function wireMediaSessionActions(): void {
-  if (mediaSessionWired || !('mediaSession' in navigator)) return;
-  mediaSessionWired = true;
+  if (controller.mediaSessionWired || !('mediaSession' in navigator)) return;
+  controller.mediaSessionWired = true;
   navigator.mediaSession.setActionHandler('play', () => resume());
   navigator.mediaSession.setActionHandler('pause', () => pause());
   navigator.mediaSession.setActionHandler('nexttrack', () => void next());
   navigator.mediaSession.setActionHandler('previoustrack', () => void previous());
 }
 
-// --- public controls ---
+function preloadNextAyah(afterIndex: number): void {
+  const reciter = currentReciter();
+  if (reciter.source !== 'everyayah.com') return;
 
-export async function playSurah(surahId: number, startAyah = 1): Promise<void> {
-  wireMediaSessionActions();
-  const store = usePlaybackStore.getState();
-  const reciter = getReciterById(store.reciterId);
-  const surah = SURAHS.find((item) => item.id === surahId);
-  if (!reciter || !surah) return;
+  const nextArabicItem = controller.queue.slice(afterIndex + 1).find((item) => item.type === 'arabic');
+  if (!nextArabicItem) return;
 
-  // Fresh start — cancel any in-progress translation interlude (a genuinely
-  // new surah/ayah supersedes it) and don't let a leftover partial
-  // translation group from a previous session/surah bleed into this one.
-  translationAudio?.pause();
-  isInTranslationInterlude = false;
-  translationGroupKeys = [];
-  cancelWordSyncBoundaryWatch();
-
-  store.setSurahId(surahId);
-  store.setLoading(true);
-  const player = getAudio();
-  const verseKey = `${surahId}:${startAyah}`;
-
-  try {
-    if (reciter.source === 'quran.com') {
-      const recitation = await loadRecitation(reciter.recitationId, surahId);
-      const timestamp = recitation.timestamps.find((item) => item.verseKey === verseKey);
-      player.src = await resolveSrc(recitation.audioUrl);
-      player.playbackRate = store.playbackSpeed;
-      player.currentTime = (timestamp?.timestampFrom ?? 0) / 1000;
-      updateMediaSessionMetadata(reciter.name, surah.nameSimple, startAyah);
-      usePlaybackStore.getState().begin('surah', verseKey, pause);
-      await player.play();
-    } else {
-      everyAyahQueue = buildQueue(surahId, surah.versesCount, store.range);
-      const index = Math.max(0, everyAyahQueue.indexOf(startAyah));
-      usePlaybackStore.getState().begin('surah', verseKey, pause);
-      await playQueueIndex(index);
-    }
-  } finally {
-    usePlaybackStore.getState().setLoading(false);
-  }
-}
-
-export function pause(): void {
-  audio?.pause();
-  translationAudio?.pause();
-  usePlaybackStore.setState({ isPlaying: false });
-}
-
-export function resume(): void {
-  // Mid-interlude, the thing actually producing sound is translationAudio,
-  // not the (intentionally paused) main audio — resuming the main audio
-  // here would start the Arabic recitation again while the translation
-  // clip keeps playing underneath. See isInTranslationInterlude docstring.
-  if (isInTranslationInterlude) {
-    if (!translationAudio) return;
-    void translationAudio.play();
-    usePlaybackStore.setState({ isPlaying: true });
-    return;
-  }
-  if (!audio) return;
-  void audio.play();
-  usePlaybackStore.setState({ isPlaying: true });
+  const url = buildAyahAudioUrl(reciter.folderName, nextArabicItem.surah, nextArabicItem.ayah);
+  void resolveSrc(url)
+    .then((resolvedUrl) => {
+      if (!controller.preloadAudio) {
+        controller.preloadAudio = new Audio();
+        controller.preloadAudio.preload = 'auto';
+      }
+      assignAudioSrc(controller.preloadAudio, resolvedUrl);
+    })
+    .catch(() => {
+      // Best-effort only — a failed preload just means the normal fetch-on-advance path runs instead.
+    });
 }
 
 /**
- * Seeks within the currently loaded audio. For quran.com reciters this spans
- * the whole surah; for everyayah.com reciters it's bounded to the current
- * ayah's file (each ayah is a separate file in that mode).
+ * Plays one ayah's Arabic — mode differences (trim this ayah's exact clip
+ * out of the shared, decoded chapter buffer, vs. fetch and play that ayah's
+ * own file) are an internal detail of *how this one item is realized*, never
+ * a different queue shape or a different set of playback states. Both modes
+ * end up playing a genuinely single-ayah audio resource through `controller.audio`,
+ * so the native 'ended' event means the same thing either way.
  */
-export function seekToTime(seconds: number): void {
-  if (!audio) return;
-  audio.currentTime = seconds;
-}
-
-export async function next(): Promise<void> {
+async function playArabicItem(item: QueueItem, index: number, epochAtStart: number): Promise<void> {
   const reciter = currentReciter();
-  if (reciter.source === 'quran.com' && audio && recitationCache) {
-    cancelWordSyncBoundaryWatch();
-    const currentMs = audio.currentTime * 1000;
-    const index = activeTimestampIndex(recitationCache.data, currentMs);
-    const nextTimestamp = recitationCache.data.timestamps[index + 1];
-    if (nextTimestamp) audio.currentTime = nextTimestamp.timestampFrom / 1000;
+  const surah = currentSurah();
+  const verseKey = `${item.surah}:${item.ayah}`;
+
+  if (reciter.source === 'quran.com') {
+    if (!controller.recitationCache) return;
+    const timestamp = controller.recitationCache.data.timestamps.find((entry) => entry.verseKey === verseKey);
+    if (!timestamp) return;
+
+    // The decoded buffer is guaranteed already cached by load() before this
+    // ever runs for the first ayah of a session — this call is a no-op cache
+    // hit in that case, and only does real work if something (a reciter
+    // change mid-session) invalidated it since.
+    const decoded = await ensureDecodedRecitation(reciter.recitationId, surah.id, controller.recitationCache.data.audioUrl);
+    if (controller.epoch !== epochAtStart) return; // superseded while decoding
+
+    // Trim this ayah's own exact samples out of the shared file and play
+    // them as an independent clip, through the same one-file-per-ayah
+    // mechanism everyayah.com mode already uses — the next ayah's audio
+    // simply isn't present in this clip, so there's nothing for the native
+    // 'ended' event to bleed into, no polling or margin required.
+    const clip = sliceAudioBuffer(decoded, getAudioContext(), timestamp.timestampFrom, timestamp.timestampTo);
+    const clipUrl = URL.createObjectURL(encodeWavBlob(clip));
+
+    const player = getAudio();
+    assignAudioSrc(player, clipUrl);
+    player.playbackRate = usePlaybackStore.getState().playbackSpeed;
+    controller.activeTimestamp = timestamp;
+    usePlaybackStore.getState().setVerseKey(verseKey);
+    updateMediaSessionMetadata(reciter.name, surah.nameSimple, item.ayah);
+    controller.state = 'playing-recitation';
+    logTransition('Playing Arabic', { verseKey });
+    await player.play();
+    if (controller.epoch !== epochAtStart) return; // superseded while play() was settling
     return;
   }
-  await playQueueIndex(queueIndex + 1);
+
+  // everyayah.com — fetch and play this ayah's own file.
+  const url = buildAyahAudioUrl(reciter.folderName, item.surah, item.ayah);
+  const resolvedUrl = await resolveSrc(url);
+  if (controller.epoch !== epochAtStart) return; // superseded while resolving — stale, terminate silently
+
+  const player = getAudio();
+  assignAudioSrc(player, resolvedUrl);
+  player.playbackRate = usePlaybackStore.getState().playbackSpeed;
+  usePlaybackStore.getState().setVerseKey(verseKey);
+  updateMediaSessionMetadata(reciter.name, surah.nameSimple, item.ayah);
+  controller.state = 'playing-recitation';
+  logTransition('Playing Arabic', { verseKey });
+  await player.play();
+  if (controller.epoch !== epochAtStart) return; // superseded while play() was settling
+  preloadNextAyah(index);
+}
+
+function getTranslationAudioPlayer(): HTMLAudioElement {
+  if (!controller.translationAudio) {
+    controller.translationAudio = new Audio();
+  }
+  return controller.translationAudio;
+}
+
+type ClipOutcome = 'ended' | 'error' | 'aborted';
+
+/**
+ * Plays one translation-audio clip to completion.
+ *
+ * Fixes a truncation bug where only a fragment played before cutting off:
+ * the 'ended' listener was previously attached *after* `await player.play()`
+ * resolved — for a clip whose data was already buffered, playback could
+ * reach 'ended' before the listener was attached, missing the event.
+ * Attaching listeners *before* calling play() closes that race.
+ *
+ * Also listens for 'pause' — a manual `.pause()` call (exactly what session
+ * teardown does to this element) fires neither 'ended' nor 'error', so
+ * without this the returned promise would hang forever every time a session
+ * is superseded mid-clip. Resolving with 'aborted' here means the awaiting
+ * code always gets a real, immediate answer instead of a dangling promise.
+ *
+ * `epochAtStart` distinguishes two very different reasons this clip's
+ * element could fire 'pause': an ordinary user pause() call (epoch
+ * unchanged — the clip is merely suspended, resume() will call .play()
+ * again on this exact element later, so the promise must stay open and
+ * waiting) vs. a session teardown's pause() call (epoch already bumped —
+ * this clip is genuinely abandoned and the promise must resolve now rather
+ * than hang). Because an ordinary pause must NOT resolve the promise, the
+ * 'pause' listener itself can't use `{ once: true }` — it may legitimately
+ * fire more than once (pause/resume, pause/resume...) before a real
+ * end/error/abort finally happens; `finish()` still handles its own
+ * cleanup once one of those genuinely occurs.
+ */
+function playTranslationClip(url: string, epochAtStart: number): Promise<ClipOutcome> {
+  const player = getTranslationAudioPlayer();
+  player.pause();
+  player.currentTime = 0;
+  player.src = url;
+  player.load();
+
+  return new Promise<ClipOutcome>((resolve) => {
+    const finish = (outcome: ClipOutcome) => (): void => {
+      player.removeEventListener('ended', onEnded);
+      player.removeEventListener('error', onError);
+      player.removeEventListener('pause', onPause);
+      resolve(outcome);
+    };
+    const onEnded = finish('ended');
+    const onError = finish('error');
+    const onPause = (): void => {
+      if (player.ended) return; // the 'ended' listener already covers a natural finish
+      if (controller.epoch === epochAtStart) return; // an ordinary pause — stay suspended, not aborted
+      finish('aborted')();
+    };
+    player.addEventListener('ended', onEnded, { once: true });
+    player.addEventListener('error', onError, { once: true });
+    player.addEventListener('pause', onPause);
+    void player.play().catch(onError);
+  });
+}
+
+/** Plays one translation queue item (one ayah, one edition) and, once it settles, advances via the same onItemEnded every other item type uses. */
+async function playTranslationItem(item: QueueItem, index: number, epochAtStart: number): Promise<void> {
+  const edition = TRANSLATION_AUDIO_EDITIONS.find((candidate) => candidate.languageCode === (item.type === 'urdu' ? 'ur' : 'en'));
+  const verseKey = `${item.surah}:${item.ayah}`;
+  if (!edition) {
+    onItemEnded(index);
+    return;
+  }
+
+  controller.state = 'playing-translation';
+  logTransition(`Starting ${edition.label}`, { verseKey });
+
+  try {
+    const url = await getAyahEditionAudio(verseKey, edition.identifier);
+    if (controller.epoch !== epochAtStart) return; // superseded while fetching the URL
+    const outcome = await playTranslationClip(url, epochAtStart);
+    logTransition(`${edition.label} Finished`, { verseKey, outcome });
+    if (outcome === 'error') {
+      console.warn(
+        `[translation-audio] "${edition.label}" (${edition.identifier}) failed to play for ${verseKey} — url: ${url}, reciter: ${usePlaybackStore.getState().reciterId}. Skipping to the next ayah.`
+      );
+    }
+  } catch (error) {
+    logTransition(`${edition.label} Finished`, { verseKey, outcome: 'error', threw: true });
+    console.warn(
+      `[translation-audio] "${edition.label}" (${edition.identifier}) failed to load for ${verseKey} — reciter: ${usePlaybackStore.getState().reciterId}.`,
+      error
+    );
+  }
+
+  if (controller.epoch !== epochAtStart) return; // superseded while the clip was playing
+  onItemEnded(index);
+}
+
+/**
+ * The entire "what plays next" question, for every case (first ayah,
+ * middle, last, loop-ayah, loop-range/surah, autoplay off, translation
+ * on/off) collapses to: look at `queue[currentIndex]`, play it. No other
+ * function anywhere decides ordering.
+ */
+async function playCurrentItem(): Promise<void> {
+  const epochAtStart = controller.epoch;
+  const item = controller.queue[controller.currentIndex];
+
+  if (!item) {
+    const { loopMode } = usePlaybackStore.getState();
+    if (loopMode === 'surah' || loopMode === 'range') {
+      logTransition('Next Ayah (loop restart)', { toIndex: 0 });
+      controller.currentIndex = 0;
+      await playCurrentItem();
+      return;
+    }
+    logTransition('Finished');
+    stop();
+    return;
+  }
+
+  if (item.type === 'arabic') {
+    await playArabicItem(item, controller.currentIndex, epochAtStart);
+  } else {
+    await playTranslationItem(item, controller.currentIndex, epochAtStart);
+  }
+}
+
+/**
+ * The one place `currentIndex` ever moves during ordinary playback — every
+ * item type (Arabic clip ended, translation clip settled) funnels through
+ * here. `finishedIndex` is compared against the *current* currentIndex
+ * first: if they don't match, this is a stale or duplicate trigger for an
+ * item already moved past, and is silently ignored rather than
+ * double-advancing.
+ */
+function onItemEnded(finishedIndex: number): void {
+  if (controller.currentIndex !== finishedIndex) return;
+
+  const finishedItem = controller.queue[finishedIndex];
+  if (!finishedItem) return;
+  const { loopMode, autoplayEnabled } = usePlaybackStore.getState();
+
+  if (loopMode === 'ayah') {
+    const ayahStartIndex = controller.queue.findIndex(
+      (item) => item.surah === finishedItem.surah && item.ayah === finishedItem.ayah
+    );
+    logTransition('Repeat Ayah', { ayah: finishedItem.ayah });
+    controller.currentIndex = ayahStartIndex === -1 ? finishedIndex : ayahStartIndex;
+    void playCurrentItem();
+    return;
+  }
+
+  const nextItem = controller.queue[finishedIndex + 1];
+  const crossingIntoNextAyah = !nextItem || nextItem.ayah !== finishedItem.ayah || nextItem.surah !== finishedItem.surah;
+
+  if (crossingIntoNextAyah && loopMode === 'off' && !autoplayEnabled) {
+    logTransition('Stop', { reason: 'autoplay disabled' });
+    controller.currentIndex = finishedIndex + 1;
+    // 'idle' (not left as whatever it last was) so resume() knows there's
+    // nothing currently loaded to resume — it should advance the queue
+    // instead. See resume()'s docstring.
+    controller.state = 'idle';
+    pause();
+    return;
+  }
+
+  controller.currentIndex = finishedIndex + 1;
+  void playCurrentItem();
+}
+
+// --- shared handlers ---
+
+function handleTimeUpdate(): void {
+  if (!controller.audio) return;
+  usePlaybackStore.getState().setProgress(controller.audio.currentTime, controller.audio.duration || 0);
+  if (currentReciter().supportsWordSync) updateWordSyncHighlight();
+}
+
+/**
+ * Native 'ended' on the shared recitation element — the sole boundary signal
+ * for both reciter modes now that quran.com's ayahs are trimmed to their own
+ * clips exactly like everyayah.com's always-one-file-per-ayah files.
+ */
+function handleEnded(): void {
+  onItemEnded(controller.currentIndex);
+}
+
+// --- public controls ---
+
+interface LoadTarget {
+  surahId: number;
+  ayah: number;
+}
+
+/**
+ * The one and only place that ever tears down a session and starts another.
+ * playSurah, next, previous, setReciter, and seekToAyah are all thin callers
+ * of this — none of them has its own competing teardown-then-play
+ * implementation.
+ */
+async function load(target: LoadTarget): Promise<void> {
+  wireMediaSessionActions();
+  const store = usePlaybackStore.getState();
+  const reciter = getReciterById(store.reciterId);
+  const surah = SURAHS.find((item) => item.id === target.surahId);
+  if (!reciter || !surah) return;
+
+  const previousSurahId = store.surahId;
+  const previousVerseKey = store.verseKey;
+  const verseKey = `${target.surahId}:${target.ayah}`;
+
+  logTransition('Destroy Queue', { reason: 'load' });
+  controller.epoch += 1;
+  const epochAtStart = controller.epoch;
+  controller.translationAudio?.pause();
+  controller.audio?.pause();
+  controller.state = 'idle';
+
+  if (previousSurahId !== target.surahId) {
+    logTransition('Surah Changed', { from: previousSurahId, to: target.surahId });
+  } else if (previousVerseKey !== verseKey) {
+    logTransition('Ayah Changed', { from: previousVerseKey, to: verseKey });
+  }
+
+  store.setSurahId(target.surahId);
+  store.setLoading(true);
+
+  try {
+    if (reciter.source === 'quran.com') {
+      const recitation = await loadRecitation(reciter.recitationId, target.surahId);
+      if (controller.epoch !== epochAtStart) return; // superseded while fetching recitation metadata
+      await ensureDecodedRecitation(reciter.recitationId, target.surahId, recitation.audioUrl);
+      if (controller.epoch !== epochAtStart) return; // superseded while fetching/decoding the audio
+      // Nothing gets assigned to `audio` here — playArabicItem trims and
+      // assigns each ayah's own clip when its turn comes, same as
+      // everyayah.com mode below.
+    }
+    // everyayah.com needs no upfront file load — each ayah's file is fetched lazily by playArabicItem when its turn comes.
+
+    const startAyah = store.range?.startAyah ?? 1;
+    const endAyah = store.range?.endAyah ?? surah.versesCount;
+    controller.queue = buildQueue(target.surahId, startAyah, endAyah, activeTranslationAudioEditions());
+    logTransition('Queue Created', { surah: target.surahId, ayahRange: [startAyah, endAyah], items: controller.queue.length });
+
+    const targetIndex = controller.queue.findIndex((item) => item.type === 'arabic' && item.ayah === target.ayah);
+    controller.currentIndex = targetIndex === -1 ? 0 : targetIndex;
+
+    usePlaybackStore.getState().begin('surah', verseKey, pause);
+    await playCurrentItem();
+  } finally {
+    // A stale call's finally must not flip isLoading back to false for a
+    // session that superseded it while this one was still loading.
+    if (controller.epoch === epochAtStart) usePlaybackStore.getState().setLoading(false);
+  }
+}
+
+export async function playSurah(surahId: number, startAyah = 1): Promise<void> {
+  await load({ surahId, ayah: startAyah });
+}
+
+/**
+ * Warms every cache `load()` reads from, ahead of the user pressing Play —
+ * called as soon as a surah is opened, not gated on any playback action.
+ * Deliberately does not touch `controller.epoch`, `queue`, `currentIndex`, or
+ * any actively-playing element: preloading a surah the user is merely
+ * *viewing* must never interrupt whatever is actually playing. Fire-and-forget
+ * by design (never awaited by its caller) so it can never block the UI.
+ *
+ * Calling this again (a new surah opened) supersedes any previous call via
+ * `preloadToken` — the superseded call's own continuations detect the
+ * mismatch after their next await and stop without writing anything or
+ * touching `preloadAudio`. The underlying network requests already in flight
+ * are not aborted (aborting a request `ensureDecodedRecitation`/`loadRecitation`
+ * might be sharing with a *real*, currently-playing session for the same
+ * surah would be a correctness bug, not an optimization), so a superseded
+ * preload's request may still complete — it just won't be acted on further,
+ * and if a real session for that surah starts later, its own epoch-guarded
+ * cache write still lands normally.
+ */
+export function preloadSurah(surahId: number, startAyah = 1): void {
+  controller.preloadToken += 1;
+  const tokenAtStart = controller.preloadToken;
+
+  const reciter = getReciterById(usePlaybackStore.getState().reciterId);
+  const surah = SURAHS.find((item) => item.id === surahId);
+  if (!reciter || !surah) return;
+
+  const translationIds = [...useReadingPreferencesStore.getState().preferences.activeTranslationIds].sort();
+  void queryClient.prefetchQuery({
+    queryKey: ['quran', 'chapterVerses', surahId, translationIds],
+    queryFn: () => fetchChapterWithTranslations(surahId, translationIds),
+  });
+
+  usePlaybackStore.getState().setSurahPreloading(true);
+
+  void (async () => {
+    try {
+      if (reciter.source === 'quran.com') {
+        const recitation = await loadRecitation(reciter.recitationId, surahId);
+        if (controller.preloadToken !== tokenAtStart) return; // superseded by a newer preload — nothing left to do
+        await ensureDecodedRecitation(reciter.recitationId, surahId, recitation.audioUrl);
+      } else {
+        // everyayah.com: only the starting ayah needs to be ready by Play —
+        // every ayah after that is already handled by preloadNextAyah once
+        // playback actually begins, exactly as today.
+        const url = buildAyahAudioUrl(reciter.folderName, surahId, startAyah);
+        const resolvedUrl = await resolveSrc(url);
+        if (controller.preloadToken !== tokenAtStart) return;
+        if (!controller.preloadAudio) {
+          controller.preloadAudio = new Audio();
+          controller.preloadAudio.preload = 'auto';
+        }
+        assignAudioSrc(controller.preloadAudio, resolvedUrl);
+      }
+    } catch {
+      // Best-effort only — a failed preload just means load() fetches normally when Play is actually pressed.
+    } finally {
+      if (controller.preloadToken === tokenAtStart) usePlaybackStore.getState().setSurahPreloading(false);
+    }
+  })();
+}
+
+export function pause(): void {
+  logTransition('Pause');
+  controller.audio?.pause();
+  controller.translationAudio?.pause();
+  usePlaybackStore.setState({ isPlaying: false });
+}
+
+/**
+ * Which of three things resume() should do is read entirely from
+ * `controller.state`, never from an audio element's own `.ended` flag —
+ * `.ended` is mode-dependent (true for everyayah.com's just-finished
+ * per-ayah file, but false for quran.com's shared file merely paused
+ * mid-way through) and would make this function behave differently per
+ * reciter mode for the exact same logical situation. `state` doesn't have
+ * that problem: onItemEnded explicitly sets it to 'idle' when autoplay-off
+ * pauses at an ayah boundary (see there), so 'idle' here means exactly
+ * "nothing loaded is currently ours to resume — advance the queue instead."
+ */
+export function resume(): void {
+  if (controller.state === 'playing-translation') {
+    if (!controller.translationAudio) return;
+    logTransition('Resume', { context: 'translation interlude' });
+    void controller.translationAudio.play();
+    usePlaybackStore.setState({ isPlaying: true });
+    return;
+  }
+  if (controller.state === 'playing-recitation') {
+    if (!controller.audio) return;
+    logTransition('Resume', { context: 'recitation' });
+    void controller.audio.play();
+    usePlaybackStore.setState({ isPlaying: true });
+    return;
+  }
+  // controller.state === 'idle' — paused at an ayah boundary (autoplay off),
+  // with currentIndex already pointing at the next queue item.
+  logTransition('Resume', { context: 'advance to next queue item' });
+  usePlaybackStore.setState({ isPlaying: true });
+  void playCurrentItem();
+}
+
+/**
+ * Seeks within the currently loaded audio. Every reciter's `audio` element
+ * now holds exactly one ayah's own clip (quran.com's is trimmed to it,
+ * everyayah.com's always was one file per ayah), so this is always bounded
+ * to the current ayah — no cross-ayah re-sync needed for either mode.
+ */
+export function seekToTime(seconds: number): void {
+  if (!controller.audio) return;
+  controller.audio.currentTime = seconds;
+}
+
+/** The ayah actually tracked as current, for either reciter mode. */
+function currentAyahNumber(): number | null {
+  const { verseKey } = usePlaybackStore.getState();
+  return verseKey ? Number(verseKey.split(':')[1]) : null;
+}
+
+/**
+ * Manual skip is treated as an ayah change — same LOAD path as everything
+ * else, not a lightweight in-place seek. This is a deliberate trade-off:
+ * for quran.com mode, a lighter implementation could just move `currentTime`
+ * within the already-loaded file (instant, no reload); going through
+ * `load()` reassigns the audio element's `src`, which the browser treats as
+ * a fresh resource load even when the underlying data is already cached —
+ * a small, real cost, accepted here because it's what closes the actual bug
+ * (next/previous silently ignoring an in-progress translation and stale
+ * closures firing after them) rather than special-casing this one path back
+ * into its own implementation.
+ */
+export async function next(): Promise<void> {
+  const store = usePlaybackStore.getState();
+  if (store.surahId === null) return;
+  const surah = SURAHS.find((item) => item.id === store.surahId);
+  if (!surah) return;
+  const current = currentAyahNumber();
+  if (current === null || current + 1 > surah.versesCount) return;
+  await load({ surahId: store.surahId, ayah: current + 1 });
 }
 
 export async function previous(): Promise<void> {
-  const reciter = currentReciter();
-  if (reciter.source === 'quran.com' && audio && recitationCache) {
-    cancelWordSyncBoundaryWatch();
-    const currentMs = audio.currentTime * 1000;
-    const index = activeTimestampIndex(recitationCache.data, currentMs);
-    const previousTimestamp = recitationCache.data.timestamps[index - 1];
-    if (previousTimestamp) audio.currentTime = previousTimestamp.timestampFrom / 1000;
-    return;
-  }
-  await playQueueIndex(queueIndex - 1);
+  const store = usePlaybackStore.getState();
+  if (store.surahId === null) return;
+  const current = currentAyahNumber();
+  if (current === null || current - 1 < 1) return;
+  await load({ surahId: store.surahId, ayah: current - 1 });
 }
 
 export function setLoopMode(mode: LoopMode): void {
@@ -608,16 +762,49 @@ export function setRange(range: PlaybackRange | null): void {
   usePlaybackStore.getState().setRange(range);
 }
 
+/**
+ * Call whenever the Urdu/English translation-audio toggles change.
+ * Everything up to and including the rest of the *currently playing* ayah's
+ * items is preserved exactly as queued (so `currentIndex` never needs to
+ * move and nothing already in flight is disrupted) — only ayahs strictly
+ * after the current one are rebuilt with the new live editions list. This
+ * matches Phase 5 exactly: takes effect at the next ayah boundary, never
+ * retroactively for the ayah already in progress.
+ */
+export function refreshTranslationEditions(): void {
+  if (controller.queue.length === 0) return; // no active session
+  const currentItem = controller.queue[controller.currentIndex];
+  if (!currentItem) return;
+
+  const lastItem = controller.queue[controller.queue.length - 1]!;
+  const nextAyahStartIndex = controller.queue.findIndex(
+    (item, idx) => idx > controller.currentIndex && (item.ayah !== currentItem.ayah || item.surah !== currentItem.surah)
+  );
+  if (nextAyahStartIndex === -1) return; // current item is already the queue's last ayah — nothing left to rebuild
+
+  const nextItem = controller.queue[nextAyahStartIndex]!;
+  const preservedHead = controller.queue.slice(0, nextAyahStartIndex);
+  const rebuiltTail = buildQueue(nextItem.surah, nextItem.ayah, lastItem.ayah, activeTranslationAudioEditions());
+
+  controller.queue = [...preservedHead, ...rebuiltTail];
+  logTransition('Queue Created', {
+    surah: nextItem.surah,
+    ayahRange: [nextItem.ayah, lastItem.ayah],
+    items: controller.queue.length,
+    reason: 'translation toggle',
+  });
+}
+
 export function setSpeed(speed: number): void {
   usePlaybackStore.getState().setPlaybackSpeed(speed);
-  if (audio) audio.playbackRate = speed;
+  if (controller.audio) controller.audio.playbackRate = speed;
 }
 
 export function setReciter(reciterId: string): void {
   // No-op guard: picking the same reciter that's already selected must never
   // restart playback — without this, any redundant call (e.g. a UI element
   // re-firing the current value) would interrupt an in-progress translation
-  // interlude or just jarringly restart the current ayah for no reason.
+  // or just jarringly restart the current ayah for no reason.
   if (usePlaybackStore.getState().reciterId === reciterId) return;
 
   const wasPlaying = usePlaybackStore.getState().isPlaying;
@@ -625,37 +812,41 @@ export function setReciter(reciterId: string): void {
   const verseKey = usePlaybackStore.getState().verseKey;
   const resumeAyah = verseKey ? Number(verseKey.split(':')[1]) : 1;
 
+  logTransition('Reciter Changed', { from: usePlaybackStore.getState().reciterId, to: reciterId });
   usePlaybackStore.getState().setReciterId(reciterId);
-  recitationCache = null;
+  controller.recitationCache = null;
+  controller.decodedRecitationCache = null;
 
   if (wasPlaying && surahId) {
-    void playSurah(surahId, resumeAyah);
+    void load({ surahId, ayah: resumeAyah });
   }
 }
 
-/**
- * Call whenever the Urdu/English translation-audio toggles change. Without
- * this, ayahs collected into `translationGroupKeys` *before* a toggle
- * flips off sit there un-flushed (that branch never touches the group
- * while translation audio is off) — so turning it back on later mixes
- * those stale, possibly long-past ayahs into the next group instead of
- * starting a clean group from where playback currently is.
- */
-export function resetTranslationAudioGroup(): void {
-  translationGroupKeys = [];
-}
-
 export function stop(): void {
-  audio?.pause();
-  translationAudio?.pause();
-  isInTranslationInterlude = false;
-  translationGroupKeys = [];
-  cancelWordSyncBoundaryWatch();
+  logTransition('Destroy Queue', { reason: 'stop' });
+  controller.epoch += 1;
+  controller.audio?.pause();
+  controller.translationAudio?.pause();
+  // Definitive end of this session — revoke now rather than leaving it for
+  // whatever load() happens to run next (assignAudioSrc would still catch
+  // it then, but there's no reason to wait).
+  if (controller.audio?.src.startsWith('blob:')) URL.revokeObjectURL(controller.audio.src);
+  if (controller.preloadAudio?.src.startsWith('blob:')) URL.revokeObjectURL(controller.preloadAudio.src);
+  controller.state = 'idle';
+  controller.queue = [];
+  controller.currentIndex = 0;
+  controller.activeTimestamp = null;
   usePlaybackStore.getState().stop();
+  // Explicit, not left to whatever load() call happened to be in flight —
+  // its own finally block correctly skips this for a stale (superseded)
+  // call now that epoch-guarding exists, which means nothing else clears it
+  // if stop() itself is what superseded it. Without this, calling stop()
+  // while a load was still loading would leave isLoading stuck true forever.
+  usePlaybackStore.getState().setLoading(false);
 }
 
 export function seekToAyah(ayahNumber: number): void {
   const store = usePlaybackStore.getState();
   if (store.surahId === null) return;
-  void playSurah(store.surahId, ayahNumber);
+  void load({ surahId: store.surahId, ayah: ayahNumber });
 }

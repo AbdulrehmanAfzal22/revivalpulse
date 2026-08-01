@@ -53,6 +53,11 @@ export default function useWordAudio(): UseWordAudioResult {
       try {
         const objectUrl = await getOrFetchAudio(word.audioUrl);
         if (isStale()) return;
+        // getOrFetchAudio creates a fresh object URL every call — revoke
+        // whatever this shared element was last pointed at (from the
+        // previous word tap) before pointing it at the new one, or every
+        // tap leaks one blob URL for the life of the page.
+        if (audio.src.startsWith('blob:')) URL.revokeObjectURL(audio.src);
         audio.src = objectUrl;
         audio.playbackRate = preferences.wordPlaybackSpeed;
         audio.onended = () => {
