@@ -315,8 +315,11 @@ export function useRecitationSession(): RecitationSession {
             returnedWordCount: timedWords.length,
             timestamp: Date.now(),
           });
-          // eslint-disable-next-line no-console -- Phase 11C: temporarily promoted, see note above.
-          console.log('[PHASE11C-DIAG] Whisper transcript', { chunkNumber, text, wordCount: timedWords.length });
+          // eslint-disable-next-line no-console -- Phase 11D: see note above.
+          console.log(
+            '[PHASE11D]',
+            JSON.stringify({ event: 'Whisper transcript', chunkNumber, transcriptText: text, words: timedWords, wordCount: timedWords.length }, null, 2)
+          );
 
           const rawWords = tokenizeArabic(text);
           trace.debug('TOKENIZATION', {
@@ -326,6 +329,8 @@ export function useRecitationSession(): RecitationSession {
             wordCount: rawWords.length,
             timestamp: Date.now(),
           });
+          // eslint-disable-next-line no-console -- Phase 11D: see note above.
+          console.log('[PHASE11D]', JSON.stringify({ event: 'normalized words', chunkNumber, transcriptText: text, normalizedWords: rawWords }, null, 2));
 
           if (rawWords.length === 0) {
             trace.error('PIPELINE STOPPED: Whisper returned zero Arabic words for this chunk — nothing downstream (correction, matching, surah detection) will run for it.', {
@@ -337,6 +342,11 @@ export function useRecitationSession(): RecitationSession {
           }
 
           setState((prev) => {
+            // eslint-disable-next-line no-console -- Phase 11D: see note above handleChunk.
+            console.log(
+              '[PHASE11D]',
+              JSON.stringify({ event: 'current phase / lock state', chunkNumber, phase: prev.phase, detectedSurahId: prev.detectedSurahId, trackerCompleted: prev.tracker?.completed ?? null }, null, 2)
+            );
             // Quran-aware correction layer: runs on every recognized batch,
             // before overlap-dedup, before surah detection, and before the
             // intelligent matcher — so a corrected transcript benefits all
@@ -469,8 +479,11 @@ export function useRecitationSession(): RecitationSession {
             }
 
             if ((prev.phase === 'listening' || prev.phase === 'detection-timeout') && wordIndexRef.current) {
-              // eslint-disable-next-line no-console -- Phase 11C: temporarily promoted, see note above handleChunk.
-              console.log('[PHASE11C-DIAG] detectSurah input', { chunkNumber, recognizedWords });
+              // eslint-disable-next-line no-console -- Phase 11D: see note above handleChunk.
+              console.log(
+                '[PHASE11D]',
+                JSON.stringify({ event: 'detectSurah input', chunkNumber, phase: prev.phase, recognizedWords }, null, 2)
+              );
               const { result, debug } = detectSurah(wordIndexRef.current, recognizedWords);
               {
                 const confidenceScore = debug.requiredLengthAtBest > 0 ? debug.bestMatchLength / debug.requiredLengthAtBest : 0;
@@ -481,14 +494,24 @@ export function useRecitationSession(): RecitationSession {
                     : debug.bestMatchLength < debug.requiredLengthAtBest
                       ? `best candidate (surah ${debug.bestMatchSurahId}) only reached ${debug.bestMatchLength} of ${debug.requiredLengthAtBest} required consecutive words`
                       : 'best-length candidates were tied/ambiguous between more than one location — see surahDetector.ts distinctLocations check';
-                // eslint-disable-next-line no-console -- Phase 11C: temporarily promoted, see note above handleChunk.
-                console.log('[PHASE11C-DIAG] detectSurah output', {
-                  chunkNumber,
-                  locked: result !== null,
-                  topCandidateSurahId: debug.bestMatchSurahId,
-                  confidenceScore: `${debug.bestMatchLength}/${debug.requiredLengthAtBest} (${Math.round(confidenceScore * 100)}%)`,
-                  rejectionReason,
-                });
+                // eslint-disable-next-line no-console -- Phase 11D: see note above handleChunk.
+                console.log(
+                  '[PHASE11D]',
+                  JSON.stringify(
+                    {
+                      event: 'detectSurah output',
+                      chunkNumber,
+                      locked: result !== null,
+                      bestCandidateSurahId: debug.bestMatchSurahId,
+                      matchedWords: result?.matchedWordCount ?? debug.bestMatchLength,
+                      requiredWords: debug.requiredLengthAtBest,
+                      confidenceScorePercent: Math.round(confidenceScore * 100),
+                      rejectionReason,
+                    },
+                    null,
+                    2
+                  )
+                );
               }
               // Visibility into whether confidence is climbing at all,
               // separate from whether it's cleared yet.
