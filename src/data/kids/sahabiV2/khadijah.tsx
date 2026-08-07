@@ -47,8 +47,8 @@ export const SAHABI_KHADIJAH: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Seerah (Ibn Hisham)', label: { en: 'Khadijah sends Muhammad ﷺ to lead her caravan and sees his honesty' } },
-        { type: 'hadith', reference: 'Seerah (Ibn Kathir, Al-Bidayah wan-Nihayah)', label: { en: 'Khadijah is known as the pure and fair merchant of Makkah' } },
+        { type: 'hadith', reference: 'Seerah (Ibn Hisham)', label: { en: 'Khadijah sends Muhammad ﷺ to lead her caravan and sees his honesty', ur: 'خدیجہ محمد ﷺ کو اپنا قافلہ لے جانے کے لیے بھیجتی ہیں اور ان کی دیانتداری دیکھتی ہیں' } },
+        { type: 'hadith', reference: 'Seerah (Ibn Kathir, Al-Bidayah wan-Nihayah)', label: { en: 'Khadijah is known as the pure and fair merchant of Makkah', ur: 'خدیجہ مکہ کی پاک اور دیانتدار تاجر کے طور پر مشہور تھیں' } },
       ],
     },
     {
@@ -76,9 +76,9 @@ export const SAHABI_KHADIJAH: KidsStoryV2 = {
           type: 'hadith',
           reference: 'Sahih al-Bukhari; Sahih Muslim (Khadijah was the first to believe)',
           needsVerification: true,
-          label: { en: 'Khadijah is the very first person to accept and believe in Islam' },
+          label: { en: 'Khadijah is the very first person to accept and believe in Islam', ur: 'خدیجہ وہ پہلی شخصیت ہیں جنہوں نے اسلام قبول کیا اور ایمان لائیں' },
         },
-        { type: 'hadith', reference: 'Seerah (Ibn Kathir, Al-Bidayah wan-Nihayah)', label: { en: 'Khadijah trusted the Prophet ﷺ with her entire heart and soul' } },
+        { type: 'hadith', reference: 'Seerah (Ibn Kathir, Al-Bidayah wan-Nihayah)', label: { en: 'Khadijah trusted the Prophet ﷺ with her entire heart and soul', ur: 'خدیجہ نے پورے دل و جان سے نبی کریم ﷺ پر بھروسہ کیا' } },
       ],
     },
     {
@@ -105,7 +105,7 @@ export const SAHABI_KHADIJAH: KidsStoryV2 = {
         {
           type: 'hadith',
           reference: 'Sahih al-Bukhari; Sahih Muslim (the beginning of revelation; Khadijah comforting the Prophet ﷺ)',
-          label: { en: 'Khadijah comforts the Prophet ﷺ in the first scary moment of revelation' },
+          label: { en: 'Khadijah comforts the Prophet ﷺ in the first scary moment of revelation', ur: 'خدیجہ وحی کے پہلے ڈراؤنے لمحے میں نبی کریم ﷺ کو تسلی دیتی ہیں' },
         },
       ],
     },
@@ -130,12 +130,12 @@ export const SAHABI_KHADIJAH: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Seerah (Ibn Kathir, Al-Bidayah wan-Nihayah)', label: { en: 'In the Year of Sorrow, the Prophet ﷺ loses his uncle and his wife' } },
+        { type: 'hadith', reference: 'Seerah (Ibn Kathir, Al-Bidayah wan-Nihayah)', label: { en: 'In the Year of Sorrow, the Prophet ﷺ loses his uncle and his wife', ur: 'غم کے سال میں نبی کریم ﷺ اپنے چچا اور اپنی بیوی دونوں سے محروم ہو جاتے ہیں' } },
         {
           type: 'hadith',
           reference: 'Sahih al-Bukhari; Sahih Muslim (the death of Khadijah, the Year of Sorrow)',
           needsVerification: true,
-          label: { en: 'Khadijah passes away in the sad, hard year called the Year of Sorrow' },
+          label: { en: 'Khadijah passes away in the sad, hard year called the Year of Sorrow', ur: 'خدیجہ اس اداس اور مشکل سال میں وفات پاتی ہیں جسے غم کا سال کہا گیا' },
         },
       ],
     },
@@ -164,12 +164,12 @@ export const SAHABI_KHADIJAH: KidsStoryV2 = {
           type: 'hadith',
           reference: 'Sahih al-Bukhari; Sahih Muslim (the Prophet ﷺ remembers Khadijah after her death)',
           needsVerification: true,
-          label: { en: 'The Prophet ﷺ still remembers and honors Khadijah many years later' },
+          label: { en: 'The Prophet ﷺ still remembers and honors Khadijah many years later', ur: 'نبی کریم ﷺ کئی سال بعد بھی خدیجہ کو یاد کرتے ہیں اور ان کی عزت کرتے ہیں' },
         },
         {
           type: 'hadith',
           reference: 'Seerah (Ibn Kathir, Al-Bidayah wan-Nihayah)',
-          label: { en: 'The Prophet ﷺ sends gifts to Khadijah’s friends and family, with love' },
+          label: { en: 'The Prophet ﷺ sends gifts to Khadijah’s friends and family, with love', ur: 'نبی کریم ﷺ محبت کے ساتھ خدیجہ کی سہیلیوں اور خاندان کو تحفے بھیجتے ہیں' },
         },
       ],
     },

@@ -346,6 +346,7 @@ export const hi: LocaleDictionary = {
   'kids.chapters': 'अध्याय',
   'kids.chapterDetail': 'अध्याय {{current}} / {{total}}',
   'kids.storySources': 'स्रोत',
+'kids.ayahExplained': 'आयत की व्याख्या',
   'kids.sourceQuran': 'क़ुरान',
   'kids.sourceHadith': 'हदीस',
   'kids.sourceNeedVerification': 'अभी सत्यापित नहीं',

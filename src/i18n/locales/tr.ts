@@ -346,6 +346,7 @@ export const tr: LocaleDictionary = {
   'kids.chapters': 'Bölümler',
   'kids.chapterDetail': 'Bölüm {{current}} / {{total}}',
   'kids.storySources': 'Kaynaklar',
+'kids.ayahExplained': 'Ayet açıklaması',
   'kids.sourceQuran': 'Kur\'an',
   'kids.sourceHadith': 'Hadis',
   'kids.sourceNeedVerification': 'Henüz doğrulanmadı',

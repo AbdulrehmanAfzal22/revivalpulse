@@ -347,6 +347,7 @@ export const ar: LocaleDictionary = {
   'kids.chapters': 'الفصول',
   'kids.chapterDetail': 'الفصل {{current}} من {{total}}',
   'kids.storySources': 'المصادر',
+'kids.ayahExplained': 'تفسير الآية',
   'kids.sourceQuran': 'القرآن',
   'kids.sourceHadith': 'حديث',
   'kids.sourceNeedVerification': 'لم يتم التحقق بعد',

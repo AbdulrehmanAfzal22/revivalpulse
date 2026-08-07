@@ -359,6 +359,7 @@ export const en = {
   'kids.chapters': 'Chapters',
   'kids.chapterDetail': 'Chapter {{current}} of {{total}}',
   'kids.storySources': 'Sources',
+'kids.ayahExplained': 'Ayah explained',
   'kids.sourceQuran': 'Qur’an',
   'kids.sourceHadith': 'Hadith',
   'kids.sourceNeedVerification': 'Not yet verified',

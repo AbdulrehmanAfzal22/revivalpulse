@@ -48,12 +48,12 @@ export const SAHABI_ALI: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Seerah (Ibn Hisham)', label: { en: 'The Seerah tells how the Prophet ﷺ took young Ali into his home' } },
+        { type: 'hadith', reference: 'Seerah (Ibn Hisham)', label: { en: 'The Seerah tells how the Prophet ﷺ took young Ali into his home', ur: 'سیرت بتاتی ہے کہ نبی کریم ﷺ نے چھوٹے علی کو اپنے گھر رکھا' } },
         {
           type: 'hadith',
           reference: 'Sahih al-Bukhari (the Prophet ﷺ raised Ali in his home)',
           needsVerification: true,
-          label: { en: 'Ali grew up in the Prophet’s house, learning from the most honest man' },
+          label: { en: 'Ali grew up in the Prophet’s house, learning from the most honest man', ur: 'علی نبی کریم ﷺ کے گھر پلے بڑھے اور سب سے سچے انسان سے سیکھتے رہے' },
         },
       ],
     },
@@ -78,12 +78,12 @@ export const SAHABI_ALI: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Seerah (Ibn Hisham)', label: { en: 'The Seerah records that Ali was the first child of Makkah to accept Islam' } },
+        { type: 'hadith', reference: 'Seerah (Ibn Hisham)', label: { en: 'The Seerah records that Ali was the first child of Makkah to accept Islam', ur: 'سیرت لکھتی ہے کہ علی مکہ کے پہلے بچے تھے جنہوں نے اسلام قبول کیا' } },
         {
           type: 'hadith',
           reference: 'Sahih al-Bukhari (Ali accepted Islam while a child)',
           needsVerification: true,
-          label: { en: 'Ali still a young boy, eagerly believes in the Prophet’s message' },
+          label: { en: 'Ali still a young boy, eagerly believes in the Prophet’s message', ur: 'علی جو ابھی چھوٹے لڑکے تھے، دل سے نبی ﷺ کے پیغام پر ایمان لے آئے' },
         },
       ],
     },
@@ -111,9 +111,9 @@ export const SAHABI_ALI: KidsStoryV2 = {
         {
           type: 'hadith',
           reference: 'Sahih al-Bukhari; Sahih Muslim (the flag of Khaybar given to Ali)',
-          label: { en: 'The Prophet ﷺ gives the flag at Khaybar to Ali, the man who loves Allah' },
+          label: { en: 'The Prophet ﷺ gives the flag at Khaybar to Ali, the man who loves Allah', ur: 'نبی ﷺ خیبر کے دن جھنڈا علی کو دیتے ہیں، جو اللہ سے محبت کرنے والے ہیں' },
         },
-        { type: 'hadith', reference: 'Seerah (Ibn Hisham; the battle of Badr)', label: { en: 'Ali stands bravely among the Muslims who win the battle of Badr' } },
+        { type: 'hadith', reference: 'Seerah (Ibn Hisham; the battle of Badr)', label: { en: 'Ali stands bravely among the Muslims who win the battle of Badr', ur: 'علی ان مسلمانوں میں بہادری سے لڑتے ہیں جو جنگ بدر میں فتح پاتے ہیں' } },
       ],
     },
     {
@@ -140,7 +140,7 @@ export const SAHABI_ALI: KidsStoryV2 = {
         {
           type: 'hadith',
           reference: 'Sahih al-Bukhari; Sahih Muslim (the Prophet ﷺ comparing Ali to Aaron as Moses)',
-          label: { en: 'The Prophet ﷺ tells Ali he is like Aaron to Moses, but no prophet after him' },
+          label: { en: 'The Prophet ﷺ tells Ali he is like Aaron to Moses, but no prophet after him', ur: 'نبی ﷺ علی کہتے ہیں کہ وہ موسیٰ کے لیے ہارون کی مانند ہیں، مگر ان کے بعد کوئی نبی نہیں' },
         },
       ],
     },
@@ -169,13 +169,13 @@ export const SAHABI_ALI: KidsStoryV2 = {
           type: 'hadith',
           reference: 'Seerah (Ibn Hisham); Sunan works on Ali as judge in Yemen',
           needsVerification: true,
-          label: { en: 'The Prophet ﷺ sends Ali to Yemen to judge fairly between people' },
+          label: { en: 'The Prophet ﷺ sends Ali to Yemen to judge fairly between people', ur: 'نبی ﷺ علی کو یمن بھیجتے ہیں تاکہ لوگوں کے درمیان انصاف سے فیصلہ کریں' },
         },
         {
           type: 'hadith',
           reference: 'Sayings of Ali recorded in Sunan collections',
           needsVerification: true,
-          label: { en: 'Ali taught that a sharp mind and fairness are the best strength' },
+          label: { en: 'Ali taught that a sharp mind and fairness are the best strength', ur: 'علی نے سکھایا کہ تیز دماغ اور انصاف بہترین طاقت ہے' },
         },
       ],
     },

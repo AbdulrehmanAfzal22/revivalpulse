@@ -44,8 +44,8 @@ export const SAHABI_BILAL: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Sahih al-Bukhari, Kitab al-Manakib (Virtues of Bilal)', needsVerification: true, label: { en: 'Bilal repeats Ahad, Ahad under the heavy stone and burning sand' } },
-        { type: 'hadith', reference: 'Seerah (Ibn Hisham)', label: { en: 'The Seerah tells how patient and strong Bilal’s heart stayed' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari, Kitab al-Manakib (Virtues of Bilal)', needsVerification: true, label: { en: 'Bilal repeats Ahad, Ahad under the heavy stone and burning sand', ur: 'بلال بھاری پتھر اور تپتی ریت کے نیچے احد، احد دہراتے ہیں' } },
+        { type: 'hadith', reference: 'Seerah (Ibn Hisham)', label: { en: 'The Seerah tells how patient and strong Bilal’s heart stayed', ur: 'سیرت بتاتی ہے کہ بلال کا دل کتنا صابر اور مضبوط رہا' } },
       ],
     },
     {
@@ -66,8 +66,8 @@ export const SAHABI_BILAL: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Sahih al-Bukhari (Virtues of Abu Bakr / Bilal)', needsVerification: true, label: { en: 'Abu Bakr gives money to free Bilal and sets him free' } },
-        { type: 'hadith', reference: 'Seerah (Ibn Hisham)', label: { en: 'The Seerah tells that Abu Bakr freed and cared for Bilal' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari (Virtues of Abu Bakr / Bilal)', needsVerification: true, label: { en: 'Abu Bakr gives money to free Bilal and sets him free', ur: 'ابوبکر بلال کو آزاد کرنے کے لیے پیسے دیتے ہیں اور انہیں آزاد کر دیتے ہیں' } },
+        { type: 'hadith', reference: 'Seerah (Ibn Hisham)', label: { en: 'The Seerah tells that Abu Bakr freed and cared for Bilal', ur: 'سیرت بتاتی ہے کہ ابوبکر نے بلال کو آزاد کیا اور ان کی دیکھ بھال کی' } },
       ],
     },
     {
@@ -88,8 +88,8 @@ export const SAHABI_BILAL: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Sahih al-Bukhari; Sahih Muslim', needsVerification: true, label: { en: 'The Prophet ﷺ tells Bilal to call the adhan with the words of the dream' } },
-        { type: 'hadith', reference: 'Sahih Muslim (chapter on adhān)', needsVerification: true, label: { en: 'On the Day of Judgment, the mu’adhins are honored for their call to prayer' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari; Sahih Muslim', needsVerification: true, label: { en: 'The Prophet ﷺ tells Bilal to call the adhan with the words of the dream', ur: 'نبی کریم ﷺ بلال سے کہتے ہیں کہ وہ خواب کے الفاظ کے ساتھ اذان دیں' } },
+        { type: 'hadith', reference: 'Sahih Muslim (chapter on adhān)', needsVerification: true, label: { en: 'On the Day of Judgment, the mu’adhins are honored for their call to prayer', ur: 'قیامت کے دن اذان دینے والوں کو عزت دی جائے گی کیونکہ وہ لوگوں کو اللہ کی طرف بلاتے ہیں' } },
       ],
     },
     {
@@ -110,8 +110,8 @@ export const SAHABI_BILAL: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Sahih al-Bukhari 1002 (hadith of Paradise with Bilal)', needsVerification: true, label: { en: 'The Prophet ﷺ tells Bilal he hears his footsteps in Paradise' } },
-        { type: 'hadith', reference: 'Seerah (Ibn Sa’d)', needsVerification: true, label: { en: 'After the Prophet ﷺ passes away, Bilal asks to stop the adhan in Madinah' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari 1002 (hadith of Paradise with Bilal)', needsVerification: true, label: { en: 'The Prophet ﷺ tells Bilal he hears his footsteps in Paradise', ur: 'نبی کریم ﷺ بلال سے کہتے ہیں کہ وہ جنت میں ان کے قدموں کی آواز سنتے ہیں' } },
+        { type: 'hadith', reference: 'Seerah (Ibn Sa’d)', needsVerification: true, label: { en: 'After the Prophet ﷺ passes away, Bilal asks to stop the adhan in Madinah', ur: 'نبی کریم ﷺ کے انتقال کے بعد بلال مدینہ میں اذان دینا چھوڑنے کی اجازت مانگتے ہیں' } },
       ],
     },
   ],

@@ -346,6 +346,7 @@ export const ms: LocaleDictionary = {
   'kids.chapters': 'Bab',
   'kids.chapterDetail': 'Bab {{current}} daripada {{total}}',
   'kids.storySources': 'Sumber',
+'kids.ayahExplained': 'Ayat diterangkan',
   'kids.sourceQuran': 'Al-Quran',
   'kids.sourceHadith': 'Hadis',
   'kids.sourceNeedVerification': 'Belum disahkan',

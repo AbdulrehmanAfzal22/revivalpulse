@@ -44,11 +44,15 @@ export const STORY_IBRAHIM: KidsStoryV2 = {
           en: "So, even before the people knew him as a prophet, the truth was already growing inside him like a treasure: there is no god except Allah. A young honest heart had found the straight path all on its own, being guided by its Creator.",
         },
       ],
+      ayahNote: {
+        en: "A young heart searched the stars, the moon and the sun, and one by one each light faded away. The truth it found is this: the real Lord is the One who never disappears, and a sincere heart can find Him on its own.",
+        ur: "ایک جوان دل نے ستاروں، چاند اور سورج کو باری باری آزمایا، اور ہر ایک کی روشنی کسی نہ کسی وقت غروب ہو گئی۔ سچائی یہ ہے: اصل رب وہی ہے جو کبھی غائب نہیں ہوتا، اور ایک خالص دل اُسے خود بھی ڈھونڈ سکتا ہے۔",
+      },
       sources: [
         {
           type: "hadith",
           reference: "Ibn Kathir's Tafsir (Qur'an 6:74-79)",
-          label: { en: "Ibn Kathir narrates how young Ibrahim tried the star, the moon and the sun before reaching the truth of Allah's oneness" },
+          label: { en: "Ibn Kathir narrates how young Ibrahim tried the star, the moon and the sun before reaching the truth of Allah's oneness", ur: "ابن کثیر بیان کرتے ہیں کہ چھوٹے ابراہیم نے اللہ کی توحید کی سچائی تک پہنچنے سے پہلے ستارے، چاند اور سورج کو آزمایا" },
           needsVerification: true,
         },
       ],
@@ -73,11 +77,19 @@ export const STORY_IBRAHIM: KidsStoryV2 = {
           en: "From this a child can learn a lovely lesson: you can love people very deeply and still wish for them what is true and good. Even when people stay with their old ways, a gentle heart keeps hoping and keeps behaving with kindness.",
         },
       ],
+      ayahNote: {
+        en: "The key verse of this chapter is from Qur'an 9:114: Ibrahim only asked Allah to forgive his father because of a promise he had once made. It teaches children that you can love someone with your whole heart — and still hold on to the truth of Allah.",
+        ur: "اس باب کی مرکزی آیت سورہ توبہ کی ہے: ابراہیم نے اپنے باپ کے لیے مغفرت کی دعا صرف اس وجہ سے کی تھی کہ اُنہوں نے ایک بار اُس سے وعدہ کیا تھا۔ یہ بچوں کو سکھاتی ہے کہ تم کسی سے دل سے محبت کر سکتے ہو — اور پھر بھی اللہ کے سچ کو نہ چھوڑو۔",
+      },
       sources: [
         {
           type: "quran",
           reference: "Qur'an 9:114",
-          label: { en: "Ibrahim prayed for forgiveness for his father because of a promise he had made to him" },
+          label: { en: "Ibrahim prayed for forgiveness for his father because of a promise he had made to him", ur: "ابراہیم نے اپنے باپ کے لیے مغفرت کی دعا کی کیونکہ انہوں نے اپنے باپ سے ایک وعدہ کیا تھا" },
+          explanation: {
+            en: "This ayah does not say that Ibrahim loved his father's idols — it shows he kept a promise made with love. Kindness and truth can live together in the same heart.",
+            ur: "اس آیت کا مطلب یہ نہیں کہ ابراہیم کو اپنے باپ کے بت پسند تھے — یہ بتاتی ہے کہ اُنہوں نے محبت کے ساتھ کیے گئے وعدے کو ہی نبھایا۔ نرمی اور سچائی ایک ہی دل میں اکٹھی رہ سکتی ہیں۔",
+          },
         },
       ],
     },
@@ -101,11 +113,15 @@ export const STORY_IBRAHIM: KidsStoryV2 = {
           en: "That was a lesson no statue could ever give: the hot fire of an entire people cannot harm a heart that truly trusts in Allah. Even fire obeys the command of the Only One who deserves to be worshipped.",
         },
       ],
+      ayahNote: {
+        en: "The fire of an entire town blazed around Ibrahim, yet the Qur'an tells us Allah's words were obeyed by the fire itself: become cool and safe. The key lesson for a child: a heart that truly trusts in Allah is stronger than any heat in the world.",
+        ur: "پوری قوم کی آگ ابراہیم کے گرد بھڑکی، مگر اللہ کے حکم نے خود آگ کو کہا: ٹھنڈی ہو جاؤ اور محفوظ رہو۔ بچوں کے لیے یہ سبق ہے: جو دل سچے دل سے اللہ پر بھروسہ کرتا ہے، وہ دنیا کی ہر آگ سے زیادہ مضبوط ہوتا ہے۔",
+      },
       sources: [
         {
           type: "hadith",
           reference: "Ibn Kathir's Tafsir (Qur'an 21:68-70)",
-          label: { en: "Ibn Kathir narrates how the great fire was made cool and safe for the Prophet Ibrahim" },
+          label: { en: "Ibn Kathir narrates how the great fire was made cool and safe for the Prophet Ibrahim", ur: "ابن کثیر بیان کرتے ہیں کہ کس طرح بڑی آگ ابراہیم علیہ السلام کے لیے ٹھنڈی اور محفوظ بنا دی گئی" },
           needsVerification: true,
         },
       ],
@@ -130,11 +146,15 @@ export const STORY_IBRAHIM: KidsStoryV2 = {
           en: "That is why the believers remember this event every year on Eid al-Adha, the festival of the sacrifice, when families share meat with relatives and with people in need. It is a beautiful yearly reminder that submitting to Allah brings safety and mercy in the end.",
         },
       ],
+      ayahNote: {
+        en: "This chapter's heart beats in the Qur'an's account of the dreams of the prophets (37:102-109): Ibrahim and Ismail obeyed a hard command together, and Allah sent a great sacrifice instead. Obedience that is tested and passed becomes a mercy remembered forever — that is the story of the Eid, the day of the festival.",
+        ur: "اس باب کا دل سورہ صافات کی باتوں میں دھڑکتا ہے: ابراہیم اور اسماعیل نے سخت حکم پر مل کر اطاعت کی، اور اللہ نے ایک بڑا ذبیحہ اُن کی جگہ بھیجا۔ آزمائی ہوئی اطاعت ہمیشہ یاد رکھی جانے والی رحمت بن جاتی ہے — یہی عید کے دن کی کہانی ہے۔",
+      },
       sources: [
         {
           type: "hadith",
           reference: "Ibn Kathir's Tafsir of Qur'an 37:100-109",
-          label: { en: "Ibn Kathir narrates Ibrahim's dream to offer his son, the son's faithful patience, and the great sacrifice sent in his place" },
+          label: { en: "Ibn Kathir narrates Ibrahim's dream to offer his son, the son's faithful patience, and the great sacrifice sent in his place", ur: "ابن کثیر بیان کرتے ہیں کہ ابراہیم کا خواب کہ وہ اپنے بیٹے کو قربان کریں گے، بیٹے کا وفاداری سے صبر، اور ان کی جگہ بھیجا گیا بڑا ذبیحہ" },
           needsVerification: true,
         },
       ],
@@ -159,11 +179,19 @@ export const STORY_IBRAHIM: KidsStoryV2 = {
           en: "That House is the sacred Kaaba that still stands in Makkah. Whenever a child sees the picture of the Kaaba, they can remember: this blessed building was raised by the hands of a great prophet and his obedient son, and Allah blessed their work forever.",
         },
       ],
+      ayahNote: {
+        en: "The prayer that built the Kaaba is the sweetest ayah of this chapter: Our Lord, accept this from us, for You are the All-Hearing, the All-Knowing. It teaches a child that a deed done for Allah — done in love — is the kind of work Allah builds into forever.",
+        ur: "جس دعا نے کعبہ بنایا وہ اس باب کی سب سے میٹھی آیت ہے: اے ہمارے رب، ہم سے یہ قبول فرما، بیشک تو ہی سننے والا اور جاننے والا ہے۔ یہ بچوں کو سکھاتی ہے کہ جو کام اللہ کے لیے اور محبت سے کیا جائے، یہی وہ کام ہے جسے اللہ ہمیشہ کے لیے قائم کر دیتا ہے۔",
+      },
       sources: [
         {
           type: "quran",
           reference: "Qur'an 2:127",
-          label: { en: "Ibrahim and Ismail raise the foundations of the House and pray that Allah accepts their work" },
+          label: { en: "Ibrahim and Ismail raise the foundations of the House and pray that Allah accepts their work", ur: "ابراہیم اور اسماعیل کعبہ کی بنیادیں اٹھاتے ہیں اور دعا کرتے ہیں کہ اللہ ان کا کام قبول فرمائے" },
+          explanation: {
+            en: "This is the two faithful builders at their best moment: stone upon stone, and with every stone a prayer — accept this from us. It shows a child what to ask Allah for every kind deed: not praise, but acceptance.",
+            ur: "یہ دو وفادار معماروں کا سب سے خوبصورت لمحہ ہے: ایک پتھر پر ایک پتھر، اور ہر پتھر کے ساتھ دعا: اے اللہ، یہ ہم سے قبول فرما۔ یہ بچوں کو سکھاتی ہے کہ ہر نیک کام کے لیے اللہ سے کیا مانگنا ہے — تعریف نہیں، قبولیت۔",
+          },
         },
       ],
     },
@@ -187,11 +215,15 @@ export const STORY_IBRAHIM: KidsStoryV2 = {
           en: "Such is the whole lesson of the prophet of faith: trust Allah with a certain heart, in the little moments on the biggest tests. And whenever the fire of a difficulty or the trial of a decision looks too big, we remember the friend of the Merciful and call the same Lord he called.",
         },
       ],
+      ayahNote: {
+        en: "Fire, thirst, travel and the hardest sacrifice — Ibrahim passed every test, so Allah gave him the highest title of all: His close friend, the Khalil. The lesson of this chapter for a child: trust in Allah, kept again and again, turns a servant into a friend of the Most Merciful.",
+        ur: "آگ، پیاس، سفر اور سب سے مشکل قربانی — ابراہیم ہر آزمائش میں کامیاب ہوئے، اس لیے اللہ نے اُنہیں سب سے بڑا لقب دیا: اپنا قریبی دوست یعنی خلیل۔ اس باب کا بچوں کے لیے سبق یہ ہے: اللہ پر بھروسہ جو بار بار رکھا جائے، بندے کو رحمٰن کا دوست بنا دیتا ہے۔",
+      },
       sources: [
         {
           type: "hadith",
           reference: "Sahih al-Bukhari; Sahih Muslim",
-          label: { en: "The Prophet (PBUH) says that Allah took Ibrahim as His close and intimate friend, the Khalil" },
+          label: { en: "The Prophet (PBUH) says that Allah took Ibrahim as His close and intimate friend, the Khalil", ur: "نبی کریم ﷺ نے فرمایا کہ اللہ نے ابراہیم کو اپنا قریبی اور پیارا دوست یعنی خلیل بنایا" },
         },
       ],
     },

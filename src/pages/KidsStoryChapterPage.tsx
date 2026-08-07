@@ -104,6 +104,17 @@ export default function KidsStoryChapterPage() {
         </Card>
       ))}
 
+      {chapter.ayahNote && (
+        <Card elevation="raised" className={styles.ayahNoteCard}>
+          <div className={styles.ayahNoteTitle} dir={language === 'ur' ? 'rtl' : undefined}>
+            {t('kids.ayahExplained')}
+          </div>
+          <Typography variant="body" as="p" dir={language === 'ur' ? 'rtl' : undefined}>
+            {localText(chapter.ayahNote, language)}
+          </Typography>
+        </Card>
+      )}
+
       <div className={styles.sourcesSection}>
         <Typography variant="h4" as="h2">
           {t('kids.storySources')}
@@ -129,6 +140,11 @@ export default function KidsStoryChapterPage() {
                 </span>
               )}
             </div>
+            {source.explanation && (
+              <div className={styles.sourceExplanation} dir={language === 'ur' ? 'rtl' : undefined}>
+                {localText(source.explanation, language)}
+              </div>
+            )}
           </Card>
         ))}
       </div>

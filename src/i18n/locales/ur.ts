@@ -346,6 +346,7 @@ export const ur: LocaleDictionary = {
   'kids.chapters': 'ابواب',
   'kids.chapterDetail': 'باب {{current}} از {{total}}',
   'kids.storySources': 'مآخذ',
+'kids.ayahExplained': 'آیت کی وضاحت',
   'kids.sourceQuran': 'قرآن',
   'kids.sourceHadith': 'حدیث',
   'kids.sourceNeedVerification': 'ابھی تصدیق نہیں ہوئی',

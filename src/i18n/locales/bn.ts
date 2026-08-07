@@ -346,6 +346,7 @@ export const bn: LocaleDictionary = {
   'kids.chapters': 'অধ্যায়সমূহ',
   'kids.chapterDetail': 'অধ্যায় {{current}} / {{total}}',
   'kids.storySources': 'উৎস',
+'kids.ayahExplained': 'আয়াত ব্যাখ্যা',
   'kids.sourceQuran': 'কুরআন',
   'kids.sourceHadith': 'হাদিস',
   'kids.sourceNeedVerification': 'এখনো যাচাই করা হয়নি',

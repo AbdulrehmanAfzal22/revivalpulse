@@ -44,7 +44,7 @@ export const SAHABI_KHALID: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Seerah (Ibn Hisham) — Khalid before Islam', label: { en: 'Khalid commands the horsemen against the Muslims at the battle of Uhud' } },
+        { type: 'hadith', reference: 'Seerah (Ibn Hisham) — Khalid before Islam', label: { en: 'Khalid commands the horsemen against the Muslims at the battle of Uhud', ur: 'خالد جنگ احد میں مسلمانوں کے خلاف گھڑ سواروں کی قیادت کرتے ہیں' } },
       ],
     },
     {
@@ -65,8 +65,8 @@ export const SAHABI_KHALID: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Seerah (Ibn Hisham) — Khalid accepting Islam', label: { en: 'After the treaty, Khalid rides to the Prophet ﷺ and accepts Islam' } },
-        { type: 'hadith', reference: 'Sahih al-Bukhari', needsVerification: true, label: { en: 'The Prophet ﷺ warmly welcomes Khalid into Islam' } },
+        { type: 'hadith', reference: 'Seerah (Ibn Hisham) — Khalid accepting Islam', label: { en: 'After the treaty, Khalid rides to the Prophet ﷺ and accepts Islam', ur: 'صلح کے بعد خالد نبی کریم ﷺ کے پاس آتے ہیں اور اسلام قبول کرتے ہیں' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari', needsVerification: true, label: { en: 'The Prophet ﷺ warmly welcomes Khalid into Islam', ur: 'نبی کریم ﷺ خالد کو محبت سے اسلام میں خوش آمدید کہتے ہیں' } },
       ],
     },
     {
@@ -87,9 +87,9 @@ export const SAHABI_KHALID: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Sahih al-Bukhari (chapter of Mutah)', needsVerification: true, label: { en: 'Khalid takes the flag at Mutah when the three commanders fall' } },
-        { type: 'hadith', reference: 'Sahih Muslim', needsVerification: true, label: { en: 'The Prophet ﷺ calls Khalid the Sword of Allah' } },
-        { type: 'hadith', reference: 'Seerah (Ibn Hisham)', label: { en: 'The Seerah tells how Khalid was praised as Sayf Allah, the Sword of Allah' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari (chapter of Mutah)', needsVerification: true, label: { en: 'Khalid takes the flag at Mutah when the three commanders fall', ur: 'خالد جنگ موتہ میں جھنڈا سنبھالتے ہیں جب تین کمانڈر شہید ہو جاتے ہیں' } },
+        { type: 'hadith', reference: 'Sahih Muslim', needsVerification: true, label: { en: 'The Prophet ﷺ calls Khalid the Sword of Allah', ur: 'نبی کریم ﷺ خالد کو اللہ کی تلوار کہتے ہیں' } },
+        { type: 'hadith', reference: 'Seerah (Ibn Hisham)', label: { en: 'The Seerah tells how Khalid was praised as Sayf Allah, the Sword of Allah', ur: 'سیرت بتاتی ہے کہ خالد کو سیف اللہ یعنی اللہ کی تلوار کے طور پر کیسے سراہا گیا' } },
       ],
     },
     {
@@ -110,8 +110,8 @@ export const SAHABI_KHALID: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Tarikh (At-Tabari) — the dirwins of the Ridda and of Syria', needsVerification: true, label: { en: 'Khalid leads the armies of the Ridda wars and the conquests of Syria' } },
-        { type: 'hadith', reference: 'Seerah (Ibn Sa’d)', needsVerification: true, label: { en: 'In his last days, Khalid pleads for a death like a hero and refuses vanity' } },
+        { type: 'hadith', reference: 'Tarikh (At-Tabari) — the dirwins of the Ridda and of Syria', needsVerification: true, label: { en: 'Khalid leads the armies of the Ridda wars and the conquests of Syria', ur: 'خالد جنگِ ارتداد اور شام کی فتوحات میں لشکروں کی قیادت کرتے ہیں' } },
+        { type: 'hadith', reference: 'Seerah (Ibn Sa’d)', needsVerification: true, label: { en: 'In his last days, Khalid pleads for a death like a hero and refuses vanity', ur: 'آخری ایام میں خالد بہادر کی موت کی دعا کرتے ہیں اور دنیا کی چمک دور کرتے ہیں' } },
       ],
     },
   ],

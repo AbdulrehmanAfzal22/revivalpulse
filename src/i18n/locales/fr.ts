@@ -346,6 +346,7 @@ export const fr: LocaleDictionary = {
   'kids.chapters': 'Chapitres',
   'kids.chapterDetail': 'Chapitre {{current}} sur {{total}}',
   'kids.storySources': 'Sources',
+'kids.ayahExplained': 'Verset expliqué',
   'kids.sourceQuran': 'Coran',
   'kids.sourceHadith': 'Hadith',
   'kids.sourceNeedVerification': 'Pas encore vérifié',

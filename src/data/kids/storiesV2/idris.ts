@@ -40,11 +40,19 @@ export const STORY_IDRIS: KidsStoryV2 = {
           en: "Truth and patience were the treasures of Idris. He held onto both, and both made him a beloved and honored servant of Allah.",
         },
       ],
+      ayahNote: {
+        en: "The whole story of Idris shines from one verse (Qur’an 19:56): Allah calls him a man of truth and a prophet. The two treasures that carried Idris forward were truth and patience.",
+        ur: "ادریس کی پوری کہانی ایک آیت سے روشن ہوتی ہے (قرآن 19:56): اللہ اُسے سچا آدمی اور نبی کہتا ہے۔ ادریس کو بلند رکھنے والی دو چیزیں تھیں: سچ بولنا اور صبر کرنا۔",
+      },
       sources: [
         {
           type: "quran",
           reference: "Qur’an 19:56",
-          label: { en: "The Qur’an tells us that Idris was a man of truth and a prophet" },
+          label: { en: "The Qur’an tells us that Idris was a man of truth and a prophet", ur: "قرآن ہمیں بتاتا ہے کہ ادریس سچے آدمی اور نبی تھے" },
+          explanation: {
+            en: "Allah Himself tells us about Idris in one line: he was a truthful man and a prophet. Speaking the truth every day is a habit of the prophets.",
+            ur: "اللہ خود ایک جملے میں ادریس کا تعارف بتاتا ہے: وہ سچ بولنے والا اور نبی تھا۔ روزانہ سچ بولنا انبیاء کا طریقہ ہے۔",
+          },
         },
       ],
     },
@@ -65,11 +73,15 @@ export const STORY_IDRIS: KidsStoryV2 = {
           en: "Knowledge is one of the greatest gifts of Allah. He gave it to Idris, and it helped Idris become a light for his people. When we learn good things and use them to help others, we are doing something very much like what Idris did.",
         },
       ],
+      ayahNote: {
+        en: "Allah gave Idris the gift of knowledge, and Idris used it to teach people goodness. When children learn good things and help others with what they learned, they are following the path of Idris.",
+        ur: "اللہ نے ادریس کو علم کا تحفہ دیا اور ادریس نے اس علم سے لوگوں کو بھلائی سکھائی۔ جب بچے اچھی چیزیں سیکھتے ہیں اور سیکھ کر دوسروں کی مدد کرتے ہیں تو وہ ادریس کی راہ پر چلتے ہیں۔",
+      },
       sources: [
         {
           type: "hadith",
           reference: "Sahih al-Bukhari; Sahih Muslim",
-          label: { en: "The Prophet (PBUH) encouraged learning and teaching knowledge, following the way of the prophets who were given wisdom" },
+          label: { en: "The Prophet (PBUH) encouraged learning and teaching knowledge, following the way of the prophets who were given wisdom", ur: "نبی کریم ﷺ نے علم سیکھنے اور سکھانے کی ترغیب دی، ان نبیوں کے طریقے پر جو حکمت دیے گئے تھے" },
           needsVerification: true,
         },
       ],
@@ -91,11 +103,15 @@ export const STORY_IDRIS: KidsStoryV2 = {
           en: "For every child, this is a beautiful promise: people who are truthful and patient are lifted up by Allah and kept close to the ones He honors.",
         },
       ],
+      ayahNote: {
+        en: "The Qur’an says Allah raised Idris to a high station (Qur’an 19:56). It was not his power or his riches that lifted him — it was his truthful and patient heart. A pure heart raises a person the highest.",
+        ur: "قرآن کہتا ہے کہ اللہ نے ادریس کو بلند مرتبہ عطا کیا (قرآن 19:56)۔ اسے اونچا کرنے والی چیز طاقت یا دولت نہیں تھی بلکہ اس کا سچا اور صابر دل تھا۔ صاف دل انسان کو سب سے بلند کرتا ہے۔",
+      },
       sources: [
         {
           type: "hadith",
           reference: "Sahih al-Bukhari",
-          label: { en: "The Prophet (PBUH) tells of meeting Idris in the heavens on the night journey, showing the high station Allah gave him" },
+          label: { en: "The Prophet (PBUH) tells of meeting Idris in the heavens on the night journey, showing the high station Allah gave him", ur: "نبی کریم ﷺ بتاتے ہیں کہ معراج کے سفر میں انہوں نے آسمانوں پر ادریس سے ملاقات کی، جو اللہ کی طرف سے ان کا بلند مقام ظاہر کرتا ہے" },
           needsVerification: true,
         },
       ],
@@ -117,11 +133,15 @@ export const STORY_IDRIS: KidsStoryV2 = {
           en: "Tell the truth, be patient, learn good things, and always trust in Allah. That is the lamp of Idris, and if we hold it, it will lead us close to the ones Allah loves.",
         },
       ],
+      ayahNote: {
+        en: "Two big lessons live in the story of Idris: a truthful person is honored by Allah, and a patient person is raised high. Whatever is hard, a patient and honest heart keeps moving forward, and Allah is with it.",
+        ur: "ادریس کی کہانی میں دو بڑے سبق ہیں: سچا انسان اللہ کی نظر میں عزت والا ہے، اور صابر انسان اونچا اٹھایا جاتا ہے۔ چاہے بات کتنی ہی مشکل ہو، صبر اور سچا دل آگے بڑھتا رہتا ہے اور اللہ اس کے ساتھ ہوتا ہے۔",
+      },
       sources: [
         {
           type: "hadith",
           reference: "Sahih al-Bukhari",
-          label: { en: "The Prophet (PBUH) taught that truthfulness leads to righteousness and that righteousness leads to Paradise" },
+          label: { en: "The Prophet (PBUH) taught that truthfulness leads to righteousness and that righteousness leads to Paradise", ur: "نبی کریم ﷺ نے سکھایا کہ سچائی نیکی کی طرف لے جاتی ہے اور نیکی جنت کی طرف" },
         },
       ],
     },

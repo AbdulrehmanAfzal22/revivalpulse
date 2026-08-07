@@ -7,8 +7,6 @@
  *    (a chapter list with a detail page per chapter).
  *  - Text is bilingual (`LocalizedText`): English is always present; Urdu
  *    (`ur`) may lag behind and falls back to English when empty.
-*  - Text is bilingual (`LocalizedText`): English is always present; Urdu
- *    (`ur`) may lag behind and falls back to English when empty.
  *  - Every chapter carries a non-empty `sources` array. `type: "quran"`
  *    anchors a Quran-narrated event to its actual verse; `type: "hadith"`
  *    is used ONLY where a specific authentic hadith covers the event.
@@ -19,6 +17,11 @@
  *    angels to bow to Adam"), not just a raw reference code. `reference` is
  *    the language-agnostic source string; `label` is what makes it read as
  *    an explanation in the reader's language.
+ *  - Quran ayaat are hard to understand without context. Every quran source
+ *    may carry a bilingual `explanation` (a plain child-level "what does
+ *    this verse mean in the story"), and each chapter may carry a highlighted
+ *    `ayahNote` card right after the paragraphs explaining the chapter's key
+ *    verse(s) in context. Both must be bilingual when present.
  *
  * Depth standard (decided Phase 11): there is NO fixed chapter-count target.
  * Cover every well-documented event for a given Prophet or Sahabi — some
@@ -66,6 +69,13 @@ export interface StorySource {
   reference: string;
   /** Short bilingual human explanation of what this citation anchors — the reader-facing "why" behind the reference. */
   label: LocalizedText;
+  /**
+   * Optional bilingual child-level explanation of a Quran verse — the
+   * "what does this ayah mean in the story" note. Ayaat are often hard to
+   * understand without context; this makes the passage meaningful for
+   * young readers. Only present on `type: "quran"` sources.
+   */
+  explanation?: LocalizedText;
   /** True when the author could not verify this citation — must be reviewed before publishing. */
   needsVerification?: boolean;
   /** True once the site owner signed this citation off in a review batch. */
@@ -86,6 +96,13 @@ export interface KidsStoryChapter {
    * event — a story may have 4 or 10+ chapters.
    */
   paragraphs: LocalizedText[];
+  /**
+   * Optional bilingual highlight shown as a colored "ayah explained" card
+   * right after the paragraphs — a plain-language explanation of the key
+   * verse(s) of this chapter so children understand the full context of the
+   * story, not just the literal words.
+   */
+  ayahNote?: LocalizedText;
   /** Non-empty — every chapter must be anchored to at least one source. */
   sources: StorySource[];
 }

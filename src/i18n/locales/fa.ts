@@ -346,6 +346,7 @@ export const fa: LocaleDictionary = {
   'kids.chapters': 'فصل‌ها',
   'kids.chapterDetail': 'فصل {{current}} از {{total}}',
   'kids.storySources': 'منابع',
+'kids.ayahExplained': 'توضیح آیه',
   'kids.sourceQuran': 'قرآن',
   'kids.sourceHadith': 'حدیث',
   'kids.sourceNeedVerification': 'هنوز تأیید نشده',

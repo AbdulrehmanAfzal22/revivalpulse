@@ -41,8 +41,8 @@ export const STORY_YUSUF: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: "quran", reference: "Qur’an 12:4", label: { en: "Yusuf tells his father his dream of eleven stars, the sun and the moon bowing to him" } },
-        { type: "hadith", reference: "Tafsir (Ibn Kathir) — Surah Yusuf", needsVerification: true, label: { en: "The classical commentaries relate how Yaqub rejoiced in the dream and guarded advice to keep it secret" } },
+        { type: "quran", reference: "Qur’an 12:4", label: { en: "Yusuf tells his father his dream of eleven stars, the sun and the moon bowing to him", ur: "یوسف اپنے والد کو اپنا خواب بتاتے ہیں کہ گیارہ ستارے، سورج اور چاند انہیں سجدہ کر رہے ہیں" } },
+        { type: "hadith", reference: "Tafsir (Ibn Kathir) — Surah Yusuf", needsVerification: true, label: { en: "The classical commentaries relate how Yaqub rejoiced in the dream and guarded advice to keep it secret", ur: "کلاسیکی تفاسیر بیان کرتی ہیں کہ یعقوب خواب سے کیسے خوش ہوئے اور نصیحت کی کہ اسے راز رکھا جائے" } },
       ],
     },
     {
@@ -66,8 +66,8 @@ export const STORY_YUSUF: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: "hadith", reference: "Tafsir (Ibn Kathir) — Surah Yusuf", needsVerification: true, label: { en: "The classical commentaries narrate the brothers’ jealousy, their plot, the well, and the caravan that found him" } },
-        { type: "hadith", reference: "Sahih al-Bukhari (Book of the Prophets)", needsVerification: true, label: { en: "The honoured hadith works tell of Yusuf and his father among the noble family of the prophets" } },
+        { type: "hadith", reference: "Tafsir (Ibn Kathir) — Surah Yusuf", needsVerification: true, label: { en: "The classical commentaries narrate the brothers’ jealousy, their plot, the well, and the caravan that found him", ur: "کلاسیکی تفاسیر بھائیوں کی جلن، ان کی چال، کنویں اور اس قافلے کا قصہ بیان کرتی ہیں جس نے انہیں پایا" } },
+        { type: "hadith", reference: "Sahih al-Bukhari (Book of the Prophets)", needsVerification: true, label: { en: "The honoured hadith works tell of Yusuf and his father among the noble family of the prophets", ur: "معزز حدیث کی کتابیں یوسف اور ان کے والد کا ذکر انبیاء کے عظیم خاندان میں کرتی ہیں" } },
       ],
     },
     {
@@ -91,7 +91,7 @@ export const STORY_YUSUF: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: "hadith", reference: "Tafsir (Ibn Kathir) — Surah Yusuf", needsVerification: true, label: { en: "The commentaries recount Yusuf’s brave refusal, the false accusation, and his patient life in the prison" } },
+        { type: "hadith", reference: "Tafsir (Ibn Kathir) — Surah Yusuf", needsVerification: true, label: { en: "The commentaries recount Yusuf’s brave refusal, the false accusation, and his patient life in the prison", ur: "تفسیریں یوسف کے بہادری سے انکار، جھوٹے الزام اور جیل میں صبر سے گزارے گئے دن بیان کرتی ہیں" } },
       ],
     },
     {
@@ -115,7 +115,7 @@ export const STORY_YUSUF: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: "hadith", reference: "Tafsir (Ibn Kathir) — Surah Yusuf", needsVerification: true, label: { en: "The commentaries narrate the prisoners’ dream, the king’s dream, and Yusuf’s rise to a place of great trust in Egypt" } },
+        { type: "hadith", reference: "Tafsir (Ibn Kathir) — Surah Yusuf", needsVerification: true, label: { en: "The commentaries narrate the prisoners’ dream, the king’s dream, and Yusuf’s rise to a place of great trust in Egypt", ur: "تفسیریں قیدیوں کے خواب، بادشاہ کے خواب اور یوسف کے مصر میں بڑے عہدے تک پہنچنے کا ذکر کرتی ہیں" } },
       ],
     },
     {
@@ -139,7 +139,7 @@ export const STORY_YUSUF: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: "hadith", reference: "Tafsir (Ibn Kathir) — Surah Yusuf", needsVerification: true, label: { en: "The commentaries narrate the drought, the brothers’s coming for food, and the keeping of the young brother in Egypt" } },
+        { type: "hadith", reference: "Tafsir (Ibn Kathir) — Surah Yusuf", needsVerification: true, label: { en: "The commentaries narrate the drought, the brothers’s coming for food, and the keeping of the young brother in Egypt", ur: "تفسیریں قحط، بھائیوں کا اناج کے لیے آنا اور چھوٹے بھائی کو مصر میں رکھنے کا ذکر کرتی ہیں" } },
       ],
     },
     {
@@ -163,8 +163,8 @@ export const STORY_YUSUF: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: "quran", reference: "Qur’an 12:90", label: { en: "Yusuf reveals himself to his brothers, forgives them, and thanks Allah who favored him" } },
-        { type: "hadith", reference: "Tafsir (Ibn Kathir) — Surah Yusuf", needsVerification: true, label: { en: "The commentaries narrate the full reunion of Yusuf with the father and the family moving to Egypt" } },
+        { type: "quran", reference: "Qur’an 12:90", label: { en: "Yusuf reveals himself to his brothers, forgives them, and thanks Allah who favored him", ur: "یوسف اپنے بھائیوں کے سامنے اپنی پہچان ظاہر کرتے ہیں، انہیں معاف کرتے ہیں اور اللہ کا شکر ادا کرتے ہیں جس نے ان پر فضل کیا" } },
+        { type: "hadith", reference: "Tafsir (Ibn Kathir) — Surah Yusuf", needsVerification: true, label: { en: "The commentaries narrate the full reunion of Yusuf with the father and the family moving to Egypt", ur: "تفسیریں یوسف کی والد کے ساتھ مکمل ملاقات اور خاندان کے مصر جانے کا ذکر کرتی ہیں" } },
       ],
     },
   ],

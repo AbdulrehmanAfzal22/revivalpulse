@@ -11,6 +11,23 @@ export interface CitationIssue {
 function chapterIssues(storyId: string, chapter: KidsStoryChapter): CitationIssue[] {
   const issues: CitationIssue[] = [];
 
+  if (chapter.ayahNote) {
+    if (!chapter.ayahNote.en || !chapter.ayahNote.en.trim()) {
+      issues.push({
+        storyId,
+        chapterId: chapter.id,
+        message: 'chapter ayahNote has no English text — explanations ship in BOTH languages',
+      });
+    }
+    if (!chapter.ayahNote.ur?.trim()) {
+      issues.push({
+        storyId,
+        chapterId: chapter.id,
+        message: 'chapter ayahNote has no Urdu text — explanations ship in BOTH languages, never an empty fallback',
+      });
+    }
+  }
+
   if (!chapter.sources || chapter.sources.length === 0) {
     issues.push({
       storyId,
@@ -41,6 +58,22 @@ function chapterIssues(storyId: string, chapter: KidsStoryChapter): CitationIssu
         chapterId: chapter.id,
         message: `sources[${index}] has no Urdu label — labels ship in BOTH languages, never an empty fallback`,
       });
+    }
+    if (source.explanation) {
+      if (!source.explanation.en || !source.explanation.en.trim()) {
+        issues.push({
+          storyId,
+          chapterId: chapter.id,
+          message: `sources[${index}] explanation has no English text — explanations ship in BOTH languages`,
+        });
+      }
+      if (!source.explanation.ur?.trim()) {
+        issues.push({
+          storyId,
+          chapterId: chapter.id,
+          message: `sources[${index}] explanation has no Urdu text — explanations ship in BOTH languages, never an empty fallback`,
+        });
+      }
     }
     if (source.reviewed && !source.reviewedBy) {
       issues.push({

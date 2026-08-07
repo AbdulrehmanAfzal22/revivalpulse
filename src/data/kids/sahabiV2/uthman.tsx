@@ -45,7 +45,7 @@ export const SAHABI_UTHMAN: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Sahih al-Bukhari; Sahih Muslim (Uthman buying the Well of Rumah)', needsVerification: true, label: { en: 'Uthman buys the Well of Rumah and gives it for all the Muslims of Madinah' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari; Sahih Muslim (Uthman buying the Well of Rumah)', needsVerification: true, label: { en: 'Uthman buys the Well of Rumah and gives it for all the Muslims of Madinah', ur: 'عثمان کنواں رومہ خرید کر اسے مدینہ کے تمام مسلمانوں کے لیے وقف کر دیتے ہیں' } },
       ],
     },
     {
@@ -66,8 +66,8 @@ export const SAHABI_UTHMAN: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Sahih al-Bukhari; Sahih Muslim (Uthman married to Ruqayyah and Umm Kulthum, the name Dhun-Nurayn)', needsVerification: true, label: { en: 'Uthman marries two daughters of the Prophet ﷺ and is called Dhun-Nurayn' } },
-        { type: 'hadith', reference: 'Sahih al-Bukhari (the hayaa of Uthman)', needsVerification: true, label: { en: 'The Prophet ﷺ praised the good shyness called hayaa in Uthman' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari; Sahih Muslim (Uthman married to Ruqayyah and Umm Kulthum, the name Dhun-Nurayn)', needsVerification: true, label: { en: 'Uthman marries two daughters of the Prophet ﷺ and is called Dhun-Nurayn', ur: 'عثمان نبی کریم ﷺ کی دو بیٹیوں سے شادی کرتے ہیں اور ذو النورین کہلاتے ہیں' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari (the hayaa of Uthman)', needsVerification: true, label: { en: 'The Prophet ﷺ praised the good shyness called hayaa in Uthman', ur: 'نبی کریم ﷺ نے عثمان میں حیاء یعنی اچھی شرم کی تعریف کی' } },
       ],
     },
     {
@@ -91,7 +91,7 @@ export const SAHABI_UTHMAN: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Sahih al-Bukhari (gathering of the Qur’an under Uthman, narrated by Zaid bin Thabit)', needsVerification: true, label: { en: 'Uthman gathers the Qur’an into one complete Book with Zaid bin Thabit' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari (gathering of the Qur’an under Uthman, narrated by Zaid bin Thabit)', needsVerification: true, label: { en: 'Uthman gathers the Qur’an into one complete Book with Zaid bin Thabit', ur: 'عثمان زید بن ثابت کے ساتھ قرآن کو ایک مکمل کتاب میں جمع کرتے ہیں' } },
       ],
     },
     {
@@ -115,8 +115,8 @@ export const SAHABI_UTHMAN: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Sahih al-Bukhari; Sahih Muslim (the hadith of equipping the army of al-Usra)', needsVerification: true, label: { en: 'Uthman equips the struggling army of al-Usra so it can march' } },
-        { type: 'hadith', reference: 'Seerah of the Prophet ﷺ (the Expedition of Tabuk)', needsVerification: true, label: { en: 'The Seerah tells of the long, scorching expedition of Tabuk' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari; Sahih Muslim (the hadith of equipping the army of al-Usra)', needsVerification: true, label: { en: 'Uthman equips the struggling army of al-Usra so it can march', ur: 'عثمان مشکل حالات کے لشکر کو سامان دیتے ہیں تاکہ وہ آگے چل سکے' } },
+        { type: 'hadith', reference: 'Seerah of the Prophet ﷺ (the Expedition of Tabuk)', needsVerification: true, label: { en: 'The Seerah tells of the long, scorching expedition of Tabuk', ur: 'سیرت تبوک کے طویل اور تپتا ہوا سفر کا ذکر کرتی ہے' } },
       ],
     },
     {
@@ -137,8 +137,8 @@ export const SAHABI_UTHMAN: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Seerah and histories of the Rightly-Guided Caliphs (the shura that agreed on Uthman)', needsVerification: true, label: { en: 'The companions counsel together and agree to choose Uthman as caliph' } },
-        { type: 'hadith', reference: 'Histories of the Rightly-Guided Caliphate (Uthman’s expansion of the Prophet’s Mosque and the state)', needsVerification: true, label: { en: 'Uthman enlarged the Prophet’s Mosque and spread the Islamic state' } },
+        { type: 'hadith', reference: 'Seerah and histories of the Rightly-Guided Caliphs (the shura that agreed on Uthman)', needsVerification: true, label: { en: 'The companions counsel together and agree to choose Uthman as caliph', ur: 'صحابہ آپس میں مشورہ کرتے ہیں اور عثمان کو خلیفہ چننے پر متفق ہوتے ہیں' } },
+        { type: 'hadith', reference: 'Histories of the Rightly-Guided Caliphate (Uthman’s expansion of the Prophet’s Mosque and the state)', needsVerification: true, label: { en: 'Uthman enlarged the Prophet’s Mosque and spread the Islamic state', ur: 'عثمان نے نبی کریم ﷺ کی مسجد کو بڑھایا اور اسلامی ریاست کو پھیلایا' } },
       ],
     },
   ],

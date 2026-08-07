@@ -48,8 +48,8 @@ export const SAHABI_UMAR: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Sahih al-Bukhari; Sahih Muslim (the coming of Umar to Islam)', label: { en: 'Umar hears the Qur’an, and accepts Islam on that day' } },
-        { type: 'hadith', reference: 'Seerah of the Prophet ﷺ (Ibn Hisham) — the detailed story of Umar’s conversion', needsVerification: true, label: { en: 'The Seerah tells the full story of how Umar came to Islam' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari; Sahih Muslim (the coming of Umar to Islam)', label: { en: 'Umar hears the Qur’an, and accepts Islam on that day', ur: 'عمر قرآن سنتے ہیں اور اسی دن اسلام قبول کر لیتے ہیں' } },
+        { type: 'hadith', reference: 'Seerah of the Prophet ﷺ (Ibn Hisham) — the detailed story of Umar’s conversion', needsVerification: true, label: { en: 'The Seerah tells the full story of how Umar came to Islam', ur: 'سیرت بتاتی ہے کہ عمر اسلام میں کیسے آئے اس کی مکمل کہانی' } },
       ],
     },
     {
@@ -70,8 +70,8 @@ export const SAHABI_UMAR: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Sahih al-Bukhari (the Prophet ﷺ tying a stone over his stomach in hunger)', needsVerification: true, label: { en: 'The Prophet ﷺ ties a stone over his stomach to press down his hunger' } },
-        { type: 'hadith', reference: 'Sahih al-Bukhari; Sahih Muslim (the brotherhood between the Muhajirun and the Ansar)', label: { en: 'The Muhajirun and the Ansar become brothers and share everything' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari (the Prophet ﷺ tying a stone over his stomach in hunger)', needsVerification: true, label: { en: 'The Prophet ﷺ ties a stone over his stomach to press down his hunger', ur: 'نبی کریم ﷺ بھوک کو دبانے کے لیے اپنے پیٹ پر پتھر باندھتے تھے' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari; Sahih Muslim (the brotherhood between the Muhajirun and the Ansar)', label: { en: 'The Muhajirun and the Ansar become brothers and share everything', ur: 'مہاجرین اور انصار بھائی بن جاتے ہیں اور سب کچھ آپس میں بانٹتے ہیں' } },
       ],
     },
     {
@@ -95,8 +95,8 @@ export const SAHABI_UMAR: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Sahih al-Bukhari; Sahih Muslim (the treaty of Hudaybiyyah)', label: { en: 'The Prophet ﷺ and the people of Makkah write the peace treaty of Hudaybiyyah' } },
-        { type: 'hadith', reference: 'Seerah (Ibn Hisham) — the story of Hudaybiyyah and Umar’s concern', needsVerification: true, label: { en: 'The Seerah tells how worried Umar was about the terms of the treaty' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari; Sahih Muslim (the treaty of Hudaybiyyah)', label: { en: 'The Prophet ﷺ and the people of Makkah write the peace treaty of Hudaybiyyah', ur: 'نبی کریم ﷺ اور مکہ کے لوگ صلح حدیبیہ کا معاہدہ لکھتے ہیں' } },
+        { type: 'hadith', reference: 'Seerah (Ibn Hisham) — the story of Hudaybiyyah and Umar’s concern', needsVerification: true, label: { en: 'The Seerah tells how worried Umar was about the terms of the treaty', ur: 'سیرت بتاتی ہے کہ عمر معاہدے کی شرائط پر کتنے پریشان تھے' } },
       ],
     },
     {
@@ -117,9 +117,9 @@ export const SAHABI_UMAR: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Seerah and stories of the companions about the name al-Faruq', needsVerification: true, label: { en: 'The believers call Umar al-Faruq, the one who sees truth apart from falsehood' } },
-        { type: 'hadith', reference: 'Sahih al-Bukhari, Kitab al-Manakib (Virtues of Umar)', needsVerification: true, label: { en: 'The Virtues of Umar chapter records his justice, kindness and simple life' } },
-        { type: 'hadith', reference: 'Reports of Umar’s night walks in Madinah', needsVerification: true, label: { en: 'Umar walks the lanes of Madinah at night so no one is forgotten or hungry' } },
+        { type: 'hadith', reference: 'Seerah and stories of the companions about the name al-Faruq', needsVerification: true, label: { en: 'The believers call Umar al-Faruq, the one who sees truth apart from falsehood', ur: 'مسلمان عمر کو فاروق کہتے ہیں یعنی سچ اور جھوٹ میں فرق کرنے والے' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari, Kitab al-Manakib (Virtues of Umar)', needsVerification: true, label: { en: 'The Virtues of Umar chapter records his justice, kindness and simple life', ur: 'فضائل عمر کا باب ان کے انصاف، مہربانی اور سادہ زندگی کو درج کرتا ہے' } },
+        { type: 'hadith', reference: 'Reports of Umar’s night walks in Madinah', needsVerification: true, label: { en: 'Umar walks the lanes of Madinah at night so no one is forgotten or hungry', ur: 'عمر رات کو مدینہ کی گلیوں میں چلتے ہیں تاکہ کوئی بھوکا یا بھولا ہوا نہ ہو' } },
       ],
     },
     {
@@ -140,8 +140,8 @@ export const SAHABI_UMAR: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Sahih al-Bukhari; Sahih Muslim (the appointment of Umar after Abu Bakr)', needsVerification: true, label: { en: 'Abu Bakr chooses Umar to lead the Muslims after him' } },
-        { type: 'hadith', reference: 'Seerah and historical accounts of the Caliphate of Umar (the hijri calendar and the expansion)', needsVerification: true, label: { en: 'Under Umar, Islam spreads far and the years are counted from the hijrah' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari; Sahih Muslim (the appointment of Umar after Abu Bakr)', needsVerification: true, label: { en: 'Abu Bakr chooses Umar to lead the Muslims after him', ur: 'ابوبکر عمر کو اپنے بعد مسلمانوں کی قیادت کے لیے چنتے ہیں' } },
+        { type: 'hadith', reference: 'Seerah and historical accounts of the Caliphate of Umar (the hijri calendar and the expansion)', needsVerification: true, label: { en: 'Under Umar, Islam spreads far and the years are counted from the hijrah', ur: 'عمر کے دور میں اسلام دور تک پھیلتا ہے اور سالوں کا شمار ہجرت سے ہونے لگتا ہے' } },
       ],
     },
   ],

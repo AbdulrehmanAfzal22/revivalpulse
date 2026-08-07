@@ -47,7 +47,7 @@ export const SAHABI_ABU_BAKR: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Sahih al-Bukhari; Sahih Muslim', label: { en: 'The Prophet ﷺ says if he took a very close friend, it would be Abu Bakr' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari; Sahih Muslim', label: { en: 'The Prophet ﷺ says if he took a very close friend, it would be Abu Bakr', ur: 'نبی کریم ﷺ نے فرمایا کہ اگر وہ کوئی گہرا دوست بناتے تو ابوبکر کو بناتے' } },
       ],
     },
     {
@@ -68,8 +68,8 @@ export const SAHABI_ABU_BAKR: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Seerah (Ibn Kathir, Al-Bidayah wan-Nihayah)', label: { en: 'The Seerah tells how Abu Bakr confirmed the amazing night journey' } },
-        { type: 'hadith', reference: 'Sahih al-Bukhari', needsVerification: true, label: { en: 'Abu Bakr is called as-Siddiq for always confirming the truth' } },
+        { type: 'hadith', reference: 'Seerah (Ibn Kathir, Al-Bidayah wan-Nihayah)', label: { en: 'The Seerah tells how Abu Bakr confirmed the amazing night journey', ur: 'سیرت بتاتی ہے کہ ابوبکر نے معراج کے حیرت انگیز سفر کی تصدیق کی' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari', needsVerification: true, label: { en: 'Abu Bakr is called as-Siddiq for always confirming the truth', ur: 'ہمیشہ سچ کی تصدیق کرنے کی وجہ سے ابوبکر صدیق کہلائے' } },
       ],
     },
     {
@@ -90,8 +90,8 @@ export const SAHABI_ABU_BAKR: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Sahih al-Bukhari (Chapters on Abu Bakr)', needsVerification: true, label: { en: 'Abu Bakr buys and frees the believing slaves in early Makkah' } },
-        { type: 'hadith', reference: 'Seerah (Ibn Hisham)', label: { en: 'The Seerah tells how Abu Bakr freed and cared for Bilal and other believers' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari (Chapters on Abu Bakr)', needsVerification: true, label: { en: 'Abu Bakr buys and frees the believing slaves in early Makkah', ur: 'ابوبکر ابتدائی مکہ میں مومن غلاموں کو خرید کر آزاد کرتے ہیں' } },
+        { type: 'hadith', reference: 'Seerah (Ibn Hisham)', label: { en: 'The Seerah tells how Abu Bakr freed and cared for Bilal and other believers', ur: 'سیرت بتاتی ہے کہ ابوبکر نے بلال اور دوسرے مومنوں کو کیسے آزاد کیا اور ان کی دیکھ بھال کی' } },
       ],
     },
     {
@@ -112,8 +112,8 @@ export const SAHABI_ABU_BAKR: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Sahih al-Bukhari 4665', label: { en: 'The Prophet ﷺ and Abu Bakr hide from the enemies in the Cave of Thawr' } },
-        { type: 'hadith', reference: 'Sahih Muslim', label: { en: 'The Prophet ﷺ says “do not be sad, indeed Allah is with us”' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari 4665', label: { en: 'The Prophet ﷺ and Abu Bakr hide from the enemies in the Cave of Thawr', ur: 'نبی کریم ﷺ اور ابوبکر غار ثور میں دشمنوں سے چھپ جاتے ہیں' } },
+        { type: 'hadith', reference: 'Sahih Muslim', label: { en: 'The Prophet ﷺ says “do not be sad, indeed Allah is with us”', ur: 'نبی کریم ﷺ نے فرمایا کہ غم نہ کرو، اللہ ہمارے ساتھ ہے' } },
       ],
     },
     {
@@ -134,8 +134,8 @@ export const SAHABI_ABU_BAKR: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: 'hadith', reference: 'Sahih al-Bukhari (Chapters on the virtues of Abu Bakr)', needsVerification: true, label: { en: 'Umar calls the believers to agree on Abu Bakr as the first caliph' } },
-        { type: 'hadith', reference: 'Sahih al-Bukhari (the collection of the Qur’an, narrated by Zaid bin Thabit)', needsVerification: true, label: { en: 'The Prophet asks the companions to gather the Qur’an into one book' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari (Chapters on the virtues of Abu Bakr)', needsVerification: true, label: { en: 'Umar calls the believers to agree on Abu Bakr as the first caliph', ur: 'عمر مسلمانوں کو ابوبکر کو پہلی خلیفہ ماننے کی دعوت دیتے ہیں' } },
+        { type: 'hadith', reference: 'Sahih al-Bukhari (the collection of the Qur’an, narrated by Zaid bin Thabit)', needsVerification: true, label: { en: 'The Prophet asks the companions to gather the Qur’an into one book', ur: 'نبی کریم صحابہ سے کہتے ہیں کہ قرآن کو ایک نہیں میں جمع کریں' } },
       ],
     },
   ],

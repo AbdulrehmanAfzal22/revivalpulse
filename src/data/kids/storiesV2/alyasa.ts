@@ -38,9 +38,21 @@ export const STORY_ALYASA: KidsStoryV2 = {
           en: "Al-Yasa is remembered above all for patience. Day after day, he called his people to the truth, and he remained gentle no matter how hard the road became.",
         },
       ],
+      ayahNote: {
+        en: "Al-Yasa carried on the call of Ilyas: worship Allah alone, never idols. He did not become famous, but he kept the mission alive — and Allah honored his faithfulness.",
+        ur: "الیسع نے الیاس کی دعوت آگے بڑھائی: صرف اللہ کی عبادت کرو، بتوں کی نہیں۔ وہ مشہور نہیں ہوئے، مگر انہوں نے پیغام کو زندہ رکھا — اور اللہ نے ان کی وفاداری کو عزت دی۔",
+      },
       sources: [
-        { type: "quran", reference: "Qur'an 6:86", label: { en: "Al-Yasa is named among the prophets Allah guided and preferred above the worlds" } },
-        { type: "hadith", reference: "Classical prophet-stories tradition", needsVerification: true, label: { en: "Al-Yasa' is described as the successor who continued the mission of the prophet Ilyas" } },
+        {
+          type: "quran",
+          reference: "Qur'an 6:86",
+          label: { en: "Al-Yasa is named among the prophets Allah guided and preferred above the worlds", ur: "اليسع ان نبیوں میں شامل ہیں جنہیں اللہ نے ہدایت دی اور تمام دنیا کے لوگوں پر فضیلت دی" },
+          explanation: {
+            en: "Al-Yasa is named among the prophets whom Allah guided and preferred above the worlds. His name in the Qur'an is itself a reward: Allah remembers those who serve Him quietly.",
+            ur: "الیسع ان انبیاء میں شمار ہوتے ہیں جنہیں اللہ نے ہدایت دی اور دنیا کے لوگوں پر فضیلت دی۔ قرآن میں ان کا نام خود انعام ہے: اللہ انہیں یاد رکھتا ہے جو چپ چاپ اس کی خدمت کرتے ہیں۔",
+          },
+        },
+        { type: "hadith", reference: "Classical prophet-stories tradition", needsVerification: true, label: { en: "Al-Yasa' is described as the successor who continued the mission of the prophet Ilyas", ur: "اليسع کو الیاس علیہ السلام کا جانشین بتایا گیا ہے جنہوں نے نبی الیاس کا پیغام آگے بڑھایا" } },
       ],
     },
     {
@@ -60,8 +72,20 @@ export const STORY_ALYASA: KidsStoryV2 = {
           en: "Sometimes the most precious people are the ones who never become famous. Al-Yasa shows us that doing your duty quietly, day after day, is a treasure in the eyes of Allah.",
         },
       ],
+      ayahNote: {
+        en: "Allah said: remember Ishmael, Al-Yasa and Dhul-Kifl — all of them are among the best. A person who is not famous can still be beloved to Allah, because He sees the faithful heart.",
+        ur: "اللہ نے فرمایا: اسماعیل، الیسع اور ذوالکفل کو یاد کرو — یہ سب بہترین لوگ ہیں۔ جو شخص مشہور نہیں وہ بھی اللہ کے نزدیک پیارا ہوتا ہے، کیونکہ اللہ وفادار دل کو دیکھتا ہے۔",
+      },
       sources: [
-        { type: "quran", reference: "Qur'an 38:48", label: { en: "Allah remembers Ishmael, Al-Yasa' and Dhul-Kifl as among the best" } },
+        {
+          type: "quran",
+          reference: "Qur'an 38:48",
+          label: { en: "Allah remembers Ishmael, Al-Yasa' and Dhul-Kifl as among the best", ur: "اللہ اسماعیل، اليسع اور ذو الکفل کا ذکر ان بہترین لوگوں میں کرتا ہے" },
+          explanation: {
+            en: "Allah himself praises Al-Yasa together with Ishmael and Dhul-Kifl, calling them all among the best. When Allah remembers you with praise, fame is not needed.",
+            ur: "اللہ خود الیسع کو اسماعیل اور ذوالکفل کے ساتھ یاد کرتا ہے اور ان سب کو بہترین کہتا ہے۔ جب اللہ آپ کو عزت سے یاد کرے تو دنیا کی شہرت کی ضرورت نہیں۔",
+          },
+        },
       ],
     },
     {
@@ -81,8 +105,20 @@ export const STORY_ALYASA: KidsStoryV2 = {
           en: "His example shows us something important about Allah's scale: He judges hearts, not popularity. A quiet, honest believer can be dearer to Allah than a loud and famous one.",
         },
       ],
+      ayahNote: {
+        en: "Al-Yasa is placed with Ishmael, Yunus and Lut — all preferred above the worlds. Allah raises people not by their fame but by their patience, truth and constant turning to Him.",
+        ur: "الیسع کا ذکر اسماعیل، یونس اور لوط کے ساتھ آیا ہے — جن سب کو دنیا کے لوگوں پر فضیلت دی گئی۔ اللہ شہرت سے نہیں، صبر، سچائی اور اپنی طرف رجوع سے بلند کرتا ہے۔",
+      },
       sources: [
-        { type: "quran", reference: "Qur'an 6:86", label: { en: "Al-Yasa is mentioned with Ishmael, Yunus and Lut who were all favoured above the worlds" } },
+        {
+          type: "quran",
+          reference: "Qur'an 6:86",
+          label: { en: "Al-Yasa is mentioned with Ishmael, Yunus and Lut who were all favoured above the worlds", ur: "اليسع کا ذکر اسماعیل، یونس اور لوط کے ساتھ آیا ہے جن سب کو دنیا کے لوگوں پر فضیلت دی گئی" },
+          explanation: {
+            en: "Al-Yasa, Ishmael, Yunus and Lut were all preferred above the worlds — not for wealth but for faith. Patience and honesty lift a quiet person higher than fame ever could.",
+            ur: "الیسع، اسماعیل، یونس اور لوط سب کو دنیا پر فضیلت ملی — مال کی وجہ سے نہیں، ایمان کی وجہ سے۔ صبر اور سچائی ایک خاموش انسان کو شہرت سے زیادہ بلند کرتی ہے۔",
+          },
+        },
       ],
     },
     {
@@ -102,9 +138,29 @@ export const STORY_ALYASA: KidsStoryV2 = {
           en: "So when we remember Al-Yasa, we say: let me be patient, let me be truthful, and let me do my duty faithfully — because Allah remembers those who serve Him faithfully.",
         },
       ],
+      ayahNote: {
+        en: "Al-Yasa teaches us: help others stay on the right path, do your duty faithfully, and be patient. Allah remembers those who serve Him quietly.",
+        ur: "الیسع ہمیں سکھاتے ہیں: دوسروں کو سیدھے راستے پر رہنے میں مدد کرو، اپنا کام وفاداری سے کرو اور صبر کرو۔ اللہ انہیں یاد رکھتا ہے جو چپ چاپ اس کی خدمت کرتے ہیں۔",
+      },
       sources: [
-        { type: "quran", reference: "Qur'an 38:48", label: { en: "Al-Yasa is counted among the best and most faithful servants remembered in the Qur'an" } },
-        { type: "quran", reference: "Qur'an 6:86", label: { en: "Allah guides and honours those, like Al-Yasa, who are patient and devoted" } },
+        {
+          type: "quran",
+          reference: "Qur'an 38:48",
+          label: { en: "Al-Yasa is counted among the best and most faithful servants remembered in the Qur'an", ur: "اليسع قرآن میں یاد کیے جانے والے بہترین اور وفادار بندوں میں شمار ہوتے ہیں" },
+          explanation: {
+            en: "Al-Yasa is counted among the best and most faithful servants remembered in the Qur'an. Doing your small duties well every day makes you great in the sight of Allah.",
+            ur: "الیسع قرآن میں یاد کیے جانے والے بہترین اور وفادار بندوں میں شمار ہوتے ہیں۔ روزانہ کے چھوٹے کام نیکی سے کرنا آپ کو اللہ کے نزدیک بڑا بناتا ہے۔",
+          },
+        },
+        {
+          type: "quran",
+          reference: "Qur'an 6:86",
+          label: { en: "Allah guides and honours those, like Al-Yasa, who are patient and devoted", ur: "اللہ ان لوگوں کو ہدایت اور عزت دیتا ہے جو اليسع کی طرح صبر کرنے والے اور اللہ کے وفادار ہوں" },
+          explanation: {
+            en: "Allah guides and honours those who are patient and devoted like Al-Yasa. A quiet believer who keeps his prayers and his promises shines brightly before Allah.",
+            ur: "اللہ ان لوگوں کو ہدایت اور عزت دیتا ہے جو الیسع کی طرح صبر کرنے والے اور وفادار ہوں۔ جو بندہ نماز اور وعدے نبھاتا ہے وہ اللہ کے نزدیک چمکتا ہے۔",
+          },
+        },
       ],
     },
   ],
