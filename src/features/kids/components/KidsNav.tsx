@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { BookOpen, GraduationCap, HeartHandshake, Home, LogOut, Type } from 'lucide-react';
+import { BookOpen, GraduationCap, HeartHandshake, Home, LogOut, Type, Users } from 'lucide-react';
 import { ROUTES } from 'constants/routes';
 import useTranslation from 'hooks/useTranslation';
 import type { TranslationKey } from 'i18n';
@@ -9,6 +9,7 @@ const NAV_ITEMS: { to: string; labelKey: TranslationKey; icon: typeof Home; end:
   { to: ROUTES.KIDS, labelKey: 'kids.nav.home', icon: Home, end: true },
   { to: ROUTES.KIDS_ALPHABET, labelKey: 'kids.nav.letters', icon: Type, end: false },
   { to: ROUTES.KIDS_STORIES, labelKey: 'kids.nav.stories', icon: BookOpen, end: false },
+  { to: ROUTES.KIDS_SAHABI, labelKey: 'kids.nav.sahabi', icon: Users, end: false },
   { to: ROUTES.KIDS_LESSONS, labelKey: 'kids.nav.lessons', icon: GraduationCap, end: false },
   { to: ROUTES.KIDS_MANNERS, labelKey: 'kids.nav.manners', icon: HeartHandshake, end: false },
 ];

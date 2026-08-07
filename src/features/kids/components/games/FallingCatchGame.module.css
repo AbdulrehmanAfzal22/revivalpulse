@@ -1,0 +1,107 @@
+.stage {
+  position: relative;
+  height: 26rem;
+  border-radius: var(--radius-lg, 1.25rem);
+  border: 3px solid var(--color-border);
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--kids-sky, #5ec8e0) 70%, #fff) 0%,
+    color-mix(in srgb, var(--kids-purple, #b08be0) 35%, #fff) 100%
+  );
+}
+
+.prompt {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  background: var(--color-surface);
+  border: 3px solid var(--kids-emerald, var(--color-primary));
+  color: var(--color-text);
+  border-radius: 999px;
+  padding: 0.5rem 1.4rem;
+  font-weight: 800;
+  font-size: 1.15rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  white-space: nowrap;
+}
+
+.nudge {
+  position: absolute;
+  top: 3.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 2px solid var(--kids-coral, var(--color-danger));
+  border-radius: 999px;
+  padding: 0.35rem 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.faller {
+  position: absolute;
+  top: -5rem;
+  left: var(--x);
+  display: grid;
+  place-items: center;
+  gap: 0.2rem;
+  width: 5.6rem;
+  height: 5.6rem;
+  border: none;
+  padding: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    color-mix(in srgb, var(--faller-color) 70%, #fff) 0%,
+    var(--faller-color) 55%,
+    color-mix(in srgb, var(--faller-color) 55%, #333) 140%
+  );
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18), inset 0 -4px 10px rgba(0, 0, 0, 0.15);
+  color: #fff;
+  cursor: pointer;
+  animation: fall var(--dur) linear var(--delay) infinite;
+  transition: transform 0.12s ease;
+}
+
+.faller:hover {
+  transform: scale(1.08);
+}
+
+.fallerStar {
+  font-size: 1.05rem;
+  color: color-mix(in srgb, var(--kids-sunshine, #ffc94d) 85%, #fff);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.fallerText {
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  direction: rtl;
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(0) rotate(-6deg);
+  }
+  to {
+    transform: translateY(34rem) rotate(6deg);
+  }
+}
+
+.attempts {
+  font-weight: 700;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faller {
+    animation: none;
+  }
+}

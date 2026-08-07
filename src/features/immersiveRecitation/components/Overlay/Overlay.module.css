@@ -1,0 +1,23 @@
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  /**
+   * Dimming gradient — tuned exclusively through CSS variables so later
+   * visual work needs no component changes. `--ov-dim` is the peak darkness
+   * (share of black, 0..1) at the focal point; `--ov-blur` sets the backdrop
+   * blur (0 = disabled). Desired range is ~50-70% black, strongest at
+   * center/bottom where the name text sits, fading to transparent at the
+   * edges so the ambient video stays visible.
+   */
+  background: radial-gradient(
+    ellipse 115% 95% at 50% 62%,
+    rgb(0 0 0 / var(--ov-dim, 0.62)),
+    rgb(0 0 0 / calc(var(--ov-dim, 0.62) * 0.5)) 45%,
+    rgb(0 0 0 / 0) 100%
+  );
+  backdrop-filter: blur(var(--ov-blur, 0px));
+  -webkit-backdrop-filter: blur(var(--ov-blur, 0px));
+}

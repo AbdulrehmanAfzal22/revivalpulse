@@ -1,0 +1,1 @@
+export { default, type FullScreenLayoutHandle, type FullScreenLayoutProps } from './FullScreenLayout';

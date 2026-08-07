@@ -49,10 +49,10 @@ export const STORY_ADAM: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: "quran", reference: "Qur’an 38:71" },
-        { type: "quran", reference: "Qur’an 38:72" },
-        { type: "quran", reference: "Qur’an 32:8" },
-        { type: "quran", reference: "Qur’an 2:30" },
+        { type: "quran", reference: "Qur’an 38:71", label: { en: "Allah announces to the angels He will create a human being from clay" } },
+        { type: "quran", reference: "Qur’an 38:72", label: { en: "Allah orders the angels to fall prostrate to Adam once He has perfected him and breathed from His spirit" } },
+        { type: "quran", reference: "Qur’an 32:8", label: { en: "Allah began the creation of humankind from clay and shaped Adam with His own care" } },
+        { type: "quran", reference: "Qur’an 2:30", label: { en: "Allah tells the angels He is placing a successor on the earth who will cause trouble and shed blood" } },
       ],
     },
     {
@@ -73,9 +73,9 @@ export const STORY_ADAM: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: "quran", reference: "Qur’an 2:31" },
-        { type: "quran", reference: "Qur’an 2:32" },
-        { type: "quran", reference: "Qur’an 2:33" },
+        { type: "quran", reference: "Qur’an 2:31", label: { en: "Allah teaches Adam the names of all things, then presents them to the angels" } },
+        { type: "quran", reference: "Qur’an 2:32", label: { en: "The angels reply that they know only what Allah has taught them" } },
+        { type: "quran", reference: "Qur’an 2:33", label: { en: "Adam informs the angels of the names at Allah's command" } },
       ],
     },
     {
@@ -99,10 +99,10 @@ export const STORY_ADAM: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: "quran", reference: "Qur’an 2:34" },
-        { type: "quran", reference: "Qur’an 38:76" },
-        { type: "quran", reference: "Qur’an 38:78" },
-        { type: "quran", reference: "Qur’an 38:82–83" },
+        { type: "quran", reference: "Qur’an 2:34", label: { en: "Allah commands the angels to bow before Adam; all do except Iblis" } },
+        { type: "quran", reference: "Qur’an 38:76", label: { en: "Iblis refuses, claiming he was created from fire and Adam from clay" } },
+        { type: "quran", reference: "Qur’an 38:78", label: { en: "Allah banishes Iblis as rejected and accursed" } },
+        { type: "quran", reference: "Qur’an 38:82–83", label: { en: "Iblis vows to mislead Allah's servants except the sincere chosen ones" } },
       ],
     },
     {
@@ -123,8 +123,8 @@ export const STORY_ADAM: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: "quran", reference: "Qur’an 2:35" },
-        { type: "quran", reference: "Qur’an 20:118–119" },
+        { type: "quran", reference: "Qur’an 2:35", label: { en: "Allah settles Adam and his wife in the Garden and points out the one forbidden tree" } },
+        { type: "quran", reference: "Qur’an 20:118–119", label: { en: "Allah promises Adam he will not go hungry, unclothed, thirsty or scorched in the Garden" } },
       ],
     },
     {
@@ -148,9 +148,9 @@ export const STORY_ADAM: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: "quran", reference: "Qur’an 20:120" },
-        { type: "quran", reference: "Qur’an 20:121" },
-        { type: "quran", reference: "Qur’an 2:208" },
+        { type: "quran", reference: "Qur’an 20:120", label: { en: "Iblis whispers to Adam, tempting him toward the tree of eternity and an endless kingdom" } },
+        { type: "quran", reference: "Qur’an 20:121", label: { en: "Adam and his wife eat from the tree, disobeying the one command" } },
+        { type: "quran", reference: "Qur’an 2:208", label: { en: "Allah warns humankind that Shaytan is a clear enemy and to follow Him fully" } },
       ],
     },
     {
@@ -171,8 +171,8 @@ export const STORY_ADAM: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: "quran", reference: "Qur’an 2:38" },
-        { type: "quran", reference: "Qur’an 7:24" },
+        { type: "quran", reference: "Qur’an 2:38", label: { en: "Allah sends Adam and his wife down from the Garden and promises guidance for whoever follows it" } },
+        { type: "quran", reference: "Qur’an 7:24", label: { en: "Allah drives Adam and his wife out to the earth for a limited stay" } },
       ],
     },
     {
@@ -193,9 +193,9 @@ export const STORY_ADAM: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: "quran", reference: "Qur’an 7:23" },
-        { type: "quran", reference: "Qur’an 2:37" },
-        { type: "quran", reference: "Qur’an 20:122" },
+        { type: "quran", reference: "Qur’an 7:23", label: { en: "Adam and his wife pray, admitting they have wronged themselves and beg for mercy" } },
+        { type: "quran", reference: "Qur’an 2:37", label: { en: "Adam receives words from his Lord and Allah turns to him in mercy and accepts his repentance" } },
+        { type: "quran", reference: "Qur’an 20:122", label: { en: "Allah chooses Adam and guides him after forgiving him" } },
       ],
     },
     {
@@ -219,8 +219,8 @@ export const STORY_ADAM: KidsStoryV2 = {
         },
       ],
       sources: [
-        { type: "quran", reference: "Qur’an 49:13" },
-        { type: "hadith", reference: "Sahih al-Bukhari; Sahih Muslim", needsVerification: true },
+        { type: "quran", reference: "Qur’an 49:13", label: { en: "Allah created every human from a single man and woman, making nations and tribes so they may know one another" } },
+        { type: "hadith", reference: "Sahih al-Bukhari; Sahih Muslim", needsVerification: true, label: { en: "The Prophet (PBUH) describes Adam as the first human being and the father of all people" } },
       ],
     },
   ],

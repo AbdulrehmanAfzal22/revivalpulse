@@ -1,0 +1,81 @@
+.board {
+  position: relative;
+  max-width: 30rem;
+  margin-inline: auto;
+}
+
+.nudge {
+  position: absolute;
+  top: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 2px solid var(--kids-coral, var(--color-danger));
+  border-radius: 999px;
+  padding: 0.35rem 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.statement {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  background: var(--color-surface);
+  border: 3px solid var(--kids-sky, var(--color-primary));
+  color: var(--color-text);
+  border-radius: var(--radius-lg, 1.25rem);
+  padding: 1.25rem 1rem;
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+}
+
+.trueButton,
+.falseButton {
+  aspect-ratio: 1.6 / 1;
+  border-radius: var(--radius-lg, 1.25rem);
+  border: 3px solid transparent;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  gap: 0.35rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  transition: transform 0.1s ease, border-color 0.12s ease;
+}
+
+.trueButton:hover,
+.falseButton:hover {
+  transform: translateY(-3px);
+}
+
+.trueButton {
+  background: color-mix(in srgb, var(--kids-emerald, var(--color-primary)) 88%, #fff);
+  color: #fff;
+}
+
+.trueButton:hover {
+  border-color: color-mix(in srgb, var(--kids-emerald, var(--color-primary)) 60%, #000);
+}
+
+.falseButton {
+  background: color-mix(in srgb, var(--kids-coral, var(--color-danger)) 88%, #fff);
+  color: #fff;
+}
+
+.falseButton:hover {
+  border-color: color-mix(in srgb, var(--kids-coral, var(--color-danger)) 60%, #000);
+}
+
+.attempts {
+  font-weight: 700;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}

@@ -1,0 +1,16 @@
+.player {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  /* Only opacity animates during the crossfade; promote onto the compositor
+     tile to avoid paint/scroll jank on mid-range devices. */
+  will-change: opacity;
+}

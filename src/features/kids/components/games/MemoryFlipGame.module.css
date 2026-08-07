@@ -1,0 +1,106 @@
+.grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.9rem;
+  max-width: 40rem;
+  perspective: 900px;
+}
+
+@media (max-width: 400px) {
+  .grid {
+    gap: 0.6rem;
+  }
+}
+
+.card {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border: none;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  perspective: 900px;
+}
+
+.card:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-md);
+}
+
+.cardInner {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.35s ease;
+}
+
+.cardFlipped .cardInner {
+  transform: rotateY(180deg);
+}
+
+.cardBack,
+.cardFace {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: var(--radius-md);
+}
+
+.cardBack {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(
+    135deg,
+    var(--kids-emerald, var(--color-primary)) 0%,
+    var(--kids-sky, var(--color-primary)) 100%
+  );
+  border: 3px solid color-mix(in srgb, var(--kids-sunshine, var(--color-primary)) 70%, #fff);
+}
+
+.cardBackStar {
+  font-size: 2rem;
+  color: var(--kids-sunshine, #fff);
+}
+
+.cardFace {
+  transform: rotateY(180deg);
+  overflow: hidden;
+  border: 3px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.cardText,
+.cardName {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 0 0.3rem;
+}
+
+.cardText {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--kids-emerald, var(--color-primary));
+}
+
+.cardName {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.attempts {
+  font-weight: 700;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cardInner {
+    transition: none;
+  }
+}

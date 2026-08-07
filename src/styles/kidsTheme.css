@@ -6,8 +6,23 @@
  * without a parallel component library — "own visual language" via CSS, not a
  * rebuild. Still respects the light/dark toggle (two variants below) rather than
  * fighting it.
+ *
+ * KIDS PALETTE (Phase 2):
+ *   --kids-sunshine #FFC94D  — warm accent, celebration surfaces
+ *   --kids-sky      #5EC8E0  — cool accent, secondary highlights
+ *   --kids-coral    #FF8965  — energetic accent (hovers, highlights)
+ *   --kids-purple   #B08BE0  — soft accent (category tints, badges)
+ *   --kids-emerald  #146356  — the MAIN SITE'S emerald, kept as the primary
+ *                              action color so kids mode still feels like the
+ *                              same app. Everything playful sits around it.
  */
 .kidsTheme {
+  --kids-sunshine: #ffc94d;
+  --kids-sky: #5ec8e0;
+  --kids-coral: #ff8965;
+  --kids-purple: #b08be0;
+  --kids-emerald: #146356;
+
   --font-sans: ui-rounded, 'SF Pro Rounded', 'Segoe UI Rounded', -apple-system, BlinkMacSystemFont,
     'Noto Naskh Arabic', 'Noto Nastaliq Urdu', Roboto, sans-serif;
 
@@ -17,11 +32,11 @@
   --color-border: #ffdca8;
   --color-text: #3a2a1a;
   --color-text-muted: #8a6f4f;
-  --color-primary: #ff7a3d;
-  --color-primary-hover: #ff6620;
+  --color-primary: var(--kids-emerald);
+  --color-primary-hover: #0e4f42;
   --color-primary-contrast: #ffffff;
   --color-danger: #e5484d;
-  --color-focus-ring: #ff7a3d;
+  --color-focus-ring: var(--kids-sky);
 
   --radius-sm: 10px;
   --radius-md: 16px;
@@ -29,33 +44,70 @@
 }
 
 :root[data-theme='dark'] .kidsTheme {
+  --kids-sunshine: #ffd76a;
+  --kids-sky: #7fd8ec;
+  --kids-coral: #ffa288;
+  --kids-purple: #c4a3ee;
+  /* Light mint so emerald text/accents stay readable on dark cards. */
+  --kids-emerald: #4fd0b4;
+
   --color-bg: #241a2e;
   --color-surface: #2f2240;
   --color-surface-raised: #3a2b4d;
   --color-border: #4d3a66;
   --color-text: #fdf3ff;
   --color-text-muted: #c7b3da;
-  --color-primary: #ffb454;
-  --color-primary-hover: #ffc372;
-  --color-primary-contrast: #241a2e;
+  --color-primary: #2ea089;
+  --color-primary-hover: #3ab396;
+  --color-primary-contrast: #06100d;
   --color-danger: #f38ba0;
-  --color-focus-ring: #ffb454;
+  --color-focus-ring: #5ec8e0;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']):not([data-theme='dark']) .kidsTheme {
+    --kids-sunshine: #ffd76a;
+    --kids-sky: #7fd8ec;
+    --kids-coral: #ffa288;
+    --kids-purple: #c4a3ee;
+    --kids-emerald: #4fd0b4;
+
     --color-bg: #241a2e;
     --color-surface: #2f2240;
     --color-surface-raised: #3a2b4d;
     --color-border: #4d3a66;
     --color-text: #fdf3ff;
     --color-text-muted: #c7b3da;
-    --color-primary: #ffb454;
-    --color-primary-hover: #ffc372;
-    --color-primary-contrast: #241a2e;
+    --color-primary: #2ea089;
+    --color-primary-hover: #3ab396;
+    --color-primary-contrast: #06100d;
     --color-danger: #f38ba0;
-    --color-focus-ring: #ffb454;
+    --color-focus-ring: #5ec8e0;
   }
+}
+
+/*
+ * KIDS TYPE SCALE: KidsLayout adds `kids-active` to <html> while a kids route
+ * is mounted. Root font-size (theme.css) is `16px * --app-font-scale`; kids
+ * mode multiplies that by 1.125 (→ 18px at the default text scale), so EVERY
+ * rem-sized element (Typography, buttons, cards, nav…) renders bigger —
+ * children need larger base type. The specificity of `html.kids-active`
+ * wins over plain `html`, and because the app-wide scale lives in a CSS
+ * variable (not inline px), the user's Text-size setting keeps working inside
+ * kids mode too. Removing the class on exit restores the adult scale.
+ */
+html.kids-active {
+  font-size: calc(16px * var(--app-font-scale, 1) * 1.125);
+}
+
+/*
+ * KIDS TOUCH TARGETS: interactive elements inside the scope must be at least
+ * 48x48px (WCAG 2.5.5 / Apple HIG kid-size guidance). Applied to the wrapper
+ * so only kids routes are affected; the adult UI keeps its compact targets.
+ */
+.kidsTheme :is(button, a, [role='button'], input[type='checkbox'], input[type='radio']) {
+  min-height: 48px;
+  min-width: 48px;
 }
 
 .kidsTheme {
@@ -68,7 +120,7 @@
   --color-text: #2a1c0e;
   --color-text-muted: #4a3620;
   --color-border: #2a1c0e;
-  --color-primary: #b3480f;
+  --color-primary: #0e4f42;
 }
 
 :root[data-theme='dark'][data-contrast='high'] .kidsTheme {
@@ -76,5 +128,5 @@
   --color-text: #ffffff;
   --color-text-muted: #ead9ff;
   --color-border: #ffffff;
-  --color-primary: #ffcb80;
+  --color-primary: #4fd0b4;
 }

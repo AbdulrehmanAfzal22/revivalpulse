@@ -10,7 +10,9 @@ import { useKidsProgressStore, getLearnedLetterIds } from 'stores/kidsProgressSt
 import LetterLearnGrid from 'features/kids/components/LetterLearnGrid';
 import LetterFlashcards from 'features/kids/components/LetterFlashcards';
 import QuizRunner from 'features/kids/components/QuizRunner';
+import KidsBackButton from 'features/kids/components/KidsBackButton';
 import { generateAlphabetQuiz } from 'features/kids/services/kidsQuiz';
+import { ROUTES } from 'constants/routes';
 import useTranslation from 'hooks/useTranslation';
 import styles from './KidsAlphabetPage.module.css';
 
@@ -41,6 +43,7 @@ export default function KidsAlphabetPage() {
 
   return (
     <div className={styles.page}>
+      <KidsBackButton to={ROUTES.KIDS} />
       <Typography variant="h2">{t('kids.arabicLetters')}</Typography>
       <PillGroup options={MODES} value={mode} onChange={(id) => setMode(id as Mode)} />
 

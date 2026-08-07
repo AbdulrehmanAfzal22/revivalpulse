@@ -18,6 +18,12 @@ export interface KidsStory {
   nameEnglish: string;
   /** Short, kid-friendly, cross-checked against a general reference — not a narrative retelling. */
   summary: string;
+  /**
+   * Detailed, kid-friendly narrative retelling (paragraphs, shown in order
+   * on the story page). Quran-based and uncontroversial; the `summary`
+   * remains the card blurb. Sahabah stories keep this empty.
+   */
+  sections?: string[];
   /** Real Quran verse keys about this figure — fetched live (api/quran/quranClient.ts), not paraphrased. */
   verseRefs: string[];
   /** Key into the symbolic (non-figurative) illustration map — features/kids/components/StoryIllustration.tsx. */

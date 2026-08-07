@@ -1,0 +1,62 @@
+.page {
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+  color: #ffffff;
+}
+
+/*
+ * The tray sits directly on the dimmed video, so it carries its own scrim:
+ * rgb(0 0 0 / 0.55) over the worst-case frame (pure white video, 0.62 overlay)
+ * yields ~0.17 effective background luminance -> >= 4.5:1 for the white text
+ * (WCAG AA) no matter how bright the underlying clip is.
+ */
+.bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
+  max-width: 48rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgb(255 255 255 / 0.08);
+  border-radius: 1rem;
+  background: rgb(0 0 0 / 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  /* Only opacity animates (auto-hide) — keep it on the compositor. */
+  transition: opacity 0.25s ease;
+  will-change: opacity;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* prefers-reduced-motion: the auto-hide becomes an instant cut, no fade. */
+@media (prefers-reduced-motion: reduce) {
+  .bottom {
+    transition: none;
+  }
+}
+
+/*
+ * Short landscape phones/tablets: tighten the tray so it never crowds the
+ * centered name overlay, and let the back button breathe.
+ */
+@media (max-height: 30rem) and (orientation: landscape) {
+  .page {
+    padding: 0.75rem 1.25rem;
+  }
+
+  .bottom {
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+  }
+}

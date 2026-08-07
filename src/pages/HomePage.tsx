@@ -5,6 +5,7 @@ import DuaOfTheDay from 'features/duas/components/DuaOfTheDay';
 import NameReflection from 'features/namesOfAllah/components/NameReflection';
 import PrayerCountdownWidget from 'features/prayerTimes/components/PrayerCountdownWidget';
 import IslamicDateWidget from 'features/islamicCalendar/components/IslamicDateWidget';
+import KidsModeEntry from 'features/kidsMode/components/KidsModeEntry';
 import Typography from 'components/ui/Typography';
 import styles from './HomePage.module.css';
 
@@ -14,6 +15,8 @@ export default function HomePage() {
       <Typography variant="h2" className={styles.heading}>
         Welcome to IslamicWeb
       </Typography>
+
+      <KidsModeEntry />
 
       <ContinueReading />
 

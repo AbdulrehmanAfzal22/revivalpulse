@@ -32,7 +32,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "videos:fetch": "node scripts/fetchVideoBatch.mjs",
+    "timestamps:placeholder": "node scripts/generatePlaceholderTimestamps.mjs"
   },
   "eslintConfig": {
     "extends": [

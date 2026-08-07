@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
+import Button from 'components/ui/Button';
 import Typography from 'components/ui/Typography';
 import Card from 'components/ui/Card';
 import Skeleton from 'components/ui/Skeleton';
@@ -8,11 +10,13 @@ import StoryIllustration from 'features/kids/components/StoryIllustration';
 import useStoryVerses from 'features/kids/hooks/useStoryVerses';
 import { useKidsProgressStore } from 'stores/kidsProgressStore';
 import { ALL_KIDS_STORIES } from 'data/kids/stories';
+import { ROUTES } from 'constants/routes';
 import useTranslation from 'hooks/useTranslation';
 import styles from './KidsStoryPage.module.css';
 
 export default function KidsStoryPage() {
   const { storyId } = useParams<{ storyId: string }>();
+  const navigate = useNavigate();
   const story = ALL_KIDS_STORIES.find((item) => item.id === storyId);
   const markContentViewed = useKidsProgressStore((state) => state.markContentViewed);
   const { t } = useTranslation();
@@ -30,6 +34,13 @@ export default function KidsStoryPage() {
 
   return (
     <div className={styles.page}>
+      <Button
+        variant="icon"
+        onClick={() => navigate(ROUTES.KIDS_STORIES)}
+        aria-label={t('kids.backToStories')}
+        leadingIcon={<ArrowLeft size={22} />}
+      />
+
       <div className={styles.header}>
         <StoryIllustration symbol={story.illustrationSymbol} color={story.accentColor} size={96} />
         <Typography variant="h2" as="h1" className={styles.arabicName} dir="rtl">
@@ -40,9 +51,19 @@ export default function KidsStoryPage() {
         </Typography>
       </div>
 
-      <Card className={styles.summaryCard}>
-        <Typography variant="body">{story.summary}</Typography>
-      </Card>
+      {story.sections && story.sections.length > 0 ? (
+        <div className={styles.sections}>
+          {story.sections.map((section) => (
+            <Card key={section} elevation="raised" className={styles.sectionCard}>
+              <Typography variant="body">{section}</Typography>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <Card className={styles.summaryCard}>
+          <Typography variant="body">{story.summary}</Typography>
+        </Card>
+      )}
 
       {story.verseRefs.length > 0 && (
         <div className={styles.versesSection}>

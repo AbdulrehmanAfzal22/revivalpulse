@@ -1,0 +1,135 @@
+.page {
+  max-width: 36rem;
+  margin-inline: auto;
+  padding: 1.5rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.backLink:hover {
+  color: var(--color-primary);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.375rem;
+}
+
+.paragraphCard {
+  text-align: start;
+  line-height: 1.7;
+}
+
+.urduNotice {
+  background: color-mix(in srgb, var(--color-warning, #f0a63a) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-warning, #f0a63a) 40%, transparent);
+  color: var(--color-text);
+  border-radius: var(--radius-md);
+  padding: 0.7rem 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.sourcesSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.sourceCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.7rem 0.9rem;
+}
+
+.sourceLabel {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.sourceMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.sourceType {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-primary) 15%, transparent);
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
+.sourceReference {
+  font-weight: 600;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.8rem;
+  color: var(--color-text-muted, #00000099);
+}
+
+.sourceWarning {
+  font-size: 0.75rem;
+  color: var(--color-warning, #b45309);
+}
+
+.sourceReviewed {
+  font-size: 0.75rem;
+  color: var(--color-success, #18794e);
+}
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.pagerLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.9rem;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.pagerLink:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.pagerNext {
+  margin-inline-start: auto;
+}

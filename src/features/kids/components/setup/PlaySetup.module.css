@@ -1,0 +1,156 @@
+.setup {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.backRow {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+/* Tablet portrait/landscape (Phase 14): two across once width allows. */
+@media (min-width: 640px) {
+  .tiles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.tile {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.9rem;
+  text-align: start;
+  padding: 0.75rem;
+  border-radius: var(--radius-lg);
+  border: 3px solid var(--color-border);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.tileSelected {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--kids-sky, var(--color-primary)) 40%, transparent);
+}
+
+.tileImage {
+  width: 76px;
+  height: 76px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  display: block;
+}
+
+.tileIconWrap {
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-raised);
+  border: 2px dashed var(--color-border);
+}
+
+/* On colorful gradient tiles the icon sits on a soft white disc instead. */
+.tileIconSoft {
+  background: rgba(255, 255, 255, 0.6);
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.tileText {
+  display: grid;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.tileTitle {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--color-text);
+}
+
+.tileDescription {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.35;
+}
+
+.tileCheck {
+  width: 1.8rem;
+  height: 1.8rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--color-surface-raised);
+  border: 2px solid var(--color-border);
+  color: transparent;
+  font-weight: 800;
+  transition: all 0.15s ease;
+}
+
+.tileSelected .tileCheck {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+}
+
+.difficulty {
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.difficultyLabel {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.difficultyOptions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.difficultyButton {
+  flex: 1;
+  max-width: 12rem;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.difficultyActive {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+}
+
+.startRow {
+  display: flex;
+  justify-content: center;
+}
+
+.startButton {
+  min-width: 14rem;
+  font-size: 1.15rem;
+}

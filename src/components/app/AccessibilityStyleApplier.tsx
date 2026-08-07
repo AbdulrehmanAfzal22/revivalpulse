@@ -3,13 +3,17 @@ import { useAccessibilityPreferencesStore } from 'stores/accessibilityPreference
 import { useDevModeStore } from 'stores/devModeStore';
 import useInterfaceLanguage from 'hooks/useInterfaceLanguage';
 
-const BASE_FONT_SIZE_PX = 16;
-
 /**
  * Applies accessibility (and Developer Mode RTL-testing) preferences as
  * root-level DOM attributes/styles — mounted once at the very top of the
  * app (App.tsx), above both MainLayout and KidsLayout, so they apply
  * everywhere, not just the main shell.
+ *
+ * Text scale is written to the `--app-font-scale` custom property on <html>
+ * (NOT an inline font-size): inline pixel styles would stomp the kids-scope
+ * scale in styles/kidsTheme.css (`html.kids-active`). The scale is consumed
+ * by `html { font-size: calc(16px * var(--app-font-scale, 1)) }` (theme.css)
+ * and doubled-down for kids mode in kidsTheme.css.
  */
 export default function AccessibilityStyleApplier() {
   const highContrast = useAccessibilityPreferencesStore((state) => state.highContrast);
@@ -22,7 +26,7 @@ export default function AccessibilityStyleApplier() {
   }, [highContrast]);
 
   useEffect(() => {
-    document.documentElement.style.fontSize = `${BASE_FONT_SIZE_PX * textScale}px`;
+    document.documentElement.style.setProperty('--app-font-scale', String(textScale));
   }, [textScale]);
 
   useEffect(() => {

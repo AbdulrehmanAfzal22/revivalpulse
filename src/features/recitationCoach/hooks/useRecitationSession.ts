@@ -22,6 +22,8 @@ import type { WordMatchClassification } from '../services/wordMatcher';
 import { CONTEXT_WINDOW_SIZE, correctWords } from '../services/quranCorrectionLayer';
 import type { CorrectionResult } from '../services/quranCorrectionLayer';
 import { createLogger } from 'services/logger';
+import { saveFloat32AsWav, hasRepeatedWordRun } from '../services/debugAudioSaver';
+import { SAMPLE_RATE } from './useMicrophoneChunks';
 
 const logger = createLogger('recitation-coach');
 /**
@@ -192,6 +194,11 @@ export function useRecitationSession(): RecitationSession {
           completed: nextTracker.completed,
           timestamp: Date.now(),
         });
+        // eslint-disable-next-line no-console -- Phase 12: unconditional report log — this `word` is what actually gets revealed/highlighted on screen once locked.
+        console.log(
+          '[PHASE12]',
+          JSON.stringify({ event: 'final UI word revealed', expectedWord, revealedWord: word, classification, comparison, cursorAfter: nextTracker.cursor }, null, 2)
+        );
         if (!prev.tracker.hasMistakeAtCursor && nextTracker.hasMistakeAtCursor) {
           playMistakeTone();
         }
@@ -332,6 +339,31 @@ export function useRecitationSession(): RecitationSession {
           // eslint-disable-next-line no-console -- Phase 11D: see note above.
           console.log('[PHASE11D]', JSON.stringify({ event: 'normalized words', chunkNumber, transcriptText: text, normalizedWords: rawWords }, null, 2));
 
+          // Phase 11 investigation (user-directed debugging plan, step 1-2):
+          // raw Whisper output is already logged above, unprocessed, before
+          // tokenization is even used downstream. If it already shows a
+          // repeated-word run (e.g. "نحن نحن نحن نحن"), the bug is before or
+          // inside Whisper inference, not in this hook — so the exact audio
+          // chunk that produced it is saved as a WAV file automatically,
+          // for listening to directly or running through a different ASR
+          // implementation. Pure side effect — does not read, branch on, or
+          // alter anything used by detection/tracking logic below.
+          if (hasRepeatedWordRun(rawWords, 3)) {
+            // eslint-disable-next-line no-console -- Phase 11 investigation: deliberately loud, one-time-per-chunk notice that a diagnostic WAV was saved.
+            console.log(
+              `[PHASE11-WAV] Chunk ${chunkNumber} transcript has a repeated-word run (${JSON.stringify(rawWords)}) — saving raw audio as bad-chunk-${chunkNumber}.wav. Listen to it, or run it through another ASR (OpenAI Whisper API / whisper.cpp / Faster-Whisper / the HF Whisper demo) to determine whether the audio itself or Transformers.js/the model is at fault.`
+            );
+            saveFloat32AsWav(chunk, `bad-chunk-${chunkNumber}.wav`, SAMPLE_RATE);
+          } else if (chunkNumber === 1) {
+            // Phase 12: also save an unconditional baseline/control sample —
+            // the first chunk of every session, regardless of its
+            // transcript — so there is always at least one normal reference
+            // WAV to compare against any later suspicious ones.
+            // eslint-disable-next-line no-console -- Phase 12 investigation, see note above.
+            console.log(`[PHASE12-WAV] Saving baseline chunk 1 audio as baseline-chunk-1.wav (transcript: ${JSON.stringify(rawWords)}).`);
+            saveFloat32AsWav(chunk, 'baseline-chunk-1.wav', SAMPLE_RATE);
+          }
+
           if (rawWords.length === 0) {
             trace.error('PIPELINE STOPPED: Whisper returned zero Arabic words for this chunk — nothing downstream (correction, matching, surah detection) will run for it.', {
               chunkNumber,
@@ -385,6 +417,11 @@ export function useRecitationSession(): RecitationSession {
               correctionsAppliedCount: appliedCorrections.length,
               timestamp: Date.now(),
             });
+            // eslint-disable-next-line no-console -- Phase 12: unconditional report log, see note above handleChunk.
+            console.log(
+              '[PHASE12]',
+              JSON.stringify({ event: 'correctWords output', chunkNumber, inputWords: rawWords, outputWords: newWords }, null, 2)
+            );
             if (appliedCorrections.length > 0) {
               logger.debug(
                 'corrections applied:',
@@ -403,6 +440,29 @@ export function useRecitationSession(): RecitationSession {
               currentPhase: prev.phase,
               timestamp: Date.now(),
             });
+            // Phase 12 note: this two-line block (findOverlapLength +
+            // spread) is the actual runtime stitching logic. The exported
+            // stitchTranscripts() in transcriptStitcher.ts wraps this exact
+            // same pair of operations but is never imported/called anywhere
+            // in the app — this hook reimplements it inline instead. So
+            // this log IS the real "stitchTranscripts output" for report
+            // purposes; there is no separate call site to instrument.
+            // eslint-disable-next-line no-console -- Phase 12: unconditional report log, see note above handleChunk.
+            console.log(
+              '[PHASE12]',
+              JSON.stringify(
+                {
+                  event: 'stitching output (inline equivalent of stitchTranscripts(), which is unused at runtime)',
+                  chunkNumber,
+                  previousRecognizedWords: prev.recognizedWords,
+                  newWordsThisChunk: newWords,
+                  overlapLength: overlap,
+                  resultRecognizedWords: recognizedWords,
+                },
+                null,
+                2
+              )
+            );
 
             if (prev.phase === 'locked' && prev.detectedSurahId !== null && prev.tracker) {
               const surahId = prev.detectedSurahId;

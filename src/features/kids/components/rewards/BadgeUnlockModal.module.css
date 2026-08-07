@@ -1,0 +1,21 @@
+.body {
+  display: grid;
+  gap: 1.25rem;
+  text-align: center;
+  justify-items: center;
+  padding: 0.5rem 0;
+}
+
+.hero {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--kids-sunshine, var(--color-primary)) 25%, var(--color-surface));
+  color: var(--kids-emerald, var(--color-primary));
+}
+
+.doneButton {
+  min-width: 10rem;
+}

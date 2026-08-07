@@ -1,0 +1,161 @@
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  display: grid;
+  grid-template-areas: 'overlay';
+  place-items: center;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+/* All name panels (entering + exiting during a crossfade) share ONE grid cell
+ * so they overlap at the exact same centered position. Without this, the two
+ * AnimatePresence children auto-place into separate grid rows and each gets
+ * centered in its own half of the layer — the visible box appears to jump
+ * up/down on every name flip. 'overlay' collapses both to the same spot. */
+.name,
+.idle {
+  grid-area: overlay;
+}
+
+/*
+ * Dark scrim panel behind the whole name block. It exists to GUARANTEE WCAG AA
+ * (>= 4.5:1) for the white text against the WORST-CASE frame (pure white):
+ * the overlay alone (rgb(0 0 0 / 0.62)) only yields ~2.4:1 on such a frame,
+ * while this ~0.85 inset yields >= 5:1 regardless of what the video behind it
+ * is showing.
+ *
+ * GEOMETRY IS FIXED: `width`/`min-height` are clamped, not content-sized, so
+ * the panel keeps the SAME dimensions for every name. Without this the box
+ * re-layouts per name (long Arabic vs short), which shows on screen as the
+ * box jumping/moving randomly between names. With a fixed footprint the text
+ * swaps inside a stable, centered panel and the AnimatePresence crossfade
+ * overlaps two identical boxes (no jitter). The fade targets opacity only
+ * (GPU-friendly), hence will-change.
+ */
+.name {
+  box-sizing: border-box;
+  width: min(40rem, calc(100vw - 3rem));
+  min-height: 12rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: rgb(0 0 0 / 0.85);
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 1.25rem;
+  padding: 1rem 1.5rem 1.25rem;
+  box-shadow: 0 4px 24px rgb(0 0 0 / 0.35);
+  will-change: opacity;
+}
+
+.arabic {
+  font-family: var(--reader-arabic-font);
+  /* Mobile-first: generous line height — Arabic needs room for diacritics. */
+  font-size: clamp(2.25rem, 9.5vw, 4.5rem);
+  line-height: 1.5;
+  margin: 0 0 0.75rem;
+  color: #ffffff;
+  text-shadow: 0 2px 16px rgb(0 0 0 / 60%);
+}
+
+.transliteration {
+  margin: 0;
+  color: #ffffff;
+  letter-spacing: 0.03em;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.meaning {
+  margin: 0.35rem 0 0;
+  color: #f3f4f6;
+  font-size: clamp(0.875rem, 2vw, 1.125rem);
+}
+
+/*
+ * Melodic intro idle state: shown while index is -1 (before the first name).
+ * A soft pulsing aura keeps the frame alive without competing with the audio.
+ */
+.idle {
+  display: grid;
+  gap: 0.75rem;
+  place-items: center;
+  max-width: 60ch;
+  background: rgb(0 0 0 / 0.6);
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 1.5rem;
+  padding: 1.25rem 2rem;
+  animation: idlePulse 3.2s ease-in-out infinite;
+  will-change: opacity, box-shadow;
+}
+
+@keyframes idlePulse {
+  0%,
+  100% {
+    opacity: 0.9;
+    box-shadow: 0 0 0 0 rgb(255 255 255 / 0.14);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 0 6px rgb(255 255 255 / 0.05);
+  }
+}
+
+.idleArabic {
+  font-family: var(--reader-arabic-font);
+  font-size: clamp(1.75rem, 6vw, 3.25rem);
+  line-height: 1.6;
+  margin: 0;
+  color: #ffffff;
+  text-shadow: 0 2px 16px rgb(0 0 0 / 60%);
+}
+
+.idleCaption {
+  margin: 0;
+  color: #e5e7eb;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: clamp(0.75rem, 2vw, 1rem);
+}
+
+/* Tablet and up: larger headline, slightly tighter (but still generous) leading. */
+@media (min-width: 48rem) {
+  .layer {
+    padding: 2rem;
+  }
+
+  .arabic {
+    font-size: clamp(3.5rem, 8vw, 5.5rem);
+    line-height: 1.4;
+  }
+}
+
+/*
+ * Short landscape phones/tablets: the name must never collide with the
+ * back button or the bottom control tray, so scale with viewport HEIGHT here.
+ */
+@media (max-height: 30rem) and (orientation: landscape) {
+  .layer {
+    padding: 0.75rem;
+  }
+
+  .name {
+    padding: 0.5rem 0.75rem 0.6rem;
+    border-radius: 0.75rem;
+  }
+
+  .arabic {
+    font-size: clamp(1.5rem, 6vh, 2.5rem);
+    line-height: 1.4;
+    margin-bottom: 0.4rem;
+  }
+
+  .transliteration {
+    font-size: 1rem;
+  }
+
+  .meaning {
+    font-size: 0.875rem;
+  }
+}

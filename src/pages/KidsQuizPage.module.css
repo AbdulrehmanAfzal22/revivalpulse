@@ -1,0 +1,42 @@
+.page {
+  max-width: 36rem;
+  margin-inline: auto;
+  padding: 1.5rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.reviewNote {
+  text-align: center;
+  opacity: 0.85;
+}
+
+.nudge {
+  text-align: center;
+  background: var(--color-surface);
+  border: 2px solid var(--kids-coral, var(--color-danger));
+  border-radius: 999px;
+  padding: 0.5rem 1.25rem;
+  font-weight: 600;
+  align-self: center;
+  animation: nudge-in 0.25s ease-out;
+}
+
+@keyframes nudge-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nudge {
+    animation: none;
+  }
+}

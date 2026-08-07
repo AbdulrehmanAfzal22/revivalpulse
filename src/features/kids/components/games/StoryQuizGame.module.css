@@ -1,0 +1,86 @@
+.board {
+  position: relative;
+  max-width: 32rem;
+  margin-inline: auto;
+}
+
+.nudge {
+  position: absolute;
+  top: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 2px solid var(--kids-coral, var(--color-danger));
+  border-radius: 999px;
+  padding: 0.35rem 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.prompt {
+  margin-bottom: 1.25rem;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--kids-emerald, #146356) 14%, #fff),
+    color-mix(in srgb, var(--kids-sky, #5ec8e0) 10%, #fff)
+  );
+  border: 3px solid var(--kids-emerald, var(--color-primary));
+  color: var(--color-text);
+  border-radius: var(--radius-lg, 1.25rem);
+  padding: 1.1rem 1rem;
+  font-weight: 800;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.8rem;
+}
+
+.option {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.8rem;
+  text-align: start;
+  padding: 0.75rem 1rem;
+  border: 3px solid var(--color-border);
+  border-radius: var(--radius-md, 1rem);
+  background: var(--color-surface);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-text);
+  transition: border-color 0.12s ease, transform 0.1s ease;
+}
+
+.option:hover {
+  border-color: var(--kids-emerald, var(--color-primary));
+  transform: translateY(-2px);
+}
+
+.optionNumber {
+  width: 2.1rem;
+  height: 2.1rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--kids-sunshine, var(--color-primary));
+  color: #3a2a1a;
+  font-weight: 900;
+  font-size: 0.95rem;
+}
+
+.optionText {
+  min-width: 0;
+}
+
+.attempts {
+  font-weight: 700;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}

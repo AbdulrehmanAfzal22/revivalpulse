@@ -1,0 +1,27 @@
+.shell {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  /* fallback for browsers without dvh (older Safari/Chrome), then dvh */
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: #000;
+
+  /*
+   * Safe-area insets for notched/rounded-screen devices (requires
+   * `viewport-fit=cover` in the viewport meta, set in public/index.html).
+   * Exposed as custom properties so descendants can pad their own UI (e.g.
+   * the HUD) without re-typing env() everywhere. The fixed background video
+   * layer ignores this padding (it's positioned against the padding box edge).
+   */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+
+  padding-top: var(--safe-top);
+  padding-right: var(--safe-right);
+  padding-bottom: var(--safe-bottom);
+  padding-left: var(--safe-left);
+}

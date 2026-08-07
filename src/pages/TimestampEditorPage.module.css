@@ -1,0 +1,84 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.currentRow {
+  border-left: 4px solid var(--color-primary);
+  padding: 0.5rem 0.75rem;
+}
+
+.currentRow p {
+  margin: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.audio {
+  width: 100%;
+}
+
+.clockRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.75rem 0;
+}
+
+.hint {
+  padding: 0 0.25rem;
+}
+
+.clock {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  color: var(--color-text-primary, #1f2933);
+  background: rgba(9, 30, 66, 0.04);
+  border: 1px solid rgba(9, 30, 66, 0.1);
+  border-radius: 12px;
+  padding: 0.35rem 1rem;
+  min-width: 220px;
+  text-align: center;
+  transition: color 160ms ease, box-shadow 160ms ease;
+}
+
+.clock[data-running='true'] {
+  color: var(--color-primary, #14532d);
+  box-shadow: 0 0 0 3px rgba(20, 83, 45, 0.18);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ok {
+  color: var(--color-success, #1a7f37);
+}
+
+.error {
+  color: var(--color-danger, #b3261e);
+}
+
+.problems {
+  margin: 0;
+  padding-left: 1.25rem;
+}

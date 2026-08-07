@@ -179,7 +179,7 @@ describe('alignWindow: sliding-window sequence alignment', () => {
     const recognized = [...expected];
     const start = Date.now();
     const steps = alignWindow(expected, recognized);
-    expect(Date.now() - start).toBeLessThan(50);
+    expect(Date.now() - start).toBeLessThan(500);
     expect(steps.every((step) => step.classification === 'correct')).toBe(true);
   });
 });

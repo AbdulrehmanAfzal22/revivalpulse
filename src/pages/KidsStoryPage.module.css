@@ -26,6 +26,16 @@
   text-align: center;
 }
 
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.sectionCard {
+  text-align: start;
+}
+
 .versesSection {
   display: flex;
   flex-direction: column;

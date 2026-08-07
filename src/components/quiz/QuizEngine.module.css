@@ -1,0 +1,187 @@
+/*
+ * Generic quiz chrome (Phase 4). Uses theme tokens only — in Kids Mode the
+ * .kidsTheme scope reskins it (buttons already get 48px min targets there);
+ * on the main site it follows the adult theme. Content-agnostic styling.
+ */
+.fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  max-width: 36rem;
+}
+
+.counter {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.options {
+  display: grid;
+  gap: 0.6rem;
+}
+
+/* Phase 12 — read-aloud: prompt + each option get a speaker companion. */
+.promptRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.prompt {
+  flex: 1;
+}
+
+.speaker {
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 2px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.speaker:hover,
+.speakButton:hover {
+  border-color: var(--color-primary);
+  background: var(--color-surface-raised);
+}
+
+.speaker:focus-visible,
+.speakButton:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.optionRow {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.speakButton {
+  flex: 0 0 44px;
+  width: 44px;
+  min-width: 44px;
+  height: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  border: 2px dashed var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: start;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.1s ease;
+}
+
+.option:hover:not(:disabled) {
+  border-color: var(--color-primary);
+}
+
+.option:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.option:disabled {
+  cursor: default;
+}
+
+.optionIndex {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 999px;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  font-size: 0.875rem;
+}
+
+.optionCorrect {
+  border-color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface));
+}
+
+.optionCorrect .optionIndex {
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  border-color: var(--color-primary);
+}
+
+.optionWrong {
+  border-color: var(--color-danger);
+  background: color-mix(in srgb, var(--color-danger) 12%, var(--color-surface));
+}
+
+.optionWrong .optionIndex {
+  background: var(--color-danger);
+  color: #ffffff;
+  border-color: var(--color-danger);
+}
+
+.actions {
+  margin-top: 0.5rem;
+}
+
+.results {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 36rem;
+}
+
+.resultRow {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.markerCorrect {
+  color: var(--color-primary);
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+
+.markerWrong {
+  color: var(--color-danger);
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+
+.resultDetail {
+  color: var(--color-text-muted);
+  word-break: break-word;
+}

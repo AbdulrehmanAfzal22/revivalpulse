@@ -6,9 +6,11 @@ import PillGroup from 'components/ui/PillGroup';
 import Skeleton from 'components/ui/Skeleton';
 import HadithSnippetCard from 'features/kids/components/HadithSnippetCard';
 import DuaCard from 'features/duas/components/DuaCard';
+import KidsBackButton from 'features/kids/components/KidsBackButton';
 import useDuas from 'features/duas/hooks/useDuas';
 import { useKidsProgressStore } from 'stores/kidsProgressStore';
 import { MANNER_TIPS, RAMADAN_EID_ACTIVITIES, SIMPLIFIED_HADITH } from 'data/kids/manners';
+import { ROUTES } from 'constants/routes';
 import useTranslation from 'hooks/useTranslation';
 import styles from './KidsMannersPage.module.css';
 
@@ -44,6 +46,7 @@ export default function KidsMannersPage() {
 
   return (
     <div className={styles.page}>
+      <KidsBackButton to={ROUTES.KIDS} />
       <Typography variant="h2">{t('kids.mannersAndMore')}</Typography>
       <PillGroup options={TABS} value={tab} onChange={(id) => setTab(id as Tab)} />
 

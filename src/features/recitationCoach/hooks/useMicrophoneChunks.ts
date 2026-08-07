@@ -11,7 +11,7 @@ import { createLogger } from 'services/logger';
 const trace = createLogger('mic-trace');
 
 /** Whisper's ONNX export expects 16kHz mono input. */
-const SAMPLE_RATE = 16000;
+export const SAMPLE_RATE = 16000;
 /**
  * 1.5s balances latency against accuracy: short enough to noticeably cut
  * the delay between speaking and highlighting, but not so short that
@@ -213,6 +213,24 @@ export default function useMicrophoneChunks({ enabled, onChunk, onError }: UseMi
               msSincePreviousChunk: gapSincePrevious,
               timestamp: now,
             });
+
+            // Phase 12 investigation: RMS energy is a pure, read-only
+            // diagnostic computed over the exact samples about to be
+            // emitted — does not alter chunkToEmit or any capture logic.
+            let sumOfSquares = 0;
+            for (let i = 0; i < chunkToEmit.length; i += 1) {
+              sumOfSquares += chunkToEmit[i]! * chunkToEmit[i]!;
+            }
+            const rmsEnergy = Math.sqrt(sumOfSquares / chunkToEmit.length);
+            // eslint-disable-next-line no-console -- Phase 12: unconditional report log, bypasses logger level gate by design.
+            console.log(
+              '[PHASE12]',
+              JSON.stringify(
+                { event: 'chunk produced', chunkNumber: chunkCount, timestamp: now, msSincePreviousChunk: gapSincePrevious, rmsEnergy },
+                null,
+                2
+              )
+            );
 
             onChunkRef.current(chunkToEmit);
 

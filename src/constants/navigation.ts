@@ -9,7 +9,7 @@ import {
   Bookmark,
   Download,
   Sparkles,
-  Mic,
+  Baby,
 } from 'lucide-react';
 
 import type { NavItem } from 'types/navigation.types';
@@ -19,7 +19,9 @@ export const NAV_ITEMS: NavItem[] = [
   { id: 'quran', labelKey: 'nav.quran', path: ROUTES.QURAN, icon: BookOpen },
   { id: 'hadith', labelKey: 'nav.hadith', path: ROUTES.HADITH, icon: ScrollText },
   { id: 'tafsir', labelKey: 'nav.tafsir', path: ROUTES.TAFSIR_SURAHS, icon: BookMarked },
-  { id: 'recitation-coach', labelKey: 'nav.recitationCoach', path: ROUTES.RECITATION_COACH, icon: Mic },
+  { id: 'kids', labelKey: 'nav.kids', path: ROUTES.KIDS, icon: Baby },
+  // Commented out until it's rebuilt as a full feature (see pages/RecitationCoachPage.tsx):
+  // { id: 'recitation-coach', labelKey: 'nav.recitationCoach', path: ROUTES.RECITATION_COACH, icon: Mic },
   { id: 'prayer-times', labelKey: 'nav.prayerTimes', path: ROUTES.PRAYER_TIMES, icon: Clock },
   { id: 'tasbeeh', labelKey: 'nav.tasbeeh', path: ROUTES.TASBEEH, icon: Hand },
   { id: 'duas', labelKey: 'nav.duas', path: ROUTES.DUAS, icon: Heart },

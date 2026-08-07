@@ -1,0 +1,114 @@
+.board {
+  position: relative;
+}
+
+.prompt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: fit-content;
+  margin: 0 auto 1rem;
+  background: var(--color-surface);
+  border: 3px solid var(--kids-emerald, var(--color-primary));
+  color: var(--color-text);
+  border-radius: 999px;
+  padding: 0.45rem 1.4rem 0.45rem 0.7rem;
+  font-weight: 800;
+  font-size: 1.15rem;
+}
+
+.promptFace {
+  font-size: 1.8rem;
+  line-height: 1;
+  color: var(--kids-emerald, var(--color-primary));
+  background: color-mix(in srgb, var(--kids-emerald, var(--color-primary)) 12%, #fff);
+  border-radius: 999px;
+  padding: 0.3rem 0.65rem;
+}
+
+.nudge {
+  position: absolute;
+  top: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 2px solid var(--kids-coral, var(--color-danger));
+  border-radius: 999px;
+  padding: 0.35rem 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  max-width: 26rem;
+  margin-inline: auto;
+}
+
+.hole {
+  position: relative;
+  aspect-ratio: 1;
+  border: 3px solid var(--color-border);
+  border-radius: 999px;
+  background: radial-gradient(circle at 50% 35%, #fff 0%, #dbe4ea 70%);
+  box-shadow: inset 0 6px 12px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.holeBonked {
+  border-color: var(--kids-emerald, var(--color-primary));
+  background: radial-gradient(
+    circle at 50% 35%,
+    color-mix(in srgb, var(--kids-emerald, var(--color-primary)) 30%, #fff) 0%,
+    #dbe4ea 70%
+  );
+}
+
+.mole {
+  display: grid;
+  place-items: center;
+  width: 74%;
+  height: 74%;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle at 35% 30%,
+    color-mix(in srgb, var(--kids-coral, #ff8965) 70%, #fff) 0%,
+    var(--kids-coral, #ff8965) 60%
+  );
+  color: #fff;
+  font-size: 1.9rem;
+  font-weight: 800;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  animation: popUp 0.18s ease-out;
+}
+
+@keyframes popUp {
+  from {
+    transform: translateY(40%) scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mole {
+    animation: none;
+  }
+}
+
+.attempts {
+  font-weight: 700;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}

@@ -1,0 +1,15 @@
+.shell {
+  min-height: 100dvh;
+}
+
+.content {
+  min-height: 100dvh;
+  position: relative;
+}
+
+.loading {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

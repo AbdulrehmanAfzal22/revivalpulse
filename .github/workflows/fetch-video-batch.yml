@@ -1,0 +1,36 @@
+# Phase 6-9 — automated background video refresh.
+# Runs weekly (every Monday 06:00 UTC) and on any push to main. The script
+# skips itself when the manifest is fresh and only downloads license-checked
+# clips; results are committed back so static hosting picks them up.
+name: fetch-video-batch
+on:
+  schedule:
+    - cron: '30 5 * * 1'
+  workflow_dispatch:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  fetch-media:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch licensed background video batch
+        env:
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PEXELS_INTERVAL_DAYS: ${{ vars.PEXELS_INTERVAL_DAYS || '90' }}
+        run: node scripts/fetchVideoBatch.mjs
+
+      - name: Commit staged media
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git config user.name "media-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add public/media/background
+            git commit -m "media: refresh background video batch (auto)"
+            git push
+          else
+            echo "no media changes (cache hit or dry run) - nothing to commit"
+          fi

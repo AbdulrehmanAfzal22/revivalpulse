@@ -1,4 +1,13 @@
 :root {
+  /*
+   * App-wide text scale (Settings > Text size). AccessibilityStyleApplier
+   * writes the user's scale here as `--app-font-scale` (1 = default). This
+   * is the SINGLE place the root font-size is computed — kids mode multiplies
+   * it via html.kids-active (kidsTheme.css). Never inline-pin html font-size
+   * elsewhere, or the kids scope can't scale on top.
+   */
+  --app-font-scale: 1;
+
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Naskh Arabic',
     'Noto Nastaliq Urdu', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue',
     sans-serif;
@@ -41,6 +50,10 @@
   --z-dialog: 300;
 
   color-scheme: light;
+}
+
+html {
+  font-size: calc(16px * var(--app-font-scale, 1));
 }
 
 :root[data-theme='dark'] {

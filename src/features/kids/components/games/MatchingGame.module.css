@@ -1,0 +1,136 @@
+.grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.75rem;
+  max-width: 44rem;
+}
+
+/* 5 pairs face-up = 10 cards: two rows on phones, one wide row on tablets. */
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-md);
+  border: 3px solid var(--color-border);
+  background: var(--color-surface);
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+  transition: border-color 0.15s ease, transform 0.1s ease;
+}
+
+.card:hover:not(.cardPaired) {
+  border-color: var(--kids-coral, var(--color-primary));
+  transform: translateY(-2px);
+}
+
+.cardSelected {
+  border-color: var(--kids-sky, var(--color-primary));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--kids-sky, var(--color-primary)) 45%, transparent);
+}
+
+.cardPaired {
+  border-color: var(--color-primary);
+  opacity: 0.65;
+  cursor: default;
+}
+
+.cardText,
+.cardName {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 0 0.3rem;
+}
+
+.cardText {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: var(--kids-emerald, var(--color-primary));
+}
+
+.cardName {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.cardCheck {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.65rem;
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  font-weight: 800;
+  font-size: 1rem;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.cardPaired .cardCheck {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.attempts {
+  font-weight: 700;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.nudge {
+  position: absolute;
+  top: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 2px solid var(--kids-coral, var(--color-danger));
+  border-radius: 999px;
+  padding: 0.35rem 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  animation: drift 1.6s ease-out forwards;
+}
+
+@keyframes drift {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nudge {
+    animation: none;
+  }
+}
+
+/* Tablet sizing pass (Phase 14): fewer, larger cards on small screens. */
+@media (max-width: 420px) {
+  .grid {
+    gap: 0.5rem;
+  }
+}

@@ -1,0 +1,40 @@
+.back {
+  position: absolute;
+  /* Inset from the top-left corner so the pill never touches the screen edges
+     (a little breathing room over the always-present overlay). */
+  top: 1rem;
+  inset-inline-start: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid rgb(255 255 255 / 0.28);
+  border-radius: 999px;
+  /* 0.55 over the always-present 0.62 overlay = effective bg ~0.17 on a pure
+     white frame -> ~4.7:1, WCAG AA for the label regardless of video. */
+  background: rgb(0 0 0 / 0.55);
+  color: #ffffff;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgb(0 0 0 / 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.back:hover {
+  background: rgb(0 0 0 / 0.68);
+  border-color: rgb(255 255 255 / 0.45);
+}
+
+.icon {
+  flex-shrink: 0;
+}
+
+/* In RTL interfaces the "back" affordance points right. */
+[dir='rtl'] .icon {
+  transform: scaleX(-1);
+}

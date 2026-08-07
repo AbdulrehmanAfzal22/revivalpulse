@@ -1,0 +1,95 @@
+.shell {
+  display: grid;
+  gap: 1rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.title {
+  flex: 1;
+  min-width: 0;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 700;
+  color: var(--kids-sunshine, var(--color-primary));
+  background: var(--color-surface-raised);
+  border: 2px solid var(--color-border);
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  min-height: 48px;
+}
+
+.board {
+  position: relative;
+  min-height: 12rem;
+}
+
+.winOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--color-bg) 70%, transparent);
+  backdrop-filter: blur(3px);
+}
+
+.winCard {
+  position: relative;
+  display: grid;
+  gap: 0.75rem;
+  justify-items: center;
+  text-align: center;
+  background: var(--color-surface);
+  border: 3px solid var(--kids-sunshine, var(--color-primary));
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.25rem;
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--kids-sunshine, var(--color-primary)) 20%, transparent);
+}
+
+.winTitle {
+  color: var(--kids-emerald, var(--color-primary));
+}
+
+.winCallout {
+  font-weight: 600;
+}
+
+.winActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .winCard {
+    animation: pop-in 0.3s ease-out;
+  }
+}
+
+@keyframes pop-in {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
