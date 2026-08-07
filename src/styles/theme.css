@@ -24,32 +24,151 @@
    */
   --reader-arabic-font: 'Reader Uthmani', serif;
 
-  --color-bg: #ffffff;
-  --color-surface: #f7f7f8;
-  --color-surface-raised: #ffffff;
-  --color-border: #e2e2e6;
-  --color-text: #17181c;
-  --color-text-muted: #5c5f66;
-  --color-primary: #0f7a5c;
-  --color-primary-hover: #0c6249;
-  --color-primary-contrast: #ffffff;
+  /* ==========================================================================
+     Refined Islamic Color Palette (Dark Theme Foundation)
+     ========================================================================== */
+  /* Deep navy/charcoal backgrounds */
+  --color-bg: #0a0d12;
+  --color-bg-elevated: #10141a;
+  --color-bg-subtle: #161b22;
+
+  /* Surfaces with subtle warmth */
+  --color-surface: #131820;
+  --color-surface-raised: #1a1f2b;
+  --color-surface-hover: #1e2430;
+  --color-surface-pressed: #232a3a;
+
+  /* Borders with subtle gold glow potential */
+  --color-border: #242b3a;
+  --color-border-subtle: #1e2430;
+  --color-border-focus: #c9a84c;
+
+  /* Text hierarchy */
+  --color-text: #f0efe8;
+  --color-text-secondary: #c8c4b8;
+  --color-text-muted: #8a867a;
+  --color-text-subtle: #6a665c;
+
+  /* Islamic Gold/Amber Accent System */
+  --color-gold: #d4af37;
+  --color-gold-light: #e8c56d;
+  --color-gold-soft: #c9a84c;
+  --color-gold-muted: #a68b3a;
+  --color-gold-glow: rgba(212, 175, 55, 0.35);
+  --color-gold-glow-strong: rgba(212, 175, 55, 0.55);
+
+  /* Teal/Emerald Highlight System */
+  --color-teal: #2ea089;
+  --color-teal-light: #3ab396;
+  --color-teal-soft: #268d76;
+  --color-teal-muted: #1d6b5a;
+  --color-teal-glow: rgba(46, 160, 137, 0.3);
+  --color-teal-glow-strong: rgba(46, 160, 137, 0.5);
+
+  /* Semantic color mappings (preserving existing API) */
+  --color-primary: var(--color-teal);
+  --color-primary-hover: var(--color-teal-light);
+  --color-primary-contrast: #08130f;
+  --color-primary-soft: var(--color-teal-glow);
+
+  --color-secondary: var(--color-gold);
+  --color-secondary-hover: var(--color-gold-light);
+  --color-secondary-contrast: #1a1608;
+  --color-secondary-soft: var(--color-gold-glow);
+
   --color-danger: #d64545;
-  --color-overlay: rgb(0 0 0 / 45%);
-  --color-focus-ring: #0f7a5c;
+  --color-danger-hover: #e06060;
+  --color-danger-soft: rgba(214, 69, 69, 0.25);
 
-  --shadow-sm: 0 1px 2px rgb(0 0 0 / 6%);
-  --shadow-md: 0 4px 16px rgb(0 0 0 / 12%);
-  --shadow-lg: 0 12px 32px rgb(0 0 0 / 18%);
+  --color-overlay: rgb(0 0 0 / 60%);
+  --color-overlay-strong: rgb(0 0 0 / 75%);
 
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
+  /* Focus ring using gold for warmth */
+  --color-focus-ring: var(--color-gold-soft);
 
+  /* ==========================================================================
+     Refined Shadow System (Multi-layer for depth)
+     ========================================================================== */
+  --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow-sm: 0 2px 8px rgb(0 0 0 / 0.35);
+  --shadow-md: 0 8px 24px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 16px 40px rgb(0 0 0 / 0.45);
+  --shadow-xl: 0 24px 56px rgb(0 0 0 / 0.5);
+
+  /* Gold-tinted shadows for special elements */
+  --shadow-gold-sm: 0 2px 8px var(--color-gold-glow);
+  --shadow-gold-md: 0 8px 24px var(--color-gold-glow);
+  --shadow-gold-lg: 0 16px 40px var(--color-gold-glow-strong);
+
+  /* Teal-tinted shadows */
+  --shadow-teal-sm: 0 2px 8px var(--color-teal-glow);
+  --shadow-teal-md: 0 8px 24px var(--color-teal-glow);
+  --shadow-teal-lg: 0 16px 40px var(--color-teal-glow-strong);
+
+  /* Inner shadows for pressed states */
+  --shadow-inset: inset 0 2px 4px rgb(0 0 0 / 0.3);
+  --shadow-inset-lg: inset 0 4px 12px rgb(0 0 0 / 0.4);
+
+  /* ==========================================================================
+     Refined Radius System
+     ========================================================================== */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-full: 9999px;
+
+  /* ==========================================================================
+     Spacing Scale (8px base)
+     ========================================================================== */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.25rem;  /* 20px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
+  --space-10: 2.5rem;  /* 40px */
+  --space-12: 3rem;    /* 48px */
+  --space-16: 4rem;    /* 64px */
+
+  /* ==========================================================================
+     Motion & Animation Tokens
+     ========================================================================== */
+  --duration-instant: 50ms;
+  --duration-fast: 120ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+  --duration-slower: 500ms;
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
+  --ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-gentle: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* Stagger delay for list animations */
+  --stagger-delay: 60ms;
+
+  /* ==========================================================================
+     Arabic Typography Enhancements
+     ========================================================================== */
+  --arabic-line-height: 2.2;
+  --arabic-line-height-tight: 1.9;
+  --arabic-letter-spacing: 0.02em;
+
+  /* ==========================================================================
+     Z-Index Scale
+     ========================================================================== */
   --z-navbar: 100;
   --z-drawer: 200;
   --z-dialog: 300;
+  --z-tooltip: 400;
+  --z-toast: 500;
 
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 html {
