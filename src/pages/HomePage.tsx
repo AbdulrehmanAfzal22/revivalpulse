@@ -11,22 +11,28 @@ import styles from './HomePage.module.css';
 
 export default function HomePage() {
   return (
-    <div className={styles.page}>
-      <Typography variant="h2" className={styles.heading}>
-        Welcome to IslamicWeb
-      </Typography>
+    <div className="container">
+      <div className={styles.page}>
+        <Typography variant="h2" className={styles.heading}>
+          Welcome to IslamicWeb
+        </Typography>
 
-      <KidsModeEntry />
+        <div className="banner">
+          <KidsModeEntry />
+        </div>
 
-      <ContinueReading />
+        <div className="banner">
+          <ContinueReading />
+        </div>
 
-      <div className={styles.widgetGrid}>
-        <PrayerCountdownWidget />
-        <IslamicDateWidget />
-        <AyahOfTheDay />
-        <HadithOfTheDay />
-        <DuaOfTheDay />
-        <NameReflection />
+        <div className="grid-dashboard">
+          <PrayerCountdownWidget />
+          <IslamicDateWidget />
+          <AyahOfTheDay />
+          <HadithOfTheDay />
+          <DuaOfTheDay />
+          <NameReflection />
+        </div>
       </div>
     </div>
   );

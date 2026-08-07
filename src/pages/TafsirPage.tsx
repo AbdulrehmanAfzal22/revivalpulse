@@ -35,7 +35,7 @@ export default function TafsirPage() {
 
   if (!surah || !Number.isInteger(verseNumber) || verseNumber < 1 || verseNumber > surah.versesCount) {
     return (
-      <div className={styles.page}>
+      <div className="container-reading">
         <Link to={ROUTES.TAFSIR_SURAHS} className={styles.backLink}>
           <ArrowLeft size={14} />
           {t('tafsir.backToSurahs')}
@@ -52,7 +52,7 @@ export default function TafsirPage() {
   const nextAyah = verseNumber < surah.versesCount ? verseNumber + 1 : null;
 
   return (
-    <div className={styles.page}>
+    <div className="container-reading">
       <Link to={ROUTES.TAFSIR_SURAHS} className={styles.backLink}>
         <ArrowLeft size={14} />
         {t('tafsir.backToSurahs')}

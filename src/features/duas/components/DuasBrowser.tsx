@@ -30,7 +30,7 @@ export default function DuasBrowser({ duas }: DuasBrowserProps) {
       {items.length === 0 ? (
         <EmptyState title={t('emptyState.duas.categoryEmpty')} />
       ) : (
-        <div className={styles.list}>
+        <div className="grid-auto" role="list">
           {items.map((dua) => (
             <DuaCard key={dua.id} dua={dua} />
           ))}

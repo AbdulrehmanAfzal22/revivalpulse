@@ -37,58 +37,60 @@ export default function PrayerTimesPage() {
   const prayerTimes = usePrayerTimes(activeCoordinates, calculationMethodId);
 
   return (
-    <div className={styles.page}>
-      <Typography variant="h2">{t('prayerTimes.title')}</Typography>
+    <div className="container">
+      <div className={styles.page}>
+        <Typography variant="h2">{t('prayerTimes.title')}</Typography>
 
-      <Card className={styles.settingsCard}>
-        <LocationPicker
-          activeLocationLabel={activeLabel}
-          geolocationStatus={geolocation.status}
-          onUseDeviceLocation={() => {
-            setManualLocation(null);
-            geolocation.requestLocation();
-          }}
-          onSelectCity={(city) =>
-            setManualLocation({
-              latitude: city.latitude,
-              longitude: city.longitude,
-              label: `${city.name}, ${city.country}`,
-              source: 'manual',
-            })
-          }
-        />
-        <CalculationMethodSelector value={calculationMethodId} onChange={setCalculationMethodId} />
-      </Card>
+        <Card className={styles.settingsCard}>
+          <LocationPicker
+            activeLocationLabel={activeLabel}
+            geolocationStatus={geolocation.status}
+            onUseDeviceLocation={() => {
+              setManualLocation(null);
+              geolocation.requestLocation();
+            }}
+            onSelectCity={(city) =>
+              setManualLocation({
+                latitude: city.latitude,
+                longitude: city.longitude,
+                label: `${city.name}, ${city.country}`,
+                source: 'manual',
+              })
+            }
+          />
+          <CalculationMethodSelector value={calculationMethodId} onChange={setCalculationMethodId} />
+        </Card>
 
-      {!activeCoordinates && geolocation.status !== 'loading' && (
-        <EmptyState title={t('emptyState.prayerTimes.setLocation')} />
-      )}
+        {!activeCoordinates && geolocation.status !== 'loading' && (
+          <EmptyState title={t('emptyState.prayerTimes.setLocation')} />
+        )}
 
-      {activeCoordinates && prayerTimes.isPending && (
-        <div aria-busy="true" aria-label={t('prayerTimes.loadingPrayerTimes')}>
-          <Skeleton variant="rect" height="8rem" />
-          <Skeleton variant="text" count={6} />
-        </div>
-      )}
+        {activeCoordinates && prayerTimes.isPending && (
+          <div aria-busy="true" aria-label={t('prayerTimes.loadingPrayerTimes')}>
+            <Skeleton variant="rect" height="8rem" />
+            <Skeleton variant="text" count={6} />
+          </div>
+        )}
 
-      {activeCoordinates && prayerTimes.isError && (
-        <EmptyState
-          title={t('emptyState.prayerTimes.loadFailed')}
-          description={prayerTimes.error.message}
-          action={
-            <Button
-              variant="secondary"
-              onClick={() => prayerTimes.refetch()}
-              disabled={prayerTimes.isFetching}
-              leadingIcon={<RotateCw size={16} />}
-            >
-              {t('common.retry')}
-            </Button>
-          }
-        />
-      )}
+        {activeCoordinates && prayerTimes.isError && (
+          <EmptyState
+            title={t('emptyState.prayerTimes.loadFailed')}
+            description={prayerTimes.error.message}
+            action={
+              <Button
+                variant="secondary"
+                onClick={() => prayerTimes.refetch()}
+                disabled={prayerTimes.isFetching}
+                leadingIcon={<RotateCw size={16} />}
+              >
+                {t('common.retry')}
+              </Button>
+            }
+          />
+        )}
 
-      {activeCoordinates && prayerTimes.data && <PrayerTimesList result={prayerTimes.data} />}
+        {activeCoordinates && prayerTimes.data && <PrayerTimesList result={prayerTimes.data} />}
+      </div>
     </div>
   );
 }

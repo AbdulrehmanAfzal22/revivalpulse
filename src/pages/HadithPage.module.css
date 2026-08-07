@@ -1,7 +1,4 @@
 .page {
-  max-width: 48rem;
-  margin-inline: auto;
-  padding: 1.5rem 1rem 3rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -31,41 +28,38 @@
   outline: none;
 }
 
-.list {
+.card {
   display: flex;
   flex-direction: column;
-  list-style: none;
-  margin: 0;
-  padding: 0;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   overflow: hidden;
+  background-color: var(--color-surface-raised);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
 }
 
-.row {
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.cardLink {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.25rem 0.5rem 0.25rem 1rem;
-  border-block-end: 1px solid var(--color-border);
-}
-
-.row:last-child {
-  border-block-end: none;
-}
-
-.rowLink {
-  display: flex;
-  align-items: center;
-  gap: 0.875rem;
-  flex: 1;
-  min-width: 0;
-  padding: 0.625rem 0;
+  flex-direction: column;
+  padding: 1rem;
   text-decoration: none;
   color: inherit;
 }
 
-.rowText {
+@media (min-width: 640px) {
+  .cardLink {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.875rem;
+  }
+}
+
+.cardText {
   display: flex;
   flex-direction: column;
   gap: 0.125rem;
@@ -73,12 +67,12 @@
   min-width: 0;
 }
 
-.rowTitle {
+.cardTitle {
   font-weight: 600;
   color: var(--color-text);
 }
 
-.rowSubtitle {
+.cardSubtitle {
   font-size: 0.8125rem;
   color: var(--color-text-muted);
 }
@@ -89,4 +83,12 @@
   flex-shrink: 0;
   font-family: var(--reader-arabic-font, 'Reader Uthmani', serif);
   line-height: 1.8;
+  padding-block-start: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .arabicName {
+    padding-block-start: 0;
+    padding-inline-start: 1rem;
+  }
 }

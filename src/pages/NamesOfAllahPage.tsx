@@ -16,42 +16,44 @@ export default function NamesOfAllahPage() {
   const navigate = useNavigate();
 
   return (
-    <div className={styles.page}>
-      <div className={styles.header}>
-        <Typography variant="h2">{t('namesOfAllah.title')}</Typography>
-        <Button
-          variant="primary"
-          onClick={() => navigate(ROUTES.NAMES_OF_ALLAH_IMMERSIVE)}
-          leadingIcon={<Sparkles size={16} />}
-        >
-          {t('namesOfAllah.immersiveExperience')}
-        </Button>
-      </div>
-
-      {isPending && (
-        <div className={styles.grid} aria-busy="true" aria-label={t('namesOfAllah.loadingNames')}>
-          <Skeleton variant="rect" height="6.5rem" count={12} />
+    <div className="container">
+      <div className={styles.page}>
+        <div className={styles.header}>
+          <Typography variant="h2">{t('namesOfAllah.title')}</Typography>
+          <Button
+            variant="primary"
+            onClick={() => navigate(ROUTES.NAMES_OF_ALLAH_IMMERSIVE)}
+            leadingIcon={<Sparkles size={16} />}
+          >
+            {t('namesOfAllah.immersiveExperience')}
+          </Button>
         </div>
-      )}
 
-      {isError && (
-        <EmptyState
-          title={t('emptyState.namesOfAllah.loadFailed')}
-          description={error.message}
-          action={
-            <Button
-              variant="secondary"
-              onClick={() => refetch()}
-              disabled={isFetching}
-              leadingIcon={<RotateCw size={16} />}
-            >
-              {t('common.retry')}
-            </Button>
-          }
-        />
-      )}
+        {isPending && (
+          <div className="grid-auto" aria-busy="true" aria-label={t('namesOfAllah.loadingNames')}>
+            <Skeleton variant="rect" height="6.5rem" count={12} />
+          </div>
+        )}
 
-      {data && <NamesOfAllahGrid names={data} />}
+        {isError && (
+          <EmptyState
+            title={t('emptyState.namesOfAllah.loadFailed')}
+            description={error.message}
+            action={
+              <Button
+                variant="secondary"
+                onClick={() => refetch()}
+                disabled={isFetching}
+                leadingIcon={<RotateCw size={16} />}
+              >
+                {t('common.retry')}
+              </Button>
+            }
+          />
+        )}
+
+        {data && <NamesOfAllahGrid names={data} />}
+      </div>
     </div>
   );
 }

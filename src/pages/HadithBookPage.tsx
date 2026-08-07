@@ -19,7 +19,7 @@ export default function HadithBookPage() {
 
   if (!book) {
     return (
-      <div className={styles.page}>
+      <div className="container">
         <EmptyState title={t('hadith.bookNotFoundTitle')} description={t('hadith.bookNotFoundDescription')} />
       </div>
     );
@@ -28,7 +28,8 @@ export default function HadithBookPage() {
   const isFavorite = isFavoriteHadithBook(favorites, book.slug);
 
   return (
-    <div className={styles.page}>
+    <div className="container">
+      <div className={styles.page}>
       <header className={styles.header}>
         <div className={styles.headerTop}>
           <Typography variant="caption" muted>
@@ -50,7 +51,8 @@ export default function HadithBookPage() {
         </Typography>
       </header>
 
-      <HadithBookView book={book} />
+<HadithBookView book={book} />
+      </div>
     </div>
   );
 }

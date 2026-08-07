@@ -24,49 +24,51 @@ export default function TafsirSurahListPage() {
   }, [query]);
 
   return (
-    <div className={styles.page}>
-      <Typography variant="h2">{t('tafsir.selectSurahTitle')}</Typography>
-      <Typography variant="body" muted>
-        {t('tafsir.selectSurahDescription')}
-      </Typography>
+    <div className="container">
+      <div className={styles.page}>
+        <Typography variant="h2">{t('tafsir.selectSurahTitle')}</Typography>
+        <Typography variant="body" muted>
+          {t('tafsir.selectSurahDescription')}
+        </Typography>
 
-      <label className={styles.searchField}>
-        <Search size={16} className={styles.searchIcon} />
-        <input
-          type="search"
-          placeholder={t('quran.searchSurahsPlaceholder')}
-          className={styles.searchInput}
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-        />
-      </label>
+        <label className={styles.searchField}>
+          <Search size={16} className={styles.searchIcon} />
+          <input
+            type="search"
+            placeholder={t('quran.searchSurahsPlaceholder')}
+            className={styles.searchInput}
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+          />
+        </label>
 
-      {filteredSurahs.length === 0 ? (
-        <EmptyState title={t('emptyState.quran.noSurahsMatch')} />
-      ) : (
-        <ul className={styles.list}>
-          {filteredSurahs.map((surah) => (
-            <li key={surah.id}>
-              <Link to={buildTafsirSurahPath(surah.id)} className={styles.row}>
-                <span className={styles.number}>{surah.id}</span>
-                <span className={styles.rowText}>
-                  <span className={styles.rowTitle}>{surah.nameSimple}</span>
-                  <span className={styles.rowSubtitle}>
-                    {t('quran.nameVersesPlace', {
-                      name: surah.translatedName,
-                      count: surah.versesCount,
-                      place: surah.revelationPlace === 'makkah' ? t('quran.meccan') : t('quran.medinan'),
-                    })}
+        {filteredSurahs.length === 0 ? (
+          <EmptyState title={t('emptyState.quran.noSurahsMatch')} />
+        ) : (
+          <ul className="grid-auto" role="list">
+            {filteredSurahs.map((surah) => (
+              <li key={surah.id} className={styles.card}>
+                <Link to={buildTafsirSurahPath(surah.id)} className={styles.cardLink}>
+                  <span className={styles.number}>{surah.id}</span>
+                  <span className={styles.cardText}>
+                    <span className={styles.cardTitle}>{surah.nameSimple}</span>
+                    <span className={styles.cardSubtitle}>
+                      {t('quran.nameVersesPlace', {
+                        name: surah.translatedName,
+                        count: surah.versesCount,
+                        place: surah.revelationPlace === 'makkah' ? t('quran.meccan') : t('quran.medinan'),
+                      })}
+                    </span>
                   </span>
-                </span>
-                <span className={styles.arabicName} dir="rtl" lang="ar">
-                  {surah.nameArabic}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+                  <span className={styles.arabicName} dir="rtl" lang="ar">
+                    {surah.nameArabic}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }

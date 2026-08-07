@@ -25,51 +25,53 @@ export default function HadithPage() {
   }, [query]);
 
   return (
-    <div className={styles.page}>
-      <Typography variant="h2">{t('hadith.title')}</Typography>
+    <div className="container">
+      <div className={styles.page}>
+        <Typography variant="h2">{t('hadith.title')}</Typography>
 
-      <label className={styles.searchField}>
-        <Search size={16} className={styles.searchIcon} />
-        <input
-          type="search"
-          placeholder={t('hadith.searchBooksPlaceholder')}
-          className={styles.searchInput}
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-        />
-      </label>
+        <label className={styles.searchField}>
+          <Search size={16} className={styles.searchIcon} />
+          <input
+            type="search"
+            placeholder={t('hadith.searchBooksPlaceholder')}
+            className={styles.searchInput}
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+          />
+        </label>
 
-      {filteredBooks.length === 0 ? (
-        <EmptyState title={t('emptyState.hadith.noBooksMatch')} />
-      ) : (
-        <ul className={styles.list}>
-          {filteredBooks.map((book) => {
-            const isFavorite = isFavoriteHadithBook(favorites, book.slug);
-            return (
-              <li key={book.slug} className={styles.row}>
-                <Link to={buildHadithBookPath(book.slug)} className={styles.rowLink}>
-                  <span className={styles.rowText}>
-                    <span className={styles.rowTitle}>{book.nameEnglish}</span>
-                    <span className={styles.rowSubtitle}>
-                      {book.authorEnglish} · {tp('hadith.hadithsCount', book.totalHadiths)}
+        {filteredBooks.length === 0 ? (
+          <EmptyState title={t('emptyState.hadith.noBooksMatch')} />
+        ) : (
+          <ul className="grid-auto" role="list">
+            {filteredBooks.map((book) => {
+              const isFavorite = isFavoriteHadithBook(favorites, book.slug);
+              return (
+                <li key={book.slug} className={styles.card}>
+                  <Link to={buildHadithBookPath(book.slug)} className={styles.cardLink}>
+                    <span className={styles.cardText}>
+                      <span className={styles.cardTitle}>{book.nameEnglish}</span>
+                      <span className={styles.cardSubtitle}>
+                        {book.authorEnglish} · {tp('hadith.hadithsCount', book.totalHadiths)}
+                      </span>
                     </span>
-                  </span>
-                  <span className={styles.arabicName} dir="rtl" lang="ar">
-                    {book.nameArabic}
-                  </span>
-                </Link>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => toggleFavoriteHadithBook(book.slug)}
-                  aria-label={isFavorite ? t('hadith.removeFromFavorites') : t('hadith.addToFavorites')}
-                  leadingIcon={<Star size={14} fill={isFavorite ? 'currentColor' : 'none'} />}
-                />
-              </li>
-            );
-          })}
-        </ul>
-      )}
+                    <span className={styles.arabicName} dir="rtl" lang="ar">
+                      {book.nameArabic}
+                    </span>
+                  </Link>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => toggleFavoriteHadithBook(book.slug)}
+                    aria-label={isFavorite ? t('hadith.removeFromFavorites') : t('hadith.addToFavorites')}
+                    leadingIcon={<Star size={14} fill={isFavorite ? 'currentColor' : 'none'} />}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }

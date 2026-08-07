@@ -36,97 +36,99 @@ export default function QuranPage() {
   }, [query]);
 
   return (
-    <div className={styles.page}>
-      <Typography variant="h2">{t('quran.title')}</Typography>
+    <div className="container">
+      <div className={styles.page}>
+        <Typography variant="h2">{t('quran.title')}</Typography>
 
-      <div className={styles.tabs} role="tablist">
-        <button
-          type="button"
-          role="tab"
-          aria-selected={tab === 'surahs'}
-          className={[styles.tab, tab === 'surahs' && styles.tabActive].filter(Boolean).join(' ')}
-          onClick={() => setTab('surahs')}
-        >
-          {t('quran.tabSurahs')}
-        </button>
-        <button
-          type="button"
-          role="tab"
-          aria-selected={tab === 'juz'}
-          className={[styles.tab, tab === 'juz' && styles.tabActive].filter(Boolean).join(' ')}
-          onClick={() => setTab('juz')}
-        >
-          {t('quran.tabJuz')}
-        </button>
-      </div>
+        <div className={styles.tabs} role="tablist">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={tab === 'surahs'}
+            className={[styles.tab, tab === 'surahs' && styles.tabActive].filter(Boolean).join(' ')}
+            onClick={() => setTab('surahs')}
+          >
+            {t('quran.tabSurahs')}
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={tab === 'juz'}
+            className={[styles.tab, tab === 'juz' && styles.tabActive].filter(Boolean).join(' ')}
+            onClick={() => setTab('juz')}
+          >
+            {t('quran.tabJuz')}
+          </button>
+        </div>
 
-      {tab === 'surahs' && (
-        <>
-          <label className={styles.searchField}>
-            <Search size={16} className={styles.searchIcon} />
-            <input
-              type="search"
-              placeholder={t('quran.searchSurahsPlaceholder')}
-              className={styles.searchInput}
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-            />
-          </label>
+        {tab === 'surahs' && (
+          <>
+            <label className={styles.searchField}>
+              <Search size={16} className={styles.searchIcon} />
+              <input
+                type="search"
+                placeholder={t('quran.searchSurahsPlaceholder')}
+                className={styles.searchInput}
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+              />
+            </label>
 
-          {filteredSurahs.length === 0 ? (
-            <EmptyState title={t('emptyState.quran.noSurahsMatch')} />
-          ) : (
-            <ul className={styles.list}>
-              {filteredSurahs.map((surah) => (
-                <li key={surah.id}>
-                  <Link to={`/quran/${surah.id}`} className={styles.row}>
-                    <span className={styles.number}>{surah.id}</span>
-                    <span className={styles.rowText}>
-                      <span className={styles.rowTitle}>{surah.nameSimple}</span>
-                      <span className={styles.rowSubtitle}>
-                        {t('quran.nameVersesPlace', {
-                          name: surah.translatedName,
-                          count: surah.versesCount,
-                          place: surah.revelationPlace === 'makkah' ? t('quran.meccan') : t('quran.medinan'),
-                        })}
+            {filteredSurahs.length === 0 ? (
+              <EmptyState title={t('emptyState.quran.noSurahsMatch')} />
+            ) : (
+              <ul className="grid-auto" role="list">
+                {filteredSurahs.map((surah) => (
+                  <li key={surah.id} className={styles.card}>
+                    <Link to={`/quran/${surah.id}`} className={styles.cardLink}>
+                      <span className={styles.number}>{surah.id}</span>
+                      <span className={styles.cardText}>
+                        <span className={styles.cardTitle}>{surah.nameSimple}</span>
+                        <span className={styles.cardSubtitle}>
+                          {t('quran.nameVersesPlace', {
+                            name: surah.translatedName,
+                            count: surah.versesCount,
+                            place: surah.revelationPlace === 'makkah' ? t('quran.meccan') : t('quran.medinan'),
+                          })}
+                        </span>
                       </span>
-                    </span>
-                    <span className={styles.arabicName} dir="rtl" lang="ar">
-                      {surah.nameArabic}
+                      <span className={styles.arabicName} dir="rtl" lang="ar">
+                        {surah.nameArabic}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </>
+        )}
+
+        {tab === 'juz' && (
+          <ul className="grid-auto" role="list">
+            {JUZ_BOUNDARIES.map((juz) => {
+              const start = surahLinkFromVerseKey(juz.firstVerseKey);
+              const end = surahLinkFromVerseKey(juz.lastVerseKey);
+              return (
+                <li key={juz.juzNumber} className={styles.card}>
+                  <Link
+                    to={`/quran/${start.surahId}?ayah=${start.ayah}`}
+                    className={styles.cardLink}
+                  >
+                    <span className={styles.number}>{juz.juzNumber}</span>
+                    <span className={styles.cardText}>
+                      <span className={styles.cardTitle}>{t('quran.juzLabel', { number: juz.juzNumber })}</span>
+                      <span className={styles.cardSubtitle}>
+                        {surahNameById(start.surahId)} {juz.firstVerseKey} – {surahNameById(end.surahId)}{' '}
+                        {juz.lastVerseKey}
+                      </span>
                     </span>
                   </Link>
                 </li>
-              ))}
-            </ul>
-          )}
-        </>
-      )}
-
-      {tab === 'juz' && (
-        <ul className={styles.list}>
-          {JUZ_BOUNDARIES.map((juz) => {
-            const start = surahLinkFromVerseKey(juz.firstVerseKey);
-            const end = surahLinkFromVerseKey(juz.lastVerseKey);
-            return (
-              <li key={juz.juzNumber}>
-                <Link
-                  to={`/quran/${start.surahId}?ayah=${start.ayah}`}
-                  className={styles.row}
-                >
-                  <span className={styles.number}>{juz.juzNumber}</span>
-                  <span className={styles.rowText}>
-                    <span className={styles.rowTitle}>{t('quran.juzLabel', { number: juz.juzNumber })}</span>
-                    <span className={styles.rowSubtitle}>
-                      {surahNameById(start.surahId)} {juz.firstVerseKey} – {surahNameById(end.surahId)}{' '}
-                      {juz.lastVerseKey}
-                    </span>
-                  </span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      )}
+              );
+            })}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }

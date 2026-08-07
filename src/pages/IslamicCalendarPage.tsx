@@ -60,10 +60,11 @@ export default function IslamicCalendarPage() {
   }
 
   return (
-    <div className={styles.page}>
-      <Typography variant="h2">{t('islamicCalendar.title')}</Typography>
+    <div className="container">
+      <div className={styles.page}>
+        <Typography variant="h2">{t('islamicCalendar.title')}</Typography>
 
-      {today.data && (
+        {today.data && (
         <Card elevation="raised" className={styles.todayCard}>
           <Typography variant="caption" muted>
             {t('islamicCalendar.today')}
@@ -132,6 +133,7 @@ export default function IslamicCalendarPage() {
         </Typography>
         {upcomingEvents.isPending && <Skeleton variant="rect" height="4rem" count={3} />}
         {upcomingEvents.data && <UpcomingEventsList events={upcomingEvents.data} />}
+      </div>
       </div>
     </div>
   );

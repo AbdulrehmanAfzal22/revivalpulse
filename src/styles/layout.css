@@ -1,0 +1,306 @@
+/**
+ * Responsive Layout System
+ *
+ * Breakpoint-driven containers following quran.com's approach:
+ * - Mobile (<640px): full width, standard padding
+ * - Tablet (640-1024px): container widens, 2-column grids where content allows
+ * - Desktop (1024-1440px): full grid layouts, 2-4 columns depending on section
+ * - Large desktop (1440px+): cap outer container ~1400px max, use full width up to cap with proper grids
+ *
+ * Reading content (Quran verses, Tafsir, full Hadith, Duas) keeps comfortable
+ * reading width (~700-800px / 44-50rem) even on large screens.
+ * Everything AROUND reading content (nav, dashboard cards, list pages) uses real width.
+ */
+
+/* ==========================================================================
+   Breakpoint Tokens
+   ========================================================================== */
+:root {
+  --bp-sm: 640px;   /* tablet */
+  --bp-md: 1024px;  /* desktop */
+  --bp-lg: 1440px;  /* large desktop */
+  --bp-xl: 1600px;  /* ultra-wide reference */
+}
+
+/* ==========================================================================
+   Container Widths (max-width at each breakpoint)
+   ========================================================================== */
+:root {
+  /* Full-width containers for dashboards, lists, navigation */
+  --container-sm: 100%;
+  --container-md: calc(100% - 3rem);
+  --container-lg: calc(100% - 4rem);
+  --container-xl: 87.5rem;   /* 1400px cap for large desktop */
+
+  /* Reading content containers (comfortable reading width) */
+  --container-reading-sm: 100%;
+  --container-reading-md: calc(100% - 3rem);
+  --container-reading-lg: 50rem;   /* 800px - comfortable reading width */
+  --container-reading-xl: 50rem;   /* capped at reading width */
+
+  /* Narrow containers for forms, settings, focused content */
+  --container-narrow-sm: 100%;
+  --container-narrow-md: 48rem;    /* 768px */
+  --container-narrow-lg: 48rem;
+  --container-narrow-xl: 48rem;
+
+  /* Standard spacing tokens */
+  --space-container-sm: 1rem;
+  --space-container-md: 1.5rem;
+  --space-container-lg: 2rem;
+  --space-container-xl: 2.5rem;
+}
+
+/* ==========================================================================
+   Layout Utility Classes (global, not CSS Modules)
+   ========================================================================== */
+
+/* Full-width responsive container for dashboards, lists, grids */
+.container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--space-container-sm);
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: var(--container-md);
+    padding-inline: var(--space-container-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: var(--container-lg);
+    padding-inline: var(--space-container-lg);
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    max-width: var(--container-xl);
+    padding-inline: var(--space-container-xl);
+  }
+}
+
+/* Reading content container - capped at comfortable reading width */
+.container-reading {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--space-container-sm);
+}
+
+@media (min-width: 640px) {
+  .container-reading {
+    max-width: var(--container-reading-md);
+    padding-inline: var(--space-container-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-reading {
+    max-width: var(--container-reading-lg);
+    padding-inline: var(--space-container-lg);
+  }
+}
+
+@media (min-width: 1440px) {
+  .container-reading {
+    max-width: var(--container-reading-xl);
+    padding-inline: var(--space-container-xl);
+  }
+}
+
+/* Narrow container for forms, settings, focused content */
+.container-narrow {
+  width: 100%;
+  max-width: var(--container-narrow-sm);
+  margin-inline: auto;
+  padding-inline: var(--space-container-sm);
+}
+
+@media (min-width: 640px) {
+  .container-narrow {
+    max-width: var(--container-narrow-md);
+    padding-inline: var(--space-container-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-narrow {
+    max-width: var(--container-narrow-lg);
+    padding-inline: var(--space-container-lg);
+  }
+}
+
+@media (min-width: 1440px) {
+  .container-narrow {
+    max-width: var(--container-narrow-xl);
+    padding-inline: var(--space-container-xl);
+  }
+}
+
+/* ==========================================================================
+   Grid Layout Utilities
+   ========================================================================== */
+
+/* 2-column grid on tablet+, 1-column on mobile */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+/* 3-column grid on desktop+, 2 on tablet, 1 on mobile */
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+/* 4-column grid on large desktop, 3 on desktop, 2 on tablet, 1 on mobile */
+.grid-4 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1440px) {
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+/* Auto-fit grid for card lists (Hadith books, Surahs, etc.) */
+.grid-auto {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .grid-auto {
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-auto {
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+/* Dashboard grid: 2 columns for widgets on tablet+, special handling for banners */
+.grid-dashboard {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .grid-dashboard {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+/* Full-width banner items in dashboard grid */
+.grid-dashboard > .banner {
+  grid-column: 1 / -1;
+}
+
+/* ==========================================================================
+   Section Spacing
+   ========================================================================== */
+
+.section {
+  padding-block: var(--space-container-sm);
+}
+
+@media (min-width: 640px) {
+  .section {
+    padding-block: var(--space-container-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding-block: var(--space-container-lg);
+  }
+}
+
+/* ==========================================================================
+   Page Shell (for MainLayout)
+   ========================================================================== */
+
+.page-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-shell > main {
+  flex: 1;
+  width: 100%;
+}
+
+/* ==========================================================================
+   Responsive Visibility
+   ========================================================================== */
+
+@media (max-width: 639px) {
+  .hide-mobile { display: none !important; }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .hide-tablet { display: none !important; }
+}
+
+@media (min-width: 1024px) {
+  .hide-desktop { display: none !important; }
+}
+
+@media (max-width: 1023px) {
+  .mobile-only { display: block !important; }
+  .tablet-up { display: none !important; }
+}
+
+@media (min-width: 1024px) {
+  .mobile-only { display: none !important; }
+  .tablet-up { display: block !important; }
+}

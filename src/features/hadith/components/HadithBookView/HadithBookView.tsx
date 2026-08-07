@@ -103,11 +103,11 @@ export default function HadithBookView({ book }: HadithBookViewProps) {
           <Typography variant="h4" as="h2" className={styles.chaptersHeading}>
             {t('hadith.chapters')}
           </Typography>
-          <ul className={styles.chapterList}>
+          <ul className="grid-auto" role="list">
           {content.chapters.map((chapter) => (
-            <li key={chapter.id}>
-              <Link to={buildHadithChapterPath(book.slug, chapter.id)} className={styles.chapterRow}>
-                <span className={styles.chapterText}>
+            <li key={chapter.id} className={styles.card}>
+              <Link to={buildHadithChapterPath(book.slug, chapter.id)} className={styles.cardLink}>
+                <span className={styles.cardText}>
                   <Typography variant="body" className={styles.chapterName}>
                     {chapter.nameEnglish}
                   </Typography>
@@ -115,7 +115,7 @@ export default function HadithBookView({ book }: HadithBookViewProps) {
                     {chapter.nameArabic}
                   </Typography>
                 </span>
-                <span className={styles.chapterMeta}>
+                <span className={styles.cardMeta}>
                   <Typography variant="caption" muted>
                     {tp('hadith.hadithsCount', chapterCounts.get(chapter.id) ?? 0)}
                   </Typography>

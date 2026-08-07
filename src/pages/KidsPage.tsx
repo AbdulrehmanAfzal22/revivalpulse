@@ -55,7 +55,8 @@ export default function KidsPage() {
   const goalProgress = Math.min(100, Math.round((todayCount / dailyGoalTarget) * 100));
 
   return (
-    <div className={styles.page}>
+    <div className="container">
+      <div className={styles.page}>
       <section className={styles.hero}>
         {FLOATING_DECORATIONS.map((decoration, index) => {
           const Decoration = decoration.icon;
@@ -124,6 +125,7 @@ export default function KidsPage() {
       </div>
 
       <NasheedToggle />
+      </div>
     </div>
   );
 }

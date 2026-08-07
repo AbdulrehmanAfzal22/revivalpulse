@@ -17,9 +17,9 @@ export default function MainLayout() {
   const { t } = useTranslation();
 
   return (
-    <div className={styles.shell}>
+    <div className="page-shell">
       <Navbar />
-      <main className={styles.content}>
+      <main className="content">
         <ErrorBoundary>
           <Suspense
             fallback={

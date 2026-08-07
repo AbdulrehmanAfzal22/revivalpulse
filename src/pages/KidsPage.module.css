@@ -1,7 +1,4 @@
 .page {
-  max-width: 40rem;
-  margin-inline: auto;
-  padding: 1.5rem 1rem 2rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;

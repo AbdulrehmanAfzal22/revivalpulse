@@ -1,7 +1,4 @@
 .page {
-  max-width: 48rem;
-  margin-inline: auto;
-  padding: 2rem 1rem 3rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -10,10 +7,4 @@
 .heading {
   margin: 0;
   text-align: center;
-}
-
-.widgetGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  gap: 1rem;
 }

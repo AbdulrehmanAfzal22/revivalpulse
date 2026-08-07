@@ -32,14 +32,14 @@ export default function HadithChapterPage() {
 
   if (!book) {
     return (
-      <div className={styles.page}>
+      <div className="container-reading">
         <EmptyState title={t('hadith.bookNotFoundTitle')} description={t('hadith.bookNotFoundDescription')} />
       </div>
     );
   }
 
   return (
-    <div className={styles.page}>
+    <div className="container-reading">
       <Link to={buildHadithBookPath(book.slug)} className={styles.backLink}>
         <ChevronLeft size={16} />
         {t('hadith.backToChapters')}

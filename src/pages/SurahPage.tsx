@@ -74,7 +74,7 @@ export default function SurahPage() {
   const nextSurah = SURAHS.find((item) => item.id === surah.id + 1);
 
   return (
-    <div ref={pageRef} className={styles.page} style={getReaderCssVars(preferences)}>
+    <div ref={pageRef} className="container-reading" style={getReaderCssVars(preferences)}>
       <div className={styles.toolbar}>
         <Button
           variant="icon"
