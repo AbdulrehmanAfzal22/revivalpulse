@@ -4,6 +4,7 @@ import { ThemeProvider } from 'contexts/ThemeContext';
 import { LanguageProvider } from 'contexts/LanguageContext';
 import { indexedDbPersister, queryClient } from 'services/queryClient';
 import AccessibilityStyleApplier from 'components/app/AccessibilityStyleApplier';
+import NewVersionNotice from 'components/app/NewVersionNotice';
 import AppRoutes from 'routes/AppRoutes';
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
       <ThemeProvider>
         <LanguageProvider>
           <AccessibilityStyleApplier />
+          <NewVersionNotice />
           <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
             <AppRoutes />
           </BrowserRouter>

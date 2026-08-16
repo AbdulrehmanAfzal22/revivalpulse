@@ -4,7 +4,8 @@ import SparkleBurst from 'features/kids/components/rewards/SparkleBurst';
 import StudyTopicChips from 'features/kids/components/games/StudyTopicChips';
 import { pickTarget, pickDecoys, shuffle } from 'features/kids/games/engineUtils';
 import type { KidsStudyTopic, StudyItem } from 'data/kids/gameContent';
-import type { PlayDifficulty } from 'features/kids/components/setup/PlaySetup';
+import type { Tier } from 'features/kids/games/difficultyConfig';
+import { getDifficultyConfig } from 'features/kids/games/difficultyConfig';
 import { playCorrect, playWrong } from 'services/kidSounds';
 import useTranslation from 'hooks/useTranslation';
 import styles from './WordFinderGame.module.css';
@@ -13,8 +14,6 @@ import styles from './WordFinderGame.module.css';
 export const WORD_FINDER_GAME_ID = 'word-finder';
 
 const ROUNDS = 8;
-const OPTION_COUNT = 4;
-const MEDIUM_OPTION_COUNT = 6;
 
 interface RoundState {
   target: StudyItem;
@@ -24,10 +23,9 @@ interface RoundState {
 function makeRound(
   pack: KidsStudyTopic,
   round: number,
-  difficulty: PlayDifficulty,
+  optionCount: number,
 ): RoundState {
   const target = pickTarget(pack, round);
-  const optionCount = difficulty === 'medium' ? MEDIUM_OPTION_COUNT : OPTION_COUNT;
   return {
     target,
     options: shuffle([target, ...pickDecoys(pack, target, optionCount - 1)]),
@@ -35,14 +33,16 @@ function makeRound(
 }
 
 export interface WordFinderGameProps {
-  difficulty?: PlayDifficulty;
+  difficulty?: Tier;
 }
 
 export default function WordFinderGame({ difficulty = 'easy' }: WordFinderGameProps) {
   const { t } = useTranslation();
+  const config = getDifficultyConfig('wordfinder', difficulty);
+  const optionCount = config.optionCount as number;
   const [pack, setPack] = useState<KidsStudyTopic>('words');
   const [round, setRound] = useState(0);
-  const [state, setState] = useState<RoundState>(() => makeRound('words', 0, difficulty));
+  const [state, setState] = useState<RoundState>(() => makeRound('words', 0, optionCount));
   const [burst, setBurst] = useState<{ key: number; x: number; y: number } | null>(null);
   const [nudge, setNudge] = useState(false);
 
@@ -50,7 +50,7 @@ export default function WordFinderGame({ difficulty = 'easy' }: WordFinderGamePr
 
   const newRound = (nextRound: number, nextPack: KidsStudyTopic) => {
     setRound(nextRound);
-    setState(makeRound(nextPack, nextRound, difficulty));
+    setState(makeRound(nextPack, nextRound, optionCount));
     setBurst(null);
     setNudge(false);
   };

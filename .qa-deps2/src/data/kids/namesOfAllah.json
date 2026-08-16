@@ -1,0 +1,794 @@
+[
+    {
+        "number": 1,
+        "arabic": "اَلرََّحْماَنُ",
+        "transliteration": "Ar-Rahman",
+        "meaning": "The All-Compassionate",
+        "description": "He is the One who wills Mercy and good for all creation, at all times, He pours upon all creation infinite bounties.",
+        "audioUrl": "/audio/asma-ul-husna/1.mp3"
+    },
+    {
+        "number": 2,
+        "arabic": "اَلرََّحِيْمُ",
+        "transliteration": "Ar-Rahim",
+        "meaning": "The most merciful",
+        "description": "He is the source of infinite mercy and benificence, who rewards with eternal gifts the one who uses his bounties for the good.",
+        "audioUrl": "/audio/asma-ul-husna/2.mp3"
+    },
+    {
+        "number": 3,
+        "arabic": "اَلْمَلِكُ",
+        "transliteration": "Al-Malik",
+        "meaning": "The Sovereign",
+        "description": "He is the owner and ruler of the entire universe, visible and invisible, and of all creation, from before the beginning and after the end.",
+        "audioUrl": "/audio/asma-ul-husna/3.mp3"
+    },
+    {
+        "number": 4,
+        "arabic": "اَلْقُدُّوْسُ",
+        "transliteration": "Al-Quddus",
+        "meaning": "The Pure One",
+        "description": "He is the most pure one, devoid of all Blemish, Shortcoming, Weakness, Heedlessness and Error.",
+        "audioUrl": "/audio/asma-ul-husna/4.mp3"
+    },
+    {
+        "number": 5,
+        "arabic": "اَلْسَّلاَمُ",
+        "transliteration": "As-Salam",
+        "meaning": "The Source of Peace",
+        "description": "He is the One who saves the believing servants from all dangers, bringing them peace, blessings and security of paradise.",
+        "audioUrl": "/audio/asma-ul-husna/5.mp3"
+    },
+    {
+        "number": 6,
+        "arabic": "الْمُؤْمِنُ",
+        "transliteration": "Al-Mu'min",
+        "meaning": "Giver of Peace",
+        "description": "He is the illuminator of the light of faith in hearts. He is the Comforter, the Protector of the ones who take refuge in Him.",
+        "audioUrl": "/audio/asma-ul-husna/6.mp3"
+    },
+    {
+        "number": 7,
+        "arabic": "اَلْمُهَيْمِنُ",
+        "transliteration": "Al-Muhaymin",
+        "meaning": "The Guardian",
+        "description": "He is the Protector and the Guardian. He is the One who sees to the growth of His creation, leading them where they are destined to go.",
+        "audioUrl": "/audio/asma-ul-husna/7.mp3"
+    },
+    {
+        "number": 8,
+        "arabic": "اَلْعَزِيْزُ",
+        "transliteration": "Al-A'zeez",
+        "meaning": "The Victorious",
+        "description": "He is the victorious One whom no force can overwhelm. There is no strength in this universe that can stand before His will.",
+        "audioUrl": "/audio/asma-ul-husna/8.mp3"
+    },
+    {
+        "number": 9,
+        "arabic": "اَلْجَبَّارُ",
+        "transliteration": "Al-Jabbar",
+        "meaning": "The Compeller",
+        "description": "He is the repairer of the broken, the completer of the lacking, the one who can enforce His will without any opposition.",
+        "audioUrl": "/audio/asma-ul-husna/9.mp3"
+    },
+    {
+        "number": 10,
+        "arabic": "اَلْمُتَكَبِّرُ",
+        "transliteration": "Al-Mutakabbir",
+        "meaning": "The Greatest",
+        "description": "He is the greatest, who shows His greatness in everything, on all occassions.",
+        "audioUrl": "/audio/asma-ul-husna/10.mp3"
+    },
+    {
+        "number": 11,
+        "arabic": "اَلْخَالِقُ",
+        "transliteration": "Al-Khaaliq",
+        "meaning": "The Creator",
+        "description": "He is the one who creates from nothing, creating at the same time the states, conditions and sustenance of all that He has created. He establishes how, when and where creation will take place.",
+        "audioUrl": "/audio/asma-ul-husna/11.mp3"
+    },
+    {
+        "number": 12,
+        "arabic": "اَلْبَارِئُ",
+        "transliteration": "Al-Baari",
+        "meaning": "One who gives life",
+        "description": "He is the one who orders His creation with perfect harmony – not only each thing within itself, but everything in accordance with everything else.",
+        "audioUrl": "/audio/asma-ul-husna/12.mp3"
+    },
+    {
+        "number": 13,
+        "arabic": "اَلْمُصَوِّرُ",
+        "transliteration": "Al-Musawwir",
+        "meaning": "Fashioner of Shapes",
+        "description": "He is the one who, without using any model, shapes everything in the most perfect shape.",
+        "audioUrl": "/audio/asma-ul-husna/13.mp3"
+    },
+    {
+        "number": 14,
+        "arabic": "اَلْغَفَّارُ",
+        "transliteration": "Al-Ghaffar",
+        "meaning": "The Forgiving",
+        "description": "He is the One who accepts repentance and forgives.",
+        "audioUrl": "/audio/asma-ul-husna/14.mp3"
+    },
+    {
+        "number": 15,
+        "arabic": "اَلْقَهَّارُ ",
+        "transliteration": "Al-Qahhaar",
+        "meaning": "The Dominant",
+        "description": "He is the ever dominating One, who has surrounded all His creation from without and within with His irresistable power. Nothing can escape Him.",
+        "audioUrl": "/audio/asma-ul-husna/15.mp3"
+    },
+    {
+        "number": 16,
+        "arabic": "اَلْوَهَّابُ",
+        "transliteration": "Al-Wahhab",
+        "meaning": "The Giver of All",
+        "description": "He is the donor of all, without conditions, without limits without asking anyone benefit or return, giving everything to everyone, everywhere, always.",
+        "audioUrl": "/audio/asma-ul-husna/16.mp3"
+    },
+    {
+        "number": 17,
+        "arabic": "اَلرَّزَّاقُ",
+        "transliteration": "Ar-Razzaaq",
+        "meaning": "The Sustainer",
+        "description": "He is the Sustainer. Sustenance is needed to maintain the creation (both physical and spiritual sustenance).",
+        "audioUrl": "/audio/asma-ul-husna/17.mp3"
+    },
+    {
+        "number": 18,
+        "arabic": "اَلْفَتَّاحُ",
+        "transliteration": "Al-Fattaah",
+        "meaning": "The Opener",
+        "description": "He is the Opener & the Solver, the Easer of all that is locked, tied and hardened.",
+        "audioUrl": "/audio/asma-ul-husna/18.mp3"
+    },
+    {
+        "number": 19,
+        "arabic": "اَلْعَلِيْمُ",
+        "transliteration": "Al-Aleem",
+        "meaning": "The Knower of All",
+        "description": "He is the One who knows all. He knows what has happened, what is happening, and what will happen from the beginning to the end.",
+        "audioUrl": "/audio/asma-ul-husna/19.mp3"
+    },
+    {
+        "number": 20,
+        "arabic": "اَلْقَابِضُ",
+        "transliteration": "Al-Qaabid",
+        "meaning": "The Constrictor",
+        "description": "He is the One who constricts. All existence is in the power of Allah. The life on this planet is a test for us, but Allah does not test his servants above their ability.",
+        "audioUrl": "/audio/asma-ul-husna/20.mp3"
+    },
+    {
+        "number": 21,
+        "arabic": "اَلْبَاسِطُ",
+        "transliteration": "Al-Basit",
+        "meaning": "The Reliever",
+        "description": "He is the one who releases abundance, joy, relief, and ease after difficulties. These are manifestations of His attribute Al-Baasit.",
+        "audioUrl": "/audio/asma-ul-husna/21.mp3"
+    },
+    {
+        "number": 22,
+        "arabic": "اَلْخَافِضُ",
+        "transliteration": "Al-Khaafid",
+        "meaning": "The Abaser",
+        "description": "Allah most high is the One who raises His creatures to honour and fame and who can cast them down to the lowest of the low.",
+        "audioUrl": "/audio/asma-ul-husna/22.mp3"
+    },
+    {
+        "number": 23,
+        "arabic": "اَلرَّافِعُ",
+        "transliteration": "Ar-Raafi",
+        "meaning": "The Exalter",
+        "description": "Allah most high is the One who raises His creatures to honour and fame and who can cast them down to the lowest of the low.",
+        "audioUrl": "/audio/asma-ul-husna/23.mp3"
+    },
+    {
+        "number": 24,
+        "arabic": "اَلْمُعِزُّ",
+        "transliteration": "Al-Mu'izz",
+        "meaning": "The Bestower of Honors",
+        "description": "He is the One who honours and the One who humiliates.",
+        "audioUrl": "/audio/asma-ul-husna/24.mp3"
+    },
+    {
+        "number": 25,
+        "arabic": "اَلْمُذِلَّ",
+        "transliteration": "Al-Mudhill",
+        "meaning": "The Humiliator",
+        "description": "He is the One who honours and the One who humiliates.",
+        "audioUrl": "/audio/asma-ul-husna/25.mp3"
+    },
+    {
+        "number": 26,
+        "arabic": "اَلسَّمِيْعُ",
+        "transliteration": "As-Sami",
+        "meaning": "The Hearer of All",
+        "description": "He is the one who hears all – that which comes from the lips, passes through the minds, is felt by the hearts, the rustling of leaves in the wind, the footsteps of ants and atoms moving through the void.",
+        "audioUrl": "/audio/asma-ul-husna/26.mp3"
+    },
+    {
+        "number": 27,
+        "arabic": "اَلْبَصِيْرُ",
+        "transliteration": "Al-Baseer",
+        "meaning": "The Seer of All",
+        "description": "He is the One who is all-seeing. He sees all that has passed, all there is, and all there will be until the end of time.",
+        "audioUrl": "/audio/asma-ul-husna/27.mp3"
+    },
+    {
+        "number": 28,
+        "arabic": "اَلْحَكَمُ",
+        "transliteration": "Al-Hakam",
+        "meaning": "Maker of Immutable Judgements",
+        "description": "He is the One who orders. He is the bringer of justice and truth. He judges, and executes His justice.",
+        "audioUrl": "/audio/asma-ul-husna/28.mp3"
+    },
+    {
+        "number": 29,
+        "arabic": "اَلْعَدْلُ",
+        "transliteration": "Al-`Adl",
+        "meaning": "The Equitable",
+        "description": "He is the absolute justice. Justice secures peace, balance order and harmony. Allah the just is the enemy of tyrants.",
+        "audioUrl": "/audio/asma-ul-husna/29.mp3"
+    },
+    {
+        "number": 30,
+        "arabic": "اَللَّطِيْفُ",
+        "transliteration": "Al-Lateef",
+        "meaning": "The Kind",
+        "description": "He is the most delicate, fine, gentle, beautiful one, He is the one who knows the finest details of beauty. The finest of His beauties are hidden in the secrets of the beauties of the soul, wisdom, and divine light.",
+        "audioUrl": "/audio/asma-ul-husna/30.mp3"
+    },
+    {
+        "number": 31,
+        "arabic": "اَلْخَبِيْرُ",
+        "transliteration": "Al-Khabeer",
+        "meaning": "The All-Aware",
+        "description": "He is the one who is aware of the hidden inner occurrences in everything. He is the one whose cognisance reaches the deepest, darkest, hidden corners of His kingdom, where neither human intelligence nor His angels can penetrate.",
+        "audioUrl": "/audio/asma-ul-husna/31.mp3"
+    },
+    {
+        "number": 32,
+        "arabic": "اَلْحَلِيْمُ",
+        "transliteration": "Al-Haleem",
+        "meaning": "The Forbearing",
+        "description": "He is forbearing in the punishment of the guilty. He waits, giving time to the sinner to realise his guilt and ask for forgiveness in order that He may forgive him rather than punish him.",
+        "audioUrl": "/audio/asma-ul-husna/32.mp3"
+    },
+    {
+        "number": 33,
+        "arabic": "اَلْعَظِيْمُ",
+        "transliteration": "Al-Azeem",
+        "meaning": "The Magnificent",
+        "description": "He is the greatest on the earth below and in the heavens above, in realms where our sight cannot reach and of which our minds cannot conceive. He is the absolute and perfect greatness.",
+        "audioUrl": "/audio/asma-ul-husna/33.mp3"
+    },
+    {
+        "number": 34,
+        "arabic": "اَلْغَفُوْرُ",
+        "transliteration": "Al-Ghafur",
+        "meaning": "The Forgiver",
+        "description": "He is the most forgiving one. He veils our faults from the eyes of other men, from the angels and relieves us from the suffering of continual remembrance of our faults.",
+        "audioUrl": "/audio/asma-ul-husna/34.mp3"
+    },
+    {
+        "number": 35,
+        "arabic": "اَلشَّكُوْرُ",
+        "transliteration": "Ash-Shakoor",
+        "meaning": "The Rewarder of Thankfulness",
+        "description": "He is the one who repays a good deed with a much greater reward. Thankfulness is to return good with good.",
+        "audioUrl": "/audio/asma-ul-husna/35.mp3"
+    },
+    {
+        "number": 36,
+        "arabic": "اَلْعَلِيُّ",
+        "transliteration": "Al-Ali",
+        "meaning": "The Highest",
+        "description": "He is the highest One. He is higher than the whole of the created universe. His nearness and farness and His being high cannot be measured by the limits of human intellect.",
+        "audioUrl": "/audio/asma-ul-husna/36.mp3"
+    },
+    {
+        "number": 37,
+        "arabic": "اَلْخَبِيْرُ",
+        "transliteration": "Al-Kabeer",
+        "meaning": "The Greatest",
+        "description": "He is the greatest, whose greatness stretches from before the beginning until after the end. There is no difference for Him between the creation of an atom and the infinite –seeming universe. This is His grandeur as much as we can understand it. He is greater than that.",
+        "audioUrl": "/audio/asma-ul-husna/37.mp3"
+    },
+    {
+        "number": 38,
+        "arabic": "اَلْحَفِيْظُ",
+        "transliteration": "Al-Hafeez",
+        "meaning": "The Preserver",
+        "description": "He is the one who remembers all that was and all that is, keeping in His divine protection all that there will be.",
+        "audioUrl": "/audio/asma-ul-husna/38.mp3"
+    },
+    {
+        "number": 39,
+        "arabic": "اَلْمُقِيْتُ",
+        "transliteration": "Al-Muqit",
+        "meaning": "The Nourisher",
+        "description": "He is the nourisher of all creation. Allah creates the nourishment of His creatures before He creates them. No one can take away the nourishment destined for each element of creation.",
+        "audioUrl": "/audio/asma-ul-husna/39.mp3"
+    },
+    {
+        "number": 40,
+        "arabic": "اَلْحَسِيْبُ",
+        "transliteration": "Al-Haseeb",
+        "meaning": "The Accounter",
+        "description": "He is the one who takes account of all and everything that His creation does or is subjected to.",
+        "audioUrl": "/audio/asma-ul-husna/40.mp3"
+    },
+    {
+        "number": 41,
+        "arabic": "اَلْجَلِيْلُ",
+        "transliteration": "Al-Jaleel",
+        "meaning": "The Mighty",
+        "description": "He is the lord of majesty and might. His might and His greatness, His eternity bears no resemblance to any energy, matter or time.",
+        "audioUrl": "/audio/asma-ul-husna/41.mp3"
+    },
+    {
+        "number": 42,
+        "arabic": "اَلْكَرِيْمُ",
+        "transliteration": "Al-Kareem",
+        "meaning": "The Generous",
+        "description": "He is the generous One. His greatest generosity is His Mercy, through which He forgives when He could punish.",
+        "audioUrl": "/audio/asma-ul-husna/42.mp3"
+    },
+    {
+        "number": 43,
+        "arabic": "اَلرَّقِيْبُ",
+        "transliteration": "Ar-Raqeeb",
+        "meaning": "The Watchful One",
+        "description": "He is the One who watches everything, always. This scrutiny of every detail in the existence of all creation is in part protective.",
+        "audioUrl": "/audio/asma-ul-husna/43.mp3"
+    },
+    {
+        "number": 44,
+        "arabic": "اَلْمُجِيْبُ",
+        "transliteration": "Al-Mujeeb",
+        "meaning": "The Responder to Prayer",
+        "description": "He is the one who responds to all the needs of His servants. Allah is closer to His creatures than they are to themselves. He is not any closer to a saint than He is to you or a mustard seed.",
+        "audioUrl": "/audio/asma-ul-husna/44.mp3"
+    },
+    {
+        "number": 45,
+        "arabic": "اَلْوَاسِعُ",
+        "transliteration": "Al-Waasi",
+        "meaning": "The All-Comprehending",
+        "description": "He is the limitless vastness, whose knowledge, mercy, power, generosity and all other beautiful attributes are infinite.",
+        "audioUrl": "/audio/asma-ul-husna/45.mp3"
+    },
+    {
+        "number": 46,
+        "arabic": "اَلْحَكِيْمُ",
+        "transliteration": "Al-Hakeem",
+        "meaning": "The Perfectly Wise",
+        "description": "He is the perfectly wise, in His knowledge and in His deeds. There is no doubt or uncertainty in His knowledge, nor does it have an end.",
+        "audioUrl": "/audio/asma-ul-husna/46.mp3"
+    },
+    {
+        "number": 47,
+        "arabic": "اَلْوَدُودُ",
+        "transliteration": "Al-Wadud",
+        "meaning": "The Loving One",
+        "description": "He is the one who loves His good servants. He is the only one who is worthy of love.",
+        "audioUrl": "/audio/asma-ul-husna/47.mp3"
+    },
+    {
+        "number": 48,
+        "arabic": "اَلْمَجِيْدُ",
+        "transliteration": "Al-Majeed",
+        "meaning": "The Majestic One",
+        "description": "Allah most high is glorious and majestic in the whole of His creation and beyond. No hand reaches Him, no power can touch Him, yet He is closer to His servants than their own souls. His state is pure perfection. His acts are pure wisdom.",
+        "audioUrl": "/audio/asma-ul-husna/48.mp3"
+    },
+    {
+        "number": 49,
+        "arabic": "اَلْبَاعِثُ",
+        "transliteration": "Al-Baa'ith",
+        "meaning": "The Resurrector",
+        "description": "He is the raiser from the dead. Allah will give life back to all creation on the day of judgement.",
+        "audioUrl": "/audio/asma-ul-husna/49.mp3"
+    },
+    {
+        "number": 50,
+        "arabic": "اَلشَّهِيدُ",
+        "transliteration": "Ash-Shaheed",
+        "meaning": "The Witness",
+        "description": "He is the one who witnesses all that happens everywhere at all times.",
+        "audioUrl": "/audio/asma-ul-husna/50.mp3"
+    },
+    {
+        "number": 51,
+        "arabic": "اَلْحَقُّ",
+        "transliteration": "Al-Haqq",
+        "meaning": "The Truth",
+        "description": "Allah is the truth, whose being is ever unchanged.",
+        "audioUrl": "/audio/asma-ul-husna/51.mp3"
+    },
+    {
+        "number": 52,
+        "arabic": "اَلْوَكِيلُ",
+        "transliteration": "Al-Wakeel",
+        "meaning": "The Trustee",
+        "description": "Allah is the ultimate and faithful trustee. Men think that they are able to do, but He is the one who does everything. He can replace everything in the universe, but nothing can replace Him nor can stand on its own without being dependent on Him.",
+        "audioUrl": "/audio/asma-ul-husna/52.mp3"
+    },
+    {
+        "number": 53,
+        "arabic": "اَلْقَوِيُّ",
+        "transliteration": "Al-Qawi",
+        "meaning": "Almighty",
+        "description": "Allah is the most strong one, the inexhaustible. He possesses all strength. He can create a billion universes with the same ease with which He creates a blade of grass.",
+        "audioUrl": "/audio/asma-ul-husna/53.mp3"
+    },
+    {
+        "number": 54,
+        "arabic": "اَلْمَتِينُ",
+        "transliteration": "Al-Mateen",
+        "meaning": "The Forceful One",
+        "description": "Allah is perfect in His strength and His firmness. None can be saved from this strength, no force can oppose it and nothing can weaken it.",
+        "audioUrl": "/audio/asma-ul-husna/54.mp3"
+    },
+    {
+        "number": 55,
+        "arabic": "اَلْوَلِيُّ",
+        "transliteration": "Al-Wali",
+        "meaning": "The Governor",
+        "description": "Allah is the protecting friend of His good servants. He eliminates their difficulties and gives them guidance, peace and success in their affairs in this world and in the hereafter.",
+        "audioUrl": "/audio/asma-ul-husna/55.mp3"
+    },
+    {
+        "number": 56,
+        "arabic": "اَلْحَمِيدُ",
+        "transliteration": "Al-Hameed",
+        "meaning": "The Praised One",
+        "description": "Allah is most praiseworthy, all that exist praise Allah with their tongues, with their action, or simply by their very existence. He is the only one who is worthy of devotion, respect, thankfulness and praise.",
+        "audioUrl": "/audio/asma-ul-husna/56.mp3"
+    },
+    {
+        "number": 57,
+        "arabic": "اَلْمُحْصِي",
+        "transliteration": "Al-Muhsi",
+        "meaning": "The Appraiser",
+        "description": "Allah is the possessor of all quantitative knowledge. He sees and knows everything in its reality. He knows the number of all existence in the universe down to the number of breaths exhaled and inhaled by each of His creatures.",
+        "audioUrl": "/audio/asma-ul-husna/57.mp3"
+    },
+    {
+        "number": 58,
+        "arabic": "اَلْمُبْدِئُ",
+        "transliteration": "Al-Mubdi",
+        "meaning": "The Originator",
+        "description": "Allah is the originator of all. He creates without model or material.",
+        "audioUrl": "/audio/asma-ul-husna/58.mp3"
+    },
+    {
+        "number": 59,
+        "arabic": "اَلْمُعِيدُ",
+        "transliteration": "Al-Mu'eed",
+        "meaning": "The Restorer",
+        "description": "Allah is the restorer of the things that He has created and destroyed.",
+        "audioUrl": "/audio/asma-ul-husna/59.mp3"
+    },
+    {
+        "number": 60,
+        "arabic": "اَلْمُحْيِي",
+        "transliteration": "Al-Muhyi",
+        "meaning": "The Giver of Life",
+        "description": "Allah is the giver of life to things without life. Allah is the one who has created life and who has created death, no one else can do that.",
+        "audioUrl": "/audio/asma-ul-husna/60.mp3"
+    },
+    {
+        "number": 61,
+        "arabic": "اَلْمُمِيتُ",
+        "transliteration": "Al-Mumeet",
+        "meaning": "The Taker of Life",
+        "description": "Allah is the creator of death. All who are alive will certainly die. Man is made of a combination of the flesh and the soul. The body is temporal, the soul is eternal.",
+        "audioUrl": "/audio/asma-ul-husna/61.mp3"
+    },
+    {
+        "number": 62,
+        "arabic": "اَلْقَيُّومُ",
+        "transliteration": "Al-Haiy",
+        "meaning": "The Ever Living One",
+        "description": "Allah is the perfectly alive and ever living one. Allah is cognizant of all, and all actions are His. All that is known and will be known is within His knowledge. All existence is always comprehended in His action.",
+        "audioUrl": "/audio/asma-ul-husna/62.mp3"
+    },
+    {
+        "number": 63,
+        "arabic": "اَلْوَاجِدُ",
+        "transliteration": "Al-Qayyum",
+        "meaning": "The Self-Existing One",
+        "description": "Allah is the ever self-existing one upon whom the existence of all depends. His existence depends upon none other than Himself.",
+        "audioUrl": "/audio/asma-ul-husna/63.mp3"
+    },
+    {
+        "number": 64,
+        "arabic": "اَلْوَاجِدُ",
+        "transliteration": "Al-Waajid",
+        "meaning": "The Finder",
+        "description": "Allah finds and obtains whatever He wishes whenever He wishes. It is even superfluous to use the word \"FIND\" because all is in His presence at all times.",
+        "audioUrl": "/audio/asma-ul-husna/64.mp3"
+    },
+    {
+        "number": 65,
+        "arabic": "اَلْمَاجِدُ",
+        "transliteration": "Al-Maajid",
+        "meaning": "The Glorious",
+        "description": "Allah is the most glorious, who shows infinite generosity and munificence to those close to Him.",
+        "audioUrl": "/audio/asma-ul-husna/65.mp3"
+    },
+    {
+        "number": 66,
+        "arabic": "اَلْوَاحِدُ",
+        "transliteration": "Al-Waahid",
+        "meaning": "The Indivisible",
+        "description": "Allah is one. He has no equal, none like Him nor any partner in His essence, in His attributes, in His actions, in His orders, or in His beautiful Names.",
+        "audioUrl": "/audio/asma-ul-husna/66.mp3"
+    },
+    {
+        "number": 67,
+        "arabic": "اَلأَحَدُ",
+        "transliteration": "Al-Ahad",
+        "meaning": "The One Unequalled",
+        "description": "He is the unity in which all names, attributes and their relations to any and all are united.",
+        "audioUrl": "/audio/asma-ul-husna/67.mp3"
+    },
+    {
+        "number": 68,
+        "arabic": "اَلصَّمَدُ",
+        "transliteration": "As-Samad",
+        "meaning": "The Satisfier of All Needs",
+        "description": "Allah is the satisfier of all needs, and all is in need of Him. He is the sole recourse; the only place of support where one may go to rid oneself of all trouble and to receive all that one needs through the blessings of this name.",
+        "audioUrl": "/audio/asma-ul-husna/68.mp3"
+    },
+    {
+        "number": 69,
+        "arabic": "اَلْقَادِرُ",
+        "transliteration": "Al-Qaadir",
+        "meaning": "The All Powerful",
+        "description": "Allah is the all-powerful who does what He wills the way He wills. He created the universe by Himself, from nothing, with neither materials nor model. He said “be” and it became.",
+        "audioUrl": "/audio/asma-ul-husna/69.mp3"
+    },
+    {
+        "number": 70,
+        "arabic": "اَلْمُقْتَدِرُ",
+        "transliteration": "Al-Muqtadir",
+        "meaning": "Powerful",
+        "description": "Allah is the one who creates all power and has total control over all power. Allah bestows power upon things on earth and in heaven, and uses them in accordance with His all-pervasive wisdom and will.",
+        "audioUrl": "/audio/asma-ul-husna/70.mp3"
+    },
+    {
+        "number": 71,
+        "arabic": "اَلْمُقَدِّمُ",
+        "transliteration": "Al-Muqaddim",
+        "meaning": "The Expediter",
+        "description": "Allah brings forward whomever He wills. Allah advances the chosen among His creation, bringing some above and ahead of others.",
+        "audioUrl": "/audio/asma-ul-husna/71.mp3"
+    },
+    {
+        "number": 72,
+        "arabic": "اَلْمُؤَخِّرُ",
+        "transliteration": "Al-Mu'akhkhir",
+        "meaning": "The Delayer",
+        "description": "Allah is He who leaves whomever He wills behind, and delays advancement.",
+        "audioUrl": "/audio/asma-ul-husna/72.mp3"
+    },
+    {
+        "number": 73,
+        "arabic": "اَلأَوَّ&#1604",
+        "transliteration": "Al-Awwal",
+        "meaning": "The First",
+        "description": "Allah is the first. There is none like Him. His firstness means that there is none prior to Him, that He is self-existent, that all comes from Him and that He is the cause of all that became.",
+        "audioUrl": "/audio/asma-ul-husna/73.mp3"
+    },
+    {
+        "number": 74,
+        "arabic": "اَلآخِرُ",
+        "transliteration": "Al-Aakhir",
+        "meaning": "The Last",
+        "description": "Allah is the last. As He has no beginning, He has no end. He is eternal. He is the last in the sense that the circle of existence begins and ends with Him.",
+        "audioUrl": "/audio/asma-ul-husna/74.mp3"
+    },
+    {
+        "number": 75,
+        "arabic": "اَلظَّاهِرُ",
+        "transliteration": "Az-Zaahir",
+        "meaning": "The Obvious",
+        "description": "Allah is the manifest one. Allah most high is hidden from those who seek to see by means of their senses, but He is apparent to those ho seek to know Him by the wisdom and reason that Allah has bestowed upon them.",
+        "audioUrl": "/audio/asma-ul-husna/75.mp3"
+    },
+    {
+        "number": 76,
+        "arabic": "اَلْبَاطِنُ",
+        "transliteration": "Al-Baatin",
+        "meaning": "The Hidden One",
+        "description": "Allah is the hidden one. His existence is both manifest and hidden. To truly know the creator is not possible because the knowledge, the mind the understanding of the created one are limited.",
+        "audioUrl": "/audio/asma-ul-husna/76.mp3"
+    },
+    {
+        "number": 77,
+        "arabic": "اَلْوَالِي",
+        "transliteration": "Al-Waali",
+        "meaning": "The Protecting Friend",
+        "description": "Allah is the sole manager and governor of the whole creation.",
+        "audioUrl": "/audio/asma-ul-husna/77.mp3"
+    },
+    {
+        "number": 78,
+        "arabic": "اَلْمُتَعَالِي",
+        "transliteration": "Al-Muta'ali",
+        "meaning": "The Supreme One",
+        "description": "Allah is the Supreme One. His greatness grows. As He gives from His inexhaustible treasures, His riches increase. As the needs of His creation increase, His bounties increase.",
+        "audioUrl": "/audio/asma-ul-husna/78.mp3"
+    },
+    {
+        "number": 79,
+        "arabic": "اَلْبَرُّ",
+        "transliteration": "Al-Barr",
+        "meaning": "The Doer of Good",
+        "description": "Allah is the perfect doe of good. All good and bounty come from Him. He loves for His servants only good, comfort and ease.",
+        "audioUrl": "/audio/asma-ul-husna/79.mp3"
+    },
+    {
+        "number": 80,
+        "arabic": "اَلتَّوَابُ",
+        "transliteration": "At-Tawwaab",
+        "meaning": "The Guide to Repentance",
+        "description": "Allah is He who constantly turns man to repentance.",
+        "audioUrl": "/audio/asma-ul-husna/80.mp3"
+    },
+    {
+        "number": 81,
+        "arabic": "اَلْمُنْتَقِمُ",
+        "transliteration": "Al-Muntaqim",
+        "meaning": "The Avenger",
+        "description": "Allah is the great avenger. Allah punishes those who persist in revolting, raving in their unconsciousness and egotism, creating disharmony, tyrannising Allah’s servants and His creation.",
+        "audioUrl": "/audio/asma-ul-husna/81.mp3"
+    },
+    {
+        "number": 82,
+        "arabic": "اَلْعَفُوُّ",
+        "transliteration": "Al-'Afuww",
+        "meaning": "The Forgiver",
+        "description": "Allah is the forgiver, the eliminator of sins. He does not often punish the ones who deny, the ones who revolt. He accepts their recognition of their sins as repentance. He erases their sins.",
+        "audioUrl": "/audio/asma-ul-husna/82.mp3"
+    },
+    {
+        "number": 83,
+        "arabic": "اَلرَّؤُوفُ",
+        "transliteration": "Ar-Raauf",
+        "meaning": "The Clement",
+        "description": "Allah is all clement. In spite of His ability to see our sins, of His being just, of His being able to punish, the fact that He chooses to forgive proves His infinite mercy and clemency.",
+        "audioUrl": "/audio/asma-ul-husna/83.mp3"
+    },
+    {
+        "number": 84,
+        "arabic": "مَالِكُ الْمُلْكِ",
+        "transliteration": "Malik-al-Mulk",
+        "meaning": "The Owner of All",
+        "description": "Allah is the eternal owner of His kingdom. He shares neither the ownership nor the power, government or guardianship of the universe with anyone.",
+        "audioUrl": "/audio/asma-ul-husna/84.mp3"
+    },
+    {
+        "number": 85,
+        "arabic": "ذُو الْجَلاَلِ وَالإِكْرَامِ",
+        "transliteration": "Zul-Jalaal-e wal-Ikraam",
+        "meaning": "Majestic and Benevolent",
+        "description": "Allah is the Lord of Majesty and bounty. There is no perfection that does not belong to Him nor any blessing or honor that comes from other than Him. Allah is the owner of all majesty.",
+        "audioUrl": "/audio/asma-ul-husna/85.mp3"
+    },
+    {
+        "number": 86,
+        "arabic": "اَلْمُقْسِطُ",
+        "transliteration": "Al-Muqsit",
+        "meaning": "The Equitable One",
+        "description": "Allah is the one who acts and distributes in justice and fairness. How harmonious and balanced is the creation: all the beauties in heaven and earth-mountains, seas, sunsets, flowers – and also the eyes to see.",
+        "audioUrl": "/audio/asma-ul-husna/86.mp3"
+    },
+    {
+        "number": 87,
+        "arabic": "اَلْجَامِعُ",
+        "transliteration": "Al-Jaami",
+        "meaning": "The Gatherer",
+        "description": "Allah is the gatherer of whatever He wishes, wherever He wishes. Allah has gathered together within this universe spaces, galaxies-stars, earths, seas, plants and animals, things whose nature, size, shape and colour are different.",
+        "audioUrl": "/audio/asma-ul-husna/87.mp3"
+    },
+    {
+        "number": 88,
+        "arabic": "اَلْغَنِيُّ",
+        "transliteration": "Al-Ghani",
+        "meaning": "The Rich One",
+        "description": "Allah is the rich one who is self sufficient. His essence and attributes have no relationship to anything else. Someone whose existence and perfection depend on another needs to earn that existence. Only Allah needs not, neither does He need to earn.",
+        "audioUrl": "/audio/asma-ul-husna/88.mp3"
+    },
+    {
+        "number": 89,
+        "arabic": "اَلْمُغْنِي",
+        "transliteration": "Al-Mughni",
+        "meaning": "The Enricher",
+        "description": "Allah is the enricher. He renders whomever He wishes rich and whomever He wishes poor.",
+        "audioUrl": "/audio/asma-ul-husna/89.mp3"
+    },
+    {
+        "number": 90,
+        "arabic": "اَلْمَانِعُ",
+        "transliteration": "Al-Mani",
+        "meaning": "The Hinderer",
+        "description": "Allah is the one who averts harm from His creation.",
+        "audioUrl": "/audio/asma-ul-husna/90.mp3"
+    },
+    {
+        "number": 91,
+        "arabic": "اَلضَّارُّ",
+        "transliteration": "Ad-Daar",
+        "meaning": "The Creator of The Harmful",
+        "description": "Allah is the creator of the harmful and evil as He is the creator of the good and beneficial. Ha has also taught us to opt for the good and escape the evil. Ha has given us power of discrimination, given us a will and freedom to choose.",
+        "audioUrl": "/audio/asma-ul-husna/91.mp3"
+    },
+    {
+        "number": 92,
+        "arabic": "اَلنَّافِعُ",
+        "transliteration": "An-Naafi",
+        "meaning": "The Creator of Good",
+        "description": "Allah is the creator of good. Allah has created man as the best of his creation and He has bestowed upon him gifts which render him unique and superior to the rest of creation.",
+        "audioUrl": "/audio/asma-ul-husna/92.mp3"
+    },
+    {
+        "number": 93,
+        "arabic": "اَلنُّورُ",
+        "transliteration": "An-Nur",
+        "meaning": "The Light",
+        "description": "Allah is the light that is shed upon the whole creation, making it apparent. That light is the light that brought existence out of the darkness of non-existence.",
+        "audioUrl": "/audio/asma-ul-husna/93.mp3"
+    },
+    {
+        "number": 94,
+        "arabic": "اَلْهَادِي",
+        "transliteration": "Al-Haadi",
+        "meaning": "The Guide",
+        "description": "Allah is the one who creates guidance, leading his servants to good, benficence and the satisfaction of their needs.",
+        "audioUrl": "/audio/asma-ul-husna/94.mp3"
+    },
+    {
+        "number": 95,
+        "arabic": "اَلْبَدِيعُ",
+        "transliteration": "Al-Badee'u",
+        "meaning": "The Originator",
+        "description": "Allah is the Originator of the creation, having created it without model or material. He does not need previous knowledge to think, to first investigate, to figure things out. Everything He creates is a wonder since He originated it from nothing.",
+        "audioUrl": "/audio/asma-ul-husna/95.mp3"
+    },
+    {
+        "number": 96,
+        "arabic": "اَلْبَاقِي",
+        "transliteration": "Al-Baaqi",
+        "meaning": "The Everlasting One",
+        "description": "Allah is the everlasting one whose existence in the future is forever. He has neither beginning nor end. The creation will end, and time with it. But Allah the everlasting one will still exist.",
+        "audioUrl": "/audio/asma-ul-husna/96.mp3"
+    },
+    {
+        "number": 97,
+        "arabic": "اَلْوَارِثُ",
+        "transliteration": "Al-Waaris",
+        "meaning": "The Inheritor of All",
+        "description": "Allah is the ultimate inheritor, to whom everything is left after its temporal possessors are gone. It is He who exists after all existence disappears, it is He to whom all existence returns.",
+        "audioUrl": "/audio/asma-ul-husna/97.mp3"
+    },
+    {
+        "number": 98,
+        "arabic": "اَلرَّشِيدُ",
+        "transliteration": "Ar-Rashid",
+        "meaning": "The Righteous Teacher",
+        "description": "Allah is the righteous teacher who ordains righteousness for all creatures. In His wisdom He leads all matters to their finality in a perfect way and order.",
+        "audioUrl": "/audio/asma-ul-husna/98.mp3"
+    },
+    {
+        "number": 99,
+        "arabic": "اَلصَّبُورُ",
+        "transliteration": "As-Sabur",
+        "meaning": "The Patient One",
+        "description": "Allah is the most patient one. In His creation as in His actions, in His dealings with His creation, nothing is either bigger or smaller, better or worse, earlier or later than is determined for it to be.",
+        "audioUrl": "/audio/asma-ul-husna/99.mp3"
+    }
+]

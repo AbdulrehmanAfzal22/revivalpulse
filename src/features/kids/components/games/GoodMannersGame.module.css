@@ -1,0 +1,154 @@
+.board {
+  position: relative;
+  max-width: 40rem;
+  margin-inline: auto;
+}
+
+.nudge {
+  position: absolute;
+  top: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 2px solid var(--kids-coral, var(--color-danger));
+  border-radius: 999px;
+  padding: 0.35rem 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.attempts {
+  font-weight: 700;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.timer {
+  font-weight: 700;
+  color: var(--kids-coral, var(--color-danger));
+  white-space: nowrap;
+}
+
+.scenarioCard {
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  border-radius: var(--radius-lg, 1.25rem);
+  border: 3px solid var(--kids-purple, var(--color-primary));
+  background: var(--color-surface);
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.scenarioTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.situation {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.hadithRef {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--kids-purple, var(--color-primary));
+  font-style: italic;
+}
+
+.optionsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+.option {
+  aspect-ratio: 4 / 1;
+  border: 3px solid var(--color-border);
+  border-radius: var(--radius-lg, 1.25rem);
+  background: var(--color-surface);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1.5rem;
+  transition: border-color 0.12s ease, transform 0.1s ease, box-shadow 0.12s ease;
+  text-align: left;
+}
+
+.option:hover:not(:disabled) {
+  border-color: var(--kids-purple, var(--color-primary));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.option:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.optionNumber {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--kids-purple, var(--color-primary));
+  color: var(--color-primary-contrast, #fff);
+  font-weight: 800;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.optionText {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.4;
+}
+
+.timeUp {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: var(--radius-lg, 1.25rem);
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 800;
+  z-index: 10;
+}
+
+@media (max-width: 480px) {
+  .scenarioCard {
+    padding: 1rem;
+  }
+  .situation {
+    font-size: 1.1rem;
+  }
+  .option {
+    aspect-ratio: 3.5 / 1;
+    padding: 0 1rem;
+  }
+  .optionText {
+    font-size: 1rem;
+  }
+}

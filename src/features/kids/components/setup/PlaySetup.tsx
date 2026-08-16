@@ -6,7 +6,7 @@ import KidsBackButton from 'features/kids/components/KidsBackButton';
 import { ROUTES } from 'constants/routes';
 import styles from './PlaySetup.module.css';
 
-export type PlayDifficulty = 'easy' | 'medium';
+export type PlayDifficulty = 'easy' | 'medium' | 'hard';
 
 export interface PlaySetupTopic {
   id: string;
@@ -25,7 +25,7 @@ export interface PlaySetupProps {
   /** Illustrated, selectable activity cards. */
   topics: PlaySetupTopic[];
   /** Translated difficulty labels. */
-  difficultyLabels: { easy: string; medium: string };
+  difficultyLabels: { easy: string; medium: string; hard: string };
   /** Translated start button + heading. */
   labels: { start: string; difficulty: string };
   defaultDifficulty?: PlayDifficulty;
@@ -108,7 +108,7 @@ export default function PlaySetup({
       <fieldset className={styles.difficulty}>
         <legend className={styles.difficultyLabel}>{labels.difficulty}</legend>
         <div className={styles.difficultyOptions}>
-          {(['easy', 'medium'] as const).map((level) => (
+          {(['easy', 'medium', 'hard'] as const).map((level) => (
             <button
               key={level}
               type="button"

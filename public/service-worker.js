@@ -15,7 +15,19 @@
  * caching ever gets a chance to run.
  */
 
-const CACHE_NAME = 'islamic-web-shell-v1';
+/**
+ * Build-versioned cache name. scripts/injectServiceWorkerVersion.mjs rewrites
+ * the __SW_BUILD_VERSION__ token inside build/service-worker.js after every
+ * build (CRA copies public/ verbatim — it can't inject build metadata itself).
+ *
+ * Because the token varies per build, the deployed worker file also varies per
+ * build, which forces the browser to install the new worker instead of keeping
+ * the old one. Its activate handler then prunes any cache under an older name.
+ * Without this, a redeploy served repeat visitors the previous bundle's cached
+ * files indefinitely via stale-while-revalidate — the original false-alarm.
+ */
+const BUILD_VERSION = '__SW_BUILD_VERSION__';
+const CACHE_NAME = `islamic-web-shell-${BUILD_VERSION === '__SW_BUILD_VERSION__' ? 'dev' : BUILD_VERSION}`;
 const OFFLINE_FALLBACK_URL = '/index.html';
 
 self.addEventListener('install', (event) => {

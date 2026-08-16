@@ -21,7 +21,6 @@ function shuffle<T>(items: T[]): T[] {
   return copy;
 }
 
-/** One face-up card: either the Arabic "face" or the English "name" side of a study item. */
 interface MatchCard {
   id: string;
   item: StudyItem;
@@ -29,23 +28,16 @@ interface MatchCard {
   paired: boolean;
 }
 
-function buildCards(topic: KidsStudyTopic, itemCount: number): MatchCard[] {
-  const pool = shuffle(KIDS_STUDY_SETS[topic]).slice(0, itemCount);
-  const cards: MatchCard[] = pool.flatMap((item) => [
-    { id: `${item.id}--face`, item, side: 'face', paired: false },
-    { id: `${item.id}--name`, item, side: 'name', paired: false },
-  ]);
-  return shuffle(cards);
-}
+const COLORS_bg = ['#FFC94D', '#5EC8E0', '#FF8965', '#B08BE0', '#146356'];
+const COLORS_text = ['#1a1a1a', '#ffffff', '#ffffff', '#ffffff', '#ffffff'];
 
 export interface MatchingGameProps {
-  /** Easy = 3 pairs, Medium = 5 pairs (Phase 11 difficulty). */
   difficulty?: PlayDifficulty;
 }
 
 export default function MatchingGame({ difficulty = 'easy' }: MatchingGameProps) {
   const { t } = useTranslation();
-  const pairCount = difficulty === 'medium' ? 5 : 3;
+  const pairCount = { easy: 3, medium: 5, hard: 7 }[difficulty] as number;
   const [topic, setTopic] = useState<KidsStudyTopic>('letters');
   const [cards, setCards] = useState<MatchCard[]>(() => buildCards('letters', pairCount));
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -132,7 +124,10 @@ export default function MatchingGame({ difficulty = 'easy' }: MatchingGameProps)
             {t('kids.gentleNudge')}
           </div>
         )}
-        {cards.map((card) => {
+        {cards.map((card, cardIndex) => {
+          const ci = cardIndex % 5;
+          const bg = COLORS_bg[ci];
+          const text = COLORS_text[ci];
           const isSelected = selectedId === card.id;
           return (
             <button
@@ -147,6 +142,7 @@ export default function MatchingGame({ difficulty = 'easy' }: MatchingGameProps)
               }}
               aria-pressed={isSelected}
               aria-label={card.side === 'face' ? card.item.face : card.item.name}
+              style={{ backgroundColor: bg, color: text }}
             >
               {card.side === 'face' ? (
                 <span className={styles.cardText} dir="rtl">
@@ -164,4 +160,13 @@ export default function MatchingGame({ difficulty = 'easy' }: MatchingGameProps)
       </div>
     </MiniGameShell>
   );
+}
+
+function buildCards(topic: KidsStudyTopic, itemCount: number): MatchCard[] {
+  const pool = shuffle(KIDS_STUDY_SETS[topic]).slice(0, itemCount);
+  const cards: MatchCard[] = pool.flatMap((item) => [
+    { id: `${item.id}--face`, item, side: 'face', paired: false },
+    { id: `${item.id}--name`, item, side: 'name', paired: false },
+  ]);
+  return shuffle(cards);
 }

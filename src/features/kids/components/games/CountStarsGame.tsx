@@ -3,7 +3,8 @@ import { Star } from 'lucide-react';
 import MiniGameShell from 'features/kids/components/games/MiniGameShell';
 import SparkleBurst from 'features/kids/components/rewards/SparkleBurst';
 import { shuffle } from 'features/kids/games/engineUtils';
-import type { PlayDifficulty } from 'features/kids/components/setup/PlaySetup';
+import type { Tier } from 'features/kids/games/difficultyConfig';
+import { getDifficultyConfig } from 'features/kids/games/difficultyConfig';
 import { playCorrect, playWrong } from 'services/kidSounds';
 import useTranslation from 'hooks/useTranslation';
 import styles from './CountStarsGame.module.css';
@@ -18,10 +19,10 @@ interface RoundState {
   options: number[];
 }
 
-function makeRound(round: number, difficulty: PlayDifficulty): RoundState {
-  const min = difficulty === 'medium' ? 4 : 2;
-  const count = min + (round % (11 - min));
-  const spread = difficulty === 'medium' ? 2 : 1;
+function makeRound(round: number, config: { minCount: number; maxCount: number; spread: number }): RoundState {
+  const min = config.minCount;
+  const count = min + (round % (config.maxCount + 1 - min));
+  const spread = config.spread;
   const candidates = [...new Set([count - spread, count, count + spread])].filter(
     (n) => n >= 1 && n <= 10,
   );
@@ -29,7 +30,7 @@ function makeRound(round: number, difficulty: PlayDifficulty): RoundState {
 }
 
 export interface CountStarsGameProps {
-  difficulty?: PlayDifficulty;
+  difficulty?: Tier;
 }
 
 function toArabicNumeral(n: number): string {
@@ -38,8 +39,9 @@ function toArabicNumeral(n: number): string {
 
 export default function CountStarsGame({ difficulty = 'easy' }: CountStarsGameProps) {
   const { t } = useTranslation();
+  const config = getDifficultyConfig('countstars', difficulty) as { minCount: number; maxCount: number; spread: number };
   const [round, setRound] = useState(0);
-  const [state, setState] = useState<RoundState>(() => makeRound(0, difficulty));
+  const [state, setState] = useState<RoundState>(() => makeRound(0, config));
   const [burst, setBurst] = useState<{ key: number; x: number; y: number } | null>(null);
   const [nudge, setNudge] = useState(false);
 
@@ -47,7 +49,7 @@ export default function CountStarsGame({ difficulty = 'easy' }: CountStarsGamePr
 
   const restart = () => {
     setRound(0);
-    setState(makeRound(0, difficulty));
+    setState(makeRound(0, config));
     setBurst(null);
     setNudge(false);
   };
@@ -59,7 +61,7 @@ export default function CountStarsGame({ difficulty = 'easy' }: CountStarsGamePr
       setBurst({ key: Date.now(), x, y });
       const nextRound = round + 1;
       setRound(nextRound);
-      setState(makeRound(nextRound, difficulty));
+      setState(makeRound(nextRound, config));
     } else {
       playWrong();
       setNudge(true);

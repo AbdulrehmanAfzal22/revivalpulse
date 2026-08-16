@@ -5,18 +5,14 @@ import StudyTopicChips from 'features/kids/components/games/StudyTopicChips';
 import { sample, shuffle } from 'features/kids/games/engineUtils';
 import { KIDS_STUDY_SETS } from 'data/kids/gameContent';
 import type { KidsStudyTopic, StudyItem } from 'data/kids/gameContent';
-import type { PlayDifficulty } from 'features/kids/components/setup/PlaySetup';
+import type { Tier } from 'features/kids/games/difficultyConfig';
+import { getDifficultyConfig } from 'features/kids/games/difficultyConfig';
 import { playCorrect, playWrong } from 'services/kidSounds';
 import useTranslation from 'hooks/useTranslation';
 import styles from './OrderGame.module.css';
 
 /** Put It in Order: tap the tiles in the right sequence (alphabet, counting). */
 export const ORDER_GAME_ID = 'order-line';
-
-export interface OrderGameProps {
-  /** Easy = 5 tiles, Medium = 7 tiles. */
-  difficulty?: PlayDifficulty;
-}
 
 interface Round {
   ordered: StudyItem[];
@@ -28,9 +24,14 @@ function makeRound(pack: KidsStudyTopic, count: number): Round {
   return { ordered, pool: shuffle(ordered) };
 }
 
+export interface OrderGameProps {
+  difficulty?: Tier;
+}
+
 export default function OrderGame({ difficulty = 'easy' }: OrderGameProps) {
   const { t } = useTranslation();
-  const tileCount = difficulty === 'medium' ? 7 : 5;
+  const config = getDifficultyConfig('order', difficulty) as { itemCount: number; maxGap: number };
+  const tileCount = config.itemCount;
   const [pack, setPack] = useState<KidsStudyTopic>('letters');
   const [state, setState] = useState<Round>(() => makeRound('letters', tileCount));
   const [placedCount, setPlacedCount] = useState(0);

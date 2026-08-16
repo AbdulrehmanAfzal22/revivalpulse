@@ -4,7 +4,8 @@ import SparkleBurst from 'features/kids/components/rewards/SparkleBurst';
 import { shuffle } from 'features/kids/games/engineUtils';
 import { KIDS_STUDY_WORDS } from 'data/kids/gameContent';
 import type { StudyItem } from 'data/kids/gameContent';
-import type { PlayDifficulty } from 'features/kids/components/setup/PlaySetup';
+import type { Tier } from 'features/kids/games/difficultyConfig';
+import { getDifficultyConfig } from 'features/kids/games/difficultyConfig';
 import { playCorrect, playWrong } from 'services/kidSounds';
 import useTranslation from 'hooks/useTranslation';
 import styles from './LetterCountGame.module.css';
@@ -20,23 +21,20 @@ interface RoundState {
   options: number[];
 }
 
-function makeRound(round: number, difficulty: PlayDifficulty): RoundState {
-  const pool =
-    difficulty === 'medium'
-      ? KIDS_STUDY_WORDS.filter((item) => [...item.face].length >= 4)
-      : KIDS_STUDY_WORDS;
+function makeRound(round: number, wordLengthRange: [number, number]): RoundState {
+  const [minLen, maxLen] = wordLengthRange;
+  const pool = KIDS_STUDY_WORDS.filter(
+    (item) => [...item.face].length >= minLen && [...item.face].length <= maxLen,
+  );
   const word = (pool[round % pool.length] ?? KIDS_STUDY_WORDS[round % KIDS_STUDY_WORDS.length]) as StudyItem;
   const count = [...word.face].length;
-  if (difficulty === 'medium') {
-    const raw = [count - 2, count - 1, count, count + 1].map((n) => (n < 2 ? 2 : n));
-    return { word, count, options: shuffle([...new Set(raw)]) };
-  }
-  const raw = [count - 1, count, count + 1].map((n) => (n < 2 ? n + 2 : n));
+  const spread = maxLen - minLen + 1;
+  const raw = Array.from({ length: spread + 2 }, (_, i) => count - 1 + i).map((n) => (n < 2 ? n + 2 : n));
   return { word, count, options: shuffle([...new Set(raw)]) };
 }
 
 export interface LetterCountGameProps {
-  difficulty?: PlayDifficulty;
+  difficulty?: Tier;
 }
 
 function toArabicNumeral(n: number): string {
@@ -45,8 +43,10 @@ function toArabicNumeral(n: number): string {
 
 export default function LetterCountGame({ difficulty = 'easy' }: LetterCountGameProps) {
   const { t } = useTranslation();
+  const config = getDifficultyConfig('lettercount', difficulty);
+  const wordLengthRange = config.wordLengthRange as unknown as [number, number];
   const [round, setRound] = useState(0);
-  const [state, setState] = useState<RoundState>(() => makeRound(0, difficulty));
+  const [state, setState] = useState<RoundState>(() => makeRound(0, wordLengthRange));
   const [burst, setBurst] = useState<{ key: number; x: number; y: number } | null>(null);
   const [nudge, setNudge] = useState(false);
 
@@ -54,7 +54,7 @@ export default function LetterCountGame({ difficulty = 'easy' }: LetterCountGame
 
   const restart = () => {
     setRound(0);
-    setState(makeRound(0, difficulty));
+    setState(makeRound(0, wordLengthRange));
     setBurst(null);
     setNudge(false);
   };
@@ -66,7 +66,7 @@ export default function LetterCountGame({ difficulty = 'easy' }: LetterCountGame
       setBurst({ key: Date.now(), x, y });
       const nextRound = round + 1;
       setRound(nextRound);
-      setState(makeRound(nextRound, difficulty));
+      setState(makeRound(nextRound, wordLengthRange));
     } else {
       playWrong();
       setNudge(true);

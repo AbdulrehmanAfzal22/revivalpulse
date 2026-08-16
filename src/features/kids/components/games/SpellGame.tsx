@@ -4,7 +4,8 @@ import SparkleBurst from 'features/kids/components/rewards/SparkleBurst';
 import { sample, shuffle } from 'features/kids/games/engineUtils';
 import { KIDS_BUILDABLE_WORDS, KIDS_STUDY_LETTERS } from 'data/kids/gameContent';
 import type { StudyItem } from 'data/kids/gameContent';
-import type { PlayDifficulty } from 'features/kids/components/setup/PlaySetup';
+import type { Tier } from 'features/kids/games/difficultyConfig';
+import { getDifficultyConfig } from 'features/kids/games/difficultyConfig';
 import { playCorrect, playWrong } from 'services/kidSounds';
 import useTranslation from 'hooks/useTranslation';
 import styles from './SpellGame.module.css';
@@ -13,8 +14,6 @@ import styles from './SpellGame.module.css';
 export const SPELL_GAME_ID = 'build-word';
 
 const WORD_COUNT = 5;
-const DISTRACTOR_COUNT = 2;
-const MEDIUM_DISTRACTOR_COUNT = 4;
 
 interface Round {
   word: StudyItem;
@@ -22,12 +21,10 @@ interface Round {
   target: string[];
 }
 
-function makeRound(round: number, difficulty: PlayDifficulty): Round {
+function makeRound(round: number, distractorCount: number): Round {
   const word = KIDS_BUILDABLE_WORDS[round % KIDS_BUILDABLE_WORDS.length] as StudyItem;
   const target = [...word.face];
   const inWord = new Set(target);
-  const distractorCount =
-    difficulty === 'medium' ? MEDIUM_DISTRACTOR_COUNT : DISTRACTOR_COUNT;
   const distractorFaces = sample(
     KIDS_STUDY_LETTERS.filter((letter) => !inWord.has(letter.face)),
     distractorCount,
@@ -36,13 +33,15 @@ function makeRound(round: number, difficulty: PlayDifficulty): Round {
 }
 
 export interface SpellGameProps {
-  difficulty?: PlayDifficulty;
+  difficulty?: Tier;
 }
 
 export default function SpellGame({ difficulty = 'easy' }: SpellGameProps) {
   const { t } = useTranslation();
+  const config = getDifficultyConfig('spell', difficulty);
+  const distractorCount = config.distractorCount as number;
   const [round, setRound] = useState(0);
-  const [state, setState] = useState<Round>(() => makeRound(0, difficulty));
+  const [state, setState] = useState<Round>(() => makeRound(0, distractorCount));
   const [typed, setTyped] = useState(0);
   const [used, setUsed] = useState<number[]>([]);
   const [burst, setBurst] = useState<{ key: number; x: number; y: number } | null>(null);
@@ -52,7 +51,7 @@ export default function SpellGame({ difficulty = 'easy' }: SpellGameProps) {
 
   const restart = () => {
     setRound(0);
-    setState(makeRound(0, difficulty));
+    setState(makeRound(0, distractorCount));
     setTyped(0);
     setUsed([]);
     setBurst(null);
@@ -76,7 +75,7 @@ export default function SpellGame({ difficulty = 'easy' }: SpellGameProps) {
     setTyped(nextTyped);
     if (nextTyped >= state.target.length && round + 1 < WORD_COUNT) {
       setRound(round + 1);
-      setState(makeRound(round + 1, difficulty));
+      setState(makeRound(round + 1, distractorCount));
       setTyped(0);
       setUsed([]);
     }

@@ -3,9 +3,11 @@ import {
   ArrowUpDown,
   Balloon,
   BookOpen,
+  Brain,
   Eye,
   Hammer,
   Hash,
+  Heart,
   Images,
   Languages,
   Layers,
@@ -16,36 +18,76 @@ import {
   Repeat,
   Scale,
   Search,
+  Shield,
   Sparkles,
   Star,
   Target,
   ThumbsUp,
+  Timer,
+  Volume2,
+  Zap,
 } from 'lucide-react';
 import type { TranslationKey } from 'i18n';
 import type { KidsStudyTopic } from 'data/kids/gameContent';
+
+/**
+ * KIDS GAMES REDESIGN — CONFIRMED CLASSIFICATION (source of truth)
+ *
+ * This block records the agreed-upon disposition for every game in the registry.
+ * Do not deviate from this classification in later phases without explicit
+ * discussion and updating this comment.
+ *
+ * KEEP — UI polish only (mechanics frozen, visual upgrades only):
+ *   - matching (match)
+ *   - memory (memory)
+ *   - balloon-pop (pop)
+ *   - spot-same (spot)
+ *   - letter-hunt (hunt)
+ *   - order-line (order)
+ *   - build-word (spell)
+ *   - count-stars (countstars)
+ *   - letter-count (lettercount)
+ *   - word-finder (wordfinder)
+ *
+ * KEEP — Content expansion only (mechanics frozen, grow question banks):
+ *   - true-false (truefalse)
+ *   - story-quiz (storyquiz)
+ *
+ * REPLACED — 8 games removed and replaced with new distinct mechanics:
+ *   - catch → halal-haram (halalharam)
+ *   - whack → good-manners (goodmanners)
+ *   - big-small → wudu-order (wuduorder) — REMOVED, replaced by quran-echo
+ *   - whats-missing → names-meaning (namesmeaning)
+ *   - pattern-repeat → prophet-timeline (prophettimeline)
+ *   - next-in-line → cause-effect (causeeffect)
+ *   - missing-letter → dua-moment (duamoment)
+ *   - more-or-less → letter-sound (lettersound)
+ *
+ * Last confirmed: Phase 8 Additions
+ */
 
 /** Engine ids → one per distinct interaction mechanic. */
 export type EngineId =
   | 'match'
   | 'memory'
   | 'pop'
-  | 'catch'
-  | 'whack'
   | 'spot'
   | 'hunt'
   | 'order'
-  | 'bigsmall'
   | 'spell'
-  | 'whatsmissing'
   | 'countstars'
-  | 'truefalse'
-  | 'pattern'
-  | 'nextinline'
   | 'lettercount'
-  | 'missingletter'
+  | 'wordfinder'
+  | 'truefalse'
   | 'storyquiz'
-  | 'moreorless'
-  | 'wordfinder';
+  | 'halalharam'
+  | 'goodmanners'
+  | 'namesmeaning'
+  | 'prophettimeline'
+  | 'causeeffect'
+  | 'duamoment'
+  | 'lettersound'
+  | 'quranecho';
 
 export interface GameSpec {
   /** Stable id — route segment and per-game rewards tally. */
@@ -96,24 +138,24 @@ export const GAMES: GameSpec[] = [
     packs: ['letters', 'numbers', 'words'],
   },
   {
-    id: 'catch',
-    engine: 'catch',
-    titleKey: 'kids.gameCatch',
-    descKey: 'kids.gameCatchDesc',
-    icon: Star,
-    color: '#f4a261',
-    gradient: 'linear-gradient(135deg, #fff0b3, #ffd24d)',
-    packs: ['letters', 'numbers', 'words'],
+    id: 'halal-haram',
+    engine: 'halalharam',
+    titleKey: 'kids.gameHalalHaram',
+    descKey: 'kids.gameHalalHaramDesc',
+    icon: Shield,
+    color: '#22c55e',
+    gradient: 'linear-gradient(135deg, #dcfce7, #bbf7d0)',
+    packs: [],
   },
   {
-    id: 'whack',
-    engine: 'whack',
-    titleKey: 'kids.gameWhack',
-    descKey: 'kids.gameWhackDesc',
-    icon: Hammer,
-    color: '#ef476f',
-    gradient: 'linear-gradient(135deg, #ffd0db, #ff9ab0)',
-    packs: ['letters', 'numbers', 'words'],
+    id: 'good-manners',
+    engine: 'goodmanners',
+    titleKey: 'kids.gameGoodManners',
+    descKey: 'kids.gameGoodMannersDesc',
+    icon: Heart,
+    color: '#ec4899',
+    gradient: 'linear-gradient(135deg, #fce7f3, #fbcfe8)',
+    packs: [],
   },
   {
     id: 'spot-same',
@@ -146,16 +188,6 @@ export const GAMES: GameSpec[] = [
     packs: ['letters', 'numbers'],
   },
   {
-    id: 'big-small',
-    engine: 'bigsmall',
-    titleKey: 'kids.gameBigSmall',
-    descKey: 'kids.gameBigSmallDesc',
-    icon: ArrowUpDown,
-    color: '#e76f51',
-    gradient: 'linear-gradient(135deg, #ffd9c9, #ffab8e)',
-    packs: ['numbers'],
-  },
-  {
     id: 'build-word',
     engine: 'spell',
     titleKey: 'kids.gameSpell',
@@ -166,14 +198,14 @@ export const GAMES: GameSpec[] = [
     packs: ['words'],
   },
   {
-    id: 'whats-missing',
-    engine: 'whatsmissing',
-    titleKey: 'kids.gameWhatMissing',
-    descKey: 'kids.gameWhatMissingDesc',
-    icon: Eye,
+    id: 'names-meaning',
+    engine: 'namesmeaning',
+    titleKey: 'kids.gameNamesMeaning',
+    descKey: 'kids.gameNamesMeaningDesc',
+    icon: BookOpen,
     color: '#8b5cf6',
-    gradient: 'linear-gradient(135deg, #e8ddff, #c9b2ff)',
-    packs: ['letters', 'numbers', 'words'],
+    gradient: 'linear-gradient(135deg, #f3e8ff, #e9d5ff)',
+    packs: [],
   },
   {
     id: 'count-stars',
@@ -193,27 +225,27 @@ export const GAMES: GameSpec[] = [
     icon: ThumbsUp,
     color: '#2f9e7f',
     gradient: 'linear-gradient(135deg, #d5f5ec, #a4e8d6)',
-    packs: ['letters', 'numbers', 'words'],
+    packs: [],
   },
   {
-    id: 'pattern-repeat',
-    engine: 'pattern',
-    titleKey: 'kids.gamePattern',
-    descKey: 'kids.gamePatternDesc',
-    icon: Repeat,
-    color: '#3b82f6',
-    gradient: 'linear-gradient(135deg, #d6ecff, #a8d4ff)',
-    packs: ['letters', 'numbers', 'words'],
-  },
-  {
-    id: 'next-in-line',
-    engine: 'nextinline',
-    titleKey: 'kids.gameNextInLine',
-    descKey: 'kids.gameNextInLineDesc',
-    icon: MoveRight,
+    id: 'prophet-timeline',
+    engine: 'prophettimeline',
+    titleKey: 'kids.gameProphetTimeline',
+    descKey: 'kids.gameProphetTimelineDesc',
+    icon: Timer,
     color: '#f97316',
-    gradient: 'linear-gradient(135deg, #ffe3d6, #ffc0a8)',
-    packs: ['letters', 'numbers', 'words'],
+    gradient: 'linear-gradient(135deg, #ffedd5, #fed7aa)',
+    packs: [],
+  },
+  {
+    id: 'cause-effect',
+    engine: 'causeeffect',
+    titleKey: 'kids.gameCauseEffect',
+    descKey: 'kids.gameCauseEffectDesc',
+    icon: Brain,
+    color: '#10b981',
+    gradient: 'linear-gradient(135deg, #d1fae5, #a7f3d0)',
+    packs: [],
   },
   {
     id: 'letter-count',
@@ -226,14 +258,14 @@ export const GAMES: GameSpec[] = [
     packs: ['words'],
   },
   {
-    id: 'missing-letter',
-    engine: 'missingletter',
-    titleKey: 'kids.gameMissingLetter',
-    descKey: 'kids.gameMissingLetterDesc',
-    icon: Puzzle,
-    color: '#10b981',
-    gradient: 'linear-gradient(135deg, #d9f6ea, #b3ecd2)',
-    packs: ['words'],
+    id: 'dua-moment',
+    engine: 'duamoment',
+    titleKey: 'kids.gameDuaMoment',
+    descKey: 'kids.gameDuaMomentDesc',
+    icon: Volume2,
+    color: '#eab308',
+    gradient: 'linear-gradient(135deg, #fef9c3, #fef08a)',
+    packs: [],
   },
   {
     id: 'story-quiz',
@@ -246,14 +278,14 @@ export const GAMES: GameSpec[] = [
     packs: [],
   },
   {
-    id: 'more-or-less',
-    engine: 'moreorless',
-    titleKey: 'kids.gameMoreLess',
-    descKey: 'kids.gameMoreLessDesc',
-    icon: Scale,
-    color: '#0ea5e9',
-    gradient: 'linear-gradient(135deg, #d9efff, #b3dfff)',
-    packs: ['numbers'],
+    id: 'letter-sound',
+    engine: 'lettersound',
+    titleKey: 'kids.gameLetterSound',
+    descKey: 'kids.gameLetterSoundDesc',
+    icon: Volume2,
+    color: '#a78bfa',
+    gradient: 'linear-gradient(135deg, #ece0ff, #d4b8ff)',
+    packs: ['letters'],
   },
   {
     id: 'word-finder',
@@ -265,8 +297,19 @@ export const GAMES: GameSpec[] = [
     gradient: 'linear-gradient(135deg, #ece0ff, #d4b8ff)',
     packs: ['words'],
   },
+  {
+    id: 'quran-echo',
+    engine: 'quranecho',
+    titleKey: 'kids.gameQuranEcho',
+    descKey: 'kids.gameQuranEchoDesc',
+    icon: BookOpen,
+    color: '#8b5cf6',
+    gradient: 'linear-gradient(135deg, #e9d8ff, #c4b5fd)',
+    packs: [],
+  },
 ];
 
+/** Engine id → one per distinct interaction. */
 export function getGame(gameId: string): GameSpec | undefined {
   return GAMES.find((game) => game.id === gameId);
 }

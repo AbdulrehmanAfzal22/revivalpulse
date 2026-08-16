@@ -15,8 +15,38 @@ function sendSyncConfig(registration: ServiceWorkerRegistration): void {
   });
 }
 
+type UpdateListener = () => void;
+let updateListener: UpdateListener | null = null;
+
+/**
+ * Subscribe to "a new build has taken over this page" events. Fires once per
+ * deployment the browser applies mid-session (the new worker calls
+ * skipWaiting + clients.claim), so the app can offer a one-tap refresh
+ * instead of letting users keep running the old bundle unknowingly.
+ * Returns an unsubscribe function.
+ */
+export function subscribeToServiceWorkerUpdates(listener: UpdateListener): () => void {
+  updateListener = listener;
+  return () => {
+    if (updateListener === listener) updateListener = null;
+  };
+}
+
 export function register(): void {
   if (!('serviceWorker' in navigator)) return;
+
+  // Production only: in dev, CRA serves unbundled modules whose requests a
+  // stale-while-revalidate worker can fight (and redirect quirks made the
+  // deployed false alarm next to impossible to reproduce locally, too).
+  if (process.env.NODE_ENV !== 'production') return;
+
+  // controllerchange fires when a NEW worker takes control — which on a
+  // first-ever install is just the initial takeover (no controller existed
+  // yet), not the arrival of a newer build. That flag tells them apart.
+  const hadController = Boolean(navigator.serviceWorker.controller);
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (hadController) updateListener?.();
+  });
 
   window.addEventListener('load', () => {
     navigator.serviceWorker

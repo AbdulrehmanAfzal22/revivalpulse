@@ -1,18 +1,19 @@
-import { useEffect, useState } from 'react';
-import { BookHeart, HandHeart, MoonStar, UserRound } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+import { BookHeart, BookOpenText, CalendarDays, HandHeart, HandCoins, MoonStar, UserRound } from 'lucide-react';
 import QuizEngine from 'components/quiz/QuizEngine';
 import Typography from 'components/ui/Typography';
 import BadgeUnlockModal from 'features/kids/components/rewards/BadgeUnlockModal';
 import SparkleBurst from 'features/kids/components/rewards/SparkleBurst';
 import PlaySetup from 'features/kids/components/setup/PlaySetup';
 import type { PlayDifficulty } from 'features/kids/components/setup/PlaySetup';
+import { shuffle } from 'features/kids/games/engineUtils';
 import useReadAloud from 'features/kids/hooks/useReadAloud';
 import useAnswerFeedback from 'features/kids/hooks/useAnswerFeedback';
 import { QUIZ_CONTENT_REVIEWED, quizQuestionsByCategory } from 'data/kids/quizBank';
+import type { QuizQuestion, QuizResult } from 'types/quiz.types';
 import { useKidsRewardsStore } from 'stores/useKidsRewardsStore';
 import { useKidsProgressStore } from 'stores/kidsProgressStore';
 import useTranslation from 'hooks/useTranslation';
-import type { QuizResult } from 'types/quiz.types';
 import type { BadgeId } from 'types/kids.types';
 import styles from './KidsQuizPage.module.css';
 
@@ -21,9 +22,15 @@ const TOPICS = [
   { id: 'salah-basics', icon: MoonStar, color: '#3e9e83' },
   { id: 'duas', icon: BookHeart, color: '#d1637a' },
   { id: 'adab', icon: HandHeart, color: '#8d6e63' },
+  { id: 'quran', icon: BookOpenText, color: '#22c55e' },
+  { id: 'worship', icon: HandCoins, color: '#f59e0b' },
+  { id: 'calendar', icon: CalendarDays, color: '#0ea5e9' },
 ] as const;
 
 type TopicId = (typeof TOPICS)[number]['id'];
+
+/** Sessions stay short and fresh: cap + shuffle a fresh deck each run. */
+const SESSION_LENGTH = 10;
 
 interface QuizConfig {
   topicId: TopicId;
@@ -60,7 +67,24 @@ export default function KidsQuizPage() {
     'salah-basics': { title: t('kids.quizTopic.salah'), description: t('kids.quizTopic.salahDesc') },
     duas: { title: t('kids.quizTopic.duas'), description: t('kids.quizTopic.duasDesc') },
     adab: { title: t('kids.quizTopic.adab'), description: t('kids.quizTopic.adabDesc') },
+    quran: { title: t('kids.quizTopic.quran'), description: t('kids.quizTopic.quranDesc') },
+    worship: { title: t('kids.quizTopic.worship'), description: t('kids.quizTopic.worshipDesc') },
+    calendar: { title: t('kids.quizTopic.calendar'), description: t('kids.quizTopic.calendarDesc') },
   };
+
+  const topicDeck = useMemo(() => {
+    if (!config) return [];
+    const pool = quizQuestionsByCategory(config.topicId).filter((question) => {
+      if (config.difficulty === 'medium') {
+        return question.difficulty === 'easy' || question.difficulty === 'medium';
+      }
+      if (config.difficulty === 'hard') {
+        return question.difficulty === 'easy' || question.difficulty === 'medium' || question.difficulty === 'hard';
+      }
+      return question.difficulty === 'easy';
+    });
+    return shuffle(pool).slice(0, SESSION_LENGTH);
+  }, [config]);
 
   if (!config) {
     return (
@@ -70,7 +94,7 @@ export default function KidsQuizPage() {
         </Typography>
         <PlaySetup
           kind="quiz"
-          difficultyLabels={{ easy: t('kids.difficultyEasy'), medium: t('kids.difficultyMedium') }}
+          difficultyLabels={{ easy: t('kids.difficultyEasy'), medium: t('kids.difficultyMedium'), hard: t('kids.difficultyHard') }}
           labels={{ start: t('kids.startPlay'), difficulty: t('kids.difficulty') }}
           onStart={(topicId, difficulty) => {
             setConfig({ topicId: topicId as TopicId, difficulty });
@@ -93,9 +117,7 @@ export default function KidsQuizPage() {
     );
   }
 
-  const questions = quizQuestionsByCategory(config.topicId).filter(
-    (question) => config.difficulty === 'medium' || question.difficulty === 'easy',
-  );
+  const questions = topicDeck;
 
   const handleFinish = (result: QuizResult) => {
     const before = useKidsRewardsStore.getState().unlockedBadges;

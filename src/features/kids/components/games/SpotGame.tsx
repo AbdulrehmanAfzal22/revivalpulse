@@ -4,7 +4,8 @@ import SparkleBurst from 'features/kids/components/rewards/SparkleBurst';
 import StudyTopicChips from 'features/kids/components/games/StudyTopicChips';
 import { pickTarget, pickDecoys, shuffle } from 'features/kids/games/engineUtils';
 import type { KidsStudyTopic, StudyItem } from 'data/kids/gameContent';
-import type { PlayDifficulty } from 'features/kids/components/setup/PlaySetup';
+import type { Tier } from 'features/kids/games/difficultyConfig';
+import { getDifficultyConfig } from 'features/kids/games/difficultyConfig';
 import { playCorrect, playWrong } from 'services/kidSounds';
 import useTranslation from 'hooks/useTranslation';
 import styles from './SpotGame.module.css';
@@ -13,19 +14,18 @@ import styles from './SpotGame.module.css';
 export const SPOT_GAME_ID = 'spot-same';
 
 const ROUNDS = 10;
-const OPTION_COUNT = 4;
-const MEDIUM_OPTION_COUNT = 6;
 
 export interface SpotGameProps {
-  difficulty?: PlayDifficulty;
+  difficulty?: Tier;
 }
 
 export default function SpotGame({ difficulty = 'easy' }: SpotGameProps) {
   const { t } = useTranslation();
+  const config = getDifficultyConfig('spot', difficulty);
+  const optionCount = config.optionCount as number;
   const [pack, setPack] = useState<KidsStudyTopic>('letters');
   const [round, setRound] = useState(0);
   const [target, setTarget] = useState<StudyItem>(() => pickTarget('letters', 0));
-  const optionCount = difficulty === 'medium' ? MEDIUM_OPTION_COUNT : OPTION_COUNT;
   const [options, setOptions] = useState<StudyItem[]>(() => {
     const init = pickTarget('letters', 0);
     return shuffle([init, ...pickDecoys('letters', init, optionCount - 1)]);
@@ -37,7 +37,6 @@ export default function SpotGame({ difficulty = 'easy' }: SpotGameProps) {
 
   const beginRound = (nextRound: number, nextPack: KidsStudyTopic) => {
     const nextTarget = pickTarget(nextPack, nextRound);
-    const optionCount = difficulty === 'medium' ? MEDIUM_OPTION_COUNT : OPTION_COUNT;
     setTarget(nextTarget);
     setOptions(shuffle([nextTarget, ...pickDecoys(nextPack, nextTarget, optionCount - 1)]));
     setBurst(null);

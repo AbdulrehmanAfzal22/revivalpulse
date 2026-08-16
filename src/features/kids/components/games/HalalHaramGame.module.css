@@ -1,0 +1,191 @@
+.board {
+  position: relative;
+  max-width: 40rem;
+  margin-inline: auto;
+}
+
+.nudge {
+  position: absolute;
+  top: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 2px solid var(--kids-coral, var(--color-danger));
+  border-radius: 999px;
+  padding: 0.35rem 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.attempts {
+  font-weight: 700;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.timer {
+  font-weight: 700;
+  color: var(--kids-coral, var(--color-danger));
+  white-space: nowrap;
+}
+
+.baskets {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.basket {
+  background: var(--color-surface);
+  border: 3px solid var(--color-border);
+  border-radius: var(--radius-lg, 1.25rem);
+  padding: 1rem;
+  min-height: 12rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.basket[data-category="halal"] {
+  border-color: var(--kids-emerald, var(--color-primary));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--kids-emerald, var(--color-primary)) 20%, transparent);
+}
+
+.basket[data-category="haram"] {
+  border-color: var(--kids-coral, var(--color-danger));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--kids-coral, var(--color-danger)) 20%, transparent);
+}
+
+.basketLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.basketIcon {
+  font-size: 1.5rem;
+}
+
+.basketDropZone {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  align-content: flex-start;
+  min-height: 8rem;
+}
+
+.placedItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.75rem;
+  background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.itemsArea {
+  background: var(--color-surface-raised);
+  border-radius: var(--radius-lg, 1.25rem);
+  padding: 1rem;
+  border: 2px dashed var(--color-border);
+}
+
+.hint {
+  text-align: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: color-mix(in srgb, var(--kids-sunshine, var(--color-primary)) 20%, transparent);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.itemsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+}
+
+.itemCard {
+  aspect-ratio: 1;
+  border: 3px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  cursor: grab;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.5rem;
+  transition: border-color 0.12s ease, transform 0.1s ease, box-shadow 0.12s ease;
+}
+
+.itemCard:hover {
+  border-color: var(--kids-sky, var(--color-primary));
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.itemSelected {
+  border-color: var(--kids-sunshine, var(--color-primary));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--kids-sunshine, var(--color-primary)) 35%, transparent);
+  transform: translateY(-3px);
+}
+
+.itemCard:active {
+  cursor: grabbing;
+}
+
+.itemIcon {
+  font-size: 2.5rem;
+}
+
+.itemName {
+  word-break: break-word;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.itemHint {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--kids-emerald, var(--color-primary)) 20%, transparent);
+  color: var(--kids-emerald, var(--color-primary));
+}
+
+.timeUp {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: var(--radius-lg, 1.25rem);
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 800;
+  z-index: 10;
+}
+
+@media (max-width: 480px) {
+  .baskets {
+    grid-template-columns: 1fr;
+  }
+  .itemsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES2019",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "jsx": "react",
+    "resolveJsonModule": true,
+    "outDir": ".qa-deps2/src",
+    "baseUrl": ".",
+    "paths": { "types/*": ["src/types/*"], "data/*": ["src/data/*"], "features/*": ["src/features/*"] }
+  },
+  "include": [
+    "src/data/kids/causeEffect.ts",
+    "src/data/kids/duaMoment.ts",
+    "src/data/kids/lletterSound.ts",
+    "src/data/kids/mannersScenarios.ts",
+    "src/data/kids/namesMeaning.ts",
+    "src/data/kids/namesOfAllah.json",
+    "src/data/kids/halalHaram.ts",
+    "src/types/kids.types.ts"
+  ]
+}

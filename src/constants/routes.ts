@@ -37,7 +37,8 @@ export const ROUTES = {
   /** Phase 6-7,10,11 — quiz/games hub, games, and the stars dashboard. */
   KIDS_QUIZ: '/kids/quiz',
   KIDS_GAMES: '/kids/games',
-  KIDS_GAME_PLAY: '/kids/games/:gameId',
+  KIDS_GAMES_TIER: '/kids/games/:tier',
+  KIDS_GAME_PLAY: '/kids/games/:tier/:gameId',
   KIDS_STARS: '/kids/stars',
   /** Intentionally not in NAV_ITEMS / any linked navigation — see pages/DevModePage.tsx. */
   DEV_MODE: '/dev',

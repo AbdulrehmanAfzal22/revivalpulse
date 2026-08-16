@@ -44,6 +44,7 @@ const KidsMannersPage = lazy(() => import('pages/KidsMannersPage'));
 const KidsParentDashboardPage = lazy(() => import('pages/KidsParentDashboardPage'));
 const KidsQuizPage = lazy(() => import('pages/KidsQuizPage'));
 const KidsGamesPage = lazy(() => import('pages/KidsGamesPage'));
+const KidsGamesTierPage = lazy(() => import('pages/KidsGamesTierPage'));
 const KidsGamePlayPage = lazy(() => import('pages/KidsGamePlayPage'));
 const KidsStarsPage = lazy(() => import('pages/KidsStarsPage'));
 const ImmersiveRecitationPage = lazy(() => import('pages/ImmersiveRecitationPage'));
@@ -93,6 +94,7 @@ export default function AppRoutes() {
         <Route path={ROUTES.KIDS_PARENT} element={<KidsParentDashboardPage />} />
         <Route path={ROUTES.KIDS_QUIZ} element={<KidsQuizPage />} />
         <Route path={ROUTES.KIDS_GAMES} element={<KidsGamesPage />} />
+        <Route path={ROUTES.KIDS_GAMES_TIER} element={<KidsGamesTierPage />} />
         <Route path={ROUTES.KIDS_GAME_PLAY} element={<KidsGamePlayPage />} />
         <Route path={ROUTES.KIDS_STARS} element={<KidsStarsPage />} />
       </Route>

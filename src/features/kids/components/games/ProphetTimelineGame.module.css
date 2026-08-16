@@ -1,0 +1,212 @@
+.board {
+  position: relative;
+  max-width: 45rem;
+  margin-inline: auto;
+}
+
+.nudge {
+  position: absolute;
+  top: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 2px solid var(--kids-coral, var(--color-danger));
+  border-radius: 999px;
+  padding: 0.35rem 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.attempts {
+  font-weight: 700;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.timer {
+  font-weight: 700;
+  color: var(--kids-coral, var(--color-danger));
+  white-space: nowrap;
+}
+
+.prompt {
+  text-align: center;
+  margin: 0 auto 1rem;
+  max-width: 32rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--kids-emerald, var(--color-primary)) 12%, transparent);
+  font-weight: 700;
+  color: var(--kids-emerald, var(--color-primary));
+}
+
+.timeline {
+  margin-bottom: 1.5rem;
+}
+
+.slots {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.5rem;
+  padding-bottom: 1rem;
+}
+
+.slot {
+  flex: 0 0 80px;
+  min-width: 80px;
+  height: 100px;
+  border: 3px dashed var(--color-border);
+  border-radius: var(--radius-lg, 1.25rem);
+  background: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+
+.slot:hover {
+  border-color: var(--kids-sky, var(--color-primary));
+  background: color-mix(in srgb, var(--kids-sky, var(--color-primary)) 10%, transparent);
+}
+
+.slotFilled {
+  border-style: solid;
+  border-width: 3px;
+}
+
+.slotCorrect {
+  border-color: var(--kids-emerald, var(--color-primary));
+  background: color-mix(in srgb, var(--kids-emerald, var(--color-primary)) 15%, transparent);
+}
+
+.slotWrong {
+  border-color: var(--kids-coral, var(--color-danger));
+  background: color-mix(in srgb, var(--kids-coral, var(--color-danger)) 15%, transparent);
+}
+
+.slotNumber {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  position: absolute;
+  top: 0.25rem;
+  left: 0.5rem;
+}
+
+.placedCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.25rem;
+}
+
+.placedIcon {
+  font-size: 1.5rem;
+}
+
+.placedName {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
+  line-height: 1.1;
+}
+
+.cardsArea {
+  background: var(--color-surface-raised);
+  border-radius: var(--radius-lg, 1.25rem);
+  padding: 1rem;
+  border: 2px dashed var(--color-border);
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.prophetCard {
+  border: 3px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  cursor: grab;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.75rem;
+  transition: border-color 0.12s ease, transform 0.1s ease, box-shadow 0.12s ease;
+}
+
+.prophetCard:hover {
+  border-color: var(--kids-sky, var(--color-primary));
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.prophetCard:active {
+  cursor: grabbing;
+}
+
+.prophetIcon {
+  font-size: 2rem;
+}
+
+.prophetInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  text-align: center;
+}
+
+.prophetNameEnglish {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.prophetNameArabic {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--kids-emerald, var(--color-primary));
+}
+
+.prophetPeriod {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.timeUp {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: var(--radius-lg, 1.25rem);
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 800;
+  z-index: 10;
+}
+
+@media (max-width: 480px) {
+  .slot {
+    flex: 0 0 70px;
+    min-width: 70px;
+    height: 90px;
+  }
+  .prophetCard {
+    padding: 0.5rem;
+  }
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MiniGameShell from 'features/kids/components/games/MiniGameShell';
 import SparkleBurst from 'features/kids/components/rewards/SparkleBurst';
 import EmptyState from 'components/feedback/EmptyState';
+import { shuffle } from 'features/kids/games/engineUtils';
 import { QUIZ_BANK } from 'data/kids/quizBank';
 import type { QuizQuestion } from 'types/quiz.types';
-import type { PlayDifficulty } from 'features/kids/components/setup/PlaySetup';
+import type { Tier } from 'features/kids/games/difficultyConfig';
+import { getDifficultyConfig } from 'features/kids/games/difficultyConfig';
 import { playCorrect, playWrong } from 'services/kidSounds';
 import useTranslation from 'hooks/useTranslation';
 import styles from './StoryQuizGame.module.css';
@@ -23,39 +25,88 @@ function isAnswerable(question: QuizQuestion): boolean {
   );
 }
 
-const DECK = QUIZ_BANK.filter(isAnswerable);
+/** Shuffle a question's options and remap correctIndex so the correct answer
+ *  moves to a fresh position. The authored order must never reach the screen,
+ *  otherwise the right answer always sits in the same slot. */
+export function shuffleOptions(question: QuizQuestion): QuizQuestion {
+  const positions = shuffle(question.options.map((_, index) => index));
+  return {
+    ...question,
+    options: positions.map((index) => question.options[index] as string),
+    correctIndex: positions.indexOf(question.correctIndex),
+  };
+}
 
-function deckForDifficulty(difficulty: PlayDifficulty): QuizQuestion[] {
-  if (difficulty === 'medium') {
-    const medium = DECK.filter((question) => question.difficulty === 'medium');
-    if (medium.length > 0) return medium;
+const BANK = QUIZ_BANK.filter(isAnswerable);
+
+export function deckForDifficulty(filterDifficulty: string): QuizQuestion[] {
+  let pool: QuizQuestion[];
+  if (filterDifficulty === 'hard') {
+    const hard = BANK.filter((question) => question.difficulty === 'hard');
+    pool = hard.length > 0 ? hard : BANK;
+  } else if (filterDifficulty === 'medium') {
+    const medium = BANK.filter((question) => question.difficulty === 'medium');
+    pool = medium.length > 0 ? medium : BANK;
+  } else {
+    const easy = BANK.filter((question) => question.difficulty === 'easy');
+    pool = easy.length > 0 ? easy : BANK;
   }
-  return DECK.filter((question) => question.difficulty === 'easy');
+  return pool.map(shuffleOptions);
 }
 
 export interface StoryQuizGameProps {
-  difficulty?: PlayDifficulty;
+  difficulty?: Tier;
+  tier?: Tier;
 }
 
-export default function StoryQuizGame({ difficulty = 'easy' }: StoryQuizGameProps) {
+export default function StoryQuizGame({ difficulty = 'easy', tier = 'easy' }: StoryQuizGameProps) {
   const { t } = useTranslation();
-  const deck = deckForDifficulty(difficulty);
-  const ROUNDS = Math.min(8, deck.length);
+  const config = getDifficultyConfig('storyquiz', tier) as {
+    filterDifficulty: string;
+    roundsToWin: number;
+    timeLimit: number;
+  };
+  const [deck, setDeck] = useState<QuizQuestion[]>(() => shuffle(deckForDifficulty(config.filterDifficulty)));
   const [round, setRound] = useState(0);
   const [burst, setBurst] = useState<{ key: number; x: number; y: number } | null>(null);
   const [nudge, setNudge] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(config.timeLimit);
+  const [timerActive, setTimerActive] = useState(false);
 
-  const won = ROUNDS > 0 && round >= ROUNDS;
+  const roundsToWin = config.roundsToWin;
+  const isTimed = config.timeLimit > 0;
+
+  const won = deck.length > 0 && round >= roundsToWin;
+  const lost = isTimed && timeLeft <= 0 && !won;
   const question = deck[round % deck.length];
 
+  // Timer
+  useEffect(() => {
+    if (!isTimed || won || lost) return;
+    setTimerActive(true);
+    const id = window.setInterval(() => {
+      setTimeLeft((prev) => {
+        const next = prev - 100;
+        if (next <= 0) {
+          setTimerActive(false);
+          return 0;
+        }
+        return next;
+      });
+    }, 100);
+    return () => window.clearInterval(id);
+  }, [isTimed, won, lost]);
+
   const restart = () => {
+    setDeck(shuffle(deckForDifficulty(config.filterDifficulty)));
     setRound(0);
     setBurst(null);
     setNudge(false);
+    if (isTimed) setTimeLeft(config.timeLimit);
   };
 
   const pick = (index: number, x: number, y: number) => {
-    if (won || !question) return;
+    if (won || lost || !question) return;
     const isValidTap = index >= 0 && index < question.options.length;
     if (isValidTap && index === question.correctIndex) {
       playCorrect();
@@ -68,7 +119,7 @@ export default function StoryQuizGame({ difficulty = 'easy' }: StoryQuizGameProp
     }
   };
 
-  const progressLabel = t('kids.gameRoundProgress', { current: Math.min(round + 1, ROUNDS), total: ROUNDS });
+  const progressLabel = t('kids.gameRoundProgress', { current: Math.min(round + 1, roundsToWin), total: roundsToWin });
 
   return (
     <MiniGameShell
@@ -76,7 +127,12 @@ export default function StoryQuizGame({ difficulty = 'easy' }: StoryQuizGameProp
       title={t('kids.gameStoryQuiz')}
       won={won}
       onRestart={restart}
-      headerExtra={<span className={styles.attempts}>{progressLabel}</span>}
+      headerExtra={
+        <>
+          <span className={styles.attempts}>{progressLabel}</span>
+          {isTimed && <span className={styles.timer} role="timer">{Math.ceil(timeLeft / 1000)}s</span>}
+        </>
+      }
     >
       <div className={styles.board}>
         {burst && <SparkleBurst burstKey={burst.key} x={burst.x} y={burst.y} />}
@@ -114,6 +170,7 @@ export default function StoryQuizGame({ difficulty = 'easy' }: StoryQuizGameProp
         ) : (
           <EmptyState title={t('emptyState.kids.gameNotFound')} />
         )}
+        {lost && <div className={styles.timeUp}>{t('kids.gameTimeUp')}</div>}
       </div>
     </MiniGameShell>
   );

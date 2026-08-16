@@ -79,3 +79,16 @@
   color: var(--color-text-muted);
   white-space: nowrap;
 }
+
+.timer {
+  font-weight: 700;
+  color: var(--kids-coral, var(--color-danger));
+  white-space: nowrap;
+}
+
+.timeUp {
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 700;
+  color: var(--kids-coral, var(--color-danger));
+}

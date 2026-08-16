@@ -1,26 +1,30 @@
 import type { ComponentType } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import EmptyState from 'components/feedback/EmptyState';
 import MatchingGame from 'features/kids/components/games/MatchingGame';
 import MemoryFlipGame from 'features/kids/components/games/MemoryFlipGame';
 import BalloonPopGame from 'features/kids/components/games/BalloonPopGame';
-import FallingCatchGame from 'features/kids/components/games/FallingCatchGame';
-import WhackGame from 'features/kids/components/games/WhackGame';
 import SpotGame from 'features/kids/components/games/SpotGame';
 import HuntGame from 'features/kids/components/games/HuntGame';
 import OrderGame from 'features/kids/components/games/OrderGame';
-import BigSmallGame from 'features/kids/components/games/BigSmallGame';
 import SpellGame from 'features/kids/components/games/SpellGame';
-import WhatMissingGame from 'features/kids/components/games/WhatMissingGame';
 import CountStarsGame from 'features/kids/components/games/CountStarsGame';
 import TrueFalseGame from 'features/kids/components/games/TrueFalseGame';
-import PatternRepeatGame from 'features/kids/components/games/PatternRepeatGame';
-import NextInLineGame from 'features/kids/components/games/NextInLineGame';
 import LetterCountGame from 'features/kids/components/games/LetterCountGame';
-import MissingLetterGame from 'features/kids/components/games/MissingLetterGame';
 import StoryQuizGame from 'features/kids/components/games/StoryQuizGame';
-import MoreOrLessGame from 'features/kids/components/games/MoreOrLessGame';
 import WordFinderGame from 'features/kids/components/games/WordFinderGame';
+
+// New replacement games (Phase 7)
+import HalalHaramGame from 'features/kids/components/games/HalalHaramGame';
+import GoodMannersGame from 'features/kids/components/games/GoodMannersGame';
+
+import NamesMeaningGame from 'features/kids/components/games/NamesMeaningGame';
+import ProphetTimelineGame from 'features/kids/components/games/ProphetTimelineGame';
+import CauseEffectGame from 'features/kids/components/games/CauseEffectGame';
+import DuaMomentGame from 'features/kids/components/games/DuaMomentGame';
+import LetterSoundGame from 'features/kids/components/games/LetterSoundGame';
+import QuranEchoGame from 'features/kids/components/games/QuranEchoGame';
+
 import { getGame } from 'features/kids/games/gameRegistry';
 import type { EngineId } from 'features/kids/games/gameRegistry';
 import type { PlayDifficulty } from 'features/kids/components/setup/PlaySetup';
@@ -29,37 +33,42 @@ import styles from './KidsGamePlayPage.module.css';
 
 interface EngineProps {
   difficulty?: PlayDifficulty;
+  tier?: 'easy' | 'medium' | 'hard';
 }
 
 const ENGINES: Record<EngineId, ComponentType<EngineProps>> = {
   match: MatchingGame,
   memory: MemoryFlipGame,
   pop: BalloonPopGame,
-  catch: FallingCatchGame,
-  whack: WhackGame,
   spot: SpotGame,
   hunt: HuntGame,
   order: OrderGame,
-  bigsmall: BigSmallGame,
   spell: SpellGame,
-  whatsmissing: WhatMissingGame,
   countstars: CountStarsGame,
   truefalse: TrueFalseGame,
-  pattern: PatternRepeatGame,
-  nextinline: NextInLineGame,
   lettercount: LetterCountGame,
-  missingletter: MissingLetterGame,
   storyquiz: StoryQuizGame,
-  moreorless: MoreOrLessGame,
   wordfinder: WordFinderGame,
+  // New replacement games
+  halalharam: HalalHaramGame,
+  goodmanners: GoodMannersGame,
+  namesmeaning: NamesMeaningGame,
+  prophettimeline: ProphetTimelineGame,
+  causeeffect: CauseEffectGame,
+  duamoment: DuaMomentGame,
+  lettersound: LetterSoundGame,
+  quranecho: QuranEchoGame,
 };
+
+type Tier = 'easy' | 'medium' | 'hard';
 
 /** One generic route hosts every game; the registry picks the engine. */
 export default function KidsGamePlayPage() {
-  const { gameId } = useParams<{ gameId: string }>();
-  const location = useLocation();
+  const { gameId, tier } = useParams<{ gameId: string; tier: Tier }>();
   const { t } = useTranslation();
-  const difficulty = ((location.state as { difficulty?: PlayDifficulty } | null)?.difficulty ?? 'easy') as PlayDifficulty;
+
+  // Read tier from route params, default to 'easy'
+  const validTier: Tier = tier && ['easy', 'medium', 'hard'].includes(tier) ? tier : 'easy';
 
   const spec = getGame(gameId ?? '');
   if (!spec) {
@@ -69,7 +78,7 @@ export default function KidsGamePlayPage() {
   const Engine = ENGINES[spec.engine];
   return (
     <div className={styles.page}>
-      <Engine difficulty={difficulty} />
+      <Engine difficulty={validTier} tier={validTier} />
     </div>
   );
 }

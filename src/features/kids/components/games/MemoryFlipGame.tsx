@@ -4,7 +4,8 @@ import SparkleBurst from 'features/kids/components/rewards/SparkleBurst';
 import StudyTopicChips from 'features/kids/components/games/StudyTopicChips';
 import { KIDS_STUDY_SETS } from 'data/kids/gameContent';
 import type { KidsStudyTopic, StudyItem } from 'data/kids/gameContent';
-import type { PlayDifficulty } from 'features/kids/components/setup/PlaySetup';
+import type { Tier } from 'features/kids/games/difficultyConfig';
+import { getDifficultyConfig } from 'features/kids/games/difficultyConfig';
 import { playCorrect, playWrong } from 'services/kidSounds';
 import useTranslation from 'hooks/useTranslation';
 import styles from './MemoryFlipGame.module.css';
@@ -39,13 +40,13 @@ function buildDeck(topic: KidsStudyTopic, pairCount: number): MemoryCard[] {
 }
 
 export interface MemoryFlipGameProps {
-  /** Easy = 4 pairs, Medium = 6 pairs (Phase 11 difficulty). */
-  difficulty?: PlayDifficulty;
+  difficulty?: Tier;
 }
 
 export default function MemoryFlipGame({ difficulty = 'easy' }: MemoryFlipGameProps) {
   const { t } = useTranslation();
-  const pairCount = difficulty === 'medium' ? 6 : 4;
+  const config = getDifficultyConfig('memory', difficulty);
+  const pairCount = config.pairCount as number;
   const [topic, setTopic] = useState<KidsStudyTopic>('letters');
   const [deck, setDeck] = useState<MemoryCard[]>(() => buildDeck('letters', pairCount));
   const [flipped, setFlipped] = useState<string[]>([]);
