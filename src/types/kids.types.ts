@@ -29,6 +29,8 @@ export interface KidsStory {
   /** Key into the symbolic (non-figurative) illustration map — features/kids/components/StoryIllustration.tsx. */
   illustrationSymbol: string;
   accentColor: string;
+  /** Name with Islamic respect suffix (ﷺ for prophets) */
+  nameWithRespect?: string;
 }
 
 export interface BeginnerLesson {

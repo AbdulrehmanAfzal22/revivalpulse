@@ -46,8 +46,8 @@ export default function UpcomingEventsList({ events }: UpcomingEventsListProps) 
             className={styles.item}
           >
             <div>
-              <Typography variant="body">{event.name}</Typography>
-              <Typography variant="caption" muted>
+              <Typography variant="body" className={styles.eventName}>{event.name}</Typography>
+              <Typography variant="caption" muted className={styles.eventDate}>
                 {event.hijriDay} {hijriMonthName} · {event.gregorian.monthNameEn} {event.gregorian.day},{' '}
                 {event.gregorian.year}
               </Typography>

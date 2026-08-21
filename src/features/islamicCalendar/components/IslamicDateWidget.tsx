@@ -27,10 +27,10 @@ export default function IslamicDateWidget() {
 
       {data && (
         <Link to={ROUTES.ISLAMIC_CALENDAR} className={styles.link}>
-          <Typography variant="h3" as="p">
+          <Typography variant="h3" as="p" className={styles.islamicDate}>
             {t('islamicCalendar.hijriDateAH', { day: data.hijri.day, month: data.hijri.month.en, year: data.hijri.year })}
           </Typography>
-          <Typography variant="caption" muted>
+          <Typography variant="caption" muted className={styles.gregorianDate}>
             {t('islamicCalendar.gregorianDate', {
               weekday: data.gregorian.weekdayEn,
               month: data.gregorian.monthNameEn,

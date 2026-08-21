@@ -9,6 +9,7 @@ import { PROPHET_STORIES, SAHABAH_STORIES } from 'data/kids/stories';
 import { getKidsStoryV2 } from 'data/kids/storiesV2';
 import { ROUTES, buildKidsStoryChaptersPath, buildKidsStoryPath } from 'constants/routes';
 import useTranslation from 'hooks/useTranslation';
+import { ProphetName } from 'features/kids/components/ProphetName';
 import styles from './KidsStoriesPage.module.css';
 
 type Tab = 'prophets' | 'sahabah';
@@ -42,7 +43,7 @@ export default function KidsStoriesPage() {
           <Link key={story.id} to={storyLink(story.id)} className={styles.cardLink}>
             <Card elevation="raised" className={styles.card}>
               <StoryIllustration symbol={story.illustrationSymbol} color={story.accentColor} size={64} />
-              <Typography variant="body">{story.nameEnglish}</Typography>
+              <Typography variant="body">{ProphetName({ nameEnglish: story.nameEnglish, propType: story.type })}</Typography>
             </Card>
           </Link>
         ))}
