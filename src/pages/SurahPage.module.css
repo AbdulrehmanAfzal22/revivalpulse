@@ -4,8 +4,26 @@
 }
 
 /* No navbar to clear in fullscreen — the page itself is the fullscreen root. */
-.page:fullscreen .toolbar {
+.page:fullscreen .readerHeader {
   top: 0;
+}
+
+.readerHeader {
+  position: sticky;
+  top: 3.5rem;
+  z-index: var(--z-navbar);
+  margin-block-end: 1rem;
+  background-color: var(--color-bg);
+  border-block-end: 1px solid var(--color-border);
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 12%);
+}
+
+.headerControls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-block: 0.5rem;
 }
 
 .toolbar {
@@ -13,14 +31,21 @@
   align-items: center;
   justify-content: flex-end;
   gap: 0.25rem;
-  margin-block-end: 0.5rem;
-  /* Stays reachable while scrolling through long surahs — sits just below
-     the global sticky navbar rather than scrolling away with the header. */
-  position: sticky;
-  top: 3.5rem;
-  z-index: var(--z-navbar);
-  padding-block: 0.5rem;
-  background-color: var(--reader-bg, var(--color-bg));
+  flex-shrink: 0;
+}
+
+.backButton {
+  animation: back-in 420ms ease-out both;
+}
+
+.backButton:hover { transform: translateX(-0.15rem) scale(1.06); }
+
+.backLabel { display: inline; }
+
+@keyframes back-in { from { opacity: 0; transform: translateX(-0.5rem); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .backButton { animation: none; }
 }
 
 .header {
@@ -30,7 +55,7 @@
   text-align: center;
   gap: 0.25rem;
   padding-block-end: 1.5rem;
-  margin-block-end: 1rem;
+  margin-block-end: 0;
   border-block-end: 1px solid var(--color-border);
 }
 
@@ -74,4 +99,9 @@
 
 .pagerLink {
   text-decoration: none;
+}
+
+@media (max-width: 40rem) {
+  .backLabel { display: none; }
+  .backButton { padding-inline: 0.65rem; }
 }

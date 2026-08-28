@@ -18,3 +18,61 @@
 .note {
   color: var(--color-text-muted);
 }
+
+/* react-markdown theme matching */
+rmd-bold,
+strong {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+rmd-em,
+em {
+  font-style: italic;
+  color: var(--color-text);
+}
+
+rmd-list,
+ul,
+ol {
+  color: var(--color-text);
+  line-height: 1.75;
+}
+
+rmd-list li,
+ul li,
+ol li {
+  margin-bottom: 0.25rem;
+}
+
+rmd-h1,
+h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 1rem 0;
+}
+
+rmd-h2,
+h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 1rem 0;
+}
+
+rmd-h3,
+h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0.75rem 0;
+}
+
+rmd-blockquote,
+blockquote {
+  border-left: 3px solid var(--color-primary);
+  padding-left: 0.75rem;
+  color: var(--color-text-muted);
+  margin: 1rem 0;
+}

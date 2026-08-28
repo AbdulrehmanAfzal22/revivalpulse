@@ -1,8 +1,21 @@
 .page {
+  width: 100%;
+  box-sizing: border-box;
+  padding: clamp(1.25rem, 4vw, 3rem) clamp(1rem, 4vw, 3rem) 5rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
 }
+
+.backLink {
+  align-self: flex-start;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+.backLink:hover { color: var(--color-primary); background: var(--color-surface); transform: translateX(-0.15rem); }
 
 .header {
   display: flex;
@@ -11,7 +24,7 @@
   text-align: center;
   gap: 0.25rem;
   padding-block-end: 1.5rem;
-  margin-block-end: 1rem;
+  margin-block-end: 1.75rem;
   border-block-end: 1px solid var(--color-border);
 }
 

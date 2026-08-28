@@ -5,6 +5,21 @@
   text-align: center;
   gap: 0.5rem;
   padding: 1.25rem 0.75rem;
+  min-height: 14rem;
+  border-radius: clamp(1rem, 2vw, 1.5rem);
+  animation: card-pop 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.card:hover,
+.card:focus-within {
+  transform: scale(1.05) translateY(-0.2rem);
+  box-shadow: 0 0.75rem 1.5rem rgba(62, 53, 110, 0.2);
+}
+
+.learned {
+  border-color: var(--kids-emerald, var(--color-primary));
+  animation: learned-pop 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .arabic {
@@ -13,6 +28,7 @@
   margin: 0;
   font-family: var(--reader-arabic-font, 'Reader Uthmani', serif);
   line-height: 1.8;
+  animation: write-in 600ms ease-out both;
 }
 
 .actions {
@@ -21,4 +37,25 @@
   align-items: center;
   gap: 0.5rem;
   margin-top: 0.25rem;
+}
+
+@keyframes card-pop {
+  from { opacity: 0; transform: translateY(1rem) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes write-in {
+  from { opacity: 0; transform: scale(0.65) rotate(-8deg); }
+  to { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@keyframes learned-pop {
+  0% { transform: scale(0.94); }
+  60% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card, .arabic, .learned { animation: none; }
+  .card:hover, .card:focus-within { transform: none; }
 }

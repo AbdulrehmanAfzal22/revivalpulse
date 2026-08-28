@@ -7,18 +7,35 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
+  animation: page-in 500ms ease-out both;
 }
 
 .tierTabs {
+  position: relative;
+  isolation: isolate;
   display: flex;
-  justify-content: center;
-  gap: var(--space-2);
+  width: min(100%, 30rem);
+  margin-inline: auto;
   padding-bottom: var(--space-4);
   border-bottom: 1px solid var(--color-border);
-  flex-wrap: wrap;
+}
+
+.tabHighlight {
+  position: absolute;
+  z-index: -1;
+  inset: 0 auto var(--space-4) 0;
+  width: calc(100% / 3);
+  border-radius: var(--radius-lg);
+  background: var(--color-primary-container);
+  box-shadow: inset 0 0 0 2px var(--color-primary);
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .tierTab {
+  flex: 1;
+  position: relative;
+  display: grid;
+  place-items: center;
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius-lg);
   font-weight: 600;
@@ -26,7 +43,7 @@
   color: var(--color-text-muted);
   background: transparent;
   border: 2px solid transparent;
-  transition: all var(--duration-fast) ease;
+  transition: color var(--duration-fast) ease, transform var(--duration-fast) ease;
   text-decoration: none;
 }
 
@@ -37,8 +54,7 @@
 
 .tierTabActive {
   color: var(--color-primary);
-  background: var(--color-primary-container);
-  border-color: var(--color-primary);
+  transform: translateY(-1px);
 }
 
 .header {
@@ -49,6 +65,7 @@
   gap: var(--space-2);
   padding-bottom: var(--space-4);
   border-bottom: 1px solid var(--color-border);
+  animation: fade-slide-in 550ms 80ms ease-out both;
 }
 
 .title {
@@ -77,6 +94,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-4);
+  animation: grid-in 420ms ease-out both;
 }
 
 @media (min-width: 480px) {
@@ -121,12 +139,39 @@
     transform var(--duration-instant) ease,
     box-shadow var(--duration-fast) ease;
   text-decoration: none;
+  animation: tile-pop 550ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+.tile:nth-child(2) { animation-delay: 45ms; }
+.tile:nth-child(3) { animation-delay: 90ms; }
+.tile:nth-child(4) { animation-delay: 135ms; }
+.tile:nth-child(5) { animation-delay: 180ms; }
+.tile:nth-child(6) { animation-delay: 225ms; }
+.tile:nth-child(7) { animation-delay: 270ms; }
+.tile:nth-child(8) { animation-delay: 315ms; }
+
+.tileIconWrap svg {
+  animation: icon-float 3.6s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.tile-matching .tileIconWrap svg { animation-name: icon-shuffle; }
+.tile-memory .tileIconWrap svg { animation-name: icon-flip; }
+.tile-pop .tileIconWrap svg { animation-name: icon-bob; }
+.tile-countstars .tileIconWrap svg { animation-name: icon-twinkle; }
+.tile-hunt .tileIconWrap svg { animation-name: icon-sway; }
+.tile-duamoment .tileIconWrap svg,
+.tile-lettersound .tileIconWrap svg { animation-name: icon-pulse; }
+
 .tile:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 1rem 2rem color-mix(in srgb, currentColor 22%, transparent);
   border-color: currentColor;
+}
+
+.tile:hover .tileIconWrap svg,
+.tile:focus-visible .tileIconWrap svg {
+  animation: icon-wiggle 450ms ease-in-out;
 }
 
 .tile:focus-visible {
@@ -168,11 +213,30 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .page,
+  .header,
+  .grid,
   .tile,
-  .tierTab {
+  .tierTab,
+  .tabHighlight,
+  .tileIconWrap svg {
+    animation: none;
     transition: none;
   }
   .tile:hover {
     transform: none;
   }
 }
+
+@keyframes page-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fade-slide-in { from { opacity: 0; transform: translateY(0.6rem); } to { opacity: 1; transform: none; } }
+@keyframes grid-in { from { opacity: 0; transform: translateY(0.75rem); } to { opacity: 1; transform: none; } }
+@keyframes tile-pop { 0% { opacity: 0; transform: translateY(1rem) scale(0.88); } 70% { transform: translateY(-0.15rem) scale(1.02); } 100% { opacity: 1; transform: none; } }
+@keyframes icon-float { 50% { transform: translateY(-0.2rem); } }
+@keyframes icon-shuffle { 35% { transform: translateX(0.18rem) rotate(5deg); } 70% { transform: translateX(-0.18rem) rotate(-5deg); } }
+@keyframes icon-flip { 50% { transform: rotateY(180deg); } }
+@keyframes icon-bob { 50% { transform: translateY(-0.35rem) rotate(2deg); } }
+@keyframes icon-twinkle { 50% { transform: scale(1.12) rotate(8deg); filter: brightness(1.25); } }
+@keyframes icon-sway { 50% { transform: rotate(-8deg); } }
+@keyframes icon-pulse { 50% { transform: scale(1.12); filter: drop-shadow(0 0 0.35rem currentColor); } }
+@keyframes icon-wiggle { 25% { transform: rotate(-7deg) scale(1.08); } 75% { transform: rotate(7deg) scale(1.08); } }

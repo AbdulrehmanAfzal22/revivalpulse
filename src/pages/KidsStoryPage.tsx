@@ -9,7 +9,7 @@ import EmptyState from 'components/feedback/EmptyState';
 import StoryIllustration from 'features/kids/components/StoryIllustration';
 import useStoryVerses from 'features/kids/hooks/useStoryVerses';
 import { useKidsProgressStore } from 'stores/kidsProgressStore';
-import { ALL_KIDS_STORIES } from 'data/kids/stories';
+import { PROPHET_STORIES } from 'data/kids/stories';
 import { ROUTES } from 'constants/routes';
 import useTranslation from 'hooks/useTranslation';
 import styles from './KidsStoryPage.module.css';
@@ -17,7 +17,7 @@ import styles from './KidsStoryPage.module.css';
 export default function KidsStoryPage() {
   const { storyId } = useParams<{ storyId: string }>();
   const navigate = useNavigate();
-  const story = ALL_KIDS_STORIES.find((item) => item.id === storyId);
+  const story = PROPHET_STORIES.find((item) => item.id === storyId);
   const markContentViewed = useKidsProgressStore((state) => state.markContentViewed);
   const { t } = useTranslation();
 

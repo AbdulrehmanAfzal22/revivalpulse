@@ -74,7 +74,7 @@ export default function HadithBookView({ book }: HadithBookViewProps) {
 
   return (
     <div>
-      <label className={styles.field}>
+      <label className={styles.field} aria-label={`${t('hadith.searchPlaceholder')} (${book.nameEnglish})`}>
         <Search size={16} className={styles.fieldIcon} />
         <input
           type="search"
@@ -103,7 +103,7 @@ export default function HadithBookView({ book }: HadithBookViewProps) {
           <Typography variant="h4" as="h2" className={styles.chaptersHeading}>
             {t('hadith.chapters')}
           </Typography>
-          <ul className="grid-auto" role="list">
+          <ul className={styles.chapterGrid} role="list">
           {content.chapters.map((chapter) => (
             <li key={chapter.id} className={styles.card}>
               <Link to={buildHadithChapterPath(book.slug, chapter.id)} className={styles.cardLink}>

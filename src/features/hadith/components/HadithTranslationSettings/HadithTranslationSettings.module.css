@@ -1,0 +1,31 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.25rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sectionLabel {
+  font-weight: 600;
+}
+
+.toggle { display: flex; align-items: center; gap: 0.5rem; color: var(--color-text); font-size: 0.875rem; }
+
+.sourceNote {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}

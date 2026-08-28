@@ -39,7 +39,7 @@ export default function PrayerTimesPage() {
   return (
     <div className="container">
       <div className={styles.page}>
-        <Typography variant="h2">{t('prayerTimes.title')}</Typography>
+        <Typography variant="h1" className={styles.title}>{t('prayerTimes.title')}</Typography>
 
         <Card className={styles.settingsCard}>
           <LocationPicker

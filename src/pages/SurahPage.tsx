@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { BookText, ChevronLeft, ChevronRight, Loader2, Maximize, Minimize, Settings, Star } from 'lucide-react';
+import { ArrowLeft, BookText, ChevronLeft, ChevronRight, Loader2, Maximize, Minimize, Settings, Star } from 'lucide-react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { SURAHS } from 'data/quran/surahs';
 import SurahView from 'features/quranReader/components/SurahView';
 import ReadingSettingsPanel from 'features/quranReader/components/ReadingSettingsPanel';
@@ -16,6 +17,7 @@ import useFullscreen from 'hooks/useFullscreen';
 import { isFavoriteSurah, useCollectionsStore } from 'stores/collectionsStore';
 import useTranslation from 'hooks/useTranslation';
 import styles from './SurahPage.module.css';
+import { useReadingPositionStore } from 'stores/readingPositionStore';
 
 /** Only surface a loading affordance if preloading is still running after this long — most preloads finish well under it, and flashing a spinner for a near-instant background fetch would be noise, not signal. */
 const SLOW_PRELOAD_HINT_DELAY_MS = 600;
@@ -33,12 +35,17 @@ export default function SurahPage() {
   const favorites = useCollectionsStore((state) => state.favorites);
   const toggleFavoriteSurah = useCollectionsStore((state) => state.toggleFavoriteSurah);
   const { t } = useTranslation();
+  const savedPosition = useReadingPositionStore((state) => state.positions.quran);
+  const navigate = useNavigate();
 
   const id = Number(surahId);
   const surah = SURAHS.find((item) => item.id === id);
   const isFavorite = isFavoriteSurah(favorites, id);
   const targetAyahParam = searchParams.get('ayah');
   const targetAyah = targetAyahParam ? Number(targetAyahParam) : undefined;
+  const lastReadAyah = savedPosition?.module === 'quran' && savedPosition.surahId === id
+    ? savedPosition.ayahNumber
+    : undefined;
 
   const isSurahPreloading = usePlaybackStore((state) => state.isSurahPreloading);
   const [showSlowPreloadHint, setShowSlowPreloadHint] = useState(false);
@@ -75,34 +82,46 @@ export default function SurahPage() {
 
   return (
     <div ref={pageRef} className="container-reading" style={getReaderCssVars(preferences)}>
-      <div className={styles.toolbar}>
-        <Button
-          variant="icon"
-          onClick={() => toggleFavoriteSurah(surah.id)}
-          aria-label={isFavorite ? t('quran.removeFavoriteSurah') : t('quran.addFavoriteSurah')}
-          leadingIcon={<Star size={16} fill={isFavorite ? 'currentColor' : 'none'} />}
-        />
-        <Button
-          variant="icon"
-          onClick={toggleFullscreen}
-          aria-label={isFullscreen ? t('quran.exitFullScreen') : t('quran.enterFullScreen')}
-          leadingIcon={isFullscreen ? <Minimize size={16} /> : <Maximize size={16} />}
-        />
-        <Button
-          variant="icon"
-          onClick={() => setIsTranslationsOpen(true)}
-          aria-label={t('quran.chooseTranslations')}
-          leadingIcon={<BookText size={16} />}
-        />
-        <Button
-          variant="icon"
-          onClick={() => setIsSettingsOpen(true)}
-          aria-label={t('quran.readingSettings')}
-          leadingIcon={<Settings size={16} />}
-        />
-      </div>
+      <div className={styles.readerHeader}>
+        <div className={styles.headerControls}>
+          <Button
+            variant="secondary"
+            className={styles.backButton}
+            onClick={() => navigate('/quran')}
+            aria-label={t('quran.title')}
+            leadingIcon={<ArrowLeft size={18} />}
+          >
+            <span className={styles.backLabel}>All Surahs</span>
+          </Button>
+          <div className={styles.toolbar}>
+            <Button
+              variant="icon"
+              onClick={() => toggleFavoriteSurah(surah.id)}
+              aria-label={isFavorite ? t('quran.removeFavoriteSurah') : t('quran.addFavoriteSurah')}
+              leadingIcon={<Star size={16} fill={isFavorite ? 'currentColor' : 'none'} />}
+            />
+            <Button
+              variant="icon"
+              onClick={toggleFullscreen}
+              aria-label={isFullscreen ? t('quran.exitFullScreen') : t('quran.enterFullScreen')}
+              leadingIcon={isFullscreen ? <Minimize size={16} /> : <Maximize size={16} />}
+            />
+            <Button
+              variant="icon"
+              onClick={() => setIsTranslationsOpen(true)}
+              aria-label={t('quran.chooseTranslations')}
+              leadingIcon={<BookText size={16} />}
+            />
+            <Button
+              variant="icon"
+              onClick={() => setIsSettingsOpen(true)}
+              aria-label={t('quran.readingSettings')}
+              leadingIcon={<Settings size={16} />}
+            />
+          </div>
+        </div>
 
-      <header className={styles.header}>
+        <header className={styles.header}>
         <Typography variant="caption" muted>
           {t('quran.surahOfTotal', {
             number: surah.id,
@@ -128,9 +147,10 @@ export default function SurahPage() {
             {BISMILLAH_ARABIC}
           </p>
         )}
-      </header>
+        </header>
+      </div>
 
-      <SurahView surahId={surah.id} targetAyah={targetAyah} />
+      <SurahView surahId={surah.id} targetAyah={targetAyah} lastReadAyah={lastReadAyah} />
 
       <nav className={styles.pager} aria-label={t('quran.surahNavigation')}>
         {previousSurah ? (

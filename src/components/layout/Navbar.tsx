@@ -10,6 +10,7 @@ import LanguageSelector from './LanguageSelector';
 import ThemeToggle from './ThemeToggle';
 import UserMenu from './UserMenu';
 import MobileDrawer from './MobileDrawer';
+import AssistantLauncherButton from 'features/assistant/components/AssistantLauncherButton';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
@@ -47,6 +48,7 @@ export default function Navbar() {
         </nav>
 
         <div className={styles.actions}>
+          <AssistantLauncherButton />
           <GlobalSearchBar />
           <LanguageSelector />
           <ThemeToggle />

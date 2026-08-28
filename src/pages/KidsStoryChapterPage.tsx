@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Card from 'components/ui/Card';
@@ -6,6 +6,7 @@ import Typography from 'components/ui/Typography';
 import EmptyState from 'components/feedback/EmptyState';
 import StoryIllustration from 'features/kids/components/StoryIllustration';
 import StoryLanguageToggle from 'features/kids/components/StoryLanguageToggle';
+import KidsBackButton from 'features/kids/components/KidsBackButton';
 import { useKidsProgressStore } from 'stores/kidsProgressStore';
 import { getKidsStoryV2 } from 'data/kids/storiesV2';
 import { getSahabiV2 } from 'data/kids/sahabiV2';
@@ -27,6 +28,44 @@ function isSahabi(storyType: string): boolean {
   return storyType === 'sahabi';
 }
 
+function StoryCheck({ onSuccess }: { onSuccess: () => void }) {
+  const { t } = useTranslation();
+  const [selected, setSelected] = useState<string | null>(null);
+  const options = useMemo(() => ['Patience and trust in Allah', 'Giving up when life is hard', 'Being proud of ourselves'].sort(() => Math.random() - 0.5), []);
+  const correct = selected === 'Patience and trust in Allah';
+
+  return (
+    <Card elevation="raised" className={styles.storyCheck}>
+      <Typography variant="h3" as="h2">What did we learn?</Typography>
+      <Typography variant="body">Choose the best lesson from this story.</Typography>
+      <div className={styles.checkOptions}>
+        {options.map((option) => {
+          const isSelected = selected === option;
+          const isCorrect = option === 'Patience and trust in Allah';
+          return (
+            <button
+              key={option}
+              type="button"
+              className={[styles.checkOption, selected && isCorrect && styles.checkCorrect, isSelected && !isCorrect && styles.checkWrong].filter(Boolean).join(' ')}
+              onClick={() => {
+                setSelected(option);
+                if (isCorrect) window.setTimeout(onSuccess, 700);
+              }}
+              disabled={selected !== null}
+            >
+              {option}
+            </button>
+          );
+        })}
+      </div>
+      {selected && !correct && (
+        <button type="button" className={styles.tryAgain} onClick={() => setSelected(null)}>Try again</button>
+      )}
+      {selected && <span className={styles.checkFeedback} role="status">{correct ? t('kids.correct') : 'Almost! The best lesson is "Patience and trust in Allah."'}</span>}
+    </Card>
+  );
+}
+
 /** Visible fallback notice shown when Urdu isn't ready for a story yet. */
 function UrduFallbackNotice() {
   const { t } = useTranslation();
@@ -44,12 +83,8 @@ export default function KidsStoryChapterPage() {
   const { t } = useTranslation();
   const { language, setLanguage } = useStoryLanguage();
   const markContentViewed = useKidsProgressStore((state) => state.markContentViewed);
+  const [completed, setCompleted] = useState(false);
   const storyMissingUrdu = story ? !story.chapters.some((c) => c.title.ur?.trim()) : false;
-
-  useEffect(() => {
-    if (story) markContentViewed('story', story.id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [story?.id]);
 
   if (!story) {
     return <EmptyState title={t('emptyState.kids.storyNotFound')} />;
@@ -65,19 +100,19 @@ export default function KidsStoryChapterPage() {
 
   const previous = index > 0 ? story.chapters[index - 1] : undefined;
   const next = index < story.chapters.length - 1 ? story.chapters[index + 1] : undefined;
+  const isFinalChapter = !next;
 
   return (
     <div className={styles.page}>
       <div className={styles.topBar}>
         <StoryLanguageToggle language={language} onChange={setLanguage} />
-        <Link
-          to={isSahabi(story.type) ? buildKidsSahabiChaptersPath(story.id) : buildKidsStoryChaptersPath(story.id)}
-          className={styles.backLink}
-          aria-label={t('kids.chapterBackToStory')}
-        >
-          <ArrowLeft size={20} aria-hidden="true" />
-          <span>{t('kids.chapters')}</span>
-        </Link>
+        <KidsBackButton to={isSahabi(story.type) ? buildKidsSahabiChaptersPath(story.id) : buildKidsStoryChaptersPath(story.id)} />
+      </div>
+
+      <div className={styles.chapterRail} aria-label={t('kids.chapters')}>
+        {story.chapters.map((item, chapterIndex) => (
+          <Link key={item.id} to={isSahabi(story.type) ? buildKidsSahabiChapterPath(story.id, item.id) : buildKidsStoryChapterPath(story.id, item.id)} className={chapterIndex === index ? styles.chapterDotActive : styles.chapterDot} aria-label={`${t('kids.chapters')} ${chapterIndex + 1}`} />
+        ))}
       </div>
 
       <div className={styles.header}>
@@ -115,6 +150,15 @@ export default function KidsStoryChapterPage() {
         </Card>
       )}
 
+      {chapter.lesson && (
+        <Card elevation="raised" className={styles.lessonCard}>
+          <div className={styles.lessonTitle}>Lesson</div>
+          <Typography variant="body" as="p" dir={language === 'ur' ? 'rtl' : undefined}>
+            {localText(chapter.lesson, language)}
+          </Typography>
+        </Card>
+      )}
+
       <div className={styles.sourcesSection}>
         <Typography variant="h4" as="h2">
           {t('kids.storySources')}
@@ -148,6 +192,9 @@ export default function KidsStoryChapterPage() {
           </Card>
         ))}
       </div>
+
+      {isFinalChapter && !completed && <StoryCheck onSuccess={() => { markContentViewed('story', story.id); setCompleted(true); }} />}
+      {completed && <Typography variant="body" className={styles.completedNote} role="status">Story complete! You earned a star.</Typography>}
 
       <div className={styles.pager}>
         {previous && (

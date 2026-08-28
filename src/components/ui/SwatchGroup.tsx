@@ -19,7 +19,7 @@ export default function SwatchGroup({ options, value, onChange }: SwatchGroupPro
           aria-checked={option.id === value}
           aria-label={option.label}
           title={option.label}
-          className={styles.swatch}
+          className={[styles.swatch, option.id === value && styles.swatchActive].filter(Boolean).join(' ')}
           style={{ backgroundColor: option.value }}
           onClick={() => onChange(option.id)}
         >

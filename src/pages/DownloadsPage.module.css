@@ -1,10 +1,64 @@
 .page {
-  max-width: 44rem;
-  margin-inline: auto;
-  padding: 1.5rem 1rem 3rem;
+  --downloads-ink: #f2f5ef;
+  --downloads-muted: #9ca9a2;
+  --downloads-emerald: #54c7a1;
+  --downloads-emerald-bright: #79e0b8;
+  --downloads-panel: color-mix(in srgb, var(--color-surface-raised) 88%, #07100d);
+  width: 100%;
+  min-height: 100%;
+  padding: clamp(2rem, 5vw, 4.5rem) clamp(1rem, 4vw, 4rem) 4rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.125rem;
+  background-color: var(--color-bg);
+  background-image: linear-gradient(120deg, color-mix(in srgb, var(--downloads-emerald) 5%, transparent), transparent 42%);
+  color: var(--downloads-ink);
+  font-family: 'Avenir Next', 'Segoe UI', sans-serif;
+}
+
+.page > :first-child {
+  margin-block-end: -0.5rem;
+  color: var(--downloads-ink);
+  font-family: Georgia, 'Times New Roman', serif;
+  letter-spacing: 0.015em;
+  animation: downloads-rise 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.page > :nth-child(2) {
+  max-width: 40rem;
+  color: var(--downloads-muted);
+  animation: downloads-rise 560ms 70ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.page > :global(.group) {
+  gap: 0.625rem;
+  padding-block: 0.3rem;
+  animation: downloads-rise 560ms 140ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.page > :global(.group) :global(.pill) {
+  flex: 0 1 auto;
+  min-height: 2.75rem;
+  border-color: color-mix(in srgb, var(--downloads-emerald) 28%, var(--color-border));
+  background: transparent;
+  color: var(--downloads-muted);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: background-color 240ms ease, border-color 240ms ease, color 240ms ease, transform 240ms ease, box-shadow 240ms ease;
+}
+
+.page > :global(.group) :global(.pill):hover {
+  border-color: var(--downloads-emerald);
+  background: color-mix(in srgb, var(--downloads-emerald) 9%, transparent);
+  color: var(--downloads-ink);
+}
+
+.page > :global(.group) :global(.pillActive) {
+  border-color: var(--downloads-emerald);
+  background: var(--downloads-emerald);
+  color: #07130f;
+  box-shadow: 0 0.35rem 1rem color-mix(in srgb, var(--downloads-emerald) 25%, transparent);
+  animation: pill-pop 300ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .list {
@@ -13,20 +67,40 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  border: 1px solid var(--color-border);
+  width: 100%;
+  border: 1px solid color-mix(in srgb, var(--downloads-emerald) 22%, var(--color-border));
   border-radius: var(--radius-md);
+  background: var(--downloads-panel);
+  box-shadow: 0 1rem 3rem rgb(0 0 0 / 18%);
   overflow: hidden;
   max-height: 32rem;
   overflow-y: auto;
+  animation: downloads-rise 560ms 210ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .row {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.625rem 1rem;
-  border-block-end: 1px solid var(--color-border);
+  min-height: 4.25rem;
+  padding: 0.75rem clamp(0.75rem, 2vw, 1.25rem);
+  border-block-end: 1px solid color-mix(in srgb, var(--downloads-emerald) 12%, var(--color-border));
+  transition: background-color 220ms ease, transform 220ms ease, border-color 220ms ease;
+  animation: row-rise 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+.row:hover {
+  background: color-mix(in srgb, var(--downloads-emerald) 7%, var(--downloads-panel));
+  border-color: color-mix(in srgb, var(--downloads-emerald) 32%, var(--color-border));
+  transform: translateY(-1px);
+}
+
+.row:nth-child(1) { animation-delay: 230ms; }
+.row:nth-child(2) { animation-delay: 245ms; }
+.row:nth-child(3) { animation-delay: 260ms; }
+.row:nth-child(4) { animation-delay: 275ms; }
+.row:nth-child(5) { animation-delay: 290ms; }
+.row:nth-child(n + 6) { animation-delay: 305ms; }
 
 .row:last-child {
   border-block-end: none;
@@ -39,11 +113,19 @@
   width: 1.75rem;
   height: 1.75rem;
   border-radius: 50%;
-  background-color: var(--color-surface);
-  color: var(--color-primary);
+  background: color-mix(in srgb, var(--downloads-emerald) 12%, var(--downloads-panel));
+  border: 1px solid color-mix(in srgb, var(--downloads-emerald) 26%, transparent);
+  color: var(--downloads-emerald-bright);
   font-size: 0.6875rem;
   font-weight: 700;
   flex-shrink: 0;
+  transition: box-shadow 220ms ease, background-color 220ms ease, transform 220ms ease;
+}
+
+.row:hover .number {
+  background: color-mix(in srgb, var(--downloads-emerald) 20%, var(--downloads-panel));
+  box-shadow: 0 0 1rem color-mix(in srgb, var(--downloads-emerald) 35%, transparent);
+  transform: scale(1.06);
 }
 
 .rowText {
@@ -56,12 +138,13 @@
 .rowTitle {
   font-weight: 600;
   font-size: 0.875rem;
-  color: var(--color-text);
+  color: var(--downloads-ink);
+  letter-spacing: 0.01em;
 }
 
 .rowSubtitle {
   font-size: 0.75rem;
-  color: var(--color-text-muted);
+  color: var(--downloads-muted);
 }
 
 .downloadedBadge {
@@ -70,8 +153,9 @@
   gap: 0.25rem;
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--color-primary);
+  color: var(--downloads-emerald-bright);
   flex-shrink: 0;
+  animation: downloaded-pulse 500ms ease-out;
 }
 
 .downloadingBadge {
@@ -79,8 +163,34 @@
   align-items: center;
   gap: 0.375rem;
   font-size: 0.75rem;
-  color: var(--color-text-muted);
+  color: var(--downloads-muted);
   flex-shrink: 0;
+}
+
+.row :global(.button) {
+  flex-shrink: 0;
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+}
+
+.row :global(.button.secondary) {
+  border-color: color-mix(in srgb, var(--downloads-emerald) 35%, var(--color-border));
+  background: transparent;
+  color: var(--downloads-emerald-bright);
+}
+
+.row :global(.button.secondary):hover:not(:disabled) {
+  border-color: var(--downloads-emerald);
+  background: color-mix(in srgb, var(--downloads-emerald) 13%, transparent);
+  color: var(--downloads-ink);
+  box-shadow: 0 0 1rem color-mix(in srgb, var(--downloads-emerald) 18%, transparent);
+}
+
+.row :global(.button:hover) :global(.iconSlot) {
+  transform: translateY(0.15rem);
+}
+
+.row :global(.iconSlot) {
+  transition: transform 200ms ease;
 }
 
 .spin {
@@ -90,5 +200,68 @@
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes downloads-rise {
+  from { opacity: 0; transform: translateY(0.65rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes row-rise {
+  from { opacity: 0; transform: translateY(0.45rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pill-pop {
+  0% { transform: scale(0.97); }
+  70% { transform: scale(1.025); }
+  100% { transform: scale(1); }
+}
+
+@keyframes downloaded-pulse {
+  0% { opacity: 0; transform: scale(0.92); }
+  70% { opacity: 1; transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@media (max-width: 30rem) {
+  .page > :global(.group) :global(.pill) {
+    flex: 1 1 auto;
+  }
+
+  .row {
+    gap: 0.55rem;
+  }
+
+  .downloadedBadge,
+  .downloadingBadge {
+    font-size: 0;
+  }
+
+  .downloadedBadge svg,
+  .downloadingBadge svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page > :first-child,
+  .page > :nth-child(2),
+  .page > :global(.group),
+  .list,
+  .row,
+  .page > :global(.group) :global(.pillActive),
+  .downloadedBadge {
+    animation: none;
+  }
+
+  .row,
+  .number,
+  .row :global(.button),
+  .row :global(.iconSlot),
+  .page > :global(.group) :global(.pill) {
+    transition: none;
   }
 }

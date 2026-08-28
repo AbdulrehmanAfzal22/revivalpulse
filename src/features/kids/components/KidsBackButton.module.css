@@ -1,0 +1,37 @@
+.backButton {
+  align-self: flex-start;
+  justify-self: flex-start;
+  border-radius: 999px;
+  transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.backButton:hover,
+.backButton:focus-visible {
+  transform: translateX(-0.2rem) scale(1.06);
+  background-color: var(--color-surface-raised);
+  box-shadow: 0 0.35rem 0.75rem rgb(62 53 110 / 16%);
+}
+
+.backButton:hover :global(svg),
+.backButton:focus-visible :global(svg) {
+  animation: arrow-nudge 450ms ease-in-out;
+}
+
+@keyframes arrow-nudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-0.2rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backButton,
+  .backButton:hover,
+  .backButton:focus-visible {
+    transform: none;
+    transition: none;
+  }
+
+  .backButton:hover :global(svg),
+  .backButton:focus-visible :global(svg) {
+    animation: none;
+  }
+}

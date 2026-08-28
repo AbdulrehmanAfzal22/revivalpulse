@@ -26,10 +26,7 @@ export default function TranslationSwitcher({ isOpen, onClose }: TranslationSwit
   const active = preferences.activeTranslationIds;
 
   const toggle = (id: string): void => {
-    const isActive = active.includes(id);
-    if (isActive && active.length === 1) return;
-    const next = isActive ? active.filter((item) => item !== id) : [...active, id];
-    update({ activeTranslationIds: next });
+    update({ activeTranslationIds: [id] });
   };
 
   return (
@@ -38,9 +35,9 @@ export default function TranslationSwitcher({ isOpen, onClose }: TranslationSwit
       onClose={onClose}
       titleKey="quran.translationsDialogTitle"
       hintKey="quran.translationsHint"
-      mode="multi"
+      mode="single"
       resources={TRANSLATIONS}
-      activeIds={active}
+      activeIds={active.slice(0, 1)}
       onToggle={toggle}
       languageLabelKeys={LANGUAGE_LABEL_KEYS}
     />

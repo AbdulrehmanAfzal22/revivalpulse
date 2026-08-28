@@ -7,10 +7,13 @@ import Typography from 'components/ui/Typography';
 import EmptyState from 'components/feedback/EmptyState';
 import useTranslation from 'hooks/useTranslation';
 import styles from './TafsirSurahListPage.module.css';
+import ContinueReadingCard from 'components/ui/ContinueReadingCard';
+import { useReadingPositionStore } from 'stores/readingPositionStore';
 
 export default function TafsirSurahListPage() {
   const [query, setQuery] = useState('');
   const { t } = useTranslation();
+  const tafsirPosition = useReadingPositionStore((state) => state.positions.tafsir);
 
   const filteredSurahs = useMemo(() => {
     const term = query.trim().toLowerCase();
@@ -24,9 +27,17 @@ export default function TafsirSurahListPage() {
   }, [query]);
 
   return (
-    <div className="container">
+    <div className={styles.shell}>
       <div className={styles.page}>
         <Typography variant="h2">{t('tafsir.selectSurahTitle')}</Typography>
+        {tafsirPosition?.module === 'tafsir' && (
+          <ContinueReadingCard
+            title="Continue Reading"
+            description={`${SURAHS.find((surah) => surah.id === tafsirPosition.surahId)?.nameSimple ?? `Surah ${tafsirPosition.surahId}`} · Verse ${tafsirPosition.ayahNumber}`}
+            preview={tafsirPosition.preview}
+            to={`/tafsir/${tafsirPosition.surahId}/${tafsirPosition.ayahNumber}`}
+          />
+        )}
         <Typography variant="body" muted>
           {t('tafsir.selectSurahDescription')}
         </Typography>
@@ -45,7 +56,7 @@ export default function TafsirSurahListPage() {
         {filteredSurahs.length === 0 ? (
           <EmptyState title={t('emptyState.quran.noSurahsMatch')} />
         ) : (
-          <ul className="grid-auto" role="list">
+          <ul className={styles.surahGrid} role="list">
             {filteredSurahs.map((surah) => (
               <li key={surah.id} className={styles.card}>
                 <Link to={buildTafsirSurahPath(surah.id)} className={styles.cardLink}>

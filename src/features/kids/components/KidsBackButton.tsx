@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import Button from 'components/ui/Button';
 import useTranslation from 'hooks/useTranslation';
+import styles from './KidsBackButton.module.css';
 
 export interface KidsBackButtonProps {
   /** Route to navigate to. Defaults to browser back (navigate(-1)). */
@@ -15,6 +16,7 @@ export default function KidsBackButton({ to }: KidsBackButtonProps) {
   return (
     <Button
       variant="icon"
+      className={styles.backButton}
       onClick={() => (to ? navigate(to) : navigate(-1))}
       aria-label={t('kids.gameGoHome')}
       leadingIcon={<ArrowLeft size={22} />}

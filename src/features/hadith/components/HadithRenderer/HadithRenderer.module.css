@@ -1,12 +1,39 @@
 .hadith {
-  padding: 1.25rem 0;
-  border-block-end: 1px solid var(--color-border);
-  transition: background-color 0.15s ease;
+  width: min(100%, 62rem);
+  margin-inline: auto;
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-surface-raised), color-mix(in srgb, var(--color-primary) 4%, var(--color-surface-raised)));
+  border-inline-start: 4px solid var(--hadith-highlight, var(--color-primary));
+  box-shadow: var(--shadow-sm);
+  transition: background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
+
+.hadith:not(.hadithVisible) { opacity: 0; transform: translateY(0.75rem); }
 
 .hadith:last-child {
   border-block-end: none;
 }
+
+.lastReadMarker {
+  margin-block: -0.5rem 0.75rem;
+  padding-inline-start: 0.75rem;
+  border-inline-start: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  animation: last-read-pulse 1.8s ease-out both;
+}
+
+@keyframes last-read-pulse {
+  0% { opacity: 0; box-shadow: -0.5rem 0 1rem color-mix(in srgb, var(--color-primary) 35%, transparent); }
+  45% { opacity: 1; box-shadow: -0.25rem 0 0.75rem color-mix(in srgb, var(--color-primary) 22%, transparent); }
+  100% { opacity: 1; box-shadow: none; }
+}
+
+.hadithVisible { animation: hadith-in 420ms ease-out both; }
+.bookmarked { animation: bookmark-pop 500ms ease-out; box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 25%, transparent), var(--shadow-md); }
 
 .meta {
   display: flex;
@@ -15,6 +42,8 @@
   gap: 0.625rem;
   margin-block-end: 0.75rem;
 }
+
+.reference { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; min-width: 0; }
 
 .number {
   display: inline-flex;
@@ -41,7 +70,7 @@
 .arabic {
   margin: 0 0 0.75rem;
   font-family: var(--reader-arabic-font, inherit);
-  font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem);
+  font-size: var(--reader-arabic-size, clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem));
   line-height: 2;
   text-align: end;
   color: var(--color-text);
@@ -49,7 +78,12 @@
 
 .english {
   margin: 0;
-  font-size: 0.9375rem;
+  max-width: 52rem;
+  font-size: var(--reader-translation-size, 0.9375rem);
   line-height: 1.65;
   color: var(--color-text);
 }
+
+@keyframes hadith-in { from { opacity: 0; transform: translateY(0.75rem); } to { opacity: 1; transform: none; } }
+@keyframes bookmark-pop { 40% { transform: scale(1.015); } }
+@media (prefers-reduced-motion: reduce) { .hadithVisible, .bookmarked { animation: none; } }

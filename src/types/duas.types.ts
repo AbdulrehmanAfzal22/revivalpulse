@@ -34,5 +34,7 @@ export interface DuaItem {
   translation: string;
   /** Original publisher's own CDN (hisnmuslim.com) — not re-hosted, see data/duas/index.ts. */
   audioUrl: string | null;
+  /** Optional seek point in the source audio, in seconds. */
+  startOffsetSeconds: number;
   source: string | null;
 }

@@ -40,6 +40,7 @@ local.properties
 node_modules/
 npm-debug.log
 yarn-error.log
+server/.env
 
 # fastlane
 #
@@ -76,3 +77,13 @@ yarn-error.log
 
 # Kids Urdu-pass work files (script inputs)
 scripts/kidsbilingual/ur_jsons/
+
+# Generated embeddings
+server/embeddings/*.json
+
+# Node
+node_modules/
+
+# Build/cache
+dist/
+build/

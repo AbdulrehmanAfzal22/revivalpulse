@@ -112,7 +112,7 @@ export interface DailyActivityPayload {
   actionsCount: number;
 }
 
-export type ViewedContentCategory = 'story' | 'mannerTip';
+export type ViewedContentCategory = 'story' | 'mannerTip' | 'surahLesson';
 
 export interface ContentViewedPayload {
   kind: 'contentViewed';

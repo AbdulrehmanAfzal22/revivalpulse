@@ -36,10 +36,7 @@ export default function SettingsPage() {
   const setTextScale = useAccessibilityPreferencesStore((state) => state.setTextScale);
 
   function toggleTranslation(id: string) {
-    const active = preferences.activeTranslationIds;
-    const isActive = active.includes(id);
-    if (isActive && active.length === 1) return;
-    update({ activeTranslationIds: isActive ? active.filter((item) => item !== id) : [...active, id] });
+    update({ activeTranslationIds: [id] });
   }
 
   async function handleNotificationsToggle(checked: boolean) {
@@ -125,7 +122,7 @@ export default function SettingsPage() {
                 <label key={translation.id} className={styles.checkboxRow}>
                   <input
                     type="checkbox"
-                    checked={preferences.activeTranslationIds.includes(translation.id)}
+                    checked={preferences.activeTranslationIds[0] === translation.id}
                     onChange={() => toggleTranslation(translation.id)}
                   />
                   <span>

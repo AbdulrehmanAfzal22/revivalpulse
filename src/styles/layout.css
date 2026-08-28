@@ -86,28 +86,27 @@
 /* Reading content container - capped at comfortable reading width */
 .container-reading {
   width: 100%;
+  max-width: var(--reader-page-width, var(--container-reading-lg));
+  box-sizing: border-box;
   margin-inline: auto;
-  padding-inline: var(--space-container-sm);
+  padding-inline: var(--reader-page-padding, 0px);
 }
 
 @media (min-width: 640px) {
   .container-reading {
-    max-width: var(--container-reading-md);
-    padding-inline: var(--space-container-md);
+    max-width: var(--reader-page-width, var(--container-reading-md));
   }
 }
 
 @media (min-width: 1024px) {
   .container-reading {
-    max-width: var(--container-reading-lg);
-    padding-inline: var(--space-container-lg);
+    max-width: var(--reader-page-width, var(--container-reading-lg));
   }
 }
 
 @media (min-width: 1440px) {
   .container-reading {
-    max-width: var(--container-reading-xl);
-    padding-inline: var(--space-container-xl);
+    max-width: var(--reader-page-width, var(--container-reading-xl));
   }
 }
 

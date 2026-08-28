@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { useAuthStore } from './authStore';
 import { readLocal, syncDomain, upsertLocal } from 'services/syncEngine';
 import { DEFAULT_READING_PREFERENCES } from 'constants/readingPreferences';
+import { TRANSLATIONS } from 'constants/translations';
 import { READING_MODE_PRESETS } from 'constants/readingModes';
 import type { ReadingMode, ReadingPreferences } from 'types/readingPreferences.types';
 
@@ -11,9 +12,30 @@ function currentUserId(): string | null {
   return useAuthStore.getState().user?.id ?? null;
 }
 
+function normalizeTranslationIds(ids: unknown): string[] {
+  if (!Array.isArray(ids)) return DEFAULT_READING_PREFERENCES.activeTranslationIds;
+  const validIds = ids.filter((id): id is string =>
+    typeof id === 'string' && TRANSLATIONS.some((translation) => translation.id === id)
+  );
+  if (validIds.length === 0 || (validIds.length === 1 && validIds[0] === 'azizul-haque')) {
+    return DEFAULT_READING_PREFERENCES.activeTranslationIds;
+  }
+  return validIds.slice(0, 1);
+}
+
 function loadInitialPreferences(): ReadingPreferences {
   const [record] = readLocal<ReadingPreferences>('settings', currentUserId());
-  return record ? { ...DEFAULT_READING_PREFERENCES, ...record.payload } : DEFAULT_READING_PREFERENCES;
+  if (!record) return DEFAULT_READING_PREFERENCES;
+
+  const activeTranslationIds = normalizeTranslationIds(record.payload.activeTranslationIds);
+
+  return {
+    ...DEFAULT_READING_PREFERENCES,
+    ...record.payload,
+    activeTranslationIds: activeTranslationIds.length > 0
+      ? activeTranslationIds
+      : DEFAULT_READING_PREFERENCES.activeTranslationIds,
+  };
 }
 
 function persist(preferences: ReadingPreferences): void {
@@ -73,8 +95,13 @@ function resyncPreferencesForUser(userId: string, attempt = 1): void {
     .then((records) => {
       const record = records.find((item) => item.id === PREFERENCES_RECORD_ID);
       if (record) {
+        const activeTranslationIds = normalizeTranslationIds(record.payload.activeTranslationIds);
         useReadingPreferencesStore.setState({
-          preferences: { ...DEFAULT_READING_PREFERENCES, ...record.payload },
+          preferences: {
+            ...DEFAULT_READING_PREFERENCES,
+            ...record.payload,
+            activeTranslationIds,
+          },
         });
       }
     })

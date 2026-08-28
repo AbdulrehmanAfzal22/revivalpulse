@@ -1,29 +1,78 @@
 .page {
-  max-width: 40rem;
-  margin-inline: auto;
-  padding: 1.5rem 1rem 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 4vw, 3rem) 7rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: clamp(1rem, 2vw, 1.75rem);
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.75rem, 2vw, 1.25rem);
 }
 
 .cardLink {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }
 
 .card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  gap: 0.5rem;
-  padding: 1rem 0.5rem;
+  justify-content: center;
+  gap: 0.65rem;
+  min-height: 11rem;
   height: 100%;
+  padding: 1rem 0.5rem;
+  border-radius: clamp(1rem, 2vw, 1.5rem);
+  animation: story-pop 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.cardLink:nth-child(3n) .card { animation-delay: 120ms; }
+.cardLink:nth-child(3n + 1) .card { animation-delay: 60ms; }
+
+.card:hover,
+.cardLink:focus-visible .card {
+  transform: scale(1.05) translateY(-0.2rem);
+  box-shadow: 0 0.75rem 1.5rem rgb(62 53 110 / 20%);
+}
+
+.storyName {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  min-height: 3.25rem;
+  font-weight: 700;
+}
+
+.honorific {
+  color: var(--kids-emerald, var(--color-primary));
+  font-family: var(--reader-arabic-font, serif);
+  font-size: 0.95em;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+@keyframes story-pop {
+  from { opacity: 0; transform: translateY(0.75rem) scale(0.92); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (min-width: 40rem) {
+  .grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+
+@media (min-width: 64rem) {
+  .grid { grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card { animation: none; }
+  .card:hover,
+  .cardLink:focus-visible .card { transform: none; }
 }

@@ -3,9 +3,10 @@
   inset: 0;
   z-index: var(--z-dialog);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  padding: 10vh 1rem 1rem;
+  padding: 24px;
+  overflow: hidden;
 }
 
 .backdrop {
@@ -18,12 +19,22 @@
   position: relative;
   width: 100%;
   max-width: 32rem;
-  max-height: 80vh;
-  overflow-y: auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   background-color: var(--color-surface-raised);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
+}
+
+.sharePanel {
+  height: calc(100vh - 48px);
+  max-height: calc(100vh - 48px);
+  height: calc(100dvh - 48px);
+  max-height: calc(100dvh - 48px);
+  box-sizing: border-box;
 }
 
 .header {
@@ -33,6 +44,11 @@
   gap: 0.5rem;
   padding: 1rem 1.25rem;
   border-block-end: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  flex-shrink: 0;
+  background-color: var(--color-surface-raised);
 }
 
 .title {
@@ -43,5 +59,10 @@
 }
 
 .content {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
   padding: 1.25rem;
 }

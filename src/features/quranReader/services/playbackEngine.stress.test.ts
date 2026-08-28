@@ -142,6 +142,21 @@ describe('playback engine — concurrency/stress scenarios', () => {
     expect(usePlaybackStore.getState().surahId).toBe(SURAH_A);
   });
 
+  test('pause immediately stops the audio and invalidates queued playback', async () => {
+    const engine = await import('./playbackEngine');
+    cacheDelays.push(5);
+    await engine.playSurah(SURAH_A, 1);
+
+    const audioBefore = controller.audio as unknown as FakeAudio;
+    const epochBefore = controller.epoch;
+
+    engine.pause();
+
+    expect(audioBefore.paused).toBe(true);
+    expect(usePlaybackStore.getState().isPlaying).toBe(false);
+    expect(controller.epoch).toBeGreaterThan(epochBefore);
+  });
+
   test('rapid pause/resume/pause never throws and leaves a consistent final isPlaying', async () => {
     const engine = await import('./playbackEngine');
     cacheDelays.push(5);

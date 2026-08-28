@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import Card from 'components/ui/Card';
@@ -6,7 +5,7 @@ import Typography from 'components/ui/Typography';
 import EmptyState from 'components/feedback/EmptyState';
 import StoryIllustration from 'features/kids/components/StoryIllustration';
 import StoryLanguageToggle from 'features/kids/components/StoryLanguageToggle';
-import { useKidsProgressStore } from 'stores/kidsProgressStore';
+import KidsBackButton from 'features/kids/components/KidsBackButton';
 import { getKidsStoryV2 } from 'data/kids/storiesV2';
 import { getSahabiV2 } from 'data/kids/sahabiV2';
 import {
@@ -31,14 +30,8 @@ function buildChapterPath(storyType: string, storyId: string, chapterId: string)
 export default function KidsStoryChaptersPage() {
   const { storyId } = useParams<{ storyId: string }>();
   const story = resolveStory(storyId ?? '');
-  const markContentViewed = useKidsProgressStore((state) => state.markContentViewed);
   const { t } = useTranslation();
   const { language, setLanguage } = useStoryLanguage();
-
-  useEffect(() => {
-    if (story) markContentViewed('story', story.id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [story?.id]);
 
   if (!story) {
     return <EmptyState title={t('emptyState.kids.storyNotFound')} />;
@@ -46,6 +39,7 @@ export default function KidsStoryChaptersPage() {
 
   return (
     <div className={styles.page}>
+      <KidsBackButton to={story.type === 'sahabi' ? '/kids/sahabi' : '/kids/stories'} />
       <div className={styles.header}>
         <StoryIllustration symbol={story.illustrationSymbol} color={story.accentColor} size={96} />
         <Typography variant="h2" as="h1" className={styles.arabicName} dir="rtl">

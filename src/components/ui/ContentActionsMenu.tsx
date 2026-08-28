@@ -57,6 +57,14 @@ export default function ContentActionsMenu({
   const activeHighlight = getHighlightColorId(highlights, contentId);
   const noteText = getNoteText(notes, contentId);
 
+  const handleHighlightChange = (colorId: string): void => {
+    if (colorId === activeHighlight) {
+      removeHighlight(contentId);
+      return;
+    }
+    setHighlight(contentId, colorId);
+  };
+
   const handleCopy = async (): Promise<void> => {
     const text = [arabicText, secondaryText, `— ${citation}`].filter(Boolean).join('\n\n');
     await navigator.clipboard.writeText(text);
@@ -100,9 +108,7 @@ export default function ContentActionsMenu({
             <SwatchGroup
               options={HIGHLIGHT_COLOR_PRESETS}
               value={activeHighlight ?? ''}
-              onChange={(colorId) =>
-                colorId === activeHighlight ? removeHighlight(contentId) : setHighlight(contentId, colorId)
-              }
+              onChange={handleHighlightChange}
             />
           </div>
 

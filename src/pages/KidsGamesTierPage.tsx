@@ -5,6 +5,7 @@ import { GAMES } from 'features/kids/games/gameRegistry';
 import { ROUTES } from 'constants/routes';
 import useTranslation from 'hooks/useTranslation';
 import type { TranslationKey } from 'i18n';
+import KidsBackButton from 'features/kids/components/KidsBackButton';
 import styles from './KidsGamesTierPage.module.css';
 
 type Tier = 'easy' | 'medium' | 'hard';
@@ -42,7 +43,13 @@ export default function KidsGamesTierPage() {
 
   return (
     <div className={styles.page}>
+      <KidsBackButton to={ROUTES.KIDS} />
       <nav className={styles.tierTabs} aria-label={t('kids.difficulty')}>
+        <span
+          className={styles.tabHighlight}
+          style={{ transform: `translateX(${TIERS.indexOf(validTier) * 100}%)` }}
+          aria-hidden="true"
+        />
         {TIERS.map((tierKey) => (
           <NavLink
             key={tierKey}
@@ -69,12 +76,12 @@ export default function KidsGamesTierPage() {
         </Typography>
       </header>
 
-      <div className={styles.grid} role="list" aria-label={t('kids.gamesListLabel')}>
+      <div key={validTier} className={styles.grid} role="list" aria-label={t('kids.gamesListLabel')}>
         {GAMES.map((game) => (
           <a
             key={game.id}
             href={gamePlayPath(game.id)}
-            className={styles.tile}
+            className={[styles.tile, styles[`tile-${game.engine}`]].filter(Boolean).join(' ')}
             style={{
               borderColor: game.color,
               background: game.gradient,

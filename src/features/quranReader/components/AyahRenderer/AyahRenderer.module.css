@@ -1,7 +1,15 @@
 .ayah {
+  opacity: 0;
+  transform: translateY(0.75rem);
   padding-block: var(--reader-paragraph-spacing, 1rem);
   border-block-end: 1px solid var(--color-border);
-  transition: background-color 0.15s ease;
+  transition: opacity 420ms ease, transform 420ms ease, background-color 0.15s ease;
+  scroll-margin-top: 14rem;
+}
+
+.ayahVisible {
+  opacity: 1;
+  transform: none;
 }
 
 .ayah:hover {
@@ -11,10 +19,36 @@
 .ayahActive {
   background-color: color-mix(in srgb, var(--reader-highlight, var(--color-primary)) 18%, transparent);
   border-inline-start: 2px solid var(--color-primary);
+  animation: active-ayah-glow 2.2s ease-in-out infinite;
+}
+
+@keyframes active-ayah-glow {
+  50% { box-shadow: inset 0 0 1.5rem color-mix(in srgb, var(--color-primary) 12%, transparent); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ayahActive { animation: none; }
+  .ayah { transition: background-color 0.15s ease; }
 }
 
 .ayah:last-child {
   border-block-end: none;
+}
+
+.lastReadMarker {
+  margin-block: -0.5rem 0.75rem;
+  padding-inline-start: 0.75rem;
+  border-inline-start: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  animation: last-read-pulse 1.8s ease-out both;
+}
+
+@keyframes last-read-pulse {
+  0% { opacity: 0; box-shadow: -0.5rem 0 1rem color-mix(in srgb, var(--color-primary) 35%, transparent); }
+  45% { opacity: 1; box-shadow: -0.25rem 0 0.75rem color-mix(in srgb, var(--color-primary) 22%, transparent); }
+  100% { opacity: 1; box-shadow: none; }
 }
 
 .meta {
@@ -89,22 +123,18 @@
   color: var(--color-text);
 }
 
-.translationGrid {
+.contentGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-  gap: 1rem 1.5rem;
+  gap: 1rem;
+}
+
+.arabicBlock {
+  order: 1;
 }
 
 .translationBlock {
+  order: 2;
   min-width: 0;
-}
-
-.translationLabel {
-  display: block;
-  margin-block-end: 0.25rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--color-text);
 }
 
 .translation {
@@ -112,4 +142,34 @@
   font-size: var(--reader-translation-size, 0.9375rem);
   line-height: 1.65;
   color: var(--color-text-muted);
+}
+
+@media (min-width: 769px) {
+  .contentGrid {
+    grid-template-columns: minmax(0, 28rem) minmax(0, 32rem);
+    column-gap: 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .arabicBlock {
+    grid-column: 2;
+    text-align: end;
+  }
+
+  .translationBlock {
+    grid-column: 1;
+    grid-row: 1;
+    text-align: start;
+  }
+
+  .arabicLeft .arabicBlock {
+    grid-column: 1;
+    text-align: start;
+  }
+
+  .arabicLeft .translationBlock {
+    grid-column: 2;
+    text-align: end;
+  }
 }

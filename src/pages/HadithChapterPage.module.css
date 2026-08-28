@@ -1,15 +1,46 @@
+.readerShell {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  padding: 0 clamp(1rem, 4vw, 3rem) 5rem;
+  background: var(--color-bg);
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 0.5rem;
+  background-color: var(--color-bg);
+}
+
+.readerHeader {
+  position: sticky;
+  top: 3.5rem;
+  z-index: var(--z-navbar);
+  background-color: var(--color-bg);
+  border-block-end: 1px solid var(--color-border);
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 12%);
+}
+
 .backLink {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  margin-block-end: 1rem;
+  margin-block-end: 0;
   color: var(--color-text-muted);
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md);
   font-size: 0.875rem;
+  transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
   text-decoration: none;
 }
 
 .backLink:hover {
   color: var(--color-primary);
+  background-color: var(--color-surface);
+  transform: translateX(-0.15rem);
 }
 
 .header {
@@ -19,8 +50,8 @@
   text-align: center;
   gap: 0.25rem;
   padding-block-end: 1.5rem;
-  margin-block-end: 1rem;
-  border-block-end: 1px solid var(--color-border);
+  margin-block: 0.5rem 0;
+  padding-block-end: 1rem;
 }
 
 .chapterArabic {
@@ -32,4 +63,13 @@
 .list {
   display: flex;
   flex-direction: column;
+  gap: 1.25rem;
 }
+
+.translationNotice {
+  display: block;
+  margin-block-end: 0.75rem;
+  color: var(--color-warning, var(--color-text-muted));
+}
+
+.list > article { scroll-margin-top: 12rem; }

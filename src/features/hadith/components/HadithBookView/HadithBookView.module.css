@@ -10,16 +10,33 @@
   align-items: center;
   gap: 0.5rem;
   flex: 1;
+  width: 100%;
   min-width: 12rem;
+  min-height: 3rem;
+  box-sizing: border-box;
   padding: 0.625rem 0.75rem;
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 180ms ease, box-shadow 180ms ease;
 }
+.field:focus-within { border-color: var(--color-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 24%, transparent); }
 
 .fieldIcon {
   color: var(--color-text-muted);
   flex-shrink: 0;
+  transition: transform 180ms ease, color 180ms ease;
+}
+.field:focus-within .fieldIcon { color: var(--color-primary); transform: scale(1.12) rotate(-8deg); }
+
+.chapterGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 .input {
@@ -38,16 +55,19 @@
 .card {
   display: flex;
   flex-direction: column;
+  height: 100%;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   overflow: hidden;
   background-color: var(--color-surface-raised);
-  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  border-inline-start: 3px solid var(--color-primary);
+  animation: card-in 450ms ease-out both;
+  transition: box-shadow 180ms ease, transform 180ms ease;
 }
 
 .card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  box-shadow: 0 0.9rem 1.75rem color-mix(in srgb, var(--color-primary) 20%, transparent);
+  transform: translateY(-3px) scale(1.03);
 }
 
 .cardLink {
@@ -55,6 +75,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 0.5rem;
+  height: 100%;
   padding: 1rem;
   text-decoration: none;
   color: inherit;
@@ -92,6 +113,16 @@
   flex-shrink: 0;
   color: var(--color-text-muted);
 }
+.cardMeta > span { padding: 0.3rem 0.6rem; border-radius: 999px; background: var(--color-surface); border: 1px solid var(--color-border); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+.card:nth-child(2) { animation-delay: 40ms; }
+.card:nth-child(3) { animation-delay: 80ms; }
+.card:nth-child(4) { animation-delay: 120ms; }
+.card:nth-child(5) { animation-delay: 160ms; }
+@media (min-width: 720px) { .chapterGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .chapterGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@keyframes card-in { from { opacity: 0; transform: translateY(0.75rem) scale(0.96); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .card { animation: none; } .card:hover { transform: none; } }
 
 .list {
   display: flex;

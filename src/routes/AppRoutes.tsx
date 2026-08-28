@@ -31,6 +31,7 @@ const TimestampEditorPage =
     ? null
     : lazy(() => import('pages/TimestampEditorPage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
+const AssistantPage = lazy(() => import('pages/AssistantPage'));
 
 const KidsPage = lazy(() => import('pages/KidsPage'));
 const KidsAlphabetPage = lazy(() => import('pages/KidsAlphabetPage'));
@@ -70,6 +71,7 @@ export default function AppRoutes() {
         <Route path={ROUTES.DOWNLOADS} element={<DownloadsPage />} />
         <Route path={ROUTES.RECITATION_COACH} element={<RecitationCoachPage />} />
         <Route path={ROUTES.SETTINGS} element={<SettingsPage />} />
+        <Route path={ROUTES.ASSISTANT} element={<AssistantPage />} />
         <Route path={ROUTES.DEV_MODE} element={<DevModePage />} />
         {TimestampEditorPage && (
           <Route path={ROUTES.TIMESTAMP_EDITOR} element={<TimestampEditorPage />} />

@@ -2,8 +2,22 @@
   animation: spin 0.8s linear infinite;
 }
 
+.playing {
+  animation: audio-pulse 900ms ease-out infinite;
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
   }
+}
+
+@keyframes audio-pulse {
+  0% { box-shadow: 0 0 0 0 rgb(46 160 137 / 45%); }
+  70% { box-shadow: 0 0 0 0.65rem rgb(46 160 137 / 0%); }
+  100% { box-shadow: 0 0 0 0 rgb(46 160 137 / 0%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .playing { animation: none; }
 }

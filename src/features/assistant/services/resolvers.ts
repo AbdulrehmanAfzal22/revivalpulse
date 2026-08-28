@@ -60,7 +60,7 @@ export async function resolveVerseExplain(verseKey: string): Promise<AssistantAn
     { type: 'tafsir', label: `Tafsir ${tafsirAuthor}, ${verseKey}` },
   ];
 
-  return { sections, citations, confident: true };
+  return { sections, citations, confident: true, sources: [] };
 }
 
 export async function resolveTranslationCompare(verseKey: string): Promise<AssistantAnswer> {
@@ -92,6 +92,7 @@ export async function resolveTranslationCompare(verseKey: string): Promise<Assis
       sections: [{ kind: 'note', text: `Couldn't load translations for ${verseKey} right now.` }],
       citations: [],
       confident: false,
+      sources: [],
     };
   }
 
@@ -102,6 +103,7 @@ export async function resolveTranslationCompare(verseKey: string): Promise<Assis
       ...translations.map((translation) => ({ type: 'quran' as const, label: `${translation.label} translation` })),
     ],
     confident: true,
+    sources: [],
   };
 }
 
@@ -134,6 +136,7 @@ export async function resolveTafsirRequest(verseKey: string, tafsirId: string = 
       { type: 'tafsir', label: `Tafsir ${tafsirAuthor}, ${verseKey}` },
     ],
     confident: true,
+    sources: [],
   };
 }
 
@@ -175,6 +178,7 @@ export async function resolveHadithSearch(query: string): Promise<AssistantAnswe
         ),
         citations: matches.map((hadith) => ({ type: 'hadith' as const, label: `${book.nameEnglish} #${hadith.idInBook}` })),
         confident: true,
+        sources: [],
       };
     }
   }
@@ -183,6 +187,7 @@ export async function resolveHadithSearch(query: string): Promise<AssistantAnswe
     sections: [{ kind: 'note', text: `Couldn't find a hadith matching "${query}" in the collections this assistant searches.` }],
     citations: [],
     confident: false,
+    sources: [],
   };
 }
 
@@ -203,6 +208,7 @@ export async function resolveDuaSearch(query: string, categoryId: DuaCategoryId 
       sections: [{ kind: 'note', text: `Couldn't find a dua matching "${query}".` }],
       citations: [],
       confident: false,
+      sources: [],
     };
   }
 
@@ -223,5 +229,6 @@ export async function resolveDuaSearch(query: string, categoryId: DuaCategoryId 
     ),
     citations: matches.map((dua) => ({ type: 'dua' as const, label: dua.source ?? 'Hisn al-Muslim' })),
     confident: true,
+    sources: [],
   };
 }

@@ -1,4 +1,4 @@
-import { Bookmark, Flame, Star, Trash2 } from 'lucide-react';
+import { ArrowRight, BookOpen, Bookmark, Flame, Star, Trash2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import {
   calculateReadingStreak,
@@ -43,7 +43,14 @@ export default function BookmarksPage() {
       <Typography variant="h2">{t('bookmarks.title')}</Typography>
 
       <Card className={styles.streakCard}>
-        <Flame size={20} className={styles.streakIcon} />
+        <div className={styles.streakVisual}>
+          <Flame size={22} className={styles.streakIcon} aria-hidden="true" />
+          <div className={styles.streakDots} aria-label={`${streak} day reading streak`}>
+            {Array.from({ length: 7 }, (_, index) => (
+              <span key={index} className={index < Math.min(streak, 7) ? styles.dotLit : styles.dot} />
+            ))}
+          </div>
+        </div>
         <div>
           <Typography variant="h3">{tp('bookmarks.streakDays', streak)}</Typography>
           <Typography variant="caption" muted>
@@ -55,7 +62,12 @@ export default function BookmarksPage() {
       <section className={styles.section}>
         <Typography variant="h3">{t('bookmarks.bookmarksHeading')}</Typography>
         {bookmarks.length === 0 ? (
-          <EmptyState icon={<Bookmark size={20} />} title={t('emptyState.bookmarks.noBookmarks')} />
+          <EmptyState
+            icon={<Bookmark size={20} />}
+            title={t('emptyState.bookmarks.noBookmarks')}
+            description={t('quran.startReadingDescription')}
+            action={<Link to="/quran"><Button variant="primary" size="sm" trailingIcon={<ArrowRight size={14} />}>{t('quran.browseQuran')}</Button></Link>}
+          />
         ) : (
           <ul className={styles.list}>
             {bookmarks.map((bookmark) => {
@@ -82,7 +94,12 @@ export default function BookmarksPage() {
       <section className={styles.section}>
         <Typography variant="h3">{t('bookmarks.favoriteSurahs')}</Typography>
         {favoriteSurahIdList.length === 0 ? (
-          <EmptyState icon={<Star size={20} />} title={t('emptyState.bookmarks.noFavoriteSurahs')} />
+          <EmptyState
+            icon={<Star size={20} />}
+            title={t('emptyState.bookmarks.noFavoriteSurahs')}
+            description={t('quran.startReadingDescription')}
+            action={<Link to="/quran"><Button variant="primary" size="sm" trailingIcon={<ArrowRight size={14} />}>{t('quran.browseQuran')}</Button></Link>}
+          />
         ) : (
           <ul className={styles.list}>
             {favoriteSurahIdList.map((surahId) => (
@@ -106,7 +123,12 @@ export default function BookmarksPage() {
       <section className={styles.section}>
         <Typography variant="h3">{t('bookmarks.favoriteHadithBooks')}</Typography>
         {favoriteBookSlugList.length === 0 ? (
-          <EmptyState icon={<Star size={20} />} title={t('emptyState.bookmarks.noFavoriteHadithBooks')} />
+          <EmptyState
+            icon={<Star size={20} />}
+            title={t('emptyState.bookmarks.noFavoriteHadithBooks')}
+            description={t('hadith.bookNotFoundDescription')}
+            action={<Link to="/hadith"><Button variant="primary" size="sm" trailingIcon={<ArrowRight size={14} />}>{t('hadith.title')}</Button></Link>}
+          />
         ) : (
           <ul className={styles.list}>
             {favoriteBookSlugList.map((slug) => (
@@ -130,7 +152,12 @@ export default function BookmarksPage() {
       <section className={styles.section}>
         <Typography variant="h3">{t('bookmarks.recentlyRead')}</Typography>
         {recentHistory.length === 0 ? (
-          <EmptyState title={t('emptyState.bookmarks.nothingRead')} />
+          <EmptyState
+            icon={<BookOpen size={20} />}
+            title={t('emptyState.bookmarks.nothingRead')}
+            description={t('quran.startReadingDescription')}
+            action={<Link to="/quran"><Button variant="primary" size="sm" trailingIcon={<ArrowRight size={14} />}>{t('quran.browseQuran')}</Button></Link>}
+          />
         ) : (
           <ul className={styles.list}>
             {recentHistory.map((entry) => (

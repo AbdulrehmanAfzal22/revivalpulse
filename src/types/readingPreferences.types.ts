@@ -21,6 +21,7 @@ export interface ReadingPreferences {
   backgroundColorId: string;
   highlightColorId: string;
   readingDirection: ReadingDirection;
+  hadithTranslationLanguage: string;
   readingMode: ReadingMode;
   showArabic: boolean;
   showTranslation: boolean;

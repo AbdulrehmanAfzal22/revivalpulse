@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import { SURAHS } from 'data/quran/surahs';
@@ -7,6 +7,8 @@ import Typography from 'components/ui/Typography';
 import EmptyState from 'components/feedback/EmptyState';
 import useTranslation from 'hooks/useTranslation';
 import styles from './QuranPage.module.css';
+import ContinueReadingCard from 'components/ui/ContinueReadingCard';
+import { useReadingPositionStore } from 'stores/readingPositionStore';
 
 type Tab = 'surahs' | 'juz';
 
@@ -23,6 +25,7 @@ export default function QuranPage() {
   const [tab, setTab] = useState<Tab>('surahs');
   const [query, setQuery] = useState('');
   const { t } = useTranslation();
+  const quranPosition = useReadingPositionStore((state) => state.positions.quran);
 
   const filteredSurahs = useMemo(() => {
     const term = query.trim().toLowerCase();
@@ -36,11 +39,23 @@ export default function QuranPage() {
   }, [query]);
 
   return (
-    <div className="container">
-      <div className={styles.page}>
+    <div className={styles.page}>
         <Typography variant="h2">{t('quran.title')}</Typography>
 
-        <div className={styles.tabs} role="tablist">
+        {quranPosition?.module === 'quran' && (
+          <ContinueReadingCard
+            title="Continue Reading"
+            description={`${surahNameById(quranPosition.surahId)} · Verse ${quranPosition.ayahNumber}`}
+            preview={quranPosition.preview}
+            to={`/quran/${quranPosition.surahId}?ayah=${quranPosition.ayahNumber}`}
+          />
+        )}
+
+        <div
+          className={styles.tabs}
+          role="tablist"
+          style={{ '--tab-offset': tab === 'juz' ? '100%' : '0%' } as CSSProperties}
+        >
           <button
             type="button"
             role="tab"
@@ -77,7 +92,7 @@ export default function QuranPage() {
             {filteredSurahs.length === 0 ? (
               <EmptyState title={t('emptyState.quran.noSurahsMatch')} />
             ) : (
-              <ul className="grid-auto" role="list">
+              <ul className={styles.surahGrid} role="list">
                 {filteredSurahs.map((surah) => (
                   <li key={surah.id} className={styles.card}>
                     <Link to={`/quran/${surah.id}`} className={styles.cardLink}>
@@ -104,7 +119,7 @@ export default function QuranPage() {
         )}
 
         {tab === 'juz' && (
-          <ul className="grid-auto" role="list">
+          <ul className={styles.surahGrid} role="list">
             {JUZ_BOUNDARIES.map((juz) => {
               const start = surahLinkFromVerseKey(juz.firstVerseKey);
               const end = surahLinkFromVerseKey(juz.lastVerseKey);
@@ -128,7 +143,6 @@ export default function QuranPage() {
             })}
           </ul>
         )}
-      </div>
     </div>
   );
 }

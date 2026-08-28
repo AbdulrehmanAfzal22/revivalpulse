@@ -13,7 +13,6 @@ import { RECITERS, getReciterById } from 'constants/reciters';
 import { WORD_PLAYBACK_SPEED_BOUNDS } from 'constants/wordAudio';
 import { SURAHS } from 'data/quran/surahs';
 import {
-  BACKGROUND_COLOR_PRESETS,
   DEFAULT_READING_PREFERENCES,
   HIGHLIGHT_COLOR_PRESETS,
   PAGE_WIDTH_OPTIONS,
@@ -189,15 +188,6 @@ export default function ReadingSettingsPanel({ isOpen, onClose, surahId }: Readi
         </section>
 
         <section className={styles.section}>
-          <Typography variant="caption" muted className={styles.sectionLabel}>
-            {t('quran.backgroundColor')}
-          </Typography>
-          <SwatchGroup
-            options={BACKGROUND_COLOR_PRESETS}
-            value={preferences.backgroundColorId}
-            onChange={(id) => update({ backgroundColorId: id })}
-          />
-
           <Typography variant="caption" muted className={styles.sectionLabel}>
             {t('quran.highlightColor')}
           </Typography>

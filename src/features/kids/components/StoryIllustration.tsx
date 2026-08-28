@@ -3,12 +3,15 @@ import {
   BookOpen,
   Bird,
   CloudRain,
+  CloudSun,
   Droplet,
   Fish,
   Flame,
   Handshake,
+  HandHeart,
   HeartPulse,
   Leaf,
+  Lamp,
   Mountain,
   Scale,
   Scroll,
@@ -23,6 +26,7 @@ import {
   Waves,
   Wind,
   Gem,
+  Compass,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import styles from './StoryIllustration.module.css';
@@ -32,12 +36,15 @@ const ICONS: Record<string, LucideIcon> = {
   BookOpen,
   Bird,
   CloudRain,
+  CloudSun,
   Droplet,
   Fish,
   Flame,
   Handshake,
+  HandHeart,
   HeartPulse,
   Leaf,
+  Lamp,
   Mountain,
   Scale,
   Scroll,
@@ -52,6 +59,7 @@ const ICONS: Record<string, LucideIcon> = {
   Waves,
   Wind,
   Gem,
+  Compass,
 };
 
 export interface StoryIllustrationProps {

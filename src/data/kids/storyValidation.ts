@@ -1,6 +1,7 @@
 import type { KidsStoryV2, KidsStoryChapter, StorySource } from 'types/kidsStories.types';
 import { KIDS_STORIES_V2 } from 'data/kids/storiesV2';
 import { KIDS_SAHABI_V2 } from 'data/kids/sahabiV2';
+import { chapterWordCount } from 'data/kids/storyContent';
 
 export interface CitationIssue {
   storyId: string;
@@ -10,6 +11,21 @@ export interface CitationIssue {
 
 function chapterIssues(storyId: string, chapter: KidsStoryChapter): CitationIssue[] {
   const issues: CitationIssue[] = [];
+
+  if (chapter.paragraphs.some((paragraph) => chapterWordCount(paragraph.en) < 80 || chapterWordCount(paragraph.en) > 150)) {
+    issues.push({
+      storyId,
+      chapterId: chapter.id,
+      message: 'chapter paragraph must contain between 80 and 150 English words',
+    });
+  }
+  if (!chapter.lesson?.en.trim() || !chapter.lesson.ur?.trim()) {
+    issues.push({
+      storyId,
+      chapterId: chapter.id,
+      message: 'chapter must have a bilingual highlighted lesson',
+    });
+  }
 
   if (chapter.ayahNote) {
     if (!chapter.ayahNote.en || !chapter.ayahNote.en.trim()) {

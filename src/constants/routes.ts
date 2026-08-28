@@ -1,5 +1,6 @@
 export const ROUTES = {
   HOME: '/',
+  ASSISTANT: '/assistant',
   QURAN: '/quran',
   SURAH: '/quran/:surahId',
   HADITH: '/hadith',
@@ -58,6 +59,10 @@ export function buildTafsirSurahPath(surahId: number): string {
 
 export function buildHadithBookPath(bookSlug: string): string {
   return `/hadith/${bookSlug}`;
+}
+
+export function buildHadithPath(): string {
+  return ROUTES.HADITH;
 }
 
 export function buildHadithChapterPath(bookSlug: string, chapterId: number): string {

@@ -1,9 +1,15 @@
 import { create } from 'zustand';
 import { answerQuery } from 'api/ai/aiClient';
-import type { AssistantMessage } from 'types/assistant.types';
+import type { AssistantMessage, SourceMode } from 'types/assistant.types';
 
 function createId(): string {
   return crypto.randomUUID();
+}
+
+interface AskQuestionParams {
+  text: string;
+  language?: string;
+  sourceMode?: SourceMode;
 }
 
 interface AssistantStoreState {
@@ -13,7 +19,7 @@ interface AssistantStoreState {
   open: () => void;
   close: () => void;
   toggle: () => void;
-  askQuestion: (text: string) => Promise<void>;
+  askQuestion: (params: AskQuestionParams) => Promise<void>;
 }
 
 /**
@@ -30,16 +36,19 @@ export const useAssistantStore = create<AssistantStoreState>((set, get) => ({
   close: () => set({ isOpen: false }),
   toggle: () => set((state) => ({ isOpen: !state.isOpen })),
 
-  askQuestion: async (text) => {
+  askQuestion: async ({ text, language, sourceMode }) => {
     const trimmed = text.trim();
     if (!trimmed || get().isAnswering) return;
 
     const userMessage: AssistantMessage = { id: createId(), role: 'user', text: trimmed, createdAt: Date.now() };
     set((state) => ({ messages: [...state.messages, userMessage], isAnswering: true }));
 
-    const answer = await answerQuery(trimmed);
-
-    const assistantMessage: AssistantMessage = { id: createId(), role: 'assistant', answer, createdAt: Date.now() };
-    set((state) => ({ messages: [...state.messages, assistantMessage], isAnswering: false }));
+    try {
+      const answer = await answerQuery(trimmed, sourceMode, language);
+      const assistantMessage: AssistantMessage = { id: createId(), role: 'assistant', answer, createdAt: Date.now() };
+      set((state) => ({ messages: [...state.messages, assistantMessage] }));
+    } finally {
+      set({ isAnswering: false });
+    }
   },
 }));

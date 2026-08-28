@@ -669,8 +669,12 @@ export function preloadSurah(surahId: number, startAyah = 1): void {
 
 export function pause(): void {
   logTransition('Pause');
+  controller.epoch += 1;
   controller.audio?.pause();
   controller.translationAudio?.pause();
+  controller.state = 'idle';
+  controller.activeTimestamp = null;
+  usePlaybackStore.getState().setLoading(false);
   usePlaybackStore.setState({ isPlaying: false });
 }
 

@@ -14,6 +14,9 @@ import { SAHABI_MUSAB } from './musab';
 import { SAHABI_SAD } from './sad';
 import { SAHABI_SALMAN } from './salman';
 import { SAHABI_ZAYD } from './zayd';
+import { ADDITIONAL_SAHABI_V2 } from './additional';
+import { ensureFiveChapters } from 'data/kids/storyMinimum';
+import { enrichStoryContent } from 'data/kids/storyContent';
 
 /**
  * Registry of chapter-based Sahabi biographies (Phase 7/8). A Sahabi uses the
@@ -37,7 +40,8 @@ export const KIDS_SAHABI_V2: KidsStoryV2[] = [
   SAHABI_SAD,
   SAHABI_SALMAN,
   SAHABI_ZAYD,
-];
+  ...ADDITIONAL_SAHABI_V2,
+].map(ensureFiveChapters).map(enrichStoryContent);
 
 export function getSahabiV2(sahabiId: string): KidsStoryV2 | undefined {
   return KIDS_SAHABI_V2.find((sahabi) => sahabi.id === sahabiId);

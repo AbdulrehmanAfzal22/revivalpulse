@@ -1,3 +1,4 @@
+import ReactMarkdown from 'react-markdown';
 import Card from 'components/ui/Card';
 import Typography from 'components/ui/Typography';
 import type { AssistantSection } from 'types/assistant.types';
@@ -11,7 +12,7 @@ export default function AssistantSectionView({ section }: AssistantSectionViewPr
   if (section.kind === 'note') {
     return (
       <Typography variant="body" className={styles.note}>
-        {section.text}
+        <ReactMarkdown>{section.text}</ReactMarkdown>
       </Typography>
     );
   }
@@ -23,14 +24,16 @@ export default function AssistantSectionView({ section }: AssistantSectionViewPr
           {section.surahLabel} {section.verseKey}
         </Typography>
         <Typography variant="body" className={styles.arabic} dir="rtl">
-          {section.arabic}
+          <ReactMarkdown>{section.arabic}</ReactMarkdown>
         </Typography>
         {section.translations.map((translation) => (
           <div key={translation.label}>
             <Typography variant="caption" muted>
               {translation.label}
             </Typography>
-            <Typography variant="body">{translation.text}</Typography>
+            <Typography variant="body">
+              <ReactMarkdown>{translation.text}</ReactMarkdown>
+            </Typography>
           </div>
         ))}
       </Card>
@@ -43,7 +46,9 @@ export default function AssistantSectionView({ section }: AssistantSectionViewPr
         <Typography variant="caption" muted>
           Tafsir — {section.authorName} on {section.verseKey}
         </Typography>
-        <Typography variant="body">{section.text}</Typography>
+        <Typography variant="body">
+          <ReactMarkdown>{section.text}</ReactMarkdown>
+        </Typography>
       </Card>
     );
   }
@@ -55,9 +60,11 @@ export default function AssistantSectionView({ section }: AssistantSectionViewPr
           {section.bookName} #{section.idInBook}
         </Typography>
         <Typography variant="body" className={styles.arabic} dir="rtl">
-          {section.arabic}
+          <ReactMarkdown>{section.arabic}</ReactMarkdown>
         </Typography>
-        <Typography variant="body">{section.englishText}</Typography>
+        <Typography variant="body">
+          <ReactMarkdown>{section.englishText}</ReactMarkdown>
+        </Typography>
         {section.narrator && (
           <Typography variant="caption" muted>
             Narrated by {section.narrator}
@@ -67,16 +74,25 @@ export default function AssistantSectionView({ section }: AssistantSectionViewPr
     );
   }
 
-  return (
-    <Card elevation="raised" className={styles.card}>
-      <Typography variant="caption" muted>
-        {section.categoryLabel || 'Dua'}
-      </Typography>
-      <Typography variant="body">{section.title}</Typography>
-      <Typography variant="body" className={styles.arabic} dir="rtl">
-        {section.arabic}
-      </Typography>
-      <Typography variant="body">{section.translation}</Typography>
-    </Card>
-  );
+  if (section.kind === 'dua') {
+    return (
+      <Card elevation="raised" className={styles.card}>
+        <Typography variant="caption" muted>
+          {section.title}
+        </Typography>
+        <Typography variant="body" className={styles.arabic} dir="rtl">
+          <ReactMarkdown>{section.arabic}</ReactMarkdown>
+        </Typography>
+        <Typography variant="body">
+          <ReactMarkdown>{section.translation}</ReactMarkdown>
+        </Typography>
+      </Card>
+    );
+  }
+
+  // TypeScript exhaustive check — all AssistantSection kinds are handled above.
+  // This line satisfies the type checker and should never be reached.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _exhaustiveCheck: never = section;
+  return null;
 }

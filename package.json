@@ -15,13 +15,19 @@
     "@types/node": "^18.19.130",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
+    "concurrently": "^10.0.5",
+    "cors": "^2.8.6",
     "dompurify": "^3.4.12",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
     "framer-motion": "^12.42.2",
+    "http-proxy-middleware": "^4.2.0",
     "idb": "^8.0.3",
     "idb-keyval": "^6.3.0",
     "lucide-react": "^1.26.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-markdown": "^9.0.0",
     "react-router-dom": "^6.30.4",
     "react-scripts": "5.0.1",
     "typescript": "^4.9.5",
@@ -30,6 +36,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "server": "node server/index.js",
+    "dev:all": "concurrently \"npm start\" \"npm run server\"",
     "build": "react-scripts build && node scripts/injectServiceWorkerVersion.mjs",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -56,6 +64,7 @@
   },
   "devDependencies": {
     "@types/dompurify": "^3.0.5",
+    "concurrently": "^10.0.5",
     "fake-indexeddb": "^6.2.5"
   }
 }

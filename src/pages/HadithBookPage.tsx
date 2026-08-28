@@ -1,5 +1,5 @@
 import { Star } from 'lucide-react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { HADITH_BOOKS } from 'data/hadith/books';
 import HadithBookView from 'features/hadith/components/HadithBookView';
 import Typography from 'components/ui/Typography';
@@ -8,6 +8,7 @@ import Button from 'components/ui/Button';
 import { isFavoriteHadithBook, useCollectionsStore } from 'stores/collectionsStore';
 import useTranslation from 'hooks/useTranslation';
 import styles from './HadithBookPage.module.css';
+import { buildHadithPath } from 'constants/routes';
 
 export default function HadithBookPage() {
   const { bookSlug } = useParams<{ bookSlug: string }>();
@@ -28,8 +29,8 @@ export default function HadithBookPage() {
   const isFavorite = isFavoriteHadithBook(favorites, book.slug);
 
   return (
-    <div className="container">
-      <div className={styles.page}>
+    <div className={styles.page}>
+      <Link to={buildHadithPath()} className={styles.backLink}>Back to Hadith books</Link>
       <header className={styles.header}>
         <div className={styles.headerTop}>
           <Typography variant="caption" muted>
@@ -45,14 +46,13 @@ export default function HadithBookPage() {
         <Typography variant="h1" className={styles.arabicTitle} dir="rtl" lang="ar">
           {book.nameArabic}
         </Typography>
-        <Typography variant="h3">{book.nameEnglish}</Typography>
+        <Typography variant="h2">{book.nameEnglish}</Typography>
         <Typography variant="body" muted>
           {book.authorEnglish}
         </Typography>
       </header>
 
 <HadithBookView book={book} />
-      </div>
     </div>
   );
 }

@@ -1,19 +1,21 @@
 .line {
   margin: 0 0 0.75rem;
-  text-align: end;
-  /* Also set font-size here (matching .word's own) so this unitless
-   * line-height — inherited by .word as a raw multiplier per CSS's
-   * inheritance rules for unitless line-height — has a sane value to fall
-   * back to even before .word resolves its own. */
+  /* The actual Arabic content is the only element with a directional
+   * override; the surrounding layout should stay neutral and LTR. */
   font-size: var(--reader-arabic-size, 1.75rem);
   line-height: var(--reader-line-height, 2.4);
+}
+.arabicLine {
+  display: block;
+  text-align: end;
+  font-size: inherit;
+  line-height: inherit;
 }
 
 .word {
   position: relative;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
+  display: inline-block;
+  vertical-align: middle;
   border: none;
   background: transparent;
   padding: 0.125rem 0.3em;
@@ -25,6 +27,10 @@
   word-spacing: var(--reader-word-spacing, normal);
   color: var(--color-text);
   cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--color-primary) 38%, transparent);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.16em;
   transition: background-color 0.15s ease;
 }
 
@@ -122,3 +128,4 @@
   color: var(--color-text-muted);
   direction: ltr;
 }
+

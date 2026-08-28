@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  width: 100%;
 }
 
 .header {
@@ -11,15 +12,49 @@
   gap: 0.5rem;
 }
 
+.headerActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
 .title {
   margin: 0;
+  max-width: calc(100% - 5rem);
 }
 
 .arabic {
   direction: rtl;
   text-align: end;
   font-family: var(--reader-arabic-font, 'Reader Uthmani', serif);
-  /* Unitless/em-relative and more generous than Latin body text — full
-   * tashkeel diacritics need more vertical room than Typography's default. */
-  line-height: 2;
+  line-height: 2.2;
+  text-align: center;
+  max-width: 52rem;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.translation {
+  color: var(--color-text-secondary);
+}
+
+.audioError {
+  color: var(--color-danger);
+}
+
+.card > p:not(.arabic) {
+  max-width: 52rem;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.card > span:last-child {
+  max-width: 52rem;
+  width: 100%;
+  margin-inline: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
 }

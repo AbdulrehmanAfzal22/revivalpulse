@@ -102,7 +102,6 @@ globalThis.addEventListener('message', (event: MessageEvent<WhisperWorkerRequest
         // chunk's audio, used to stagger the on-screen reveal to match how
         // the words were actually spoken instead of an arbitrary fixed delay.
         const output = await pipe(audio, {
-          language: 'arabic',
           task: 'transcribe',
           return_timestamps: 'word',
         });

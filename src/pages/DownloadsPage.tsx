@@ -40,7 +40,7 @@ export default function DownloadsPage() {
           const status = download?.status ?? 'idle';
 
           return (
-            <li key={surah.id} className={styles.row}>
+            <li key={`${reciterId}-${surah.id}`} className={styles.row}>
               <span className={styles.number}>{surah.id}</span>
               <span className={styles.rowText}>
                 <span className={styles.rowTitle}>{surah.nameSimple}</span>

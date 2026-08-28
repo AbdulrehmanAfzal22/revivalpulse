@@ -10,14 +10,15 @@ import styles from './LetterCard.module.css';
 export interface LetterCardProps {
   letter: AlphabetLetter;
   isLearned: boolean;
+  animationDelay?: string;
   onMarkLearned: () => void;
 }
 
-export default function LetterCard({ letter, isLearned, onMarkLearned }: LetterCardProps) {
+export default function LetterCard({ letter, isLearned, animationDelay, onMarkLearned }: LetterCardProps) {
   const { t } = useTranslation();
 
   return (
-    <Card elevation="raised" className={styles.card}>
+    <Card elevation="raised" className={[styles.card, isLearned && styles.learned].filter(Boolean).join(' ')} style={{ animationDelay }}>
       <Typography variant="h1" as="p" className={styles.arabic} dir="rtl">
         {letter.arabic}
       </Typography>

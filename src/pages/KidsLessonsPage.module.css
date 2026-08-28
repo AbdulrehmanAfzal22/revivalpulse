@@ -1,60 +1,117 @@
 .page {
-  max-width: 36rem;
-  margin-inline: auto;
-  padding: 1.5rem 1rem 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 4vw, 3rem) 7rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: clamp(1rem, 2vw, 1.75rem);
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+}
+
+.lessonCard,
+.verseCard,
+.recapCard {
+  border-radius: clamp(1rem, 2vw, 1.5rem);
 }
 
 .lessonCard {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+  min-height: 9rem;
   padding: 1rem;
   cursor: pointer;
+  animation: lesson-pop 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
-.lessonHeader {
+.lessonCard:hover,
+.lessonCard:focus-visible {
+  transform: scale(1.03) translateY(-0.2rem);
+  box-shadow: 0 0.75rem 1.5rem rgb(62 53 110 / 20%);
+}
+
+.lessonCard:nth-child(3n) { animation-delay: 120ms; }
+.lessonCard:nth-child(3n + 1) { animation-delay: 60ms; }
+
+.lessonHeader,
+.verseHeader,
+.detailTop {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
-}
-
-.completeIcon {
-  color: var(--color-primary);
-}
-
-.verses {
-  display: flex;
-  flex-direction: column;
   gap: 0.75rem;
 }
 
-.verseCard {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+.surahNumber {
+  display: grid;
+  place-items: center;
+  min-width: 2rem;
+  min-height: 2rem;
+  border-radius: 999px;
+  background: var(--kids-sky, var(--color-primary));
+  color: #fff;
+  font-weight: 800;
 }
 
-.verseHeader {
+.completeIcon { color: var(--kids-emerald, var(--color-primary)); }
+
+.searchField {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 0.65rem;
+  min-height: 4rem;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--color-border);
+  border-radius: clamp(1rem, 2vw, 1.5rem);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
 }
 
+.searchField input {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.detailHeading { text-align: center; }
+.detailHeading h2,
+.detailHeading h3 { margin: 0.2rem 0; }
+.detailTop { justify-content: flex-start; }
+
+.verses { display: flex; flex-direction: column; gap: 0.75rem; }
+.verseCard { display: flex; flex-direction: column; gap: 0.5rem; }
 .verseArabic {
   direction: rtl;
   text-align: end;
   font-family: var(--reader-arabic-font, 'Reader Uthmani', serif);
-  /* Unitless/em-relative — real, multi-line Quran verse text needs more
-   * vertical room for full tashkeel diacritics than Typography's default. */
   line-height: 2;
+}
+
+.recapCard { display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start; border: 3px solid var(--kids-sky, var(--color-primary)); }
+
+@keyframes lesson-pop {
+  from { opacity: 0; transform: translateY(0.75rem) scale(0.92); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (min-width: 40rem) {
+  .grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+
+@media (min-width: 64rem) {
+  .grid { grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lessonCard,
+  .lessonCard:hover,
+  .lessonCard:focus-visible { animation: none; transform: none; }
 }

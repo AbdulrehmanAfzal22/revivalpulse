@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { X } from 'lucide-react';
 import useFocusTrap from 'hooks/useFocusTrap';
@@ -12,9 +13,11 @@ export interface DialogProps {
   onClose: () => void;
   title?: string;
   children: ReactNode;
+  contentClassName?: string;
+  panelClassName?: string;
 }
 
-export default function Dialog({ isOpen, onClose, title, children }: DialogProps) {
+export default function Dialog({ isOpen, onClose, title, children, contentClassName, panelClassName }: DialogProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const { t } = useTranslation();
@@ -46,7 +49,8 @@ export default function Dialog({ isOpen, onClose, title, children }: DialogProps
         transition: { duration: 0.18, ease: 'easeOut' as const },
       };
 
-  return (
+  return createPortal(
+    (
     <AnimatePresence>
       {isOpen && (
         <div className={styles.overlayWrapper}>
@@ -60,7 +64,7 @@ export default function Dialog({ isOpen, onClose, title, children }: DialogProps
           />
           <motion.div
             ref={panelRef}
-            className={styles.panel}
+            className={[styles.panel, panelClassName].filter(Boolean).join(' ')}
             role="dialog"
             aria-modal="true"
             aria-label={title}
@@ -76,10 +80,12 @@ export default function Dialog({ isOpen, onClose, title, children }: DialogProps
                 leadingIcon={<X size={18} />}
               />
             </div>
-            <div className={styles.content}>{children}</div>
+            <div className={[styles.content, contentClassName].filter(Boolean).join(' ')}>{children}</div>
           </motion.div>
         </div>
       )}
     </AnimatePresence>
+    ),
+    document.body,
   );
 }

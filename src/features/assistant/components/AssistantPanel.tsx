@@ -60,7 +60,7 @@ export default function AssistantPanel() {
           )}
         </div>
 
-        <AssistantInput onSubmit={(text) => void askQuestion(text)} disabled={isAnswering} showSuggestions={messages.length === 0} />
+        <AssistantInput onSubmit={(text) => void askQuestion({ text })} disabled={isAnswering} showSuggestions={messages.length === 0} />
       </div>
     </Drawer>
   );

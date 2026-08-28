@@ -24,6 +24,8 @@ import { STORY_YAQUB } from './yaqub';
 import { STORY_YUNUS } from './yunus';
 import { STORY_YUSUF } from './yusuf';
 import { STORY_ZAKARIYYA } from './zakariyya';
+import { ensureFiveChapters } from 'data/kids/storyMinimum';
+import { enrichStoryContent } from 'data/kids/storyContent';
 
 /**
  * Registry of chapter-based (KidsStoryV2) stories — every Prophet is now
@@ -56,7 +58,7 @@ export const KIDS_STORIES_V2: KidsStoryV2[] = [
   STORY_YAHYA,
   STORY_ISA,
   STORY_MUHAMMAD,
-];
+].map(ensureFiveChapters).map(enrichStoryContent);
 
 export function getKidsStoryV2(storyId: string): KidsStoryV2 | undefined {
   return KIDS_STORIES_V2.find((story) => story.id === storyId);

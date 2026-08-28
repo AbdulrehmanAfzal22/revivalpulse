@@ -1,4 +1,5 @@
 import { Loader2, Pause, Play, SkipBack, SkipForward, X } from 'lucide-react';
+import type { CSSProperties } from 'react';
 import { usePlaybackStore } from 'stores/playbackStore';
 import * as engine from 'features/quranReader/services/playbackEngine';
 import { getReciterById } from 'constants/reciters';
@@ -42,6 +43,7 @@ export default function AudioPlayer() {
           max={duration || 0}
           step={0.1}
           value={Math.min(currentTime, duration || 0)}
+          style={{ '--progress': `${duration ? (currentTime / duration) * 100 : 0}%` } as CSSProperties}
           onChange={(event) => engine.seekToTime(Number(event.target.value))}
           aria-label={t('quran.seek')}
         />

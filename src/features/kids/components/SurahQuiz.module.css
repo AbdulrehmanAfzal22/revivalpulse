@@ -1,0 +1,51 @@
+.quiz,
+.result {
+  width: min(100%, 52rem);
+  margin-inline: auto;
+  text-align: center;
+  border: 3px solid var(--kids-sky, var(--color-primary));
+  border-radius: clamp(1rem, 3vw, 1.5rem);
+  animation: quiz-in 300ms ease-out both;
+}
+
+.quiz { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.question { margin: 0; }
+.options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 0.75rem;
+  width: 100%;
+}
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 4rem;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+.option:hover:not(:disabled) { transform: scale(1.03); box-shadow: 0 0.5rem 1rem rgb(62 53 110 / 15%); }
+.option:disabled { cursor: default; }
+.correct { border-color: #2fb344; background: #2fb34422; color: #1f7c2f; animation: correct-pop 500ms ease both; }
+.incorrect { border-color: var(--color-danger); animation: gentle-shake 350ms ease both; }
+.success { color: #1f7c2f; font-weight: 700; }
+.encouragement { color: var(--color-danger); font-weight: 700; }
+.result { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+.resultIcon { color: var(--kids-sunshine, var(--color-primary)); }
+.resultActions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+
+@keyframes quiz-in { from { opacity: 0; transform: translateY(0.75rem) scale(0.96); } to { opacity: 1; transform: none; } }
+@keyframes correct-pop { 50% { box-shadow: 0 0 0 0.75rem rgb(47 179 68 / 20%); } }
+@keyframes gentle-shake { 25% { transform: translateX(-0.25rem); } 75% { transform: translateX(0.25rem); } }
+@media (prefers-reduced-motion: reduce) {
+  .quiz, .result, .correct, .incorrect { animation: none; }
+  .option:hover:not(:disabled) { transform: none; }
+}

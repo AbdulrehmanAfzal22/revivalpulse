@@ -7,6 +7,7 @@
   border-block-start: 1px solid var(--color-border);
   box-shadow: var(--shadow-lg);
   padding: 0.5rem 1rem 0.625rem;
+  animation: player-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .progressRow {
@@ -35,7 +36,8 @@
   appearance: none;
   height: 4px;
   border-radius: 2px;
-  background: var(--color-border);
+  background: linear-gradient(to right, var(--color-primary) var(--progress, 0%), var(--color-border) var(--progress, 0%));
+  transition: background-color 180ms ease, height 180ms ease;
 }
 
 .progress::-webkit-slider-thumb {
@@ -47,6 +49,8 @@
   background: var(--color-primary);
   cursor: pointer;
 }
+
+.progress:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; }
 
 .controlsRow {
   display: flex;
@@ -104,6 +108,15 @@
 
 .spin {
   animation: spin 0.8s linear infinite;
+}
+
+.transport button svg { transition: transform 180ms ease; }
+.transport button:hover svg { transform: scale(1.12); }
+
+@keyframes player-in { from { opacity: 0; transform: translateY(100%); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .bar, .transport button svg { animation: none; transition: none; }
 }
 
 @keyframes spin {

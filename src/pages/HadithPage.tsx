@@ -9,12 +9,18 @@ import Button from 'components/ui/Button';
 import EmptyState from 'components/feedback/EmptyState';
 import useTranslation from 'hooks/useTranslation';
 import styles from './HadithPage.module.css';
+import ContinueReadingCard from 'components/ui/ContinueReadingCard';
+import { useReadingPositionStore } from 'stores/readingPositionStore';
 
 export default function HadithPage() {
   const [query, setQuery] = useState('');
   const favorites = useCollectionsStore((state) => state.favorites);
   const toggleFavoriteHadithBook = useCollectionsStore((state) => state.toggleFavoriteHadithBook);
   const { t, tp } = useTranslation();
+  const hadithPosition = useReadingPositionStore((state) => state.positions.hadith);
+  const lastReadBook = hadithPosition?.module === 'hadith'
+    ? HADITH_BOOKS.find((book) => book.slug === hadithPosition.bookSlug)
+    : undefined;
 
   const filteredBooks = useMemo(() => {
     const term = query.trim().toLowerCase();
@@ -25,9 +31,17 @@ export default function HadithPage() {
   }, [query]);
 
   return (
-    <div className="container">
-      <div className={styles.page}>
+    <div className={styles.page}>
         <Typography variant="h2">{t('hadith.title')}</Typography>
+
+        {hadithPosition?.module === 'hadith' && lastReadBook && (
+          <ContinueReadingCard
+            title="Continue Reading"
+            description={`${lastReadBook.nameEnglish} · Chapter ${hadithPosition.chapterId} · Hadith ${hadithPosition.hadithNumber}`}
+            preview={hadithPosition.preview}
+            to={`/hadith/${hadithPosition.bookSlug}/${hadithPosition.chapterId}`}
+          />
+        )}
 
         <label className={styles.searchField}>
           <Search size={16} className={styles.searchIcon} />
@@ -43,7 +57,7 @@ export default function HadithPage() {
         {filteredBooks.length === 0 ? (
           <EmptyState title={t('emptyState.hadith.noBooksMatch')} />
         ) : (
-          <ul className="grid-auto" role="list">
+          <ul className={styles.bookGrid} role="list">
             {filteredBooks.map((book) => {
               const isFavorite = isFavoriteHadithBook(favorites, book.slug);
               return (
@@ -71,7 +85,6 @@ export default function HadithPage() {
             })}
           </ul>
         )}
-      </div>
     </div>
   );
 }

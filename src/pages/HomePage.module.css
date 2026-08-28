@@ -1,4 +1,6 @@
 .page {
+  box-sizing: border-box;
+  padding-block: clamp(1.25rem, 4vw, 3rem) clamp(7rem, 14vw, 10rem);
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -7,4 +9,10 @@
 .heading {
   margin: 0;
   text-align: center;
+}
+
+.readingGrid {
+  display: grid;
+  align-items: stretch;
+  gap: 1rem;
 }

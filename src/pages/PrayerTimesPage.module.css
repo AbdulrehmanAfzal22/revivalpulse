@@ -1,11 +1,43 @@
 .page {
+  position: relative;
+  isolation: isolate;
+  padding-block: clamp(2rem, 6vw, 4rem) 5rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  animation: page-in 420ms ease-out both;
+}
+
+.page::before {
+  content: '';
+  position: absolute;
+  inset: 0 10% auto;
+  height: 24rem;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 18% 10%, var(--color-teal-glow), transparent 58%), radial-gradient(ellipse at 84% 18%, var(--color-gold-glow), transparent 55%);
+  opacity: 0.045;
+  filter: blur(24px);
+  animation: ambient-drift 18s ease-in-out infinite alternate;
+}
+
+.title {
+  margin: 0;
 }
 
 .settingsCard {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  animation: section-in 450ms 80ms ease-out both;
 }
+
+@keyframes page-in { from { opacity: 0; transform: translateY(0.5rem); } to { opacity: 1; transform: none; } }
+@keyframes section-in { from { opacity: 0; transform: translateY(0.75rem); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .page, .settingsCard { animation: none; }
+  .page::before { animation: none; }
+}
+
+@keyframes ambient-drift { from { transform: translate3d(-1%, -1%, 0); } to { transform: translate3d(1%, 1%, 0); } }

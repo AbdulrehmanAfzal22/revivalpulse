@@ -38,6 +38,12 @@
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
+  transition: border-color 240ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.field:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 20%, transparent);
 }
 
 .fieldIcon {
@@ -54,6 +60,9 @@
   outline: none;
 }
 
+.input::placeholder { opacity: 0.7; transition: opacity 240ms cubic-bezier(0.16, 1, 0.3, 1); }
+.input:focus::placeholder { opacity: 0.35; }
+
 .suggestions {
   display: flex;
   flex-direction: column;
@@ -63,6 +72,12 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.searching {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
 }
 
 .suggestionRow {
@@ -79,7 +94,7 @@
 }
 
 .suggestionRow:hover {
-  background-color: var(--color-surface);
+  background-color: var(--color-surface-hover);
 }
 
 .spin {

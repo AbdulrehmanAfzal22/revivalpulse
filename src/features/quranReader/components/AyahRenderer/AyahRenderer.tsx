@@ -3,7 +3,6 @@ import { BookMarked, Loader2, Pause, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { Ayah } from 'types/quran.types';
 import type { ReadingDirection } from 'types/readingPreferences.types';
-import { TRANSLATIONS } from 'constants/translations';
 import { HIGHLIGHT_COLOR_PRESETS } from 'constants/readingPreferences';
 import { buildTafsirPath } from 'constants/routes';
 import WordByWord from 'features/quranReader/components/WordByWord';
@@ -20,15 +19,21 @@ export interface AyahRendererProps {
   ayah: Ayah;
   showArabic: boolean;
   showTranslation: boolean;
+  selectedTranslationId?: string;
   arabicDirection: ReadingDirection;
+  isLastRead?: boolean;
+  hasBeenVisible?: boolean;
 }
 
-function translationLabel(translationId: string): string {
-  return TRANSLATIONS.find((translation) => translation.id === translationId)?.label ?? translationId;
-}
-
-export default function AyahRenderer({ ayah, showArabic, showTranslation, arabicDirection }: AyahRendererProps) {
-  const showLabels = ayah.translations.length > 1;
+export default function AyahRenderer({
+  ayah,
+  showArabic,
+  showTranslation,
+  selectedTranslationId,
+  arabicDirection,
+  isLastRead = false,
+  hasBeenVisible = false,
+}: AyahRendererProps) {
   const source = usePlaybackStore((state) => state.source);
   const activeVerseKey = usePlaybackStore((state) => state.verseKey);
   const isStorePlaying = usePlaybackStore((state) => state.isPlaying);
@@ -41,6 +46,9 @@ export default function AyahRenderer({ ayah, showArabic, showTranslation, arabic
   const isPlayingThis = isActiveAyah && isStorePlaying;
   const highlightColorId = getHighlightColorId(highlights, ayah.verseKey);
   const highlightColor = HIGHLIGHT_COLOR_PRESETS.find((preset) => preset.id === highlightColorId)?.value;
+  const selectedTranslation = ayah.translations.find(
+    (translation) => translation.translationId === selectedTranslationId
+  ) ?? ayah.translations[0];
 
   const articleRef = useRef<HTMLElement>(null);
 
@@ -63,11 +71,14 @@ export default function AyahRenderer({ ayah, showArabic, showTranslation, arabic
   return (
     <article
       ref={articleRef}
-      className={[styles.ayah, isActiveAyah && styles.ayahActive].filter(Boolean).join(' ')}
+      className={[styles.ayah, hasBeenVisible && styles.ayahVisible, isActiveAyah && styles.ayahActive]
+        .filter(Boolean)
+        .join(' ')}
       id={`ayah-${ayah.verseNumber}`}
       style={highlightColor ? { backgroundColor: `color-mix(in srgb, ${highlightColor} 35%, transparent)` } : undefined}
     >
-      <div className={styles.meta}>
+      {isLastRead && <div className={styles.lastReadMarker}>You left off here</div>}
+      <div className={styles.meta} dir={arabicDirection}>
         <span className={styles.number} aria-hidden="true">
           {ayah.verseNumber}
         </span>
@@ -103,29 +114,32 @@ export default function AyahRenderer({ ayah, showArabic, showTranslation, arabic
         <AyahActionsMenu ayah={ayah} />
       </div>
 
-      {showArabic &&
-        (ayah.words.length > 0 ? (
-          <WordByWord words={ayah.words} surahId={ayah.chapterId} direction={arabicDirection} />
-        ) : (
-          <p className={styles.arabic} dir={arabicDirection} lang="ar">
-            {ayah.textUthmani}
-          </p>
-        ))}
+      <div
+        className={[
+          styles.contentGrid,
+          arabicDirection === 'ltr' ? styles.arabicRight : styles.arabicLeft,
+        ].join(' ')}
+      >
+        {showTranslation && selectedTranslation && (
+          <div className={styles.translationBlock}>
+            <p className={styles.translation} dir="ltr" lang="en">
+              {selectedTranslation.text}
+            </p>
+          </div>
+        )}
 
-      {showTranslation && ayah.translations.length > 0 && (
-        <div className={showLabels ? styles.translationGrid : undefined}>
-          {ayah.translations.map((translation) => (
-            <div key={translation.translationId} className={styles.translationBlock}>
-              {showLabels && (
-                <span className={styles.translationLabel}>{translationLabel(translation.translationId)}</span>
-              )}
-              <p className={styles.translation} dir="ltr" lang="en">
-                {translation.text}
+        {showArabic && (
+          <div className={styles.arabicBlock}>
+            {ayah.words.length > 0 ? (
+              <WordByWord words={ayah.words} surahId={ayah.chapterId} direction={arabicDirection} />
+            ) : (
+              <p className={styles.arabic} dir="rtl" lang="ar">
+                {ayah.textUthmani}
               </p>
-            </div>
-          ))}
-        </div>
-      )}
+            )}
+          </div>
+        )}
+      </div>
     </article>
   );
 }

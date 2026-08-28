@@ -103,6 +103,8 @@ export interface KidsStoryChapter {
    * story, not just the literal words.
    */
   ayahNote?: LocalizedText;
+  /** A short highlighted takeaway shown after the chapter content. */
+  lesson?: LocalizedText;
   /** Non-empty — every chapter must be anchored to at least one source. */
   sources: StorySource[];
 }

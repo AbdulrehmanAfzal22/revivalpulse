@@ -47,20 +47,19 @@
   --kids-sunshine: #ffd76a;
   --kids-sky: #7fd8ec;
   --kids-coral: #ffa288;
-  --kids-purple: #c4a3ee;
-  /* Light mint so emerald text/accents stay readable on dark cards. */
-  --kids-emerald: #4fd0b4;
+  --kids-purple: #b08be0;
+  --kids-emerald: #146356;
 
-  --color-bg: #241a2e;
-  --color-surface: #2f2240;
-  --color-surface-raised: #3a2b4d;
-  --color-border: #4d3a66;
-  --color-text: #fdf3ff;
-  --color-text-muted: #c7b3da;
-  --color-primary: #2ea089;
-  --color-primary-hover: #3ab396;
-  --color-primary-contrast: #06100d;
-  --color-danger: #f38ba0;
+  --color-bg: #fff8ee;
+  --color-surface: #ffffff;
+  --color-surface-raised: #fff2d9;
+  --color-border: #ffdca8;
+  --color-text: #3a2a1a;
+  --color-text-muted: #8a6f4f;
+  --color-primary: #146356;
+  --color-primary-hover: #0e4f42;
+  --color-primary-contrast: #ffffff;
+  --color-danger: #e5484d;
   --color-focus-ring: #5ec8e0;
 }
 
@@ -69,19 +68,19 @@
     --kids-sunshine: #ffd76a;
     --kids-sky: #7fd8ec;
     --kids-coral: #ffa288;
-    --kids-purple: #c4a3ee;
-    --kids-emerald: #4fd0b4;
+    --kids-purple: #b08be0;
+    --kids-emerald: #146356;
 
-    --color-bg: #241a2e;
-    --color-surface: #2f2240;
-    --color-surface-raised: #3a2b4d;
-    --color-border: #4d3a66;
-    --color-text: #fdf3ff;
-    --color-text-muted: #c7b3da;
-    --color-primary: #2ea089;
-    --color-primary-hover: #3ab396;
-    --color-primary-contrast: #06100d;
-    --color-danger: #f38ba0;
+    --color-bg: #fff8ee;
+    --color-surface: #ffffff;
+    --color-surface-raised: #fff2d9;
+    --color-border: #ffdca8;
+    --color-text: #3a2a1a;
+    --color-text-muted: #8a6f4f;
+    --color-primary: #146356;
+    --color-primary-hover: #0e4f42;
+    --color-primary-contrast: #ffffff;
+    --color-danger: #e5484d;
     --color-focus-ring: #5ec8e0;
   }
 }
@@ -111,7 +110,8 @@ html.kids-active {
 }
 
 .kidsTheme {
-  background-color: var(--color-bg);
+  background: linear-gradient(135deg, #dff7ff 0%, #eee9ff 52%, #e2faed 100%);
+  background-attachment: fixed;
   min-height: 100vh;
 }
 

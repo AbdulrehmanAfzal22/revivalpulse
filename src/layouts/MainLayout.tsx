@@ -9,8 +9,6 @@ import PrayerNotificationScheduler from 'features/notifications/components/Praye
 import useTranslation from 'hooks/useTranslation';
 import styles from './MainLayout.module.css';
 
-// Optional/on-demand — no need in the main bundle everyone downloads to read a surah.
-const AssistantLauncherButton = lazy(() => import('features/assistant/components/AssistantLauncherButton'));
 const AssistantPanel = lazy(() => import('features/assistant/components/AssistantPanel'));
 
 export default function MainLayout() {
@@ -35,7 +33,6 @@ export default function MainLayout() {
       <Footer />
       <AudioPlayer />
       <Suspense fallback={null}>
-        <AssistantLauncherButton />
         <AssistantPanel />
       </Suspense>
       <PrayerNotificationScheduler />

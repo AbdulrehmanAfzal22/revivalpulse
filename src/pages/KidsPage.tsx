@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   BookOpen,
@@ -9,6 +10,7 @@ import {
   ShieldCheck,
   Sparkles,
   Star,
+  MoonStar,
   Type,
   Users,
 } from 'lucide-react';
@@ -43,11 +45,35 @@ const FLOATING_DECORATIONS: { icon: typeof Star; style: React.CSSProperties; del
   { icon: Star, style: { bottom: '20%', right: '14%', width: 20, height: 20 }, delay: '2s' },
 ];
 
+const HERO_MESSAGES = [
+  'Ready to learn today? 🌟',
+  "Let's explore the Quran together 📖",
+  "You're doing amazing, keep going! 💪",
+];
+
 export default function KidsPage() {
   const records = useKidsProgressStore((state) => state.records);
   const stars = useKidsRewardsStore((state) => state.stars);
   const dailyGoalTarget = useKidsPreferencesStore((state) => state.dailyGoalTarget);
   const { t } = useTranslation();
+  const [messageIndex, setMessageIndex] = useState(0);
+  const [starsPulse, setStarsPulse] = useState(false);
+  const previousStars = useRef(stars);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => setMessageIndex((index) => (index + 1) % HERO_MESSAGES.length), 4200);
+    return () => window.clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (previousStars.current === stars) return;
+    previousStars.current = stars;
+    setStarsPulse(true);
+    const timeout = window.setTimeout(() => setStarsPulse(false), 900);
+    return () => window.clearTimeout(timeout);
+  }, [stars]);
+
+  const timeGreeting = new Date().getHours() < 12 ? 'Good morning' : new Date().getHours() < 18 ? 'Good afternoon' : 'Good evening';
 
   const earnedBadgeIds = getEarnedBadgeIds(records);
   const todayCount = getTodayActivityCount(records);
@@ -55,9 +81,9 @@ export default function KidsPage() {
   const goalProgress = Math.min(100, Math.round((todayCount / dailyGoalTarget) * 100));
 
   return (
-    <div className="container">
-      <div className={styles.page}>
+    <div className={styles.page}>
       <section className={styles.hero}>
+        <span className={styles.heroPattern} aria-hidden="true">✦ ✧ ✦</span>
         {FLOATING_DECORATIONS.map((decoration, index) => {
           const Decoration = decoration.icon;
           return (
@@ -69,18 +95,28 @@ export default function KidsPage() {
             />
           );
         })}
+        <MoonStar className={styles.heroMoon} aria-hidden="true" />
+        <span className={styles.heroHand} aria-hidden="true">👋</span>
         <Typography variant="h1" as="h1" className={styles.heroTitle}>
-          {t('kids.greeting')}
+          {Array.from(t('kids.greeting')).map((character, index) => (
+            <span key={`${character}-${index}`} className={styles.greetingCharacter} style={{ animationDelay: `${index * 45}ms` }}>
+              {character === ' ' ? '\u00a0' : character}
+            </span>
+          ))}
         </Typography>
-        <span className={styles.heroBadge}>
+        <span className={styles.heroMessage} key={messageIndex}>
+          {messageIndex === HERO_MESSAGES.length - 1 ? `${timeGreeting}! ` : ''}{HERO_MESSAGES[messageIndex]}
+        </span>
+        <span className={[styles.heroBadge, starsPulse && styles.heroBadgePulse].filter(Boolean).join(' ')}>
           <Star size={16} fill="currentColor" aria-hidden="true" />
           <Typography variant="caption" as="span">
             {t('kids.starsEarned', { count: stars })}
           </Typography>
+          {starsPulse && <span className={styles.starBurst} aria-hidden="true">✦ · ✧</span>}
         </span>
       </section>
 
-      <Card elevation="raised" className={styles.goalCard}>
+      <Card elevation="raised" className={[styles.goalCard, goalProgress >= 100 ? styles.goalComplete : ''].filter(Boolean).join(' ')}>
         <div className={styles.goalHeader}>
           <Typography variant="body">{t('kids.todaysGoal')}</Typography>
           <Typography variant="caption" muted>
@@ -90,8 +126,10 @@ export default function KidsPage() {
         <div className={styles.progressTrack}>
           <div className={styles.progressFill} style={{ width: `${goalProgress}%` }} />
         </div>
+        {goalProgress >= 100 && <span className={styles.goalBurst} aria-hidden="true">✦</span>}
         {streak > 0 && (
-          <Typography variant="caption" muted>
+          <Typography variant="caption" muted className={styles.streakLine}>
+            <span className={styles.streakFlame} aria-hidden="true">🔥</span>
             {t('kids.streak', { count: streak })}
           </Typography>
         )}
@@ -105,7 +143,7 @@ export default function KidsPage() {
               className={styles.tile}
               style={{
                 borderColor: section.color,
-                background: `linear-gradient(135deg, ${section.color}22, ${section.color}0d)`,
+                background: `linear-gradient(135deg, ${section.color}, color-mix(in srgb, ${section.color} 58%, white))`,
               }}
             >
               <span className={styles.tileIcon}>
@@ -125,7 +163,6 @@ export default function KidsPage() {
       </div>
 
       <NasheedToggle />
-      </div>
     </div>
   );
 }
