@@ -65,23 +65,18 @@ export default function ProphetTimelineGame({ difficulty = 'easy', tier = 'easy'
   const [burst, setBurst] = useState<{ key: number; x: number; y: number } | null>(null);
   const [nudge, setNudge] = useState(false);
   const [timeLeft, setTimeLeft] = useState(config.timeLimit);
-  const [timerActive, setTimerActive] = useState(false);
   const [correctPlaced, setCorrectPlaced] = useState(0);
 
   const won = round >= roundsToWin;
   const lost = isTimed && timeLeft <= 0 && !won;
-  const allPlaced = state.prophets.every(p => state.placed[p.id] !== null);
-  const roundComplete = allPlaced && correctPlaced === state.prophets.length;
 
   // Timer
   useEffect(() => {
     if (!isTimed || won || lost) return;
-    setTimerActive(true);
     const id = window.setInterval(() => {
       setTimeLeft(prev => {
         const next = prev - 100;
         if (next <= 0) {
-          setTimerActive(false);
           return 0;
         }
         return next;

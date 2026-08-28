@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import { ChevronDown, Search, BookOpen, BookMarked, Clock } from 'lucide-react';
-import { useLanguageContext } from 'contexts/LanguageContext';
 import Button from 'components/ui/Button';
 import useClickOutside from 'hooks/useClickOutside';
 import styles from './SourceDropdown.module.css';
@@ -30,7 +29,6 @@ const SOURCE_MODE_ICONS: Record<SourceMode, React.ReactNode> = {
 
 export function SourceDropdown({ mode, onModeChange }: SourceDropdownProps) {
   const [open, setOpen] = useState(false);
-  const { interfaceLanguage } = useLanguageContext();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useClickOutside(wrapperRef, open, () => setOpen(false));

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import MiniGameShell from 'features/kids/components/games/MiniGameShell';
 import SparkleBurst from 'features/kids/components/rewards/SparkleBurst';
 import { shuffle } from 'features/kids/games/engineUtils';
-import { MANNERS_SCENARIOS, getMannersScenarios } from 'data/kids/mannersScenarios';
+import { getMannersScenarios } from 'data/kids/mannersScenarios';
 import type { MannersScenario } from 'data/kids/mannersScenarios';
 import type { Tier } from 'features/kids/games/difficultyConfig';
 import { getDifficultyConfig } from 'features/kids/games/difficultyConfig';
@@ -58,7 +58,6 @@ export default function GoodMannersGame({ difficulty = 'easy', tier = 'easy' }: 
   const [burst, setBurst] = useState<{ key: number; x: number; y: number } | null>(null);
   const [nudge, setNudge] = useState(false);
   const [timeLeft, setTimeLeft] = useState(config.timeLimit);
-  const [timerActive, setTimerActive] = useState(false);
   const [answered, setAnswered] = useState(false);
 
   const won = round >= roundsToWin;
@@ -67,12 +66,10 @@ export default function GoodMannersGame({ difficulty = 'easy', tier = 'easy' }: 
   // Timer
   useEffect(() => {
     if (!isTimed || won || lost) return;
-    setTimerActive(true);
     const id = window.setInterval(() => {
       setTimeLeft(prev => {
         const next = prev - 100;
         if (next <= 0) {
-          setTimerActive(false);
           return 0;
         }
         return next;

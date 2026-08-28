@@ -57,7 +57,7 @@ export default function HadithPage() {
         {filteredBooks.length === 0 ? (
           <EmptyState title={t('emptyState.hadith.noBooksMatch')} />
         ) : (
-          <ul className={styles.bookGrid} role="list">
+          <ul className={styles.bookGrid}>
             {filteredBooks.map((book) => {
               const isFavorite = isFavoriteHadithBook(favorites, book.slug);
               return (

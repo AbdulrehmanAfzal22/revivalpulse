@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import MiniGameShell from 'features/kids/components/games/MiniGameShell';
 import SparkleBurst from 'features/kids/components/rewards/SparkleBurst';
 import { shuffle } from 'features/kids/games/engineUtils';
-import { NAMES_OF_ALLAH, getNamesMeaningItems } from 'data/kids/namesMeaning';
+import { getNamesMeaningItems } from 'data/kids/namesMeaning';
 import type { NamesMeaningItem } from 'data/kids/namesMeaning';
 import type { Tier } from 'features/kids/games/difficultyConfig';
 import { getDifficultyConfig } from 'features/kids/games/difficultyConfig';
@@ -59,7 +59,6 @@ export default function NamesMeaningGame({ difficulty = 'easy', tier = 'easy' }:
   const [burst, setBurst] = useState<{ key: number; x: number; y: number } | null>(null);
   const [nudge, setNudge] = useState(false);
   const [timeLeft, setTimeLeft] = useState(config.timeLimit);
-  const [timerActive, setTimerActive] = useState(false);
 
   const won = round >= roundsToWin;
   const lost = isTimed && timeLeft <= 0 && !won;
@@ -67,12 +66,10 @@ export default function NamesMeaningGame({ difficulty = 'easy', tier = 'easy' }:
   // Timer
   useEffect(() => {
     if (!isTimed || won || lost) return;
-    setTimerActive(true);
     const id = window.setInterval(() => {
       setTimeLeft(prev => {
         const next = prev - 100;
         if (next <= 0) {
-          setTimerActive(false);
           return 0;
         }
         return next;

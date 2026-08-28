@@ -68,7 +68,6 @@ export default function CauseEffectGame({ difficulty = 'easy', tier = 'easy' }: 
   const [burst, setBurst] = useState<{ key: number; x: number; y: number } | null>(null);
   const [nudge, setNudge] = useState(false);
   const [timeLeft, setTimeLeft] = useState(config.timeLimit);
-  const [timerActive, setTimerActive] = useState(false);
   const [answered, setAnswered] = useState(false);
   const [showExplanation, setShowExplanation] = useState(false);
 
@@ -78,12 +77,10 @@ export default function CauseEffectGame({ difficulty = 'easy', tier = 'easy' }: 
   // Timer
   useEffect(() => {
     if (!isTimed || won || lost) return;
-    setTimerActive(true);
     const id = window.setInterval(() => {
       setTimeLeft(prev => {
         const next = prev - 100;
         if (next <= 0) {
-          setTimerActive(false);
           return 0;
         }
         return next;

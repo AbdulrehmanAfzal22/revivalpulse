@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Send } from 'lucide-react';
 import Button from 'components/ui/Button';
-import useTranslation from 'hooks/useTranslation';
 import VoiceInputButton from './VoiceInputButton';
 import styles from './AssistantInput.module.css';
 
@@ -16,7 +15,6 @@ export interface AssistantInputProps {
 }
 
 export default function AssistantInput({ onSubmit, disabled, showSuggestions, value: controlledValue, onChange }: AssistantInputProps) {
-  const { t } = useTranslation();
   const [internalValue, setInternalValue] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const value = controlledValue ?? internalValue;

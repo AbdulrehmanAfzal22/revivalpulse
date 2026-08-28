@@ -56,7 +56,7 @@ export default function TafsirSurahListPage() {
         {filteredSurahs.length === 0 ? (
           <EmptyState title={t('emptyState.quran.noSurahsMatch')} />
         ) : (
-          <ul className={styles.surahGrid} role="list">
+          <ul className={styles.surahGrid}>
             {filteredSurahs.map((surah) => (
               <li key={surah.id} className={styles.card}>
                 <Link to={buildTafsirSurahPath(surah.id)} className={styles.cardLink}>

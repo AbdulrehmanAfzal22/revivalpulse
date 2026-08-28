@@ -5,7 +5,6 @@ import { SourcesUsed } from 'features/assistant/components/SourcesUsed';
 import { Sparkles } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import AssistantInput from 'features/assistant/components/AssistantInput';
-import VoiceInputButton from 'features/assistant/components/VoiceInputButton';
 import Typography from 'components/ui/Typography';
 import EmptyState from 'components/feedback/EmptyState';
 import useTranslation from 'hooks/useTranslation';
@@ -30,10 +29,6 @@ export default function AssistantPage() {
     // This goes through the exact same pipeline as typed questions
     askQuestion({ text, sourceMode });
     setDraft('');
-  };
-
-  const handleVoiceTranscript = (text: string) => {
-    setDraft((current) => (current.trim() ? `${current.trim()} ${text}` : text));
   };
 
   return (

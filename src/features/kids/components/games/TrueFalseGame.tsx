@@ -34,7 +34,6 @@ export default function TrueFalseGame({ difficulty = 'easy', tier = 'easy' }: Tr
   const [burst, setBurst] = useState<{ key: number; x: number; y: number } | null>(null);
   const [nudge, setNudge] = useState(false);
   const [timeLeft, setTimeLeft] = useState(config.timeLimit);
-  const [timerActive, setTimerActive] = useState(false);
 
   const won = deck.length > 0 && round >= roundsToWin;
   const lost = isTimed && timeLeft <= 0 && !won;
@@ -43,12 +42,10 @@ export default function TrueFalseGame({ difficulty = 'easy', tier = 'easy' }: Tr
   // Timer
   useEffect(() => {
     if (!isTimed || won || lost) return;
-    setTimerActive(true);
     const id = window.setInterval(() => {
       setTimeLeft((prev) => {
         const next = prev - 100;
         if (next <= 0) {
-          setTimerActive(false);
           return 0;
         }
         return next;

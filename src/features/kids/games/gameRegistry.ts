@@ -1,31 +1,22 @@
 import type { LucideIcon } from 'lucide-react';
 import {
-  ArrowUpDown,
   Balloon,
   BookOpen,
   Brain,
-  Eye,
-  Hammer,
   Hash,
   Heart,
   Images,
   Languages,
   Layers,
   ListOrdered,
-  MoveRight,
   Pencil,
-  Puzzle,
-  Repeat,
-  Scale,
   Search,
   Shield,
   Sparkles,
-  Star,
   Target,
   ThumbsUp,
   Timer,
   Volume2,
-  Zap,
 } from 'lucide-react';
 import type { TranslationKey } from 'i18n';
 import type { KidsStudyTopic } from 'data/kids/gameContent';

@@ -58,7 +58,6 @@ export default function HuntGame({ difficulty = 'easy', tier = 'easy' }: HuntGam
   const [burst, setBurst] = useState<{ key: number; x: number; y: number } | null>(null);
   const [nudge, setNudge] = useState(false);
   const [timeLeft, setTimeLeft] = useState(config.timeLimit);
-  const [timerActive, setTimerActive] = useState(false);
 
   const targetCount = config.targetCount;
   const isTimed = config.timeLimit > 0;
@@ -68,12 +67,10 @@ export default function HuntGame({ difficulty = 'easy', tier = 'easy' }: HuntGam
 
   useEffect(() => {
     if (!isTimed || won || lost) return;
-    setTimerActive(true);
     const id = window.setInterval(() => {
       setTimeLeft((prev) => {
         const next = prev - 100;
         if (next <= 0) {
-          setTimerActive(false);
           return 0;
         }
         return next;

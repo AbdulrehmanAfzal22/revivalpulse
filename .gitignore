@@ -87,3 +87,4 @@ node_modules/
 # Build/cache
 dist/
 build/
+scripts/audio-work/*.mp3

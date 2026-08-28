@@ -103,7 +103,7 @@ export default function HadithBookView({ book }: HadithBookViewProps) {
           <Typography variant="h4" as="h2" className={styles.chaptersHeading}>
             {t('hadith.chapters')}
           </Typography>
-          <ul className={styles.chapterGrid} role="list">
+          <ul className={styles.chapterGrid}>
           {content.chapters.map((chapter) => (
             <li key={chapter.id} className={styles.card}>
               <Link to={buildHadithChapterPath(book.slug, chapter.id)} className={styles.cardLink}>

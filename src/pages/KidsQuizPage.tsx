@@ -10,7 +10,7 @@ import { shuffle } from 'features/kids/games/engineUtils';
 import useReadAloud from 'features/kids/hooks/useReadAloud';
 import useAnswerFeedback from 'features/kids/hooks/useAnswerFeedback';
 import { QUIZ_CONTENT_REVIEWED, quizQuestionsByCategory } from 'data/kids/quizBank';
-import type { QuizQuestion, QuizResult } from 'types/quiz.types';
+import type { QuizResult } from 'types/quiz.types';
 import { useKidsRewardsStore } from 'stores/useKidsRewardsStore';
 import { useKidsProgressStore } from 'stores/kidsProgressStore';
 import useTranslation from 'hooks/useTranslation';

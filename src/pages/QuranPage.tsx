@@ -92,7 +92,7 @@ export default function QuranPage() {
             {filteredSurahs.length === 0 ? (
               <EmptyState title={t('emptyState.quran.noSurahsMatch')} />
             ) : (
-              <ul className={styles.surahGrid} role="list">
+              <ul className={styles.surahGrid}>
                 {filteredSurahs.map((surah) => (
                   <li key={surah.id} className={styles.card}>
                     <Link to={`/quran/${surah.id}`} className={styles.cardLink}>
@@ -119,7 +119,7 @@ export default function QuranPage() {
         )}
 
         {tab === 'juz' && (
-          <ul className={styles.surahGrid} role="list">
+          <ul className={styles.surahGrid}>
             {JUZ_BOUNDARIES.map((juz) => {
               const start = surahLinkFromVerseKey(juz.firstVerseKey);
               const end = surahLinkFromVerseKey(juz.lastVerseKey);

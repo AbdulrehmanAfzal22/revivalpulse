@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import PillGroup from 'components/ui/PillGroup';
@@ -55,11 +55,11 @@ export default function DuasBrowser({ duas }: DuasBrowserProps) {
     window.localStorage.setItem(DUA_SETTINGS_STORAGE_KEY, JSON.stringify(settings));
   }, [settings]);
 
-  function moveTo(nextIndex: number, nextDirection: number): void {
+  const moveTo = useCallback((nextIndex: number, nextDirection: number): void => {
     if (nextIndex < 0 || nextIndex >= categoryCount) return;
     setDirection(nextDirection);
     setCurrentIndex(nextIndex);
-  }
+  }, [categoryCount]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent): void => {
@@ -69,7 +69,7 @@ export default function DuasBrowser({ duas }: DuasBrowserProps) {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentIndex, categoryCount]);
+  }, [currentIndex, moveTo]);
 
   return (
     <div className={styles.wrapper}>

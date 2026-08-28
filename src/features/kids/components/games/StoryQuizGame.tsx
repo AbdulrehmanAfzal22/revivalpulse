@@ -71,7 +71,6 @@ export default function StoryQuizGame({ difficulty = 'easy', tier = 'easy' }: St
   const [burst, setBurst] = useState<{ key: number; x: number; y: number } | null>(null);
   const [nudge, setNudge] = useState(false);
   const [timeLeft, setTimeLeft] = useState(config.timeLimit);
-  const [timerActive, setTimerActive] = useState(false);
 
   const roundsToWin = config.roundsToWin;
   const isTimed = config.timeLimit > 0;
@@ -83,12 +82,10 @@ export default function StoryQuizGame({ difficulty = 'easy', tier = 'easy' }: St
   // Timer
   useEffect(() => {
     if (!isTimed || won || lost) return;
-    setTimerActive(true);
     const id = window.setInterval(() => {
       setTimeLeft((prev) => {
         const next = prev - 100;
         if (next <= 0) {
-          setTimerActive(false);
           return 0;
         }
         return next;

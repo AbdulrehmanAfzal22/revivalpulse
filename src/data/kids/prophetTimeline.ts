@@ -1,9 +1,7 @@
 /**
  * Prophet timeline data for the Prophet Timeline Sort game.
- * Uses the existing PROPHET_STORIES from stories.ts but simplified for ordering.
+ * This game uses a simplified, curated timeline independent from story data.
  */
-
-import { PROPHET_STORIES } from 'data/kids/stories';
 
 export interface ProphetTimelineItem {
   id: string;

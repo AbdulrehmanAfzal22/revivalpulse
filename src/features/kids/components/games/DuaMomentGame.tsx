@@ -76,7 +76,6 @@ export default function DuaMomentGame({ difficulty = 'easy', tier = 'easy' }: Du
   const [burst, setBurst] = useState<{ key: number; x: number; y: number } | null>(null);
   const [nudge, setNudge] = useState(false);
   const [timeLeft, setTimeLeft] = useState(config.timeLimit);
-  const [timerActive, setTimerActive] = useState(false);
 
   const won = round >= roundsToWin;
   const lost = isTimed && timeLeft <= 0 && !won;
@@ -84,12 +83,10 @@ export default function DuaMomentGame({ difficulty = 'easy', tier = 'easy' }: Du
   // Timer
   useEffect(() => {
     if (!isTimed || won || lost) return;
-    setTimerActive(true);
     const id = window.setInterval(() => {
       setTimeLeft(prev => {
         const next = prev - 100;
         if (next <= 0) {
-          setTimerActive(false);
           return 0;
         }
         return next;
