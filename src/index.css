@@ -14,6 +14,24 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+h1,
+h2,
+h3 {
+  font-family: var(--font-sans);
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-gold) 55%, transparent);
+  color: var(--color-text);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

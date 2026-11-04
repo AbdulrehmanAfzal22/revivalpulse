@@ -1,9 +1,9 @@
 .page {
-  --library-ink: #f7f1e5;
-  --library-muted: #a8aa9f;
-  --library-gold: #e7b85d;
-  --library-emerald: #55c6a0;
-  --library-panel: color-mix(in srgb, var(--color-surface-raised) 86%, #0b100e);
+  --library-ink: var(--color-text);
+  --library-muted: var(--color-text-muted);
+  --library-gold: var(--color-star-line);
+  --library-emerald: var(--color-primary);
+  --library-panel: color-mix(in srgb, var(--color-surface-raised) 94%, var(--color-bg));
   width: 100%;
   min-height: 100%;
   padding: clamp(2rem, 5vw, 4.5rem) clamp(1rem, 4vw, 4rem) 4rem;
@@ -14,11 +14,11 @@
   background-color: var(--color-bg);
   background-image: radial-gradient(circle at 8% 8%, color-mix(in srgb, var(--library-gold) 9%, transparent) 0 1px, transparent 1px), radial-gradient(circle at 92% 30%, color-mix(in srgb, var(--library-emerald) 8%, transparent) 0 1px, transparent 1px);
   background-size: 34px 34px, 46px 46px;
-  font-family: 'Avenir Next', 'Segoe UI', sans-serif;
+  font-family: var(--font-sans);
 }
 
 .page > :first-child {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: var(--font-serif);
   letter-spacing: 0.015em;
   color: var(--library-ink);
   animation: library-rise 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -77,7 +77,7 @@
 
 .streakCard :global(.h3) {
   color: var(--library-ink);
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: var(--font-serif);
 }
 
 .streakCard :global(.caption) {
@@ -102,7 +102,7 @@
 .section:nth-of-type(5) { animation-delay: 370ms; }
 
 .section :global(.h3) {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: var(--font-serif);
   letter-spacing: 0.01em;
 }
 

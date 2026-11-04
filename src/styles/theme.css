@@ -8,9 +8,9 @@
    */
   --app-font-scale: 1;
 
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Naskh Arabic',
-    'Noto Nastaliq Urdu', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue',
-    sans-serif;
+  --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Naskh Arabic',
+    'Noto Nastaliq Urdu', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
 
   /*
    * Global default for any Quranic Arabic text (Tafsir verse cards, Duas,
@@ -25,103 +25,105 @@
   --reader-arabic-font: 'Reader Uthmani', serif;
 
   /* ==========================================================================
-     Refined Islamic Color Palette (Dark Theme Foundation)
+     Islamic Vision palette — light (default)
+     Warm ivory paper, deep pine, terracotta accent, muted sage and gold.
      ========================================================================== */
-  /* Deep navy/charcoal backgrounds */
-  --color-bg: #0a0d12;
-  --color-bg-elevated: #10141a;
-  --color-bg-subtle: #161b22;
+  --color-bg: #f7f5ef;
+  --color-bg-elevated: #fffefa;
+  --color-bg-subtle: #efece2;
 
-  /* Surfaces with subtle warmth */
-  --color-surface: #131820;
-  --color-surface-raised: #1a1f2b;
-  --color-surface-hover: #1e2430;
-  --color-surface-pressed: #232a3a;
+  --color-surface: #fffefa;
+  --color-surface-raised: #fffefa;
+  --color-surface-hover: #f2efe5;
+  --color-surface-pressed: #e9e5d9;
 
-  /* Borders with subtle gold glow potential */
-  --color-border: #242b3a;
-  --color-border-subtle: #1e2430;
-  --color-border-focus: #c9a84c;
+  --color-border: #dce1d6;
+  --color-border-subtle: #e8ebe2;
+  --color-border-focus: #c89643;
 
-  /* Text hierarchy */
-  --color-text: #f0efe8;
-  --color-text-secondary: #c8c4b8;
-  --color-text-muted: #8a867a;
-  --color-text-subtle: #6a665c;
+  --color-text: #243d36;
+  --color-text-secondary: #4c5f55;
+  --color-text-muted: #65736a;
+  --color-text-subtle: #8b978e;
 
-  /* Islamic Gold/Amber Accent System */
-  --color-gold: #d4af37;
-  --color-gold-light: #e8c56d;
-  --color-gold-soft: #c9a84c;
-  --color-gold-muted: #a68b3a;
-  --color-gold-glow: rgba(212, 175, 55, 0.35);
-  --color-gold-glow-strong: rgba(212, 175, 55, 0.55);
+  /* Brand palette */
+  --color-pine: #294c40;
+  --color-accent: #ad4e36;
+  --color-gold: #dcc08b;
+  --color-sage: #e4eadc;
+  --color-star-line: #be9a5c;
 
-  /* Teal/Emerald Highlight System */
-  --color-teal: #2ea089;
-  --color-teal-light: #3ab396;
-  --color-teal-soft: #268d76;
-  --color-teal-muted: #1d6b5a;
-  --color-teal-glow: rgba(46, 160, 137, 0.3);
-  --color-teal-glow-strong: rgba(46, 160, 137, 0.5);
+  /* Accent system (kept under the existing token names so every component
+     inherits the new palette without touching its CSS). */
+  --color-teal: var(--color-pine);
+  --color-teal-light: #35604f;
+  --color-teal-soft: #3f6153;
+  --color-teal-muted: #6f8d7e;
+  --color-teal-glow: rgba(41, 76, 64, 0.22);
+  --color-teal-glow-strong: rgba(41, 76, 64, 0.4);
 
-  /* Semantic color mappings (preserving existing API) */
-  --color-primary: var(--color-teal);
-  --color-primary-hover: var(--color-teal-light);
-  --color-primary-contrast: #08130f;
-  --color-primary-soft: var(--color-teal-glow);
+  --color-gold-light: #e8d3a8;
+  --color-gold-soft: #c89643;
+  --color-gold-muted: #a98f5c;
+  --color-gold-glow: rgba(220, 192, 139, 0.35);
+  --color-gold-glow-strong: rgba(220, 192, 139, 0.55);
 
-  --color-secondary: var(--color-gold);
-  --color-secondary-hover: var(--color-gold-light);
-  --color-secondary-contrast: #1a1608;
-  --color-secondary-soft: var(--color-gold-glow);
+  /* Semantic color mappings */
+  --color-primary: var(--color-pine);
+  --color-primary-hover: #35604f;
+  --color-primary-contrast: #f8f1e2;
+  --color-primary-soft: color-mix(in srgb, var(--color-pine) 12%, transparent);
 
-  --color-danger: #d64545;
-  --color-danger-hover: #e06060;
-  --color-danger-soft: rgba(214, 69, 69, 0.25);
+  --color-secondary: var(--color-accent);
+  --color-secondary-hover: #c05d43;
+  --color-secondary-contrast: #fffefa;
+  --color-secondary-soft: color-mix(in srgb, var(--color-accent) 12%, transparent);
 
-  --color-overlay: rgb(0 0 0 / 60%);
-  --color-overlay-strong: rgb(0 0 0 / 75%);
+  --color-danger: #b03d2c;
+  --color-danger-hover: #c94a37;
+  --color-danger-soft: rgba(176, 61, 44, 0.12);
 
-  /* Focus ring using gold for warmth */
-  --color-focus-ring: var(--color-gold-soft);
+  --color-success: #2f6b52;
+  --color-success-soft: rgba(47, 107, 82, 0.12);
+
+  --color-overlay: rgb(24 37 31 / 55%);
+  --color-overlay-strong: rgb(24 37 31 / 72%);
+
+  --color-focus-ring: #c89643;
 
   /* ==========================================================================
-     Refined Shadow System (Multi-layer for depth)
+     Shadow system — soft, warm, paper-like (the design keeps elevation low)
      ========================================================================== */
-  --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.3);
-  --shadow-sm: 0 2px 8px rgb(0 0 0 / 0.35);
-  --shadow-md: 0 8px 24px rgb(0 0 0 / 0.4);
-  --shadow-lg: 0 16px 40px rgb(0 0 0 / 0.45);
-  --shadow-xl: 0 24px 56px rgb(0 0 0 / 0.5);
+  --shadow-xs: 0 1px 2px rgb(36 61 54 / 0.05);
+  --shadow-sm: 0 2px 10px rgb(36 61 54 / 0.07);
+  --shadow-md: 0 8px 24px rgb(36 61 54 / 0.09);
+  --shadow-lg: 0 18px 44px rgb(36 61 54 / 0.12);
+  --shadow-xl: 0 26px 64px rgb(36 61 54 / 0.16);
 
-  /* Gold-tinted shadows for special elements */
   --shadow-gold-sm: 0 2px 8px var(--color-gold-glow);
   --shadow-gold-md: 0 8px 24px var(--color-gold-glow);
   --shadow-gold-lg: 0 16px 40px var(--color-gold-glow-strong);
 
-  /* Teal-tinted shadows */
   --shadow-teal-sm: 0 2px 8px var(--color-teal-glow);
   --shadow-teal-md: 0 8px 24px var(--color-teal-glow);
   --shadow-teal-lg: 0 16px 40px var(--color-teal-glow-strong);
 
-  /* Inner shadows for pressed states */
-  --shadow-inset: inset 0 2px 4px rgb(0 0 0 / 0.3);
-  --shadow-inset-lg: inset 0 4px 12px rgb(0 0 0 / 0.4);
+  --shadow-inset: inset 0 2px 4px rgb(36 61 54 / 0.08);
+  --shadow-inset-lg: inset 0 4px 12px rgb(36 61 54 / 0.12);
 
   /* ==========================================================================
-     Refined Radius System
+     Radius system
      ========================================================================== */
   --radius-xs: 4px;
   --radius-sm: 8px;
-  --radius-md: 12px;
+  --radius-md: 14px;
   --radius-lg: 18px;
   --radius-xl: 24px;
   --radius-2xl: 32px;
   --radius-full: 9999px;
 
   /* ==========================================================================
-     Spacing Scale (8px base)
+     Spacing scale (8px base)
      ========================================================================== */
   --space-1: 0.25rem;  /* 4px */
   --space-2: 0.5rem;   /* 8px */
@@ -135,7 +137,7 @@
   --space-16: 4rem;    /* 64px */
 
   /* ==========================================================================
-     Motion & Animation Tokens
+     Motion & animation tokens
      ========================================================================== */
   --duration-instant: 50ms;
   --duration-fast: 120ms;
@@ -149,18 +151,17 @@
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-gentle: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
-  /* Stagger delay for list animations */
   --stagger-delay: 60ms;
 
   /* ==========================================================================
-     Arabic Typography Enhancements
+     Arabic typography
      ========================================================================== */
   --arabic-line-height: 2.2;
   --arabic-line-height-tight: 1.9;
   --arabic-letter-spacing: 0.02em;
 
   /* ==========================================================================
-     Z-Index Scale
+     Z-index scale
      ========================================================================== */
   --z-navbar: 100;
   --z-drawer: 200;
@@ -168,44 +169,150 @@
   --z-tooltip: 400;
   --z-toast: 500;
 
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html {
   font-size: calc(16px * var(--app-font-scale, 1));
 }
 
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+/* ==========================================================================
+   Dark theme — deep pine-night surfaces with warm parchment text.
+   ========================================================================== */
 :root[data-theme='dark'] {
-  --color-bg: #101114;
-  --color-surface: #17181c;
-  --color-surface-raised: #1d1f24;
-  --color-border: #2b2d33;
-  --color-text: #f2f2f3;
-  --color-text-muted: #a3a6ad;
-  --color-primary: #29b788;
-  --color-primary-hover: #34cc99;
-  --color-primary-contrast: #08130f;
-  --color-danger: #e57373;
-  --color-overlay: rgb(0 0 0 / 65%);
-  --color-focus-ring: #29b788;
+  --color-bg: #18251f;
+  --color-bg-elevated: #22332b;
+  --color-bg-subtle: #2e4334;
+
+  --color-surface: #22332b;
+  --color-surface-raised: #273a30;
+  --color-surface-hover: #2e4334;
+  --color-surface-pressed: #354b3c;
+
+  --color-border: #3c4e43;
+  --color-border-subtle: #2f4036;
+  --color-border-focus: #c89643;
+
+  --color-text: #f0eee4;
+  --color-text-secondary: #d6d5c9;
+  --color-text-muted: #b7c3b9;
+  --color-text-subtle: #8b9a8f;
+
+  --color-pine: #e2c58c;
+  --color-accent: #e4a28b;
+  --color-gold: #d7bb80;
+  --color-sage: #2e4334;
+  --color-star-line: #be9a5c;
+
+  --color-teal: var(--color-pine);
+  --color-teal-light: #ecd4a2;
+  --color-teal-soft: #d7bb80;
+  --color-teal-muted: #b39a68;
+  --color-teal-glow: rgba(226, 197, 140, 0.22);
+  --color-teal-glow-strong: rgba(226, 197, 140, 0.4);
+
+  --color-primary: var(--color-teal);
+  --color-primary-hover: #ecd4a2;
+  --color-primary-contrast: #203e30;
+  --color-primary-soft: color-mix(in srgb, var(--color-pine) 14%, transparent);
+
+  --color-secondary: var(--color-accent);
+  --color-secondary-hover: #edb39e;
+  --color-secondary-contrast: #203e30;
+  --color-secondary-soft: color-mix(in srgb, var(--color-accent) 14%, transparent);
+
+  --color-danger: #e58a7b;
+  --color-danger-hover: #ed9d90;
+  --color-danger-soft: rgba(229, 138, 123, 0.14);
+
+  --color-success: #8fd3b0;
+  --color-success-soft: rgba(143, 211, 176, 0.14);
+
+  --color-overlay: rgb(0 0 0 / 62%);
+  --color-overlay-strong: rgb(0 0 0 / 78%);
+
+  --color-focus-ring: #c89643;
+
+  --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.22);
+  --shadow-sm: 0 2px 10px rgb(0 0 0 / 0.28);
+  --shadow-md: 0 8px 24px rgb(0 0 0 / 0.34);
+  --shadow-lg: 0 18px 44px rgb(0 0 0 / 0.4);
+  --shadow-xl: 0 26px 64px rgb(0 0 0 / 0.46);
+
+  --shadow-gold-sm: 0 2px 8px rgba(226, 197, 140, 0.18);
+  --shadow-gold-md: 0 8px 24px rgba(226, 197, 140, 0.2);
+  --shadow-gold-lg: 0 16px 40px rgba(226, 197, 140, 0.26);
+
+  --shadow-teal-sm: 0 2px 8px var(--color-teal-glow);
+  --shadow-teal-md: 0 8px 24px var(--color-teal-glow);
+  --shadow-teal-lg: 0 16px 40px var(--color-teal-glow-strong);
+
+  --shadow-inset: inset 0 2px 4px rgb(0 0 0 / 0.32);
+  --shadow-inset-lg: inset 0 4px 12px rgb(0 0 0 / 0.42);
 
   color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']):not([data-theme='dark']) {
-    --color-bg: #101114;
-    --color-surface: #17181c;
-    --color-surface-raised: #1d1f24;
-    --color-border: #2b2d33;
-    --color-text: #f2f2f3;
-    --color-text-muted: #a3a6ad;
-    --color-primary: #29b788;
-    --color-primary-hover: #34cc99;
-    --color-primary-contrast: #08130f;
-    --color-danger: #e57373;
-    --color-overlay: rgb(0 0 0 / 65%);
-    --color-focus-ring: #29b788;
+    --color-bg: #18251f;
+    --color-bg-elevated: #22332b;
+    --color-bg-subtle: #2e4334;
+
+    --color-surface: #22332b;
+    --color-surface-raised: #273a30;
+    --color-surface-hover: #2e4334;
+    --color-surface-pressed: #354b3c;
+
+    --color-border: #3c4e43;
+    --color-border-subtle: #2f4036;
+
+    --color-text: #f0eee4;
+    --color-text-secondary: #d6d5c9;
+    --color-text-muted: #b7c3b9;
+    --color-text-subtle: #8b9a8f;
+
+    --color-pine: #e2c58c;
+    --color-accent: #e4a28b;
+    --color-gold: #d7bb80;
+    --color-sage: #2e4334;
+
+    --color-teal: var(--color-pine);
+    --color-teal-light: #ecd4a2;
+    --color-teal-soft: #d7bb80;
+    --color-teal-muted: #b39a68;
+    --color-teal-glow: rgba(226, 197, 140, 0.22);
+    --color-teal-glow-strong: rgba(226, 197, 140, 0.4);
+
+    --color-primary: var(--color-teal);
+    --color-primary-hover: #ecd4a2;
+    --color-primary-contrast: #203e30;
+    --color-primary-soft: color-mix(in srgb, var(--color-pine) 14%, transparent);
+
+    --color-secondary: var(--color-accent);
+    --color-secondary-hover: #edb39e;
+    --color-secondary-contrast: #203e30;
+    --color-secondary-soft: color-mix(in srgb, var(--color-accent) 14%, transparent);
+
+    --color-danger: #e58a7b;
+    --color-danger-hover: #ed9d90;
+    --color-danger-soft: rgba(229, 138, 123, 0.14);
+
+    --color-success: #8fd3b0;
+    --color-success-soft: rgba(143, 211, 176, 0.14);
+
+    --color-overlay: rgb(0 0 0 / 62%);
+    --color-overlay-strong: rgb(0 0 0 / 78%);
+
+    --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.22);
+    --shadow-sm: 0 2px 10px rgb(0 0 0 / 0.28);
+    --shadow-md: 0 8px 24px rgb(0 0 0 / 0.34);
+    --shadow-lg: 0 18px 44px rgb(0 0 0 / 0.4);
+    --shadow-xl: 0 26px 64px rgb(0 0 0 / 0.46);
 
     color-scheme: dark;
   }
@@ -227,32 +334,37 @@ html[dir='rtl'] {
  * rather than defining a whole separate 3rd theme.
  */
 :root[data-contrast='high'] {
-  --color-text: #000000;
-  --color-text-muted: #3a3a3a;
-  --color-border: #000000;
-  --color-primary: #085c42;
-  --color-danger: #b30000;
-  --color-focus-ring: #000000;
+  --color-text: #0b1512;
+  --color-text-secondary: #1f332b;
+  --color-text-muted: #33463d;
+  --color-border: #0b1512;
+  --color-primary: #143a2c;
+  --color-danger: #8f1d1d;
+  --color-focus-ring: #0b1512;
 }
 
 :root[data-theme='dark'][data-contrast='high'] {
-  --color-bg: #000000;
+  --color-bg: #0e1713;
+  --color-surface: #16221c;
+  --color-surface-raised: #1b2a22;
   --color-text: #ffffff;
-  --color-text-muted: #d0d0d0;
+  --color-text-muted: #d3ddd4;
   --color-border: #ffffff;
-  --color-primary: #4ee6ac;
-  --color-danger: #ff8080;
+  --color-primary: #f0d49c;
+  --color-danger: #ff9b9b;
   --color-focus-ring: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']):not([data-theme='dark'])[data-contrast='high'] {
-    --color-bg: #000000;
+    --color-bg: #0e1713;
+    --color-surface: #16221c;
+    --color-surface-raised: #1b2a22;
     --color-text: #ffffff;
-    --color-text-muted: #d0d0d0;
+    --color-text-muted: #d3ddd4;
     --color-border: #ffffff;
-    --color-primary: #4ee6ac;
-    --color-danger: #ff8080;
+    --color-primary: #f0d49c;
+    --color-danger: #ff9b9b;
     --color-focus-ring: #ffffff;
   }
 }

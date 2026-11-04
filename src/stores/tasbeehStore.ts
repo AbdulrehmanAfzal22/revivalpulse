@@ -56,6 +56,7 @@ interface TasbeehStoreState {
   dailyHistory: SyncRecord<TasbeehHistoryPayload>[];
   tap: (dhikrKey: string, label: string) => void;
   reset: (dhikrKey: string) => void;
+  undo: (dhikrKey: string) => void;
 }
 
 export const useTasbeehStore = create<TasbeehStoreState>((set, get) => ({
@@ -83,6 +84,21 @@ export const useTasbeehStore = create<TasbeehStoreState>((set, get) => ({
       updatedAt: Date.now(),
       deleted: false,
       payload: { date, dhikrKey, label: existing?.payload.label ?? dhikrKey, count: 0 },
+    };
+    set({ dailyHistory: persistLocal(record) });
+  },
+
+  undo: (dhikrKey) => {
+    const date = todayKey();
+    const id = historyRecordId(date, dhikrKey);
+    const existing = get().dailyHistory.find((item) => item.id === id && !item.deleted);
+    if (!existing || existing.payload.count <= 0) return;
+
+    const record: SyncRecord<TasbeehHistoryPayload> = {
+      id,
+      updatedAt: Date.now(),
+      deleted: false,
+      payload: { ...existing.payload, count: existing.payload.count - 1 },
     };
     set({ dailyHistory: persistLocal(record) });
   },

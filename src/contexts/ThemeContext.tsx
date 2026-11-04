@@ -22,6 +22,11 @@ export function ThemeProvider({ children }: WithChildren) {
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    if (themeColor) {
+      themeColor.setAttribute('content', theme === 'dark' ? '#18251f' : '#f7f5ef');
+    }
   }, [theme]);
 
   const setTheme = useCallback((next: ThemeMode) => {

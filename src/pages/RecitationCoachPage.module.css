@@ -1,22 +1,18 @@
 /*
- * Scoped "calm, focus-first" theme for the Recitation Coach only (Tarteel-
- * style: soft off-white, one muted teal-green accent, grayscale secondary
- * text). Deliberately kept local to .page rather than touching the app-wide
- * theme.css tokens — this page's tone is intentionally quieter than the
- * rest of the site's chrome. Both the light default and the app's existing
- * :root[data-theme='dark'] switch are covered so the page stays legible
- * either way.
+ * Scoped "calm, focus-first" theme for the Recitation Coach only. It draws
+ * from the app-wide Islamic Vision palette so it follows light/dark changes
+ * automatically instead of pinning its own colors.
  */
 .page {
-  --coach-bg: #faf7f2;
-  --coach-surface: #ffffff;
-  --coach-border: #ece6da;
-  --coach-text: #2b2a28;
-  --coach-text-muted: #746f62;
-  --coach-accent: #356f62;
-  --coach-accent-contrast: #ffffff;
+  --coach-bg: var(--color-bg);
+  --coach-surface: var(--color-surface);
+  --coach-border: var(--color-border);
+  --coach-text: var(--color-text);
+  --coach-text-muted: var(--color-text-muted);
+  --coach-accent: var(--color-pine);
+  --coach-accent-contrast: var(--color-primary-contrast);
   --coach-accent-soft: color-mix(in srgb, var(--coach-accent) 14%, transparent);
-  --coach-mistake: #b03d2c;
+  --coach-mistake: var(--color-danger);
   --coach-mistake-soft: color-mix(in srgb, var(--coach-mistake) 12%, transparent);
 
   min-height: 100dvh;
@@ -24,17 +20,6 @@
   grid-template-rows: auto 1fr auto;
   background-color: var(--coach-bg);
   color: var(--coach-text);
-}
-
-:global(:root[data-theme='dark']) .page {
-  --coach-bg: #14181a;
-  --coach-surface: #1b2023;
-  --coach-border: #262c2f;
-  --coach-text: #ededea;
-  --coach-text-muted: #98a0a2;
-  --coach-accent: #6fc2a8;
-  --coach-accent-contrast: #0b1f1a;
-  --coach-mistake: #e0806b;
 }
 
 .topBar {
