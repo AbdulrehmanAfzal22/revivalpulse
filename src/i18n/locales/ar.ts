@@ -539,6 +539,7 @@ export const ar: LocaleDictionary = {
 
   // ---- hadith ----
   'hadith.title': 'الحديث',
+  'hadith.subtitle': 'إحدى عشرة مجموعة، من الكتب الستة الكبرى إلى نصوص دراسية أقصر.',
   'hadith.searchBooksPlaceholder': 'البحث في الكتب...',
   'hadith.hadithsCount_one': 'حديث واحد',
   'hadith.hadithsCount_two': 'حديثان',
@@ -585,6 +586,7 @@ export const ar: LocaleDictionary = {
 
   // ---- quran reader chrome ----
   'quran.title': 'القرآن',
+  'quran.subtitle': '١١٤ سورة في ٣٠ جزءًا. اختر سورة للبدء بالقراءة.',
   'quran.tabSurahs': 'السور',
   'quran.tabJuz': 'الأجزاء',
   'quran.searchSurahsPlaceholder': 'البحث في السور...',
@@ -1134,4 +1136,6 @@ export const ar: LocaleDictionary = {
   'recitationCoach.memorization.debugGoalLine': 'الهدف اليومي — آيات {{ayahs}}، دقائق {{minutes}}، مراجعات {{reviews}}',
   'recitationCoach.memorization.debugSessionBuilderLine': 'اختار المُنشئ: {{mode}} — {{reason}}',
   'recitationCoach.memorization.debugAchievementLine': 'تم فتح: {{name}}',
+  'home.dailyOverview': "نظرة يومية",
+  'home.dailyReflections': "تأملات يومية",
 };

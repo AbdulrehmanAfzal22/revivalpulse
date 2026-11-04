@@ -538,6 +538,7 @@ export const tr: LocaleDictionary = {
 
   // ---- hadith ----
   'hadith.title': 'Hadis',
+  'hadith.subtitle': 'Altı büyük kitaptan daha kısa çalışma metinlerine kadar on bir koleksiyon.',
   'hadith.searchBooksPlaceholder': 'Kitaplarda ara...',
   'hadith.hadithsCount_one': '{{count}} hadis',
   'hadith.hadithsCount_other': '{{count}} hadis',
@@ -581,6 +582,7 @@ export const tr: LocaleDictionary = {
 
   // ---- quran reader chrome ----
   'quran.title': 'Kur\'an',
+  'quran.subtitle': '30 cüzda 114 sure. Okumaya başlamak için birini seçin.',
   'quran.tabSurahs': 'Sureler',
   'quran.tabJuz': 'Cüzler',
   'quran.searchSurahsPlaceholder': 'Sure ara...',
@@ -1118,4 +1120,6 @@ export const tr: LocaleDictionary = {
   'recitationCoach.memorization.debugGoalLine': 'Günlük hedef — ayet {{ayahs}}, dakika {{minutes}}, tekrar {{reviews}}',
   'recitationCoach.memorization.debugSessionBuilderLine': 'Oluşturucu seçti: {{mode}} — {{reason}}',
   'recitationCoach.memorization.debugAchievementLine': 'Kilidi açıldı: {{name}}',
+  'home.dailyOverview': "Günlük özet",
+  'home.dailyReflections': "Günlük tefekkürler",
 };

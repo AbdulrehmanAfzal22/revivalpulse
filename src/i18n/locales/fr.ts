@@ -537,6 +537,7 @@ export const fr: LocaleDictionary = {
 
   // ---- hadith ----
   'hadith.title': 'Hadith',
+  'hadith.subtitle': 'Onze collections, des six livres majeurs aux textes d’étude plus courts.',
   'hadith.searchBooksPlaceholder': 'Rechercher des livres...',
   'hadith.hadithsCount_one': '{{count}} hadith',
   'hadith.hadithsCount_other': '{{count}} hadiths',
@@ -580,6 +581,7 @@ export const fr: LocaleDictionary = {
 
   // ---- quran reader chrome ----
   'quran.title': 'Coran',
+  'quran.subtitle': '114 sourates en 30 juz. Choisissez-en une pour commencer la lecture.',
   'quran.tabSurahs': 'Sourates',
   'quran.tabJuz': 'Juz',
   'quran.searchSurahsPlaceholder': 'Rechercher des sourates...',
@@ -752,7 +754,7 @@ export const fr: LocaleDictionary = {
   'islamicCalendar.loadingCalendar': 'Chargement du calendrier',
   'islamicCalendar.upcomingEvents': 'Événements à venir',
   'islamicCalendar.eventToday': "Aujourd'hui",
-  'islamicCalendar.eventDaysAway': '{{count}} j',
+  'islamicCalendar.eventDaysAway': '{{count}} jours',
   'islamicCalendar.month.january': 'Janvier',
   'islamicCalendar.month.february': 'Février',
   'islamicCalendar.month.march': 'Mars',
@@ -1118,4 +1120,6 @@ export const fr: LocaleDictionary = {
   'recitationCoach.memorization.debugGoalLine': 'Objectif quotidien — versets {{ayahs}}, minutes {{minutes}}, révisions {{reviews}}',
   'recitationCoach.memorization.debugSessionBuilderLine': 'Le générateur a choisi : {{mode}} — {{reason}}',
   'recitationCoach.memorization.debugAchievementLine': 'Débloqué : {{name}}',
+  'home.dailyOverview': "Aperçu du jour",
+  'home.dailyReflections': "Réflexions du jour",
 };

@@ -1,42 +1,18 @@
-/** Calendar month grid — 7-column responsive layout using CSS Grid */
+/** Calendar month grid — 7-column layout using CSS Grid */
 .grid {
   display: grid;
-  gap: clamp(0.25rem, 0.5vw, 0.75rem);
+  grid-template-columns: repeat(7, 1fr);
+  gap: clamp(0.375rem, 0.75vw, 0.625rem);
   width: 100%;
 }
 
-@media (min-width: 320px) {
-  .grid {
-    grid-template-columns: repeat(7, 1fr);
-  }
-}
-
-@media (min-width: 480px) {
-  .grid {
-    grid-template-columns: repeat(7, minmax(clamp(32px, 20vw, 48px), 1fr));
-  }
-}
-
-@media (min-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(7, minmax(clamp(36px, 18vw, 56px), 1fr));
-  }
-}
-
-@media (min-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(7, minmax(clamp(40px, 15vw, 64px), 1fr));
-  }
-}
-
-/** Day-of-week header cells — 7 equal columns */
+/** Day-of-week header cells */
 .headerCell {
   text-align: center;
-  padding: clamp(0.125rem, 0.3vw, 0.5rem);
-  font-size: clamp(0.625rem, 1vw, 0.875rem);
+  padding-block: 0.375rem;
+  font-size: 0.8125rem;
   font-weight: 500;
-  color: var(--color-text);
-  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-muted);
   display: grid;
   place-items: center;
 }
@@ -53,44 +29,28 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: clamp(0.0625rem, 0.2vw, 0.25rem);
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border);
+  justify-content: flex-start;
+  gap: 0.125rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-subtle);
   background-color: var(--color-surface);
-  min-height: 44px;
-  padding: clamp(0.375rem, 0.5vw, 0.5rem);
-  transition: all 0.15s ease;
+  min-height: clamp(3.5rem, 6vw, 4.5rem);
+  padding: 0.5rem 0.25rem;
+  transition: border-color 150ms ease, background-color 150ms ease;
   cursor: pointer;
-  /* Self-align inside grid column */
   align-self: start;
 }
 
-/* Hover state */
 .dayCell:hover {
-  background-color: var(--color-surface-raised);
-  border-color: var(--color-primary);
-}
-
-/* Selected/active state */
-.dayCell.selected {
-  background-color: var(--color-primary);
-  color: var(--color-primary-contrast);
+  background-color: var(--color-surface-hover);
   border-color: var(--color-primary);
 }
 
 /* Today's date state */
 .dayCell.today {
-  border-color: var(--color-primary);
-  border-width: 2px;
-  background-color: var(--color-surface);
-}
-
-/* Today + selected state */
-.dayCell.today.selected {
-  background-color: var(--color-primary);
-  color: var(--color-primary-contrast);
-  border-color: var(--color-primary);
+  border: 2px solid var(--color-gold-soft);
+  background-color: color-mix(in srgb, var(--color-gold) 12%, var(--color-surface));
+  padding: calc(0.5rem - 1px) calc(0.25rem - 1px);
 }
 
 /** Event indicator dot */
@@ -101,28 +61,26 @@
 .dayCell.hasEvent::after {
   content: "";
   position: absolute;
-  right: 6px;
-  top: 50%;
-  transform: translateY(-50%);
+  right: 7px;
+  top: 7px;
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: var(--color-primary);
+  background-color: var(--color-gold-soft);
 }
 
 /** Hijri day text inside date cell */
 .hijriDay {
-  font-size: clamp(0.5rem, 0.8vw, 0.625rem);
+  font-size: 0.6875rem;
   color: var(--color-text-muted);
   text-align: center;
-  margin-top: clamp(0.125rem, 0.2vw, 0.25rem);
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
 /** Gregorian day number */
 .gregorianDay {
   font-weight: 600;
-  font-size: clamp(0.75rem, 1.2vw, 0.9375rem);
+  font-size: 0.9375rem;
   line-height: 1.2;
   color: var(--color-text);
 }

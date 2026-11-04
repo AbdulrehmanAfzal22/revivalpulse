@@ -537,6 +537,7 @@ export const hi: LocaleDictionary = {
 
   // ---- hadith ----
   'hadith.title': 'हदीस',
+  'hadith.subtitle': 'ग्यारह संग्रह, छह प्रमुख किताबों से लेकर छोटे अध्ययन ग्रंथों तक।',
   'hadith.searchBooksPlaceholder': 'किताबें खोजें...',
   'hadith.hadithsCount_one': '{{count}} हदीस',
   'hadith.hadithsCount_other': '{{count}} हदीसें',
@@ -580,6 +581,7 @@ export const hi: LocaleDictionary = {
 
   // ---- quran reader chrome ----
   'quran.title': 'क़ुरान',
+  'quran.subtitle': '30 जुज़ में 114 सूरतें। पढ़ना शुरू करने के लिए एक चुनें।',
   'quran.tabSurahs': 'सूरतें',
   'quran.tabJuz': 'पारे',
   'quran.searchSurahsPlaceholder': 'सूरतें खोजें...',
@@ -1117,4 +1119,6 @@ export const hi: LocaleDictionary = {
   'recitationCoach.memorization.debugGoalLine': 'दैनिक लक्ष्य — आयतें {{ayahs}}, मिनट {{minutes}}, समीक्षाएँ {{reviews}}',
   'recitationCoach.memorization.debugSessionBuilderLine': 'निर्माता ने चुना: {{mode}} — {{reason}}',
   'recitationCoach.memorization.debugAchievementLine': 'अनलॉक हुआ: {{name}}',
+  'home.dailyOverview': "दैनिक सारांश",
+  'home.dailyReflections': "दैनिक चिंतन",
 };

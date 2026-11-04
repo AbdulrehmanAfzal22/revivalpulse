@@ -537,6 +537,7 @@ export const fa: LocaleDictionary = {
 
   // ---- hadith ----
   'hadith.title': 'حدیث',
+  'hadith.subtitle': 'یازده مجموعه، از شش کتاب اصلی تا متون کوتاه‌تر درسی.',
   'hadith.searchBooksPlaceholder': 'جستجوی کتاب‌ها...',
   'hadith.hadithsCount_one': '{{count}} حدیث',
   'hadith.hadithsCount_other': '{{count}} حدیث',
@@ -580,6 +581,7 @@ export const fa: LocaleDictionary = {
 
   // ---- quran reader chrome ----
   'quran.title': 'قرآن',
+  'quran.subtitle': '۱۱۴ سوره در ۳۰ جزء. برای شروع خواندن، یک سوره را انتخاب کنید.',
   'quran.tabSurahs': 'سوره‌ها',
   'quran.tabJuz': 'جزءها',
   'quran.searchSurahsPlaceholder': 'جستجوی سوره‌ها...',
@@ -1118,4 +1120,6 @@ export const fa: LocaleDictionary = {
   'recitationCoach.memorization.debugGoalLine': 'هدف روزانه — آیات {{ayahs}}، دقایق {{minutes}}، مرورها {{reviews}}',
   'recitationCoach.memorization.debugSessionBuilderLine': 'سازنده انتخاب کرد: {{mode}} — {{reason}}',
   'recitationCoach.memorization.debugAchievementLine': 'باز شد: {{name}}',
+  'home.dailyOverview': "نمای کلی روز",
+  'home.dailyReflections': "تأملات روزانه",
 };

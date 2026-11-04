@@ -538,6 +538,7 @@ export const ur: LocaleDictionary = {
 
   // ---- hadith ----
   'hadith.title': 'حدیث',
+  'hadith.subtitle': 'گیارہ مجموعے، چھ بڑی کتب سے لے کر مختصر درسی متون تک۔',
   'hadith.searchBooksPlaceholder': 'کتابیں تلاش کریں...',
   'hadith.hadithsCount_one': '{{count}} حدیث',
   'hadith.hadithsCount_other': '{{count}} احادیث',
@@ -581,6 +582,7 @@ export const ur: LocaleDictionary = {
 
   // ---- quran reader chrome ----
   'quran.title': 'قرآن',
+  'quran.subtitle': '114 سورتیں، 30 پاروں میں۔ پڑھنا شروع کرنے کے لیے کوئی سورت منتخب کریں۔',
   'quran.tabSurahs': 'سورتیں',
   'quran.tabJuz': 'پارے',
   'quran.searchSurahsPlaceholder': 'سورتیں تلاش کریں...',
@@ -1118,4 +1120,6 @@ export const ur: LocaleDictionary = {
   'recitationCoach.memorization.debugGoalLine': 'روزانہ ہدف — آیات {{ayahs}}، منٹ {{minutes}}، جائزے {{reviews}}',
   'recitationCoach.memorization.debugSessionBuilderLine': 'تخلیق کار نے چنا: {{mode}} — {{reason}}',
   'recitationCoach.memorization.debugAchievementLine': 'کھل گیا: {{name}}',
+  'home.dailyOverview': "روزانہ جائزہ",
+  'home.dailyReflections': "روزانہ غور و فکر",
 };

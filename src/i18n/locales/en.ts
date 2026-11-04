@@ -540,6 +540,7 @@ export const en = {
 
   // ---- hadith ----
   'hadith.title': 'Hadith',
+  'hadith.subtitle': 'Eleven collections, from the six major books to shorter study texts.',
   'hadith.searchBooksPlaceholder': 'Search books...',
   'hadith.hadithsCount_one': '{{count}} hadith',
   'hadith.hadithsCount_other': '{{count}} hadiths',
@@ -584,6 +585,7 @@ export const en = {
 
   // ---- quran reader chrome ----
   'quran.title': 'Quran',
+  'quran.subtitle': '114 surahs in 30 juz. Choose one to start reading.',
   'quran.tabSurahs': 'Surahs',
   'quran.tabJuz': 'Juz',
   'quran.searchSurahsPlaceholder': 'Search surahs...',
@@ -771,7 +773,7 @@ export const en = {
   'islamicCalendar.loadingCalendar': 'Loading calendar',
   'islamicCalendar.upcomingEvents': 'Upcoming events',
   'islamicCalendar.eventToday': 'Today',
-  'islamicCalendar.eventDaysAway': '{{count}}d',
+  'islamicCalendar.eventDaysAway': '{{count}} days',
   'islamicCalendar.month.january': 'January',
   'islamicCalendar.month.february': 'February',
   'islamicCalendar.month.march': 'March',
@@ -1121,6 +1123,8 @@ export const en = {
   'recitationCoach.memorization.debugGoalLine': 'Daily goal — ayahs {{ayahs}}, minutes {{minutes}}, reviews {{reviews}}',
   'recitationCoach.memorization.debugSessionBuilderLine': 'Builder chose: {{mode}} — {{reason}}',
   'recitationCoach.memorization.debugAchievementLine': 'Unlocked: {{name}}',
+  'home.dailyOverview': 'Daily overview',
+  'home.dailyReflections': 'Daily reflections',
 } as const;
 
 export type TranslationKey = keyof typeof en;

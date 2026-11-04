@@ -1,42 +1,76 @@
 .page {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(0.75rem, 2vw, 1.25rem);
-}
-
-.todayCard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: clamp(0.25rem, 1vw, 0.5rem);
-}
-
-.calendarCard {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(0.5rem, 2vw, 1rem);
   width: 100%;
+  max-width: 62rem;
+  margin-inline: auto;
+  box-sizing: border-box;
+  padding: clamp(1.25rem, 3vw, 2.5rem) clamp(1rem, 4vw, 2.5rem) 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: page-in 420ms ease-out both;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  letter-spacing: -0.01em;
+}
+
+.todayRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-block-end: 1.25rem;
+  border-block-end: 1px solid var(--color-border);
+}
+
+.todayHijri {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  color: var(--color-text);
+}
+
+.todayGregorian {
+  font-size: 0.9375rem;
 }
 
 .monthHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: clamp(0.5rem, 2vw, 1rem);
-  flex-wrap: wrap;
-  align-content: center;
+  gap: 1rem;
 }
 
-.monthHeader > * {
-  flex: 1 1 auto;
-  min-width: 120px;
+.monthTitle {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  color: var(--color-text);
 }
 
-.monthHeader .button {
-  flex: 0 0 auto;
+.monthNav {
+  display: flex;
+  gap: 0.375rem;
 }
 
 .eventsHeading {
-  margin-bottom: clamp(0.5rem, 2vw, 0.75rem);
+  margin: 0;
+  padding-block-end: 0.75rem;
+  border-block-end: 1px solid var(--color-border);
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+}
+
+@keyframes page-in { from { opacity: 0; transform: translateY(0.5rem); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .page { animation: none; }
 }

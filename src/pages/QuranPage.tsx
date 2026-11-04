@@ -1,4 +1,4 @@
-import { useMemo, useState, type CSSProperties } from 'react';
+import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import { SURAHS } from 'data/quran/surahs';
@@ -41,6 +41,7 @@ export default function QuranPage() {
   return (
     <div className={styles.page}>
         <Typography variant="h2">{t('quran.title')}</Typography>
+        <p className={styles.subtitle}>{t('quran.subtitle')}</p>
 
         {quranPosition?.module === 'quran' && (
           <ContinueReadingCard
@@ -51,11 +52,7 @@ export default function QuranPage() {
           />
         )}
 
-        <div
-          className={styles.tabs}
-          role="tablist"
-          style={{ '--tab-offset': tab === 'juz' ? '100%' : '0%' } as CSSProperties}
-        >
+        <div className={styles.tabs} role="tablist">
           <button
             type="button"
             role="tab"
@@ -119,7 +116,7 @@ export default function QuranPage() {
         )}
 
         {tab === 'juz' && (
-          <ul className={styles.surahGrid}>
+          <ul className={[styles.surahGrid, styles.juzGrid].join(' ')}>
             {JUZ_BOUNDARIES.map((juz) => {
               const start = surahLinkFromVerseKey(juz.firstVerseKey);
               const end = surahLinkFromVerseKey(juz.lastVerseKey);

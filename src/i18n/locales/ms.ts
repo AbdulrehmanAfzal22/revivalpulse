@@ -537,6 +537,7 @@ export const ms: LocaleDictionary = {
 
   // ---- hadith ----
   'hadith.title': 'Hadis',
+  'hadith.subtitle': 'Sebelas koleksi, daripada enam kitab utama hingga teks kajian yang lebih pendek.',
   'hadith.searchBooksPlaceholder': 'Cari kitab...',
   'hadith.hadithsCount_one': '{{count}} hadis',
   'hadith.hadithsCount_other': '{{count}} hadis',
@@ -580,6 +581,7 @@ export const ms: LocaleDictionary = {
 
   // ---- quran reader chrome ----
   'quran.title': 'Al-Quran',
+  'quran.subtitle': '114 surah dalam 30 juz. Pilih satu untuk mula membaca.',
   'quran.tabSurahs': 'Surah',
   'quran.tabJuz': 'Juzuk',
   'quran.searchSurahsPlaceholder': 'Cari surah...',
@@ -752,7 +754,7 @@ export const ms: LocaleDictionary = {
   'islamicCalendar.loadingCalendar': 'Memuatkan kalendar',
   'islamicCalendar.upcomingEvents': 'Peristiwa akan datang',
   'islamicCalendar.eventToday': 'Hari ini',
-  'islamicCalendar.eventDaysAway': '{{count}}h',
+  'islamicCalendar.eventDaysAway': '{{count}} hari',
   'islamicCalendar.month.january': 'Januari',
   'islamicCalendar.month.february': 'Februari',
   'islamicCalendar.month.march': 'Mac',
@@ -1117,4 +1119,6 @@ export const ms: LocaleDictionary = {
   'recitationCoach.memorization.debugGoalLine': 'Sasaran harian — ayat {{ayahs}}, minit {{minutes}}, semakan {{reviews}}',
   'recitationCoach.memorization.debugSessionBuilderLine': 'Pembina memilih: {{mode}} — {{reason}}',
   'recitationCoach.memorization.debugAchievementLine': 'Dibuka: {{name}}',
+  'home.dailyOverview': "Gambaran harian",
+  'home.dailyReflections': "Renungan harian",
 };

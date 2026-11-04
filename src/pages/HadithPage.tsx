@@ -33,6 +33,7 @@ export default function HadithPage() {
   return (
     <div className={styles.page}>
         <Typography variant="h2">{t('hadith.title')}</Typography>
+        <p className={styles.subtitle}>{t('hadith.subtitle')}</p>
 
         {hadithPosition?.module === 'hadith' && lastReadBook && (
           <ContinueReadingCard
@@ -63,23 +64,24 @@ export default function HadithPage() {
               return (
                 <li key={book.slug} className={styles.card}>
                   <Link to={buildHadithBookPath(book.slug)} className={styles.cardLink}>
-                    <span className={styles.cardText}>
-                      <span className={styles.cardTitle}>{book.nameEnglish}</span>
-                      <span className={styles.cardSubtitle}>
-                        {book.authorEnglish} · {tp('hadith.hadithsCount', book.totalHadiths)}
-                      </span>
-                    </span>
                     <span className={styles.arabicName} dir="rtl" lang="ar">
                       {book.nameArabic}
                     </span>
+                    <span className={styles.cardText}>
+                      <span className={styles.cardTitle}>{book.nameEnglish}</span>
+                      <span className={styles.cardSubtitle}>{book.authorEnglish}</span>
+                    </span>
                   </Link>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => toggleFavoriteHadithBook(book.slug)}
-                    aria-label={isFavorite ? t('hadith.removeFromFavorites') : t('hadith.addToFavorites')}
-                    leadingIcon={<Star size={14} fill={isFavorite ? 'currentColor' : 'none'} />}
-                  />
+                  <div className={styles.cardFooter}>
+                    <span className={styles.hadithCount}>{tp('hadith.hadithsCount', book.totalHadiths)}</span>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => toggleFavoriteHadithBook(book.slug)}
+                      aria-label={isFavorite ? t('hadith.removeFromFavorites') : t('hadith.addToFavorites')}
+                      leadingIcon={<Star size={14} fill={isFavorite ? 'currentColor' : 'none'} />}
+                    />
+                  </div>
                 </li>
               );
             })}

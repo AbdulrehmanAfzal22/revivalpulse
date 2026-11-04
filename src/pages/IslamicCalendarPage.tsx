@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight, RotateCw } from 'lucide-react';
 import Typography from 'components/ui/Typography';
-import Card from 'components/ui/Card';
 import Button from 'components/ui/Button';
 import Skeleton from 'components/ui/Skeleton';
 import EmptyState from 'components/feedback/EmptyState';
@@ -60,72 +59,68 @@ export default function IslamicCalendarPage() {
   }
 
   return (
-    <div className="container">
-      <div className={styles.page}>
-        <Typography variant="h2">{t('islamicCalendar.title')}</Typography>
+    <div className={styles.page}>
+        <Typography variant="h2" className={styles.title}>{t('islamicCalendar.title')}</Typography>
 
         {today.data && (
-        <Card elevation="raised" className={styles.todayCard}>
-          <Typography variant="caption" muted>
-            {t('islamicCalendar.today')}
-          </Typography>
-          <Typography variant="h3" as="p">
-            {t('islamicCalendar.hijriDateAH', {
-              day: today.data.hijri.day,
-              month: today.data.hijri.month.en,
-              year: today.data.hijri.year,
-            })}
-          </Typography>
-          <Typography variant="caption" muted>
-            {t('islamicCalendar.gregorianDate', {
-              weekday: today.data.gregorian.weekdayEn,
-              month: today.data.gregorian.monthNameEn,
-              day: today.data.gregorian.day,
-              year: today.data.gregorian.year,
-            })}
-          </Typography>
-        </Card>
-      )}
-
-      <Card className={styles.calendarCard}>
-        <div className={styles.monthHeader}>
-          <Button variant="icon" aria-label={t('islamicCalendar.previousMonth')} onClick={goToPreviousMonth} leadingIcon={<ChevronLeft size={18} />} />
-          <Typography variant="h4" as="p">
-            {t(MONTH_NAME_KEYS[viewedMonth - 1] as TranslationKey)} {viewedYear}
-          </Typography>
-          <Button variant="icon" aria-label={t('islamicCalendar.nextMonth')} onClick={goToNextMonth} leadingIcon={<ChevronRight size={18} />} />
-        </div>
-
-        {monthCalendar.isPending && (
-          <div aria-busy="true" aria-label={t('islamicCalendar.loadingCalendar')}>
-            <Skeleton variant="rect" height="16rem" />
+          <div className={styles.todayRow}>
+            <Typography variant="h3" as="p" className={styles.todayHijri}>
+              {t('islamicCalendar.hijriDateAH', {
+                day: today.data.hijri.day,
+                month: today.data.hijri.month.en,
+                year: today.data.hijri.year,
+              })}
+            </Typography>
+            <Typography variant="body" muted className={styles.todayGregorian}>
+              {t('islamicCalendar.gregorianDate', {
+                weekday: today.data.gregorian.weekdayEn,
+                month: today.data.gregorian.monthNameEn,
+                day: today.data.gregorian.day,
+                year: today.data.gregorian.year,
+              })}
+            </Typography>
           </div>
         )}
 
-        {monthCalendar.isError && (
-          <EmptyState
-            title={t('emptyState.calendar.loadFailed')}
-            description={monthCalendar.error.message}
-            action={
-              <Button
-                variant="secondary"
-                onClick={() => monthCalendar.refetch()}
-                disabled={monthCalendar.isFetching}
-                leadingIcon={<RotateCw size={16} />}
-              >
-                {t('common.retry')}
-              </Button>
-            }
-          />
-        )}
+      <div className={styles.monthHeader}>
+        <Typography variant="h4" as="p" className={styles.monthTitle}>
+          {t(MONTH_NAME_KEYS[viewedMonth - 1] as TranslationKey)} {viewedYear}
+        </Typography>
+        <div className={styles.monthNav}>
+          <Button variant="icon" aria-label={t('islamicCalendar.previousMonth')} onClick={goToPreviousMonth} leadingIcon={<ChevronLeft size={18} />} />
+          <Button variant="icon" aria-label={t('islamicCalendar.nextMonth')} onClick={goToNextMonth} leadingIcon={<ChevronRight size={18} />} />
+        </div>
+      </div>
 
-        {monthCalendar.data && (
-          <CalendarMonthGrid
-            days={monthCalendar.data}
-            todayGregorianDay={isCurrentMonth ? now.getDate() : null}
-          />
-        )}
-      </Card>
+      {monthCalendar.isPending && (
+        <div aria-busy="true" aria-label={t('islamicCalendar.loadingCalendar')}>
+          <Skeleton variant="rect" height="16rem" />
+        </div>
+      )}
+
+      {monthCalendar.isError && (
+        <EmptyState
+          title={t('emptyState.calendar.loadFailed')}
+          description={monthCalendar.error.message}
+          action={
+            <Button
+              variant="secondary"
+              onClick={() => monthCalendar.refetch()}
+              disabled={monthCalendar.isFetching}
+              leadingIcon={<RotateCw size={16} />}
+            >
+              {t('common.retry')}
+            </Button>
+          }
+        />
+      )}
+
+      {monthCalendar.data && (
+        <CalendarMonthGrid
+          days={monthCalendar.data}
+          todayGregorianDay={isCurrentMonth ? now.getDate() : null}
+        />
+      )}
 
       <div>
         <Typography variant="h3" as="h2" className={styles.eventsHeading}>
@@ -133,7 +128,6 @@ export default function IslamicCalendarPage() {
         </Typography>
         {upcomingEvents.isPending && <Skeleton variant="rect" height="4rem" count={3} />}
         {upcomingEvents.data && <UpcomingEventsList events={upcomingEvents.data} />}
-      </div>
       </div>
     </div>
   );
