@@ -1,0 +1,41 @@
+/* Callers set --mascot-size; a variable avoids a specificity fight with the
+   module's own class for the same element. */
+.mascot {
+  width: var(--mascot-size, clamp(4.5rem, 10vw, 6.5rem));
+  height: auto;
+  overflow: visible;
+  flex: 0 0 auto;
+}
+
+.radiance {
+  transform-origin: 60px 60px;
+  animation: radiance-spin 24s linear infinite;
+}
+
+.face {
+  transform-origin: 60px 62px;
+  animation: mascot-bob 3.4s ease-in-out infinite;
+}
+
+@keyframes radiance-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes mascot-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .radiance,
+  .face {
+    animation: none;
+  }
+}

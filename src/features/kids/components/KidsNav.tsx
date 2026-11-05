@@ -24,10 +24,11 @@ export default function KidsNav() {
           key={item.to}
           to={item.to}
           end={item.end}
+          aria-label={t(item.labelKey)}
           className={({ isActive }) => [styles.item, isActive && styles.itemActive].filter(Boolean).join(' ')}
         >
           <item.icon size={22} />
-          <span>{t(item.labelKey)}</span>
+          <span className={styles.label}>{t(item.labelKey)}</span>
         </NavLink>
       ))}
       <NavLink to={ROUTES.HOME} className={styles.exit} aria-label={t('kids.exitKidsMode')}>

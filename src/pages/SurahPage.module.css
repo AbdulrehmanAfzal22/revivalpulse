@@ -10,12 +10,27 @@
 
 .readerHeader {
   position: sticky;
-  top: 3.5rem;
-  z-index: var(--z-navbar);
+  top: var(--navbar-height);
+  z-index: calc(var(--z-navbar) - 1);
   margin-block-end: 1rem;
   background-color: var(--color-bg);
-  border-block-end: 1px solid var(--color-border);
-  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 12%);
+  border-block-end: 1px solid transparent;
+  transition: border-color 160ms ease;
+}
+
+/* Only once it floats over the verses does it need a seam to separate it;
+   in normal flow it is just part of the page. */
+.headerStuck.readerHeader {
+  border-block-end-color: var(--color-border);
+}
+
+/* Zero-height flow marker just above the sticky header. Its bottom edge stays
+   glued to the header until the header pins, which is how the collapse is
+   detected. */
+.stickySentinel {
+  display: block;
+  height: 1px;
+  margin-block-end: -1px;
 }
 
 .headerControls {
@@ -24,6 +39,7 @@
   justify-content: space-between;
   gap: 0.75rem;
   padding-block: 0.5rem;
+  transition: padding-block 160ms ease;
 }
 
 .toolbar {
@@ -56,12 +72,52 @@
   gap: 0.25rem;
   padding-block-end: 1.5rem;
   margin-block-end: 0;
-  border-block-end: 1px solid var(--color-border);
+  transition: gap 160ms ease, padding-block-end 160ms ease;
+}
+
+/*
+ * Pinned state: the full title block is too tall to keep over the reader, so
+ * it collapses to one row — surah name only — and the ayahs scroll underneath
+ * without being covered.
+ */
+.headerStuck .headerControls {
+  padding-block: 0.3rem;
+}
+
+.headerStuck .header {
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.6rem;
+  padding-block-end: 0.5rem;
+}
+
+.headerStuck .headerCaption,
+.headerStuck .headerSubtitle {
+  display: none;
+}
+
+.headerStuck .arabicTitle {
+  margin-block: 0;
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+}
+
+.headerStuck .simpleTitle {
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+}
+
+.headerStuck .preloadHint {
+  display: none;
+}
+
+.simpleTitle {
+  transition: font-size 160ms ease;
 }
 
 .arabicTitle {
   margin-block: 0.375rem;
   font-family: var(--reader-arabic-font, inherit);
+  transition: font-size 160ms ease, margin-block 160ms ease;
 }
 
 .preloadHint {
@@ -82,7 +138,8 @@
 }
 
 .bismillah {
-  margin-block-start: 1rem;
+  margin-block: 0 1rem;
+  text-align: center;
   font-size: 1.375rem;
   font-family: var(--reader-arabic-font, inherit);
   line-height: var(--reader-line-height, 2);

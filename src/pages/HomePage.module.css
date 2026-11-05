@@ -7,45 +7,25 @@
 }
 
 /* ---------------------------------------------------------------------------
-   Hero — deep forest panel with gold glow and star lattice
+   Hero — flat editorial header row: next prayer left, Islamic date right
    --------------------------------------------------------------------------- */
 .hero {
-  --home-hero-ink: #f8f3e4;
-  --home-hero-muted: #cfc7ab;
-  position: relative;
-  overflow: hidden;
-  border-radius: var(--radius-lg);
-  padding: clamp(1.5rem, 4.5vw, 3rem) clamp(1.25rem, 5vw, 3.25rem);
-  color: var(--home-hero-ink);
-  background:
-    radial-gradient(640px 300px at 88% -25%, rgba(220, 192, 139, 0.22), transparent 62%),
-    radial-gradient(560px 380px at -8% 115%, rgba(63, 97, 83, 0.5), transparent 62%),
-    linear-gradient(135deg, #23493b 0%, #16352b 52%, #10241c 100%);
-  box-shadow: var(--shadow-lg);
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cpath d='M36 6 L42 30 L66 36 L42 42 L36 66 L30 42 L6 36 L30 30 Z' fill='%23dcc08b' fill-opacity='0.055'/%3E%3C/svg%3E");
-  background-size: 72px 72px;
-  pointer-events: none;
+  padding-block-end: clamp(1.25rem, 3vw, 2rem);
+  border-block-end: 1px solid var(--color-border);
 }
 
 .heroTop {
-  position: relative;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: clamp(1rem, 4vw, 3rem);
   flex-wrap: wrap;
 }
 
 .heroBlock {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.35rem;
   min-width: 0;
 }
 
@@ -55,51 +35,65 @@
 }
 
 .heroEyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-gold, #dcc08b);
+  color: var(--color-text-muted);
 }
 
 .heroLink {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
+  min-width: 0;
   color: inherit;
   text-decoration: none;
 }
 
-.heroLink:hover .heroTitle {
-  color: #ffffff;
+.heroLinkRow {
+  flex-direction: row;
+  align-items: baseline;
+  gap: 0.85rem;
+  flex-wrap: wrap;
 }
 
 .heroTitle {
-  color: var(--home-hero-ink);
-  font-family: var(--font-serif);
-  font-weight: 400;
-  font-size: clamp(1.9rem, 4vw, 2.9rem);
-  line-height: 1.15;
-  letter-spacing: 0.01em;
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: clamp(1.35rem, 1.15rem + 1vw, 1.9rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
   transition: color 200ms ease;
 }
 
+.heroTitleLead {
+  font-size: clamp(2rem, 1.3rem + 3vw, 3.1rem);
+  letter-spacing: -0.02em;
+}
+
+.heroLink:hover .heroTitle {
+  color: var(--color-primary);
+}
+
 .heroMeta {
-  color: var(--home-hero-muted);
-  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  font-size: clamp(0.9rem, 0.85rem + 0.3vw, 1rem);
 }
 
 .heroLoading {
   display: block;
-  width: 9rem;
-  height: 1rem;
-  margin-top: 0.6rem;
+  width: 7rem;
+  height: 1.1rem;
+  margin-top: 0.35rem;
   border-radius: 999px;
-  background: rgba(220, 192, 139, 0.18);
+  background: var(--color-surface-hover);
   animation: home-pulse 1.4s ease-in-out infinite;
+}
+
+.heroLoadingWide {
+  width: 13rem;
 }
 
 /* ---------------------------------------------------------------------------
@@ -315,18 +309,23 @@
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 760px) {
   .heroTop {
     flex-direction: column;
-    gap: 1.25rem;
+    align-items: flex-start;
+    gap: 1.5rem;
   }
 
   .heroBlockEnd {
     text-align: start;
     align-items: flex-start;
   }
+}
 
-  .heroBlockEnd .heroLink {
+@media (max-width: 420px) {
+  .heroLinkRow {
+    flex-direction: column;
     align-items: flex-start;
+    gap: 0.2rem;
   }
 }

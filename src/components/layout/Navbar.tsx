@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Menu, Moon } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { NAV_ITEMS } from 'constants/navigation';
@@ -15,10 +15,27 @@ import styles from './Navbar.module.css';
 
 export default function Navbar() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
   const { t } = useTranslation();
 
+  // The reader pages (surah, tafsir, hadith) pin their own sub-header directly
+  // under this bar. Its height is content-driven — it grows with the text-size
+  // setting and the mobile layout — so publish the measured value instead of
+  // letting those pages guess an offset.
+  useEffect(() => {
+    const element = headerRef.current;
+    if (!element) return undefined;
+    const publish = () => {
+      document.documentElement.style.setProperty('--navbar-height', `${element.offsetHeight}px`);
+    };
+    publish();
+    const observer = new ResizeObserver(publish);
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <header className={styles.navbar}>
+    <header ref={headerRef} className={styles.navbar}>
       <div className={styles.inner}>
         <Button
           variant="icon"

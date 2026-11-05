@@ -395,10 +395,10 @@ export const ur: LocaleDictionary = {
   'kids.safeExitLeave': 'بزرگ کے ساتھ جائیں',
 
   // ---- kids: home ----
-  'kids.greeting': 'السلام علیکم! 👋',
+  'kids.greeting': 'السلام علیکم!',
   'kids.todaysGoal': 'آج کا ہدف',
   'kids.goalProgress': '{{count}} / {{target}}',
-  'kids.streak': '🔥 {{count}} دن کا تسلسل',
+  'kids.streak': '{{count}} دن کا تسلسل',
   'kids.yourBadges': 'آپ کے بیجز',
 
   // ---- kids: alphabet ----

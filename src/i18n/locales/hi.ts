@@ -394,10 +394,10 @@ export const hi: LocaleDictionary = {
   'kids.safeExitLeave': 'बड़े के साथ चलें',
 
   // ---- kids: home ----
-  'kids.greeting': 'अस्सलामु अलैकुम! 👋',
+  'kids.greeting': 'अस्सलामु अलैकुम!',
   'kids.todaysGoal': 'आज का लक्ष्य',
   'kids.goalProgress': '{{count}} / {{target}}',
-  'kids.streak': '🔥 {{count}} दिन की श्रृंखला',
+  'kids.streak': '{{count}} दिन की श्रृंखला',
   'kids.yourBadges': 'आपके बैज',
 
   // ---- kids: alphabet ----

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { BookMarked, CalendarDays, Clock, Heart, ScrollText, Sparkles } from 'lucide-react';
+import { BookMarked, Heart, ScrollText, Sparkles } from 'lucide-react';
 import Skeleton from 'components/ui/Skeleton';
 import useAyahOfTheDay from 'features/quranReader/hooks/useAyahOfTheDay';
 import useHadithOfTheDay from 'features/hadith/hooks/useHadithOfTheDay';
@@ -72,19 +72,16 @@ export default function HomePage() {
         <section className={styles.hero} aria-label={t('home.dailyOverview')}>
           <div className={styles.heroTop}>
             <div className={styles.heroBlock}>
-              <span className={styles.heroEyebrow}>
-                <Clock size={13} aria-hidden="true" />
-                {t('prayerTimes.nextPrayer')}
-              </span>
+              <span className={styles.heroEyebrow}>{t('prayerTimes.nextPrayer')}</span>
               {activeCoordinates && prayerTimes.isPending && <span className={styles.heroLoading} />}
               {!activeCoordinates && geolocation.status !== 'loading' && (
-                <Link to={ROUTES.PRAYER_TIMES} className={styles.heroLink}>
+                <Link to={ROUTES.PRAYER_TIMES} className={`${styles.heroLink} ${styles.heroLinkRow}`}>
                   <span className={styles.heroMeta}>{t('prayerTimes.setYourLocation')}</span>
                 </Link>
               )}
               {activeCoordinates && prayerInfo && (
-                <Link to={ROUTES.PRAYER_TIMES} className={styles.heroLink}>
-                  <strong className={styles.heroTitle}>{prayerInfo.next}</strong>
+                <Link to={ROUTES.PRAYER_TIMES} className={`${styles.heroLink} ${styles.heroLinkRow}`}>
+                  <strong className={`${styles.heroTitle} ${styles.heroTitleLead}`}>{prayerInfo.next}</strong>
                   <span className={styles.heroMeta}>
                     {t('prayerTimes.in', { countdown: countdownText(prayerInfo.minutesUntilNext) })}
                   </span>
@@ -94,11 +91,7 @@ export default function HomePage() {
 
             {hijri.isError !== true && (
               <div className={`${styles.heroBlock} ${styles.heroBlockEnd}`}>
-                <span className={styles.heroEyebrow}>
-                  <CalendarDays size={13} aria-hidden="true" />
-                  {t('islamicCalendar.islamicDate')}
-                </span>
-                {hijri.isPending && <span className={styles.heroLoading} />}
+                {hijri.isPending && <span className={`${styles.heroLoading} ${styles.heroLoadingWide}`} />}
                 {hijri.data && (
                   <Link to={ROUTES.ISLAMIC_CALENDAR} className={styles.heroLink}>
                     <strong className={styles.heroTitle}>

@@ -211,9 +211,11 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .eyebrow {
+  min-width: 0;
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -236,6 +238,7 @@
 
 .dhikrTabs {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.2rem;
   margin: 1.2rem 0 1.1rem;
   padding: 0.3rem;
@@ -244,7 +247,8 @@
 }
 
 .dhikrTab {
-  flex: 1;
+  flex: 1 1 auto;
+  min-width: 0;
   padding: 0.55rem 0.25rem;
   border: 0;
   border-radius: 7px;

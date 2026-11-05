@@ -396,10 +396,10 @@ export const ar: LocaleDictionary = {
   'kids.safeExitLeave': 'الخروج مع شخص كبير',
 
   // ---- kids: home ----
-  'kids.greeting': 'السلام عليكم! 👋',
+  'kids.greeting': 'السلام عليكم!',
   'kids.todaysGoal': 'هدف اليوم',
   'kids.goalProgress': '{{count}} / {{target}}',
-  'kids.streak': '🔥 سلسلة {{count}} يوم',
+  'kids.streak': 'سلسلة {{count}} يوم',
   'kids.yourBadges': 'شاراتك',
 
   // ---- kids: alphabet ----

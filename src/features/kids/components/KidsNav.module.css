@@ -5,38 +5,77 @@
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  padding: 0.5rem 0.75rem;
-  background-color: var(--color-surface);
-  border-top: 2px solid var(--color-border);
+  padding: 0.5rem clamp(0.375rem, 2vw, 0.75rem) calc(0.5rem + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--color-gold) 14%, var(--color-surface)), var(--color-surface));
+  border-top: 2px solid color-mix(in srgb, var(--color-star-line) 38%, var(--color-border));
 }
 
-.item {
-  flex: 1;
+/* `.nav .item` outranks the kids 48px min-width rule in kidsTheme.css so the
+   bar can shrink below 360px instead of pushing the page sideways. */
+.nav .item {
+  flex: 1 1 0;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.125rem;
-  padding: 0.375rem 0.25rem;
+  padding: 0.375rem 0.125rem;
   border-radius: var(--radius-md);
   color: var(--color-text-muted);
   text-decoration: none;
   font-size: 0.6875rem;
   font-weight: 700;
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1), background-color 180ms ease, color 180ms ease;
+}
+
+.nav .label {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .item:hover {
   background-color: var(--color-surface-raised);
+  transform: translateY(-2px);
 }
 
 .itemActive {
   color: var(--color-primary-contrast);
-  background-color: var(--color-primary);
+  background: linear-gradient(180deg, var(--color-primary), var(--color-primary-hover));
+  box-shadow: 0 3px 10px color-mix(in srgb, var(--color-primary) 38%, transparent);
+  animation: tab-pop 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.exit {
+.itemActive svg {
+  animation: tab-bounce 2s ease-in-out infinite;
+}
+
+@keyframes tab-pop {
+  from { transform: scale(0.84); }
+  to { transform: scale(1); }
+}
+
+@keyframes tab-bounce {
+  0%, 100% { transform: translateY(0); }
+  45% { transform: translateY(-3px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item:hover,
+  .itemActive,
+  .itemActive svg {
+    animation: none;
+    transform: none;
+  }
+}
+
+.nav .exit {
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 48px;
   padding: 0.5rem;
   border-radius: var(--radius-md);
   color: var(--color-text-muted);
@@ -44,4 +83,15 @@
 
 .exit:hover {
   background-color: var(--color-surface-raised);
+}
+
+/* Icon-only below 400px: six labelled tabs simply do not fit a small phone. */
+@media (max-width: 400px) {
+  .nav .label {
+    display: none;
+  }
+
+  .nav .item {
+    padding: 0.5rem 0.125rem;
+  }
 }

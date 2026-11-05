@@ -394,10 +394,10 @@ export const fa: LocaleDictionary = {
   'kids.safeExitLeave': 'با یک بزرگ‌تر برو',
 
   // ---- kids: home ----
-  'kids.greeting': 'السلام علیکم! 👋',
+  'kids.greeting': 'السلام علیکم!',
   'kids.todaysGoal': 'هدف امروز',
   'kids.goalProgress': '{{count}} / {{target}}',
-  'kids.streak': '🔥 {{count}} روز پیاپی',
+  'kids.streak': '{{count}} روز پیاپی',
   'kids.yourBadges': 'نشان‌های شما',
 
   // ---- kids: alphabet ----

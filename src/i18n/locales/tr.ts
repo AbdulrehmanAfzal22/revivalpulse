@@ -395,10 +395,10 @@ export const tr: LocaleDictionary = {
   'kids.safeExitLeave': 'Büyüğünle çık',
 
   // ---- kids: home ----
-  'kids.greeting': 'Esselamu Aleyküm! 👋',
+  'kids.greeting': 'Esselamu Aleyküm!',
   'kids.todaysGoal': 'Bugünün hedefi',
   'kids.goalProgress': '{{count}} / {{target}}',
-  'kids.streak': '🔥 {{count}} günlük seri',
+  'kids.streak': '{{count}} günlük seri',
   'kids.yourBadges': 'Rozetleriniz',
 
   // ---- kids: alphabet ----

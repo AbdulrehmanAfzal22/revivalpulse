@@ -31,6 +31,9 @@ export default function SurahPage() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isTranslationsOpen, setIsTranslationsOpen] = useState(false);
   const pageRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const sentinelRef = useRef<HTMLSpanElement>(null);
+  const [isHeaderStuck, setIsHeaderStuck] = useState(false);
   const { isFullscreen, toggle: toggleFullscreen } = useFullscreen(pageRef);
   const favorites = useCollectionsStore((state) => state.favorites);
   const toggleFavoriteSurah = useCollectionsStore((state) => state.toggleFavoriteSurah);
@@ -58,6 +61,31 @@ export default function SurahPage() {
     preloadSurah(surah.id, targetAyah ?? 1);
   }, [surah, targetAyah]);
 
+  // The full title block is roughly a fifth of the viewport tall. While it is
+  // in normal flow that is fine, but once it pins it would keep covering the
+  // ayah being read — so detect the pinned state and let CSS collapse it into a
+  // compact bar that still shows the surah name. Capture-phase listening also
+  // catches the scroll container used in fullscreen mode.
+  useEffect(() => {
+    const element = headerRef.current;
+    const sentinel = sentinelRef.current;
+    if (!element || !sentinel) return undefined;
+    const evaluate = () => {
+      // Unpinned, the header rides flush with the sentinel; once it reaches its
+      // `top` limit the sentinel slides out from under it. Comparing the two
+      // avoids depending on the measured navbar height or current text scale.
+      setIsHeaderStuck(element.getBoundingClientRect().top - sentinel.getBoundingClientRect().bottom > 0.5);
+    };
+    evaluate();
+    window.addEventListener('scroll', evaluate, { passive: true, capture: true });
+    const observer = new ResizeObserver(evaluate);
+    observer.observe(element);
+    return () => {
+      window.removeEventListener('scroll', evaluate, { capture: true });
+      observer.disconnect();
+    };
+  }, [id]);
+
   // Only worth telling the user anything if preloading is unusually slow —
   // the common case finishes well within this window and should stay silent.
   useEffect(() => {
@@ -81,8 +109,9 @@ export default function SurahPage() {
   const nextSurah = SURAHS.find((item) => item.id === surah.id + 1);
 
   return (
-    <div ref={pageRef} className="container-reading" style={getReaderCssVars(preferences)}>
-      <div className={styles.readerHeader}>
+    <div ref={pageRef} className={[styles.page, 'container-reading'].join(' ')} style={getReaderCssVars(preferences)}>
+      <span ref={sentinelRef} className={styles.stickySentinel} aria-hidden="true" />
+      <div ref={headerRef} className={[styles.readerHeader, isHeaderStuck && styles.headerStuck].filter(Boolean).join(' ')}>
         <div className={styles.headerControls}>
           <Button
             variant="secondary"
@@ -122,7 +151,7 @@ export default function SurahPage() {
         </div>
 
         <header className={styles.header}>
-        <Typography variant="caption" muted>
+        <Typography variant="caption" muted className={styles.headerCaption}>
           {t('quran.surahOfTotal', {
             number: surah.id,
             place: surah.revelationPlace === 'makkah' ? t('quran.meccan') : t('quran.medinan'),
@@ -131,8 +160,8 @@ export default function SurahPage() {
         <Typography variant="h1" className={styles.arabicTitle} dir="rtl" lang="ar">
           {surah.nameArabic}
         </Typography>
-        <Typography variant="h3">{surah.nameSimple}</Typography>
-        <Typography variant="body" muted>
+        <Typography variant="h3" className={styles.simpleTitle}>{surah.nameSimple}</Typography>
+        <Typography variant="body" muted className={styles.headerSubtitle}>
           {t('quran.nameAndVerses', { name: surah.translatedName, count: surah.versesCount })}
         </Typography>
 
@@ -141,14 +170,14 @@ export default function SurahPage() {
             <Loader2 size={12} className={styles.spin} /> {t('quran.preparingAudio')}
           </Typography>
         )}
-
-        {surah.bismillahPre && surah.id !== 1 && (
-          <p className={styles.bismillah} dir="rtl" lang="ar">
-            {BISMILLAH_ARABIC}
-          </p>
-        )}
         </header>
       </div>
+
+      {surah.bismillahPre && surah.id !== 1 && (
+        <p className={styles.bismillah} dir="rtl" lang="ar">
+          {BISMILLAH_ARABIC}
+        </p>
+      )}
 
       <SurahView surahId={surah.id} targetAyah={targetAyah} lastReadAyah={lastReadAyah} />
 

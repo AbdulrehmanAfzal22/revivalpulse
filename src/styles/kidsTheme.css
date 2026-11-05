@@ -1,88 +1,52 @@
 /**
- * Scoped kid-friendly palette — applied via a wrapper class (layouts/KidsLayout.tsx),
- * not touched via ThemeContext/:root[data-theme]. Every components/ui/* primitive
- * already reads these same custom properties (var(--color-primary) etc.), so
- * wrapping Kids Mode in this class reskins Button/Card/Typography/... for free
- * without a parallel component library — "own visual language" via CSS, not a
- * rebuild. Still respects the light/dark toggle (two variants below) rather than
- * fighting it.
+ * Kids Mode palette — applied via a wrapper class (layouts/KidsLayout.tsx),
+ * never through ThemeContext/:root[data-theme].
  *
- * KIDS PALETTE (Phase 2):
- *   --kids-sunshine #FFC94D  — warm accent, celebration surfaces
- *   --kids-sky      #5EC8E0  — cool accent, secondary highlights
- *   --kids-coral    #FF8965  — energetic accent (hovers, highlights)
- *   --kids-purple   #B08BE0  — soft accent (category tints, badges)
- *   --kids-emerald  #146356  — the MAIN SITE'S emerald, kept as the primary
- *                              action color so kids mode still feels like the
- *                              same app. Everything playful sits around it.
+ * Kids Mode is not a parallel design system. It inherits the app's Islamic
+ * Vision tokens (ivory paper, deep pine, terracotta, muted gold) so the
+ * light/dark toggle and high-contrast setting work inside it for free; every
+ * components/ui/* primitive already reads those same custom properties. What
+ * it deliberately changes is the accent aliases below, a slightly rounder
+ * corner scale, and the larger type scale further down this file.
+ *
+ * KIDS ACCENT ALIASES — still main-site colors, but chosen so the five hues
+ * stay distinguishable in BOTH themes (several core tokens converge to gold in
+ * dark mode, which is what made the kids grid read as one muddy colour). Each
+ * alias is also mixed far enough toward its neighbour to keep ≥3:1 against the
+ * ivory glyph it sits behind as a filled icon disc.
+ *   --kids-emerald  success green / mint   — primary action, success
+ *   --kids-sky      deep sage / warm tan   — secondary highlight, progress
+ *   --kids-sunshine burnt amber / apricot  — celebration, accent text, discs
+ *   --kids-coral    terracotta / peach     — energetic accent, "wrong answer"
+ *   --kids-purple   deep pine / light gold — category tints, badges
+ *
+ * The three pattern vars below are the kid-friendly "intensity" knobs: dark
+ * mode needs a fainter star lattice, less colour tint in the tile bodies and a
+ * softer hero glow, or all of it turns into a green-gold smear.
  */
 .kidsTheme {
-  --kids-sunshine: #ffc94d;
-  --kids-sky: #5ec8e0;
-  --kids-coral: #ff8965;
-  --kids-purple: #b08be0;
-  --kids-emerald: #146356;
+  --kids-emerald: var(--color-success);
+  --kids-sky: color-mix(in srgb, var(--color-teal-muted) 70%, var(--color-pine));
+  --kids-sunshine: color-mix(in srgb, var(--color-gold-soft) 70%, var(--color-danger));
+  --kids-coral: var(--color-accent);
+  --kids-purple: var(--color-pine);
 
-  --font-sans: ui-rounded, 'SF Pro Rounded', 'Segoe UI Rounded', -apple-system, BlinkMacSystemFont,
-    'Noto Naskh Arabic', 'Noto Nastaliq Urdu', Roboto, sans-serif;
-
-  --color-bg: #fff8ee;
-  --color-surface: #ffffff;
-  --color-surface-raised: #fff2d9;
-  --color-border: #ffdca8;
-  --color-text: #3a2a1a;
-  --color-text-muted: #8a6f4f;
-  --color-primary: var(--kids-emerald);
-  --color-primary-hover: #0e4f42;
-  --color-primary-contrast: #ffffff;
-  --color-danger: #e5484d;
-  --color-focus-ring: var(--kids-sky);
+  --kids-pattern-opacity: 0.08;
+  --kids-tint-soft: 11%;
+  --kids-tint-strong: 26%;
+  --kids-hero-glow: var(--color-gold-glow-strong);
 
   --radius-sm: 10px;
   --radius-md: 16px;
-  --radius-lg: 24px;
+  --radius-lg: 20px;
+  --radius-xl: 26px;
 }
 
-:root[data-theme='dark'] .kidsTheme {
-  --kids-sunshine: #ffd76a;
-  --kids-sky: #7fd8ec;
-  --kids-coral: #ffa288;
-  --kids-purple: #b08be0;
-  --kids-emerald: #146356;
-
-  --color-bg: #fff8ee;
-  --color-surface: #ffffff;
-  --color-surface-raised: #fff2d9;
-  --color-border: #ffdca8;
-  --color-text: #3a2a1a;
-  --color-text-muted: #8a6f4f;
-  --color-primary: #146356;
-  --color-primary-hover: #0e4f42;
-  --color-primary-contrast: #ffffff;
-  --color-danger: #e5484d;
-  --color-focus-ring: #5ec8e0;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']):not([data-theme='dark']) .kidsTheme {
-    --kids-sunshine: #ffd76a;
-    --kids-sky: #7fd8ec;
-    --kids-coral: #ffa288;
-    --kids-purple: #b08be0;
-    --kids-emerald: #146356;
-
-    --color-bg: #fff8ee;
-    --color-surface: #ffffff;
-    --color-surface-raised: #fff2d9;
-    --color-border: #ffdca8;
-    --color-text: #3a2a1a;
-    --color-text-muted: #8a6f4f;
-    --color-primary: #146356;
-    --color-primary-hover: #0e4f42;
-    --color-primary-contrast: #ffffff;
-    --color-danger: #e5484d;
-    --color-focus-ring: #5ec8e0;
-  }
+[data-theme='dark'] .kidsTheme {
+  --kids-pattern-opacity: 0.045;
+  --kids-tint-soft: 6%;
+  --kids-tint-strong: 14%;
+  --kids-hero-glow: color-mix(in srgb, var(--color-gold) 16%, transparent);
 }
 
 /*
@@ -103,30 +67,16 @@ html.kids-active {
  * KIDS TOUCH TARGETS: interactive elements inside the scope must be at least
  * 48x48px (WCAG 2.5.5 / Apple HIG kid-size guidance). Applied to the wrapper
  * so only kids routes are affected; the adult UI keeps its compact targets.
+ * The :where() keeps this a zero-specificity default, so a component that
+ * genuinely needs to shrink — the six-tab KidsNav on a small phone — can
+ * override it without !important.
  */
-.kidsTheme :is(button, a, [role='button'], input[type='checkbox'], input[type='radio']) {
+.kidsTheme :where(button, a, [role='button'], input[type='checkbox'], input[type='radio']) {
   min-height: 48px;
   min-width: 48px;
 }
 
 .kidsTheme {
-  background: linear-gradient(135deg, #dff7ff 0%, #eee9ff 52%, #e2faed 100%);
-  background-attachment: fixed;
+  background: var(--color-bg);
   min-height: 100vh;
-}
-
-/* High contrast (Settings > Appearance) applies globally, including inside Kids Mode. */
-[data-contrast='high'] .kidsTheme {
-  --color-text: #2a1c0e;
-  --color-text-muted: #4a3620;
-  --color-border: #2a1c0e;
-  --color-primary: #0e4f42;
-}
-
-:root[data-theme='dark'][data-contrast='high'] .kidsTheme {
-  --color-bg: #120a18;
-  --color-text: #ffffff;
-  --color-text-muted: #ead9ff;
-  --color-border: #ffffff;
-  --color-primary: #4fd0b4;
 }

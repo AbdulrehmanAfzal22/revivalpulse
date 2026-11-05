@@ -395,10 +395,10 @@ export const en = {
   'kids.safeExitLeave': 'Leave with a grown-up',
 
   // ---- kids: home ----
-  'kids.greeting': 'Assalamu Alaikum! 👋',
+  'kids.greeting': 'Assalamu Alaikum!',
   'kids.todaysGoal': "Today's goal",
   'kids.goalProgress': '{{count}} / {{target}}',
-  'kids.streak': '🔥 {{count}} day streak',
+  'kids.streak': '{{count}} day streak',
   'kids.yourBadges': 'Your badges',
 
   // ---- kids: alphabet ----

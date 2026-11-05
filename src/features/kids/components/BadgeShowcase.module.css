@@ -1,32 +1,74 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
   gap: clamp(0.625rem, 1.5vw, 1rem);
 }
 
 .badge {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
-  min-height: 6rem;
+  gap: 0.45rem;
+  min-height: 7.5rem;
   padding: 1rem 0.375rem;
-  border-radius: var(--radius-md);
-  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  border: 2px dashed color-mix(in srgb, var(--color-border) 85%, transparent);
   background-color: var(--color-surface);
   color: var(--color-text-muted);
   opacity: 0.5;
   filter: grayscale(1);
-  transition: transform 180ms ease, opacity 180ms ease, filter 180ms ease;
+  transition: transform 180ms ease, opacity 180ms ease, filter 180ms ease, box-shadow 180ms ease;
+}
+
+/* The icon sits in its own disc: 44px box, 24px glyph. */
+.badge svg {
+  box-sizing: border-box;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0.625rem;
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--color-text-muted) 16%, var(--color-surface));
 }
 
 .earned {
   opacity: 1;
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-  background-color: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface));
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--kids-sunshine) 62%, var(--color-border));
+  color: var(--color-text);
+  background: linear-gradient(
+    180deg,
+    var(--color-surface-raised),
+    color-mix(in srgb, var(--color-gold-glow) 60%, var(--color-surface-raised))
+  );
   filter: none;
+  box-shadow: var(--shadow-gold-sm);
   animation: badge-pop 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.earned svg {
+  background-color: var(--kids-sunshine);
+  color: var(--color-primary-contrast);
+}
+
+/* Slow light sweep across an earned badge. */
+.earned::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: -60%;
+  width: 45%;
+  background: linear-gradient(100deg, transparent, rgb(255 255 255 / 0.3), transparent);
+  animation: badge-shine 3.4s ease-in-out infinite;
+}
+
+.earned:hover {
+  transform: translateY(-3px) rotate(-1.5deg);
+  box-shadow: var(--shadow-gold-md);
 }
 
 @keyframes badge-pop {
@@ -35,12 +77,19 @@
   100% { transform: scale(1) rotate(0); }
 }
 
-@media (min-width: 40rem) {
-  .grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+@keyframes badge-shine {
+  0%, 55% { left: -60%; }
+  85%, 100% { left: 120%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .badge { animation: none; }
+  .badge,
+  .earned,
+  .earned::after,
+  .earned:hover {
+    animation: none;
+    transform: none;
+  }
 }
 
 .label {

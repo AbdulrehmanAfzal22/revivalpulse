@@ -169,6 +169,10 @@
   --z-tooltip: 400;
   --z-toast: 500;
 
+  /* Overwritten at runtime by Navbar with the measured height; this is only the
+     pre-hydration fallback so reader sub-headers never stick at the wrong offset. */
+  --navbar-height: 3.5rem;
+
   color-scheme: light;
 }
 

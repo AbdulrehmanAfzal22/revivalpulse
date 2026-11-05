@@ -1,8 +1,8 @@
 /*
- * Big illustrated entry tile for Kids Mode (Phase 3). A full-width button-like
- * card, not a text link — kid-friendly from the very first tap. Uses the main
- * site's tokens (so it reads as part of the adult app) with kids-palette
- * accents that preview the world inside. Touch target far exceeds 48x48.
+ * Big illustrated entry tile for Kids Mode. A full-width button-like card, not
+ * a text link — kid-friendly from the very first tap — drawn entirely from the
+ * main site's Islamic Vision tokens so it reads as part of the adult app.
+ * Touch target far exceeds 48x48.
  */
 .entry {
   display: flex;
@@ -13,14 +13,11 @@
   margin: 1.5rem auto 0;
   padding: 1.25rem 1.5rem;
   border-radius: var(--radius-lg);
-  background: linear-gradient(
-    135deg,
-    rgb(255 201 77 / 0.28),
-    rgb(94 200 224 / 0.22)
-  ),
-  var(--color-surface);
-  border: 2px solid rgb(20 99 86 / 0.35);
-  box-shadow: var(--shadow-md);
+  background:
+    radial-gradient(420px 180px at 10% -25%, var(--color-gold-glow), transparent 70%),
+    var(--color-surface);
+  border: 1px solid color-mix(in srgb, var(--color-star-line) 40%, var(--color-border));
+  box-shadow: var(--shadow-sm);
   text-align: start;
   text-decoration: none;
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
@@ -28,20 +25,18 @@
 
 .entry:hover,
 .entry:focus-visible {
-  transform: translateY(-2px) scale(1.01);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--kids-emerald, #146356);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold-md);
+  border-color: var(--color-star-line);
 }
 
 .entry:focus-visible {
-  outline: 3px solid var(--kids-sky, #5ec8e0);
+  outline: 3px solid var(--color-focus-ring);
   outline-offset: 3px;
 }
 
 .mascot {
-  flex: 0 0 auto;
-  width: clamp(4.5rem, 10vw, 6.5rem);
-  height: clamp(4.5rem, 10vw, 6.5rem);
+  --mascot-size: clamp(4.5rem, 10vw, 6.5rem);
 }
 
 .text {
@@ -63,7 +58,7 @@
   gap: 0.4rem;
   margin-top: 0.35rem;
   font-weight: 700;
-  color: var(--kids-emerald, #146356);
+  color: var(--color-primary);
   text-transform: uppercase;
   letter-spacing: 0.04em;
   font-size: 0.875rem;

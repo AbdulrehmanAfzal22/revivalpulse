@@ -394,10 +394,10 @@ export const ms: LocaleDictionary = {
   'kids.safeExitLeave': 'Keluar dengan orang dewasa',
 
   // ---- kids: home ----
-  'kids.greeting': 'Assalamualaikum! 👋',
+  'kids.greeting': 'Assalamualaikum!',
   'kids.todaysGoal': 'Sasaran hari ini',
   'kids.goalProgress': '{{count}} / {{target}}',
-  'kids.streak': '🔥 {{count}} hari berturut-turut',
+  'kids.streak': '{{count}} hari berturut-turut',
   'kids.yourBadges': 'Lencana anda',
 
   // ---- kids: alphabet ----

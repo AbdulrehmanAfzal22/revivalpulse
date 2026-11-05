@@ -58,7 +58,7 @@ export default function CalendarMonthGrid({ days, todayGregorianDay }: CalendarM
           >
             <span className={styles.gregorianDay}>{day.gregorian.day}</span>
             <span className={styles.hijriDay}>
-              {day.hijri.day} {day.hijri.month.en}
+              {day.hijri.day} <span className={styles.hijriMonth}>{day.hijri.month.en}</span>
             </span>
           </div>
         );

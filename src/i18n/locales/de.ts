@@ -395,10 +395,10 @@ export const de: LocaleDictionary = {
   'kids.safeExitLeave': 'Mit einem Erwachsenen gehen',
 
   // ---- kids: home ----
-  'kids.greeting': 'Assalamu Alaikum! 👋',
+  'kids.greeting': 'Assalamu Alaikum!',
   'kids.todaysGoal': 'Heutiges Ziel',
   'kids.goalProgress': '{{count}} / {{target}}',
-  'kids.streak': '🔥 {{count}} Tage in Folge',
+  'kids.streak': '{{count}} Tage in Folge',
   'kids.yourBadges': 'Ihre Abzeichen',
 
   // ---- kids: alphabet ----
